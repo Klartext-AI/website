@@ -49,14 +49,21 @@ const BASE = import.meta.env.BASE_URL;
 </section>
 
 <style>
+  :root {
+    /* Default duration; overridden per-element via JS to match typing length */
+    --border-fade-duration: 0.8s;
+  }
+
   .hero {
-    min-height: 100vh;
+    min-height: 100vh; /* fallback */
+    min-height: 100dvh; /* fill visible viewport on mobile */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
     padding: var(--space-md);
+    border-bottom: 1px solid transparent; /* prevent next section margin-collapsing into hero */
   }
 
   .hero-logo-wrapper {
@@ -118,6 +125,11 @@ const BASE = import.meta.env.BASE_URL;
     opacity: 1;
   }
 
+  /* Show bordered pill (without caret) before typing */
+  .hero-main.pretyping {
+    opacity: 1;
+  }
+
   .hero-main.border-fade {
     border-color: transparent;
   }
@@ -128,6 +140,17 @@ const BASE = import.meta.env.BASE_URL;
     width: 0.6ch; /* Reserve space so removing caret doesn't shift text */
     animation: blink 1s infinite;
     margin-left: 4px;
+    transition: opacity 0.4s ease; /* allow fade-in */
+  }
+
+  /* Hide caret during pretyping */
+  .hero-main.pretyping::after {
+    opacity: 0;
+    animation: none;
+  }
+  /* Fade in caret while still in pretyping state */
+  .hero-main.pretyping.caret-visible::after {
+    opacity: 1;
   }
 
   .hero-main.typing-complete::after {
@@ -135,7 +158,7 @@ const BASE = import.meta.env.BASE_URL;
     content: '|';
     animation: none;
     opacity: 0;
-    transition: opacity 0.5s ease 0.15s;
+    transition: opacity 0.3s ease 0.15s;
   }
 
   @keyframes blink {
@@ -199,7 +222,8 @@ const BASE = import.meta.env.BASE_URL;
 
   @media (max-width: 768px) {
     .hero {
-      min-height: 80vh;
+      min-height: 100vh; /* fallback */
+      min-height: 100dvh; /* full screen on mobile */
       padding: var(--space-sm);
     }
 
@@ -278,22 +302,36 @@ const BASE = import.meta.env.BASE_URL;
 
     if (heroMain && heroSubtitle) {
       const mainText = heroMain.getAttribute('data-text') || '';
-      const subtitleText = heroSubtitle.getAttribute('data-text') || '';
 
       // Preload subtitle text immediately (kept hidden) to stabilize layout height
-      heroSubtitle.textContent = subtitleText;
+      heroSubtitle.textContent = heroSubtitle.getAttribute('data-text') || '';
+
+      // Step 1: show bordered pill immediately without caret
+      heroMain.classList.add('pretyping');
 
       const typingSpeed = 95;
       const typingDuration = mainText.length * typingSpeed;
-      heroMain.style.setProperty('--border-fade-duration', `${typingDuration}ms`);
 
+      // Step 2: after 0.5s fade in caret (still not typing)
+      await new Promise(resolve => setTimeout(resolve, 500));
+      heroMain.classList.add('caret-visible');
+
+      // Step 3: after another 0.5s start typing
+      await new Promise(resolve => setTimeout(resolve, 500));
+      heroMain.classList.add('typing');
+      heroMain.classList.remove('pretyping', 'caret-visible');
+
+      // Border fade: start 1s after typing begins, finish exactly when typing completes
+      const fadeDelay = 1000; // ms after typing start
       setTimeout(() => {
+        const remaining = Math.max(typingDuration - fadeDelay, 0);
+        heroMain.style.setProperty('--border-fade-duration', `${remaining}ms`);
         heroMain.classList.add('border-fade');
-      }, 550);
+      }, fadeDelay);
 
       await typeText(heroMain, mainText, typingSpeed);
 
-      // Delay before revealing subtitle (layout already stable because text preloaded)
+      // Reveal subtitle after typing completes
       await new Promise(resolve => setTimeout(resolve, 650));
       heroSubtitle.classList.add('visible');
     }
