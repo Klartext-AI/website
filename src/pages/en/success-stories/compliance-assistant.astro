@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SuccessStoryDetail from '../../../components/SuccessStoryDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'AI Assistant for Compliance & Knowledge Management | Klartext AI';
+const description = 'How an ATX company saves 80% time through intelligent compliance assistant with break-even after 2 months.';
+
+const challenge = `
+<p>In large organizations, compliance knowledge is often scattered across hundreds of documents. A leading ATX company with over 50 compliance guidelines, internal manuals, and process documents faced this challenge.</p>
+
+<p><strong>The Problem:</strong></p>
+<ul>
+  <li>Employees had no overview of relevant guidelines when facing specific questions about processes or products</li>
+  <li>Internal compliance experts lacked capacity to answer every inquiry with necessary sensitivity</li>
+  <li>Searching through documents was time-consuming and often led to uncertain results</li>
+  <li>Knowledge became outdated or was applied inconsistently</li>
+</ul>
+
+<p>The result: Slow decisions, employee uncertainty, expert overload.</p>
+`;
+
+const solution = `
+<p>Building a "chatbot over documents" is easy. Developing an assistant that truly understands and gives reliable answers is a different challenge. This is where Domain-Driven Design comes into play.</p>
+
+<p><strong>The Approach in Detail:</strong></p>
+<ul>
+  <li><strong>Integration of 50+ guidelines and documents:</strong> Complete capture of organizational knowledge</li>
+  <li><strong>Knowledge Graph integration:</strong> Connection with company metadata for contextual intelligence</li>
+  <li><strong>Intelligent retrieval methodology:</strong> Not just keyword search, but semantic understanding of relationships</li>
+  <li><strong>Source citations with context:</strong> Every answer comes with precise reference from original documents</li>
+  <li><strong>Complex inquiries:</strong> System can process multi-stage, interconnected queries</li>
+</ul>
+
+<p>What distinguishes this solution from generic RAG systems: The integration of company metadata (Knowledge Graph) enables context-aware retrieval. The AI doesn't just know what's in the documents, but also how different information relates.</p>
+`;
+
+const results = [
+  "80% time and cost savings on compliance inquiries",
+  "Break-even after just 2 months through reduced inquiries to experts",
+  "Relief for compliance teams to focus on strategic topics",
+  "Consistent compliance application across all departments",
+  "Traceability for audits through complete source citations"
+];
+
+const fullContent = `
+<h3>Knowledge Management Reimagined</h3>
+
+<p><strong>Not search, but understanding:</strong> The solution doesn't just search for keywords but understands the intention behind questions and can explain complex relationships.</p>
+
+<p><strong>Context is king:</strong> Through Knowledge Graph integration, the system knows which information is relevant in which context – depending on department, product, or process.</p>
+
+<p><strong>Trust through transparency:</strong> Employees don't just get answers but also the reasoning and the exact location in the documents. This creates trust.</p>
+
+<h3>What We Learned</h3>
+
+<ol>
+  <li><strong>Retrieval is half the battle:</strong> Answer quality depends significantly on whether the right information is found. Simple vector search isn't enough.</li>
+  <li><strong>Metadata is gold:</strong> Integrating company context (structure, processes, products) makes the difference between "works" and "works excellently".</li>
+  <li><strong>Experts remain important:</strong> The AI doesn't replace compliance experts – it gives them freedom to work where their expertise truly counts.</li>
+  <li><strong>Evaluation from the start:</strong> We measured how well the system answers from day 1. This was essential for rapid improvement.</li>
+</ol>
+
+<p>This solution is a prime example of Evaluation-Driven and Domain-Driven Development. Not "quickly build a chatbot," but systematically develop a solution that solves real business problems.</p>
+`;
+
+const metrics = {
+  "Time Savings": "80%",
+  "Break-even": "2 Months",
+  "Documents": "50+"
+};
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <SuccessStoryDetail
+    title="AI Assistant for Compliance & Knowledge Management"
+    client="ATX Company"
+    category="Knowledge Management"
+    challenge={challenge}
+    solution={solution}
+    results={results}
+    metrics={metrics}
+    fullContent={fullContent}
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

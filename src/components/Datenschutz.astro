@@ -1,0 +1,242 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+
+const content = {
+  de: {
+    title: "Datenschutzerklärung",
+    lastUpdated: "Zuletzt aktualisiert: 12.11.2025",
+    intro: "Der Schutz Ihrer persönlichen Daten ist uns sehr wichtig. Wir verarbeiten Ihre Daten ausschließlich auf Grundlage der gesetzlichen Bestimmungen (Datenschutz-Grundverordnung, DSGVO, Datenschutzgesetz, DSG).",
+    sections: [
+      {
+        heading: "1. Verantwortlicher für die Datenverarbeitung",
+        content: `Verantwortlich für die Datenverarbeitung ist:
+
+Klartext AI FlexCo
+Stubenring 24/13, 1010 Wien, Österreich
+E-Mail: office@klartext-ai.com
+Telefon: +43 660 81010 68`
+      },
+      {
+        heading: "2. Erhebung und Verarbeitung von Daten",
+        content: `Wir erheben personenbezogene Daten, wenn Sie unsere Website besuchen, sich für unseren Newsletter anmelden oder unseren Service in Anspruch nehmen. Diese Daten umfassen:
+
+Name
+E-Mail-Adresse
+IP-Adresse
+Nutzungsdaten (z.B. besuchte Seiten, Interaktionen mit der Website)`
+      },
+      {
+        heading: "3. Zweck der Verarbeitung",
+        content: `Die erhobenen Daten werden zu folgenden Zwecken verarbeitet:
+
+Bereitstellung und Verbesserung unserer Dienstleistungen
+Bearbeitung von Anfragen und Kundenservice
+Marketing und Kommunikation (nur mit ausdrücklicher Einwilligung)`
+      },
+      {
+        heading: "4. Rechtsgrundlagen der Verarbeitung",
+        content: `Die Verarbeitung erfolgt auf Basis der folgenden rechtlichen Grundlagen:
+
+Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO
+Vertragserfüllung gemäß Art. 6 Abs. 1 lit. b DSGVO
+Berechtigtes Interesse gemäß Art. 6 Abs. 1 lit. f DSGVO`
+      },
+      {
+        heading: "5. Datenweitergabe an Dritte",
+        content: `Eine Weitergabe Ihrer Daten an Dritte erfolgt nur, wenn dies zur Erfüllung des Vertrages erforderlich ist oder wenn wir gesetzlich dazu verpflichtet sind.`
+      },
+      {
+        heading: "6. Ihre Rechte",
+        content: `Sie haben das Recht:
+
+Auskunft über Ihre gespeicherten Daten zu verlangen
+Ihre Daten zu berichtigen oder zu löschen
+Die Verarbeitung Ihrer Daten zu widerrufen
+Eine Beschwerde bei der Österreichischen Datenschutzbehörde einzureichen (Wickenburggasse 8, 1080 Wien)`
+      },
+      {
+        heading: "7. Cookies",
+        content: `Wir verwenden Cookies, um die Nutzererfahrung zu verbessern. Sie können die Verwendung von Cookies in Ihren Browser-Einstellungen deaktivieren. Weitere Informationen finden Sie in unserer Cookie-Richtlinie.`
+      },
+      {
+        heading: "8. Aufbewahrung der Daten",
+        content: `Wir speichern Ihre personenbezogenen Daten nur so lange, wie es für die Erfüllung des jeweiligen Zwecks erforderlich ist.`
+      }
+    ]
+  },
+  en: {
+    title: "Privacy Policy",
+    lastUpdated: "Last updated: 12.11.2025",
+    intro: "The protection of your personal data is very important to us. We process your data exclusively on the basis of the applicable legal provisions (General Data Protection Regulation, GDPR, and the Austrian Data Protection Act, DSG).",
+    sections: [
+      {
+        heading: "1. Controller for Data Processing",
+        content: `The controller responsible for data processing is:
+
+Klartext AI FlexCo
+Stubenring 24/13, 1010 Vienna, Austria
+Email: office@klartext-ai.com
+Phone: +43 660 81010 68`
+      },
+      {
+        heading: "2. Collection and Processing of Data",
+        content: `We collect personal data when you visit our website, sign up for our newsletter, or use our services. This data includes:
+
+Name
+Email address
+IP address
+Usage data (e.g., pages visited, interactions with the website)`
+      },
+      {
+        heading: "3. Purpose of Processing",
+        content: `The collected data is processed for the following purposes:
+
+Provision and improvement of our services
+Handling inquiries and customer support
+Marketing and communication (only with your explicit consent)`
+      },
+      {
+        heading: "4. Legal Bases for Processing",
+        content: `Processing is carried out on the basis of the following legal grounds:
+
+Consent pursuant to Art. 6(1)(a) GDPR
+Performance of a contract pursuant to Art. 6(1)(b) GDPR
+Legitimate interests pursuant to Art. 6(1)(f) GDPR`
+      },
+      {
+        heading: "5. Disclosure of Data to Third Parties",
+        content: `Your data will only be disclosed to third parties if this is necessary for the performance of a contract or if we are legally obliged to do so.`
+      },
+      {
+        heading: "6. Your Rights",
+        content: `You have the right to:
+
+Request access to your stored data
+Rectify or erase your data
+Withdraw your consent to the processing of your data
+Lodge a complaint with the Austrian Data Protection Authority (Wickenburggasse 8, 1080 Vienna)`
+      },
+      {
+        heading: "7. Cookies",
+        content: `We use cookies to improve the user experience. You can disable the use of cookies in your browser settings. For more information, please refer to our Cookie Policy.`
+      },
+      {
+        heading: "8. Data Retention",
+        content: `We store your personal data only for as long as is necessary to fulfill the respective purpose.`
+      }
+    ]
+  }
+};
+
+const text = content[lang];
+---
+
+<section id="datenschutz" class="legal-page section">
+  <div class="container">
+    <div class="legal-content fade-in">
+      <h1 class="legal-title">{text.title}</h1>
+      <p class="legal-updated">{text.lastUpdated}</p>
+
+      <div class="legal-intro">
+        <p>{text.intro}</p>
+      </div>
+
+      {text.sections.map((section) => (
+        <div class="legal-section">
+          <h2 class="legal-heading">{section.heading}</h2>
+          <div class="legal-text" set:html={section.content.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .legal-page {
+    min-height: 80vh;
+    padding: var(--space-2xl) 0;
+    background: transparent;
+  }
+
+  .legal-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .legal-title {
+    font-size: var(--font-size-h1);
+    font-weight: 300;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .legal-updated {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin-bottom: var(--space-lg);
+  }
+
+  .legal-intro {
+    padding: var(--space-md);
+    background: rgba(36, 121, 190, 0.05);
+    border-left: 3px solid var(--color-blue);
+    border-radius: 4px;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .legal-intro p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-text-body);
+    margin: 0;
+  }
+
+  .legal-section {
+    margin-bottom: var(--space-xl);
+  }
+
+  .legal-heading {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-text-dark);
+    margin-bottom: var(--space-md);
+  }
+
+  .legal-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text-body);
+  }
+
+  .legal-text p {
+    margin-bottom: var(--space-md);
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: var(--space-xl) 0;
+    }
+
+    .legal-title {
+      font-size: var(--font-size-h2);
+    }
+
+    .legal-heading {
+      font-size: 1.25rem;
+    }
+
+    .legal-text {
+      font-size: 0.95rem;
+    }
+
+    .legal-intro p {
+      font-size: 1rem;
+    }
+  }
+</style>

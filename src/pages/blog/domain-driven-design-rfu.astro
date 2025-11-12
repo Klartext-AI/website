@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../components/BlogPostDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Domain-Driven Design in der Praxis: Der RFU Case | Klartext AI Blog';
+const description = 'Wie wir durch tiefes Domänenverständnis 80% Automatisierung erreicht haben – der RFU Case zeigt Domain-Driven Design in der Praxis.';
+
+const fullContent = `
+<p>Es gibt zwei Wege, KI-Systeme zu bauen: Man kann eine generische Lösung nehmen und versuchen, sie anzupassen. Oder man kann mit der Domäne beginnen und die Technologie drumherum bauen.</p>
+
+<p>Wir wählen immer den zweiten Weg.</p>
+
+<h4>Der Fehler mit dem Generic Hammer</h4>
+
+<p>Viele KI-Projekte starten mit der Technologie: "Wir nehmen ein LLM, fine-tunen es ein bisschen, und fertig." Das Problem: Diese Lösung kennt die Geschäftsprozesse nicht. Sie versteht die Fachsprache nicht. Sie weiß nicht, welche Validierungen wichtig sind und welche Fehler kritisch.</p>
+
+<p>Das Resultat sind Systeme, die in 80% der Fälle funktionieren – aber genau die 20% Sonderfälle nicht abdecken, die im Geschäftsalltag kritisch sind.</p>
+
+<h4>Was Domain-Driven Design wirklich bedeutet</h4>
+
+<p>Domain-Driven Design (DDD) ist keine Methodik, die man "mal eben anwendet". Es ist eine Philosophie, die das Verständnis der Geschäftsdomäne in den Mittelpunkt stellt.</p>
+
+<p><strong>Konkret bedeutet das:</strong></p>
+
+<p><strong>1. Mit dem Geschäft beginnen, nicht mit der Technologie</strong><br/>
+Bevor wir über Modelle, Architekturen oder Frameworks sprechen, fragen wir: Welches Problem lösen wir? Wie funktioniert der aktuelle Prozess? Was sind die kritischen Anforderungen?</p>
+
+<p><strong>2. Die Sprache der Domäne sprechen</strong><br/>
+In der Finanzwelt gibt es "KPIs", "Risk Ratings", "Compliance-Kriterien". Diese Begriffe sind nicht austauschbar. Die KI muss dieselbe Sprache sprechen wie die Experten.</p>
+
+<p><strong>3. Das Geschäft modellieren, nicht nur die Daten</strong><br/>
+Es geht nicht nur darum, Dokumente zu verarbeiten. Es geht um Geschäftsregeln, Validierungen, Prozesse, Abhängigkeiten.</p>
+
+<p><strong>4. Mit Experten arbeiten, nicht gegen sie</strong><br/>
+Die besten Lösungen entstehen, wenn Technologie-Experten und Domänen-Experten eng zusammenarbeiten.</p>
+
+<h4>Der RFU Case: 500+ Seiten, 80% Automatisierung</h4>
+
+<p>Unser Kunde im Bankendienstleistungssektor stand vor einer massiven Herausforderung: Analysten mussten täglich hunderte Seiten an Jahresberichten manuell durchforsten, um quantitative und qualitative KPIs zu extrahieren.</p>
+
+<p><strong>Die naive Lösung</strong>: Ein LLM nehmen, Dokumente reinwerfen, KPIs extrahieren lassen.</p>
+
+<p><strong>Das Problem</strong>: Welche KPIs sind relevant? Wie validiert man die Extraktion? Wie geht man mit widersprüchlichen Informationen um? Was passiert bei Sonderfällen?</p>
+
+<p><strong>Unser Ansatz</strong>:</p>
+
+<ol>
+  <li><strong>Domänenanalyse</strong>: Wir haben Wochen damit verbracht, den Prozess zu verstehen. Welche KPIs gibt es? Wie werden sie definiert? Was sind typische Fehlerquellen?</li>
+  <li><strong>Geschäftslogik formalisieren</strong>: Wir haben die impliziten Regeln der Analysten explizit gemacht. Welche Validierungen wenden sie an? Welche Cross-Checks sind notwendig?</li>
+  <li><strong>Fachsprache als Code</strong>: Die Software spricht dieselbe Sprache wie die Analysten. Begriffe wie "EBIT", "Leverage Ratio", "Working Capital" sind keine Strings, sondern Geschäftskonzepte mit Bedeutung und Regeln.</li>
+  <li><strong>Human-in-the-Loop Design</strong>: Die KI extrahiert, aber Menschen können verifizieren. Jede Extraktion kommt mit der genauen Stelle im Dokument und einer Begründung.</li>
+</ol>
+
+<p><strong>Das Ergebnis</strong>: 80% der manuellen Arbeit automatisiert, Break-even nach 1,5 Monaten, höhere Qualität durch Konsistenz.</p>
+
+<h4>Warum generische Lösungen scheitern</h4>
+
+<p>Stellen Sie sich vor, Sie nehmen ein generisches RAG-System und werfen Ihre Dokumente rein. Was fehlt?</p>
+
+<ul>
+  <li><strong>Domänenlogik</strong>: Das System weiß nicht, was ein "EBIT" ist oder wie man es validiert</li>
+  <li><strong>Geschäftsregeln</strong>: Keine Ahnung, welche Cross-Checks notwendig sind</li>
+  <li><strong>Kontextverständnis</strong>: Kann nicht zwischen "EBIT 2024" und "forecast EBIT 2025" unterscheiden</li>
+  <li><strong>Fehlerhandling</strong>: Weiß nicht, was bei widersprüchlichen Informationen zu tun ist</li>
+</ul>
+
+<p>Domain-Driven Design löst diese Probleme nicht durch mehr Daten oder bessere Modelle, sondern durch besseres Verständnis.</p>
+
+<h4>Die harte Wahrheit über Domänenwissen</h4>
+
+<p>Domänenwissen zu erwerben ist zeitaufwendig. Es bedeutet, mit Experten zu reden, Prozesse zu beobachten, Feedback einzuholen. Es bedeutet, nicht sofort mit dem Coden anzufangen.</p>
+
+<p>Aber es ist die einzige Art, Systeme zu bauen, die nicht nur funktionieren, sondern die echte Geschäftsprobleme lösen.</p>
+
+<p>Der Unterschied ist messbar: Systeme, die auf domänengetriebenem Design basieren, haben höhere Erfolgsquoten, kürzere Break-even-Zeiten und bessere Akzeptanz bei Nutzern.</p>
+
+<h4>Von der Technologie zur Domäne denken</h4>
+
+<p>Am Ende ist es eine Frage der Perspektive: <strong>Baue ich eine technische Lösung und hoffe, dass sie zum Problem passt? Oder verstehe ich das Problem erst und baue dann die Lösung?</strong></p>
+
+<p>Bei Klartext AI wählen wir immer die zweite Option. Nicht weil es einfacher ist – sondern weil es der einzige Weg ist, nachhaltige, wertvolle Systeme zu schaffen.</p>
+
+<p><strong>Domain-Driven Design ist kein Buzzword für uns. Es ist die Art, wie wir arbeiten.</strong></p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="Domain-Driven Design in der Praxis: Der RFU Case"
+    excerpt="Wie wir durch tiefes Domänenverständnis 80% Automatisierung erreicht haben."
+    fullExcerpt="Der RFU Case ist ein perfektes Beispiel dafür, wie Domain-Driven Design in der Praxis funktioniert. Anstatt mit einer vorgefertigten Lösung zu starten, haben wir uns intensiv mit den Geschäftsprozessen unseres Kunden aus dem Bankendienstleistungssektor auseinandergesetzt. Das Ergebnis: Eine KI-Lösung, die nicht nur funktioniert, sondern die Sprache der Domäne spricht und 80% der manuellen Arbeit automatisiert – mit einem Break-even von nur 1,5 Monaten."
+    fullContent={fullContent}
+    category="Case Study"
+    readTime="8 min"
+    date="2025-01-10"
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

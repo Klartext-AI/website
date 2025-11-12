@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../../components/BlogPostDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'Agile AI Development: Small Cycles, Big Impact | Klartext AI Blog';
+const description = 'How iterative development and fast feedback lead to better AI systems – Agile AI Development in practice.';
+
+const fullContent = `
+<p>"We need 6 more months, then the perfect model will be ready."</p>
+
+<p>Wrong answer.</p>
+
+<p>In those 6 months, the business has changed, requirements have shifted, and the chance for quick impact is missed.</p>
+
+<p><strong>Agile AI Development means: Better to have a system with 80% accuracy in production today than one with 85% in development tomorrow.</strong></p>
+
+<h4>The Waterfall Problem</h4>
+
+<p>Traditional AI development often follows a waterfall model:</p>
+<ol>
+  <li>Gather requirements (3 months)</li>
+  <li>Prepare data (2 months)</li>
+  <li>Train model (4 months)</li>
+  <li>Integrate system (3 months)</li>
+  <li>Deployment (2 months)</li>
+</ol>
+
+<p><strong>14 months later</strong>: A system based on requirements from over a year ago.</p>
+
+<p><strong>The problem</strong>: By the time the system is ready, business, data, and requirements have long since changed.</p>
+
+<h4>Agile Isn't Just for Software</h4>
+
+<p>Agile methods were invented for software development. But they fit perfectly with AI projects – perhaps even better.</p>
+
+<p><strong>Why?</strong> Because AI is fundamentally iterative:</p>
+<ul>
+  <li>We can't guarantee quality in advance</li>
+  <li>We learn through experiments, not specifications</li>
+  <li>Feedback from real deployment is gold</li>
+  <li>Requirements change when people use the system</li>
+</ul>
+
+<p><strong>Agile AI means:</strong></p>
+
+<p><strong>Sprint 1-2:</strong> MVP with real data, even if only 70% accuracy<br/>
+<strong>Sprint 3-4:</strong> Gather feedback, improve system<br/>
+<strong>Sprint 5+:</strong> Iteratively optimize based on real usage data</p>
+
+<h4>Small Cycles, Measurable Progress</h4>
+
+<p>At Klartext AI, we work in 2-week sprints:</p>
+
+<p><strong>Week 1-2:</strong></p>
+<ul>
+  <li>Define clear, measurable sprint goals</li>
+  <li>Implement features</li>
+  <li>Test with real data</li>
+  <li>Deploy to staging</li>
+</ul>
+
+<p><strong>Review & Retrospective:</strong></p>
+<ul>
+  <li>What did we learn?</li>
+  <li>What works well?</li>
+  <li>What needs improvement?</li>
+</ul>
+
+<p><strong>Next sprint:</strong> Based on feedback and measurements</p>
+
+<p><strong>The result</strong>: Continuous, measurable progress instead of months of development in the dark.</p>
+
+<h4>Early and Often: Deploy early, deploy often</h4>
+
+<p>The biggest mistake in AI projects: Waiting too long to deploy.</p>
+
+<p><strong>Our philosophy:</strong> Deploy as early as possible, even if the system isn't perfect.</p>
+
+<p>Why?</p>
+<ul>
+  <li><strong>Real feedback</strong> beats theoretical assumptions</li>
+  <li><strong>Early adoption</strong> leads to earlier ROI</li>
+  <li><strong>Fast iteration</strong> based on real problems</li>
+  <li><strong>Reduced risk</strong> through smaller, more frequent changes</li>
+</ul>
+
+<p>A system with 75% accuracy that's productive today is more valuable than one with 90% accuracy in 6 months.</p>
+
+<h4>Feedback Loops Are Key</h4>
+
+<p>Agile without feedback is pointless. That's why we build feedback mechanisms from the start:</p>
+
+<ul>
+  <li><strong>User feedback</strong>: Direct feedback from users</li>
+  <li><strong>System metrics</strong>: Automatic performance measurements</li>
+  <li><strong>A/B tests</strong>: Comparisons of different approaches</li>
+  <li><strong>Error analysis</strong>: Systematic error analysis</li>
+</ul>
+
+<p>Every piece of feedback flows into the next sprint.</p>
+
+<h4>The MVP (Minimum Viable Product) Principle</h4>
+
+<p>We never start with the perfect system. We start with the MVP:</p>
+
+<p><strong>Minimum:</strong> The smallest solution that delivers real value<br/>
+<strong>Viable:</strong> Production-ready, not just a prototype<br/>
+<strong>Product:</strong> An actually usable system</p>
+
+<p><strong>Example Compliance Assistant:</strong></p>
+<ul>
+  <li><strong>MVP (Sprint 1-2)</strong>: 20 most common questions, basic retrieval, manual review</li>
+  <li><strong>V2 (Sprint 3-4)</strong>: 50 questions, Knowledge Graph, automatic sourcing</li>
+  <li><strong>V3 (Sprint 5-6)</strong>: 100+ questions, multi-model ensemble, advanced evaluation</li>
+</ul>
+
+<p>Each version brings real value. Each version learns from feedback.</p>
+
+<h4>The Uncomfortable Truth</h4>
+
+<p>Agile AI Development requires courage:</p>
+<ul>
+  <li>Courage to deploy an imperfect system</li>
+  <li>Courage to accept feedback</li>
+  <li>Courage to change priorities</li>
+  <li>Courage to say "no" to non-critical features</li>
+</ul>
+
+<p>But this courage is rewarded: With systems that are done faster, work better, and are actually used.</p>
+
+<p><strong>At Klartext AI, we focus on speed without quality loss. On iteration over perfection. On feedback over assumptions.</strong></p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="Agile AI Development: Small Cycles, Big Impact"
+    excerpt="How iterative development and fast feedback lead to better AI systems."
+    fullExcerpt="Agile methodologies and AI development are a perfect match. Instead of working for months on a perfect model, we rely on small development cycles, continuous feedback, and measurable results. This creates systems that are not only technically excellent but actually solve our clients' problems."
+    fullContent={fullContent}
+    category="Technical"
+    readTime="5 min"
+    date="2024-12-15"
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

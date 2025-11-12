@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SuccessStoryDetail from '../../components/SuccessStoryDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Automatisierte Förderantragstellung | Klartext AI';
+const description = 'Wie ein Förderdienstleister 95% Zeit und Kosten spart durch KI-gestützte Antragserstellung mit Break-even nach nur 1 Monat.';
+
+const challenge = `
+<p>Förderanträge sind eine Kunstform: Sie müssen präzise formuliert sein, alle formalen Anforderungen erfüllen, die Vision des Projekts transportieren und gleichzeitig die spezifischen Kriterien der Förderrichtlinien treffen. Die manuelle Erstellung dauert Wochen und bindet Expert:innen, die ihre Zeit besser in die strategische Beratung ihrer Kunden investieren könnten.</p>
+
+<p><strong>Das Problem:</strong></p>
+<ul>
+  <li>Kunden haben exzellente Ideen, aber keine Zeit für monatelange Antragsarbeit</li>
+  <li>Hohe Anforderungen an Qualität und Konsistenz der Dokumente</li>
+  <li>Jeder Antrag muss individuell auf Förderrichtlinien zugeschnitten sein</li>
+  <li>Der Prozess ist repetitiv, aber trotzdem komplex</li>
+</ul>
+`;
+
+const solution = `
+<p>Bei Klartext AI haben wir eine Lösung entwickelt, die sich an erfolgreichen Anträgen orientiert und daraus lernt, was einen guten Antrag ausmacht.</p>
+
+<p><strong>Der Ansatz im Detail:</strong></p>
+<ul>
+  <li><strong>Pattern Recognition:</strong> Analyse erfolgreicher Förderanträge und Identifikation von Erfolgsmustern</li>
+  <li><strong>Richtlinien-Integration:</strong> Automatische Berücksichtigung spezifischer Förderkriterien und formaler Anforderungen</li>
+  <li><strong>Dynamische Generierung:</strong> KI erstellt hochqualitative Entwürfe basierend auf Projektidee und Förderrichtlinie</li>
+  <li><strong>Interaktive Steuerung:</strong> Kunden können den Generierungsprozess präzise beeinflussen und anpassen</li>
+  <li><strong>Keine Vendor Lock-in:</strong> Lösung ist so gestaltet, dass keine bleibende Abhängigkeit entsteht</li>
+</ul>
+
+<p>Was diese Lösung besonders macht: Sie ersetzt nicht die menschliche Expertise, sondern potenziert sie. Die KI übernimmt den zeitaufwendigen Schreibprozess, während Expert:innen sich auf Strategie und Feinschliff konzentrieren können.</p>
+`;
+
+const results = [
+  "95% Zeit- und Kostenersparnis – von Wochen zu Stunden",
+  "Break-Even nach nur 1 Monat – schnellste ROI-Amortisation überhaupt",
+  "Höhere Erfolgsquote durch systematische Analyse von Best Practices",
+  "Mehr Kapazität für strategische Beratung statt repetitive Arbeit",
+  "Skalierbarkeit ohne Qualitätsverlust"
+];
+
+const fullContent = `
+<h3>Domain-Driven Design in der Praxis</h3>
+
+<p>Dieser Use Case zeigt exemplarisch, was Domain-Driven Design bedeutet:</p>
+
+<p><strong>Tiefes Domänenverständnis:</strong> Wir haben intensiv analysiert, was einen erfolgreichen Förderantrag ausmacht – nicht nur formal, sondern auch inhaltlich und strategisch.</p>
+
+<p><strong>Fachsprache als Code:</strong> Die KI "spricht" die Sprache der Fördergeber und kennt die impliziten Erwartungen verschiedener Programme.</p>
+
+<p><strong>Flexible Architektur:</strong> Die Lösung passt sich neuen Förderrichtlinien an, ohne dass der gesamte Code neu geschrieben werden muss.</p>
+
+<h3>Was wir gelernt haben</h3>
+
+<ol>
+  <li><strong>Qualität kommt von Lernen, nicht von Templates:</strong> Statt starrer Vorlagen haben wir der KI beigebracht, die Prinzipien erfolgreicher Anträge zu verstehen.</li>
+  <li><strong>Kontrolle ist essentiell:</strong> Kunden wollen nicht blind der KI vertrauen – sie wollen den Prozess steuern und verstehen können.</li>
+  <li><strong>Vendor Independence matters:</strong> Gerade bei kritischen Geschäftsprozessen ist es wichtig, dass Kunden nicht dauerhaft abhängig werden.</li>
+</ol>
+
+<p>Diese Lösung ist mehr als Automatisierung – sie ist eine neue Art, über Dokumentenerstellung zu denken. Nicht "KI statt Mensch", sondern "KI und Mensch, jeder in seiner Stärke".</p>
+`;
+
+const metrics = {
+  "Zeitersparnis": "95%",
+  "Break-even": "1 Monat",
+  "Automatisierung": "95%"
+};
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <SuccessStoryDetail
+    title="Automatisierte Förderantragstellung"
+    client="Förderdienstleister"
+    category="Document Generation"
+    challenge={challenge}
+    solution={solution}
+    results={results}
+    metrics={metrics}
+    fullContent={fullContent}
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

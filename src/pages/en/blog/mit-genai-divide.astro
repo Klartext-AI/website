@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../../components/BlogPostDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'The GenAI Divide: Why 95% of AI Projects Fail | Klartext AI Blog';
+const description = "MIT's State of AI in Business Report 2025 shows: Most GenAI initiatives deliver no measurable business impact. We explain why – and what must be done differently.";
+
+const fullContent = `
+<p><a href="https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf" target="_blank" rel="noopener noreferrer">MIT</a> has put it in black and white: <strong>95% of GenAI projects fail.</strong></p>
+
+<p>Not "perform worse than expected". Not "take longer". But: Zero measurable business impact. No ROI. No P&L impact.</p>
+
+<p>30-40 billion dollars in investments. 95% failure rate.</p>
+
+<p><strong>This isn't a problem – it's the biggest money burn in tech history.</strong></p>
+
+<h4>The Numbers Don't Lie</h4>
+
+<p>MIT's "State of AI in Business 2025" report analyzed over 300 publicly documented GenAI implementations, 52 executive interviews, and 153 survey responses.</p>
+
+<p><strong>The results are sobering:</strong></p>
+
+<ul>
+  <li><strong>~5%</strong> of organizations achieve measurable value (multi-million-dollar impact)</li>
+  <li><strong>~95%</strong> show <strong>zero</strong> measurable P&L impact</li>
+  <li><strong>80%+</strong> have tested tools like ChatGPT/Copilot</li>
+  <li><strong>~40%</strong> report deployment</li>
+  <li>But for enterprise-specific systems: only <strong>~5%</strong> reach full production</li>
+</ul>
+
+<p><strong>The divide</strong>: Between experimentation and transformation lie worlds apart.</p>
+
+<h4>Why Projects Fail</h4>
+
+<p>MIT identifies three main reasons – and they're not technical:</p>
+
+<p><strong>1. No Feedback Loops</strong><br/>
+Most systems are static. They don't learn from use. They don't improve over time. They stay at day 1 level.</p>
+
+<p><strong>2. No Real Workflow Integration</strong><br/>
+"We have a chatbot" isn't integration. Real integration means: The system is embedded in existing processes. It fits existing workflows. It replaces or extends established work methods.</p>
+
+<p><strong>3. Missing Context Adaptation</strong><br/>
+Generic solutions don't work. Every domain, every process, every company is different. Without adaptation to specific context, the AI remains irrelevant.</p>
+
+<p><strong>The hard truth</strong>: The problem isn't the technology. The problem is how it's deployed.</p>
+
+<h4>The 5% That Succeed</h4>
+
+<p>What do the 5% do differently?</p>
+
+<ol>
+  <li><strong>They start with business, not technology</strong> – Not "We need an LLM-based chatbot" but "We have this business problem – how can we solve it?"</li>
+  <li><strong>They focus on workflow integration</strong> – Not a standalone tool but embedded in existing processes.</li>
+  <li><strong>They build in feedback loops</strong> – The system learns from use. It continuously improves. It adapts.</li>
+  <li><strong>They measure from the start</strong> – Clear KPIs. Systematic evaluation. No hopes, only data.</li>
+  <li><strong>They rely on Domain-Driven Design</strong> – Not generic solutions but specifically tailored to the domain.</li>
+</ol>
+
+<p><strong>Sound familiar?</strong> This is exactly what we preach – and practice – at Klartext AI.</p>
+
+<h4>What This Means for You</h4>
+
+<p>If you're planning an AI project, ask yourself:</p>
+
+<ol>
+  <li><strong>Integration</strong>: Is the system really integrated into workflows, or is it a standalone tool?</li>
+  <li><strong>Feedback</strong>: Does the system learn from real use, or does it stay static?</li>
+  <li><strong>Context</strong>: Is the solution specifically tailored to your domain, or is it generic?</li>
+  <li><strong>Measurement</strong>: Have you defined clear KPIs? Are you measuring systematically?</li>
+  <li><strong>Ownership</strong>: Do you have a team with end-to-end responsibility?</li>
+</ol>
+
+<p>If you answer "No" to 3 or more questions, you're probably heading for the 95%.</p>
+
+<h4>Our Answer to the Divide</h4>
+
+<p>At Klartext AI, we've worked against the 95% from the start:</p>
+
+<ul>
+  <li><strong>Domain-Driven Design</strong>: No generic solutions</li>
+  <li><strong>Evaluation-First</strong>: Systematic measurements from day 1</li>
+  <li><strong>Workflow Integration</strong>: Embedded in existing processes</li>
+  <li><strong>Feedback Loops</strong>: Systems that learn and improve</li>
+  <li><strong>End-to-End Ownership</strong>: One team, full responsibility</li>
+</ul>
+
+<p><strong>The result</strong>: Break-even times of 1-2 months instead of years. ROI in millions instead of wasted budget.</p>
+
+<p><strong>We're not in the 95%. We're the 5%.</strong></p>
+
+<p>The MIT <a href="https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf" target="_blank" rel="noopener noreferrer">report</a></p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="The GenAI Divide: Why 95% of AI Projects Fail"
+    excerpt="MIT's State of AI in Business Report 2025 shows: Most GenAI initiatives deliver no measurable business impact."
+    fullExcerpt="The MIT report 'The GenAI Divide' puts it plainly: Despite massive investments (30-40 billion USD), 95% of GenAI projects achieve no measurable P&L impact. The problem isn't the technology but how organizations deploy it. We show what the 5% successful projects do differently."
+    fullContent={fullContent}
+    category="Philosophie"
+    readTime="7 min"
+    date="2025-01-20"
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

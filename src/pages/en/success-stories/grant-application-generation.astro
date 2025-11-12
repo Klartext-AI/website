@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SuccessStoryDetail from '../../../components/SuccessStoryDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'Automated Grant Application Generation | Klartext AI';
+const description = 'How a funding service provider saves 95% time and costs through AI-powered application generation with break-even after just 1 month.';
+
+const challenge = `
+<p>Grant applications are an art form: They must be precisely worded, meet all formal requirements, convey the project's vision, and simultaneously hit the specific criteria of funding guidelines. Manual creation takes weeks and ties up experts who could better invest their time in strategic consulting for their clients.</p>
+
+<p><strong>The Problem:</strong></p>
+<ul>
+  <li>Clients have excellent ideas but no time for months of application work</li>
+  <li>High requirements for document quality and consistency</li>
+  <li>Each application must be individually tailored to funding guidelines</li>
+  <li>The process is repetitive yet complex</li>
+</ul>
+`;
+
+const solution = `
+<p>At Klartext AI, we developed a solution that learns from successful applications and understands what makes a good application.</p>
+
+<p><strong>The Approach in Detail:</strong></p>
+<ul>
+  <li><strong>Pattern Recognition:</strong> Analysis of successful grant applications and identification of success patterns</li>
+  <li><strong>Guideline Integration:</strong> Automatic consideration of specific funding criteria and formal requirements</li>
+  <li><strong>Dynamic Generation:</strong> AI creates high-quality drafts based on project idea and funding guidelines</li>
+  <li><strong>Interactive Control:</strong> Clients can precisely influence and adjust the generation process</li>
+  <li><strong>No Vendor Lock-in:</strong> Solution designed to avoid permanent dependency</li>
+</ul>
+
+<p>What makes this solution special: It doesn't replace human expertise, it amplifies it. The AI takes over the time-consuming writing process while experts can focus on strategy and fine-tuning.</p>
+`;
+
+const results = [
+  "95% time and cost savings – from weeks to hours",
+  "Break-even after just 1 month – fastest ROI payback ever",
+  "Higher success rate through systematic analysis of best practices",
+  "More capacity for strategic consulting instead of repetitive work",
+  "Scalability without quality loss"
+];
+
+const fullContent = `
+<h3>Domain-Driven Design in Practice</h3>
+
+<p>This use case exemplifies what Domain-Driven Design means:</p>
+
+<p><strong>Deep domain understanding:</strong> We intensively analyzed what makes a successful grant application – not just formally, but also in terms of content and strategy.</p>
+
+<p><strong>Domain language as code:</strong> The AI "speaks" the language of funding bodies and knows the implicit expectations of different programs.</p>
+
+<p><strong>Flexible architecture:</strong> The solution adapts to new funding guidelines without requiring the entire code to be rewritten.</p>
+
+<h3>What We Learned</h3>
+
+<ol>
+  <li><strong>Quality comes from learning, not templates:</strong> Instead of rigid templates, we taught the AI to understand the principles of successful applications.</li>
+  <li><strong>Control is essential:</strong> Clients don't want to blindly trust the AI – they want to be able to control and understand the process.</li>
+  <li><strong>Vendor independence matters:</strong> Especially for critical business processes, it's important that clients don't become permanently dependent.</li>
+</ol>
+
+<p>This solution is more than automation – it's a new way of thinking about document creation. Not "AI instead of human," but "AI and human, each in their strength."</p>
+`;
+
+const metrics = {
+  "Time Savings": "95%",
+  "Break-even": "1 Month",
+  "Automation": "95%"
+};
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <SuccessStoryDetail
+    title="Automated Grant Application Generation"
+    client="Funding Service Provider"
+    category="Document Generation"
+    challenge={challenge}
+    solution={solution}
+    results={results}
+    metrics={metrics}
+    fullContent={fullContent}
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

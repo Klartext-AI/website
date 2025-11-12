@@ -1,0 +1,549 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+
+// Map story IDs to page URLs
+const storyUrls: Record<string, string> = {
+  'data-extraction-rfu': 'data-extraction-banking',
+  'document-generation': 'grant-application-generation',
+  'compliance-assistant': 'compliance-assistant',
+  'quote-automation': 'quote-automation'
+};
+
+const content = {
+  de: {
+    sectionTitle: "Erfolgsgeschichten",
+    subtitle: "Messbarer Impact bei unseren Kunden",
+    readMore: "Ganze Story lesen",
+    viewAllStories: "Alle Erfolgsgeschichten ansehen",
+    ctaCard: {
+      title: "Wo kann KI in Ihrem Unternehmen echten Wert stiften?",
+      description: "Finden Sie es heraus im AI Value Sprint Workshop!",
+      buttonText: "Angebote entdecken",
+      tag: "Workshop"
+    },
+    stories: [
+      {
+        id: "data-extraction-rfu",
+        title: "Datenextraktion bei RFU",
+        industry: "Banking Services",
+        metric: "80% Zeit- und Kosteneinsparung",
+        breakeven: "Break-even: 1,5 Monate",
+        description: "Automatisierte Extraktion und Verarbeitung von Finanzdokumenten mit domänenspezifischer KI.",
+        tags: ["Automatisierung", "Finanzwesen", "Dokumentenverarbeitung"]
+      },
+      {
+        id: "document-generation",
+        title: "Förderantrags-generierung",
+        industry: "Funding Applications",
+        metric: "95% Automatisierung",
+        breakeven: "Break-even: 1 Monat",
+        description: "Vollautomatische Generierung von Förderanträgen mit kontextbewusster KI-Unterstützung.",
+        tags: ["Generierung", "Förderwesen", "NLP"]
+      },
+      {
+        id: "compliance-assistant",
+        title: "Compliance Assistant",
+        industry: "Knowledge Management",
+        metric: "80% Zeitersparnis",
+        breakeven: "Break-even: 2 Monate",
+        description: "Intelligente Wissenssuche mit verifizierten Antworten und vollständiger Quellenangabe.",
+        tags: ["Compliance", "Wissensmanagement", "RAG"]
+      },
+      {
+        id: "quote-automation",
+        title: "Automatisierte Angebotserstellung",
+        industry: "Production Company",
+        metric: "70% Zeitersparnis",
+        breakeven: "Break-even: 5 Monate",
+        description: "KI-gestützte Erstellung von technischen Angeboten basierend auf Produktionsdaten.",
+        tags: ["Automatisierung", "Produktion", "B2B"]
+      }
+    ]
+  },
+  en: {
+    sectionTitle: "Success Stories",
+    subtitle: "Measurable impact for our clients",
+    readMore: "Read full story",
+    viewAllStories: "View all success stories",
+    ctaCard: {
+      title: "Where can AI create real value in your company?",
+      description: "Find out in our AI Value Sprint Workshop!",
+      buttonText: "Discover our offers",
+      tag: "Workshop"
+    },
+    stories: [
+      {
+        id: "data-extraction-rfu",
+        title: "Data Extraction at RFU",
+        industry: "Banking Services",
+        metric: "80% time and cost savings",
+        breakeven: "Break-even: 1.5 months",
+        description: "Automated extraction and processing of financial documents using domain-specific AI.",
+        tags: ["Automation", "Finance", "Document Processing"]
+      },
+      {
+        id: "document-generation",
+        title: "Automatic Funding Application Generation",
+        industry: "Funding Applications",
+        metric: "95% automation",
+        breakeven: "Break-even: 1 month",
+        description: "Fully automated generation of funding applications with context-aware AI support.",
+        tags: ["Generation", "Funding", "NLP"]
+      },
+      {
+        id: "compliance-assistant",
+        title: "Compliance Assistant",
+        industry: "Knowledge Management",
+        metric: "80% time savings",
+        breakeven: "Break-even: 2 months",
+        description: "Intelligent knowledge search with verified answers and complete source attribution.",
+        tags: ["Compliance", "Knowledge Management", "RAG"]
+      },
+      {
+        id: "quote-automation",
+        title: "Automated Quote Generation",
+        industry: "Production Company",
+        metric: "70% time savings",
+        breakeven: "Break-even: 5 months",
+        description: "AI-powered creation of technical quotes based on production data.",
+        tags: ["Automation", "Production", "B2B"]
+      }
+    ]
+  }
+};
+
+const text = content[lang];
+---
+
+<section class="success-stories section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2>{text.sectionTitle}</h2>
+      <p class="section-subtitle">{text.subtitle}</p>
+    </div>
+
+    <div class="stories-scroll-container">
+      <div class="stories-wrapper">
+        {text.stories.map((story, index) => (
+          <a href={lang === 'en' ? `${BASE}en/success-stories/${storyUrls[story.id]}` : `${BASE}success-stories/${storyUrls[story.id]}`} class="story-card-link">
+            <article class="story-card glass-card" style={`animation-delay: ${index * 0.15}s`}>
+              <div class="story-header">
+                <span class="story-industry">{story.industry}</span>
+              </div>
+
+              <h3 class="story-title">{story.title}</h3>
+
+              <div class="story-metrics">
+                <div class="metric-badge metric-primary">{story.metric}</div>
+                <div class="metric-badge metric-secondary">{story.breakeven}</div>
+              </div>
+
+              <p class="story-description">{story.description}</p>
+
+              <div class="story-tags">
+                {story.tags.map(tag => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+
+              <div class="story-link">
+                {text.readMore}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 12l4-4-4-4"/>
+                </svg>
+              </div>
+            </article>
+          </a>
+        ))}
+
+        <!-- CTA Card -->
+        <a href={lang === 'de' ? `${BASE}offerings` : `${BASE}en/offerings`} class="story-card-link cta-card-link">
+          <article class="story-card cta-card" style="animation-delay: 0.6s">
+            <div class="cta-tag-wrapper">
+              <span class="cta-tag">{text.ctaCard.tag}</span>
+            </div>
+
+            <h3 class="cta-title">{text.ctaCard.title}</h3>
+
+            <p class="cta-description">{text.ctaCard.description}</p>
+
+            <div class="cta-button">
+              {text.ctaCard.buttonText}
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 12l4-4-4-4"/>
+              </svg>
+            </div>
+          </article>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll hint indicators -->
+    <div class="scroll-indicators">
+      <button class="scroll-btn scroll-left" aria-label="Scroll left">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button class="scroll-btn scroll-right" aria-label="Scroll right">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="stories-cta text-center fade-in">
+      <a href={lang === 'de' ? `${BASE}success-stories` : `${BASE}en/success-stories`} class="btn btn-secondary">
+        {text.viewAllStories}
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 12l4-4-4-4"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .success-stories {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-sm);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .stories-scroll-container {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-blue-accent) transparent;
+    padding: var(--space-md) 0;
+    margin: 0 calc(-1 * var(--space-md));
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  .stories-scroll-container::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .stories-scroll-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+
+  .stories-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--color-blue-accent);
+    border-radius: 4px;
+  }
+
+  .stories-wrapper {
+    display: flex;
+    gap: var(--space-md);
+    padding-bottom: var(--space-sm);
+  }
+
+  .story-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    min-width: 380px;
+    max-width: 380px;
+  }
+
+  .story-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+
+  .story-card-link:hover .story-card {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 16px 48px -12px rgba(36, 121, 190, 0.35);
+  }
+
+  .story-header {
+    margin-bottom: var(--space-sm);
+  }
+
+  .story-industry {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .story-title {
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-dark);
+  }
+
+  .story-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .metric-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .metric-primary {
+    background: var(--color-blue);
+    color: white;
+  }
+
+  .metric-secondary {
+    background: rgba(76, 138, 197, 0.2);
+    color: var(--color-blue);
+  }
+
+  .story-description {
+    flex-grow: 1;
+    color: var(--color-text-body);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .story-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(36, 121, 190, 0.1);
+    border-radius: 1rem;
+    color: var(--color-blue);
+  }
+
+  .story-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-blue);
+    font-weight: 600;
+    margin-top: auto;
+    transition: gap 0.3s ease;
+  }
+
+  .story-card-link:hover .story-link {
+    gap: 0.75rem;
+  }
+
+  .story-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .story-card-link:hover .story-link svg {
+    transform: translateX(4px);
+  }
+
+  .scroll-indicators {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .scroll-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--color-blue);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    color: var(--color-blue);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .scroll-btn:hover {
+    background: var(--color-blue);
+    color: white;
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    .story-card-link {
+      min-width: 300px;
+      max-width: 300px;
+    }
+
+    .scroll-indicators {
+      display: none;
+    }
+  }
+
+  .stories-cta {
+    margin-top: var(--space-xl);
+  }
+
+  .stories-cta .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .stories-cta .btn svg {
+    transition: transform 0.3s ease;
+  }
+
+  .stories-cta .btn:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* CTA Card Styles */
+  .cta-card {
+    background: linear-gradient(135deg,
+      rgba(36, 121, 190, 0.95) 0%,
+      rgba(76, 138, 197, 0.9) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 1rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-md);
+  }
+
+  .cta-card-link:hover .cta-card {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 60px -12px rgba(36, 121, 190, 0.5);
+  }
+
+  .cta-tag-wrapper {
+    margin-bottom: var(--space-md);
+  }
+
+  .cta-tag {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: white;
+  }
+
+  .cta-title {
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: var(--space-md);
+    color: white;
+  }
+
+  .cta-description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 90%;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: white;
+    color: var(--color-blue);
+    font-weight: 600;
+    font-size: 1.125rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    margin-top: auto;
+  }
+
+  .cta-card-link:hover .cta-button {
+    gap: 0.75rem;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .cta-button svg {
+    transition: transform 0.3s ease;
+  }
+
+  .cta-card-link:hover .cta-button svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    .cta-title {
+      font-size: 1.5rem;
+    }
+
+    .cta-description {
+      font-size: 1rem;
+      max-width: 100%;
+    }
+
+    .cta-button {
+      font-size: 1rem;
+      padding: 0.875rem 1.75rem;
+    }
+  }
+</style>
+
+<script>
+  // Horizontal scroll navigation
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.stories-scroll-container');
+    const leftBtn = document.querySelector('.scroll-left');
+    const rightBtn = document.querySelector('.scroll-right');
+
+    if (container && leftBtn && rightBtn) {
+      leftBtn.addEventListener('click', () => {
+        container.scrollBy({ left: -400, behavior: 'smooth' });
+      });
+
+      rightBtn.addEventListener('click', () => {
+        container.scrollBy({ left: 400, behavior: 'smooth' });
+      });
+    }
+  });
+</script>

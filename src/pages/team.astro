@@ -1,0 +1,326 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Unser Team - Klartext AI';
+const description = 'Lernen Sie das Team hinter Klartext AI kennen - Experten aus Forschung und Praxis.';
+const BASE = import.meta.env.BASE_URL;
+
+const teamMembers = [
+  {
+    name: "Ruben Hetfleisch",
+    role: "Geschäftsführer / CEO",
+    image: `${BASE}team/ruben.webp`,
+    linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
+    bio: [
+      "Nach meinem Ingenieurs-Studium an der TU Darmstadt, das ich 2022 abgeschlossen habe, konnte ich bei Fraunhofer Austria eine tiefgehende Expertise im Bereich künstlicher Intelligenz aufbauen.",
+      "Als Vorstandsmitglied von AI Austria (https://aiaustria.com/), dem größten KI-Netzwerk Österreichs, habe ich mit viel Herzblut die GenAI Community ins Leben gerufen – Österreichs einzige Plattform für generative KI.",
+      "Der technische Fortschritt und der Austausch mit anderen sind für mich besonders wertvoll. Deshalb engagiere ich mich intensiv in diesem Bereich. Mein Ziel ist es, KI für alle zugänglich und sinnvoll nutzbar zu machen."
+    ]
+  },
+  {
+    name: "Daniel Toth",
+    role: "Operativer Geschäftsführer / COO",
+    image: `${BASE}team/daniel.jpg`,
+    linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/",
+    bio: [
+      "Schon während meines Studiums an der TU Wien war ich über sechs Jahre am renommierten Fraunhofer Austria Institut tätig. In dieser Zeit hatte ich das Privileg, gemeinsam mit den führenden Expert:innen Europas an der Entwicklung und Umsetzung wegweisender KI-Lösungen zu arbeiten.",
+      "Von innovativen Prototypen bis hin zu großflächigen Industrieanwendungen – ich konnte Projekte realisieren, die heute als Referenz für den Einsatz von Künstlicher Intelligenz in der Praxis gelten.",
+      "Diese Erfahrungen haben mir gezeigt, wie technische Exzellenz und höchste Ansprüche an Qualität messbaren Mehrwert für Unternehmen schaffen."
+    ]
+  },
+  {
+    name: "Felix Krause",
+    role: "Technischer Geschäftsführer / CTO",
+    image: `${BASE}team/felix.png`,
+    linkedin: "https://www.linkedin.com/in/f-krause-ai/",
+    bio: [
+      "Mein Volkswirtschaftsstudium hat mir gezeigt, wie eng Menschen, Organisationen und Gesellschaft miteinander verwoben sind. Durch den Master in Data Science habe ich gelernt, diese Zusammenhänge auch in Daten sichtbar zu machen. Künstliche Intelligenz ist für mich das Werkzeug, mit dem wir die Welt nicht nur besser verstehen, sondern auch gestalten können.",
+      "Als Technischer Geschäftsführer von Klartext AI verbinde ich analytisches Denken mit technischer Umsetzung. Mein Ziel: KI-Lösungen zu entwickeln, die nachweislich wirken – zuverlässig, verständlich und mit echtem Nutzen für Unternehmen und Gesellschaft. Zusätzlich bin ich im Vorstand des Tech-Netzwerks AIM (https://ai-mission.eu/), welches 400 tech experten aus Europa vereint und regelmäßig beliebte hackathons organisiert.",
+      "Mich motiviert es, gemeinsam mit einem starken Team neuste Technologien einzusetzen und eine Arbeitskultur zu leben, die auf Vertrauen, Neugierde und Spaß an der Arbeit basiert."
+    ]
+  },
+  {
+    name: "Hrvoje Ljubić",
+    role: "Leitender Entwickler / Lead Developer",
+    image: `${BASE}team/hrvoje.png`,
+    linkedin: null,
+    bio: [
+      "Zwei Produkte erfolgreich als Gründer gelaunched. Projekte für Wirtschaftskammer Österreich, Deutsche Bahn, LG, Wirtschaftsblatt & Co. Apps mit 300T+ Downloads."
+    ]
+  },
+  {
+    name: "Ondrej Hruby",
+    role: "Lead AI Developer",
+    image: `${BASE}team/ondrej.jpg`,
+    linkedin: "https://www.linkedin.com/in/ondrej-hrubyml/",
+    bio: [
+      "AI und Software Engineer, der Daten in intelligente Lösungen verwandelt. Spezialist für Python, TensorFlow und Neural Networks. Leidenschaftlich daran interessiert, innovative und wirkungsvolle KI-Lösungen zu entwickeln.",
+      "Seit meiner Kindheit bin ich von der Magie der Technologie fasziniert. Mit fundiertem Hintergrund im Software Engineering habe ich nahtlos in die Welt des maschinellen Lernens und der künstlichen Intelligenz gewechselt. Meine Leidenschaft liegt darin, die Kraft der Daten zu nutzen, um intelligente Systeme zu schaffen, die reale Probleme lösen und Innovation vorantreiben."
+    ]
+  },
+  {
+    name: "Anna Poledna",
+    role: "Marketing & Communications Associate",
+    image: `${BASE}team/anna.jpg`,
+    linkedin: "https://www.linkedin.com/in/anna-poledna-19766531b/",
+    bio: [
+      "Dual-degree Studentin an der Duke University und Duke Kunshan University. Derzeit in Kunshan ansässig, studiere ich Molecular Bioscience mit Fokus auf Biogeochemie."
+    ]
+  }
+];
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <div class="team-page">
+    <div class="container">
+      <header class="page-header fade-in">
+        <h1>Unser Team</h1>
+        <p class="subtitle">Die Köpfe hinter Klartext AI – Expertise aus Forschung, Entwicklung und Praxis</p>
+      </header>
+
+      <div class="team-members">
+        {teamMembers.map((member, index) => (
+          <article class="member-card fade-in" style={`animation-delay: ${index * 0.15}s`}>
+            <div class="member-visual">
+              <div class="member-image-wrapper">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  class="member-image"
+                  loading="lazy"
+                />
+              </div>
+              {member.linkedin && (
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="linkedin-link"
+                  aria-label={`${member.name} auf LinkedIn besuchen`}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                    <rect x="2" y="9" width="4" height="12"/>
+                    <circle cx="4" cy="4" r="2"/>
+                  </svg>
+                  LinkedIn Profil
+                </a>
+              )}
+            </div>
+            <div class="member-content">
+              <h2 class="member-name">{member.name}</h2>
+              <p class="member-role">{member.role}</p>
+              <div class="member-bio">
+                {member.bio.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+  <Footer lang="de" />
+</BaseLayout>
+
+<style>
+  .team-page {
+    min-height: calc(100vh - 80px);
+    padding: calc(60px + var(--space-xl)) 0 var(--space-xl); /* Replace --space-nav with 60px */
+    background: transparent;
+    margin-top: var(--space-xl); /* Ensure consistent top spacing */
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .page-header h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-dark);
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .team-members {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .member-card {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: var(--space-xl);
+    padding: var(--space-xl);
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .member-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px -12px rgba(36, 121, 190, 0.3);
+  }
+
+  .member-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .member-image-wrapper {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(36, 121, 190, 0.2);
+    transition: all 0.4s ease;
+  }
+
+  .member-card:hover .member-image-wrapper {
+    border-color: var(--color-blue);
+    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.25);
+  }
+
+  .member-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .member-card:hover .member-image {
+    transform: scale(1.05);
+  }
+
+  .linkedin-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0.625rem 1.25rem;
+    background: var(--color-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .linkedin-link:hover {
+    background: var(--color-blue-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(36, 121, 190, 0.3);
+  }
+
+  .linkedin-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .member-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .member-name {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-dark);
+  }
+
+  .member-role {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-md);
+  }
+
+  .member-bio {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .member-bio p {
+    margin-bottom: var(--space-md);
+  }
+
+  .member-bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .member-card {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+    }
+
+    .member-visual {
+      align-items: center;
+    }
+
+    .member-content {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .team-page {
+      padding: calc(60px + var(--space-lg)) 0 var(--space-lg); /* Replace --space-nav with 60px */
+    }
+
+    .page-header {
+      margin-bottom: var(--space-xl);
+    }
+
+    .team-members {
+      gap: var(--space-xl);
+    }
+
+    .member-card {
+      padding: var(--space-md);
+    }
+
+    .member-image-wrapper {
+      width: 220px;
+      height: 220px;
+    }
+
+    .member-name {
+      font-size: 1.5rem;
+    }
+
+    .member-role {
+      font-size: 1rem;
+    }
+
+    .member-bio {
+      font-size: 1rem;
+    }
+  }
+</style>

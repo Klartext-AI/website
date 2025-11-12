@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SuccessStoryDetail from '../../components/SuccessStoryDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'KI-Assistent für Compliance & Wissensmanagement | Klartext AI';
+const description = 'Wie ein ATX-Unternehmen 80% Zeit spart durch intelligenten Compliance-Assistenten mit Break-even nach 2 Monaten.';
+
+const challenge = `
+<p>In großen Organisationen ist Compliance-Wissen oft in hunderten von Dokumenten verstreut. Ein führendes ATX-Unternehmen mit über 50 Compliance-Richtlinien, internen Handbüchern und Prozessdokumenten stand vor dieser Herausforderung.</p>
+
+<p><strong>Das Problem:</strong></p>
+<ul>
+  <li>Mitarbeiter hatten bei spezifischen Fragen zu Prozessen oder Produkten keinen Überblick über relevante Richtlinien</li>
+  <li>Interne Compliance-Expert:innen hatten keine Kapazität, jede Anfrage mit der nötigen Sensibilität zu beantworten</li>
+  <li>Die Suche in Dokumenten kostete Zeit und führte oft zu unsicheren Ergebnissen</li>
+  <li>Wissen veraltete oder wurde inkonsistent angewendet</li>
+</ul>
+
+<p>Das Resultat: Langsame Entscheidungen, Unsicherheit bei Mitarbeitern, Überlastung der Expert:innen.</p>
+`;
+
+const solution = `
+<p>Einen "Chatbot über Dokumente" zu bauen, ist einfach. Einen Assistenten zu entwickeln, der wirklich versteht und verlässliche Antworten gibt, ist eine andere Herausforderung. Hier kommt Domain-Driven Design ins Spiel.</p>
+
+<p><strong>Der Ansatz im Detail:</strong></p>
+<ul>
+  <li><strong>Integration von 50+ Richtlinien und Dokumenten:</strong> Vollständige Erfassung des organisatorischen Wissens</li>
+  <li><strong>Knowledge Graph Integration:</strong> Verknüpfung mit Unternehmens-Metadaten für kontextuelle Intelligenz</li>
+  <li><strong>Intelligente Retrieval-Methodik:</strong> Nicht nur Keyword-Suche, sondern semantisches Verständnis von Zusammenhängen</li>
+  <li><strong>Quellenangaben mit Kontext:</strong> Jede Antwort kommt mit präziser Referenz aus den Originaldokumenten</li>
+  <li><strong>Komplexe Fragestellungen:</strong> System kann mehrstufige, vernetzte Anfragen verarbeiten</li>
+</ul>
+
+<p>Was diese Lösung von generischen RAG-Systemen unterscheidet: Die Integration von Unternehmens-Metadaten (Knowledge Graph) ermöglicht kontextbewusstes Retrieval. Die KI weiß nicht nur, was in den Dokumenten steht, sondern auch, wie verschiedene Informationen zusammenhängen.</p>
+`;
+
+const results = [
+  "80% Zeit- und Kostenersparnis bei Compliance-Anfragen",
+  "Break-Even nach nur 2 Monaten durch reduzierte Anfragen an Expert:innen",
+  "Entlastung der Compliance-Teams für strategische Themen",
+  "Konsistente Compliance-Anwendung über alle Abteilungen",
+  "Nachvollziehbarkeit für Audits durch vollständige Quellenangaben"
+];
+
+const fullContent = `
+<h3>Knowledge Management neu gedacht</h3>
+
+<p><strong>Nicht Search, sondern Understanding:</strong> Die Lösung sucht nicht nur nach Keywords, sondern versteht die Intention hinter Fragen und kann komplexe Zusammenhänge erklären.</p>
+
+<p><strong>Kontext ist König:</strong> Durch die Integration eines Knowledge Graphs weiß das System, welche Informationen in welchem Kontext relevant sind – je nach Abteilung, Produkt oder Prozess.</p>
+
+<p><strong>Vertrauen durch Transparenz:</strong> Mitarbeiter bekommen nicht nur Antworten, sondern auch die Begründung und die genaue Stelle in den Dokumenten. Das schafft Vertrauen.</p>
+
+<h3>Was wir gelernt haben</h3>
+
+<ol>
+  <li><strong>Retrieval ist die halbe Miete:</strong> Die Qualität der Antworten hängt maßgeblich davon ab, ob die richtigen Informationen gefunden werden. Einfache Vektorsuche reicht nicht.</li>
+  <li><strong>Metadaten sind Gold wert:</strong> Die Integration von Unternehmens-Kontext (Struktur, Prozesse, Produkte) macht den Unterschied zwischen "funktioniert" und "funktioniert exzellent".</li>
+  <li><strong>Expert:innen bleiben wichtig:</strong> Die KI ersetzt keine Compliance-Expert:innen – sie gibt ihnen die Freiheit, dort zu wirken, wo ihre Expertise wirklich zählt.</li>
+  <li><strong>Evaluation von Anfang an:</strong> Wir haben von Tag 1 an gemessen, wie gut das System antwortet. Das war essentiell für die schnelle Verbesserung.</li>
+</ol>
+
+<p>Diese Lösung ist ein Paradebeispiel für Evaluation-Driven und Domain-Driven Development. Nicht "schnell einen Chatbot bauen", sondern systematisch eine Lösung entwickeln, die echte Geschäftsprobleme löst.</p>
+`;
+
+const metrics = {
+  "Zeitersparnis": "80%",
+  "Break-even": "2 Monate",
+  "Dokumente": "50+"
+};
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <SuccessStoryDetail
+    title="KI-Assistent für Compliance & Wissensmanagement"
+    client="ATX-Unternehmen"
+    category="Knowledge Management"
+    challenge={challenge}
+    solution={solution}
+    results={results}
+    metrics={metrics}
+    fullContent={fullContent}
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

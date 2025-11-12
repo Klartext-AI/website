@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SuccessStoryDetail from '../../components/SuccessStoryDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Automatisierte Angebotserstellung | Klartext AI';
+const description = 'Wie ein Produktionsunternehmen 70% Zeit spart bei 1000+ wöchentlichen Anfragen mit Break-even nach 5 Monaten.';
+
+const challenge = `
+<p>Erfolg bringt manchmal unerwartete Herausforderungen mit sich. Ein Produktionsunternehmen erhielt wöchentlich über 1000 standardisierte Anfragen per E-Mail – ein klares Zeichen für starke Marktposition, aber auch eine operative Belastung.</p>
+
+<p><strong>Das Problem:</strong></p>
+<ul>
+  <li>1000+ Anfragen pro Woche, viele davon sehr ähnlich</li>
+  <li>Manuelle Angebotserstellung bindet erhebliche Ressourcen</li>
+  <li>Zeitverlust trotz standardisierter Produkte und wiederkehrender Muster</li>
+  <li>Verzögerungen in der Antwortzeit beeinträchtigen Kundenzufriedenheit</li>
+  <li>Mitarbeiter verlieren Zeit mit repetitiven Aufgaben statt strategischer Arbeit</li>
+</ul>
+`;
+
+const solution = `
+<p>Statt einen generischen "Quote Generator" zu bauen, haben wir analysiert, was erfolgreiche Angebote ausmacht – und daraus gelernt.</p>
+
+<p><strong>Der Ansatz im Detail:</strong></p>
+<ul>
+  <li><strong>Intelligente Klassifikation:</strong> Automatische Kategorisierung eingehender Anfragen nach Typ, Produktkategorie und Komplexität</li>
+  <li><strong>Pattern Recognition:</strong> Analyse erfolgreicher vergangener Angebote zur Identifikation von Erfolgsmustern</li>
+  <li><strong>Automatische Entwurfserstellung:</strong> KI generiert erfolgsversprechende und lohnende Angebotsentwürfe</li>
+  <li><strong>Finale Kontrolle beim Menschen:</strong> Mitarbeiter prüfen und finalisieren Entwürfe effizient</li>
+  <li><strong>Kontinuierliches Lernen:</strong> System verbessert sich durch Feedback zu akzeptierten/abgelehnten Angeboten</li>
+</ul>
+
+<p>Was diese Lösung besonders macht: Sie ersetzt nicht die Expertise der Vertriebsmitarbeiter, sondern gibt ihnen die Zeit zurück, die sie für strategische Kundenbeziehungen brauchen.</p>
+`;
+
+const results = [
+  "70% Zeit- und Kostenersparnis bei der Angebotserstellung",
+  "Break-Even nach 5 Monaten – solider ROI für transformative Lösung",
+  "Schnellere Reaktionszeiten erhöhen Kundenzufriedenheit",
+  "Höhere Mitarbeiterzufriedenheit durch weniger repetitive Arbeit",
+  "Konsistente Qualität basierend auf Best Practices",
+  "Skalierbarkeit für Wachstum ohne proportional mehr Personal"
+];
+
+const fullContent = `
+<h3>Domain-Driven Design trifft Vertrieb</h3>
+
+<p><strong>Vertrieb ist mehr als Zahlen:</strong> Wir haben nicht nur Preise und Produkte betrachtet, sondern die gesamte Vertriebslogik analysiert: Was macht ein Angebot attraktiv? Welche Formulierungen funktionieren? Wie werden Preise optimal positioniert?</p>
+
+<p><strong>Lernen von Erfolgen:</strong> Statt generischer Templates haben wir der KI beigebracht, die Muster erfolgreicher Angebote zu erkennen und anzuwenden.</p>
+
+<p><strong>Integration in bestehende Prozesse:</strong> Die Lösung fügt sich nahtlos in den bestehenden Workflow ein – von E-Mail-Eingang bis CRM-Integration.</p>
+
+<h3>Was wir gelernt haben</h3>
+
+<ol>
+  <li><strong>Automatisierung bedeutet nicht Entmenschlichung:</strong> Die besten Ergebnisse kommen, wenn KI die Routine übernimmt und Menschen die Strategie steuern.</li>
+  <li><strong>Break-Even ist nicht alles:</strong> Der wahre Wert liegt in der Skalierbarkeit und der Fähigkeit, mit Wachstum Schritt zu halten.</li>
+  <li><strong>Klassifikation ist kritisch:</strong> Die Qualität der automatischen Angebote hängt stark von der korrekten Klassifikation der Anfragen ab.</li>
+  <li><strong>Feedback-Loops sind Gold:</strong> Jedes finalisierte Angebot ist eine Chance, das System zu verbessern.</li>
+</ol>
+
+<p>Diese Lösung ist mehr als ein "Tool" – sie ist eine strategische Investition in Skalierbarkeit und Effizienz. Sie zeigt, dass Automatisierung und persönlicher Service keine Gegensätze sind, sondern sich gegenseitig verstärken können.</p>
+`;
+
+const metrics = {
+  "Zeitersparnis": "70%",
+  "Break-even": "5 Monate",
+  "Volumen": "1000+ Anfragen/Woche"
+};
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <SuccessStoryDetail
+    title="Automatisierte Angebotserstellung"
+    client="Produktionsunternehmen"
+    category="Process Automation"
+    challenge={challenge}
+    solution={solution}
+    results={results}
+    metrics={metrics}
+    fullContent={fullContent}
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

@@ -1,0 +1,315 @@
+---
+interface Props {
+  title: string;
+  client: string;
+  category: string;
+  challenge: string;
+  solution: string;
+  results: string[];
+  metrics: Record<string, string>;
+  fullContent: string;
+  lang?: 'de' | 'en';
+}
+
+const { title, client, category, challenge, solution, results, metrics, fullContent, lang = 'de' } = Astro.props;
+
+const labels = {
+  de: {
+    challenge: "Die Herausforderung",
+    solution: "Unsere Lösung",
+    results: "Die Ergebnisse",
+    metrics: "Kennzahlen",
+    client: "Kunde",
+    category: "Kategorie",
+    backToStories: "← Zurück zu Erfolgsgeschichten"
+  },
+  en: {
+    challenge: "The Challenge",
+    solution: "Our Solution",
+    results: "The Results",
+    metrics: "Key Metrics",
+    client: "Client",
+    category: "Category",
+    backToStories: "← Back to Success Stories"
+  }
+};
+
+const text = labels[lang];
+const BASE = import.meta.env.BASE_URL;
+---
+
+<section class="success-story-detail section">
+  <div class="container">
+    <a href={lang === 'en' ? `${BASE}en/success-stories` : `${BASE}success-stories`} class="back-link">
+      {text.backToStories}
+    </a>
+
+    <article class="story-content fade-in">
+      <header class="story-header">
+        <span class="story-category-badge">{category}</span>
+        <h1 class="story-main-title">{title}</h1>
+        <p class="story-client-info">{text.client}: {client}</p>
+      </header>
+
+      <div class="story-metrics-highlight glass-card">
+        {Object.entries(metrics).map(([key, value]) => (
+          <div class="metric-item">
+            <span class="metric-label">{key}</span>
+            <span class="metric-value-large">{value}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="story-body">
+        <section class="story-section">
+          <h2 class="section-title">{text.challenge}</h2>
+          <div class="section-content" set:html={challenge} />
+        </section>
+
+        <section class="story-section">
+          <h2 class="section-title">{text.solution}</h2>
+          <div class="section-content" set:html={solution} />
+        </section>
+
+        <section class="story-section">
+          <h2 class="section-title">{text.results}</h2>
+          <div class="results-grid">
+            {results.map((result) => (
+              <div class="result-item glass-card">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                <p>{result}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="story-section full-content">
+          <div class="section-content" set:html={fullContent} />
+        </section>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .success-story-detail {
+    min-height: 80vh;
+    padding: var(--space-2xl) 0;
+    background: transparent;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-blue);
+    font-size: 0.95rem;
+    margin-bottom: var(--space-xl);
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+
+  .back-link:hover {
+    transform: translateX(-4px);
+    color: var(--color-blue-accent);
+  }
+
+  .story-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .story-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .story-category-badge {
+    display: inline-block;
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 1rem;
+    background: rgba(36, 121, 190, 0.1);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .story-main-title {
+    font-size: var(--font-size-h1);
+    font-weight: 300;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .story-client-info {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .story-metrics-highlight {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+    background: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  .metric-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .metric-label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+  }
+
+  .metric-value-large {
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--color-blue);
+    line-height: 1.2;
+  }
+
+  .story-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .story-section {
+    position: relative;
+  }
+
+  .section-title {
+    font-size: var(--font-size-h2);
+    font-weight: 400;
+    margin-bottom: var(--space-lg);
+    color: var(--color-blue);
+    position: relative;
+    padding-bottom: var(--space-sm);
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--color-blue);
+  }
+
+  .section-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--color-text-body);
+  }
+
+  .section-content :global(p) {
+    margin-bottom: var(--space-md);
+  }
+
+  .section-content :global(strong) {
+    color: var(--color-text-dark);
+    font-weight: 600;
+  }
+
+  .section-content :global(ul),
+  .section-content :global(ol) {
+    margin: var(--space-md) 0;
+    padding-left: var(--space-lg);
+  }
+
+  .section-content :global(li) {
+    margin-bottom: var(--space-sm);
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  .result-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.5) !important;
+    transition: all 0.3s ease;
+  }
+
+  .result-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.25);
+  }
+
+  .result-item svg {
+    flex-shrink: 0;
+    color: var(--color-blue);
+    margin-top: 2px;
+  }
+
+  .result-item p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    margin: 0;
+  }
+
+  .full-content {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .success-story-detail {
+      padding: var(--space-xl) 0;
+    }
+
+    .story-main-title {
+      font-size: var(--font-size-h2);
+    }
+
+    .story-metrics-highlight {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+    }
+
+    .metric-value-large {
+      font-size: 1.75rem;
+    }
+
+    .section-title {
+      font-size: var(--font-size-h3);
+    }
+
+    .section-content {
+      font-size: 1rem;
+    }
+
+    .results-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

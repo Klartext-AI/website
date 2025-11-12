@@ -1,0 +1,133 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+
+const content = {
+  de: {
+    headline: "Bereit für Klartext?",
+    subheadline: "Lassen Sie uns KI in ROI verwandeln.",
+    primaryCTA: "Termin vereinbaren",
+    secondaryCTA: "Erfolgsgeschichten lesen"
+  },
+  en: {
+    headline: "Ready for Klartext?",
+    subheadline: "Let's turn AI into ROI.",
+    primaryCTA: "Book a Call",
+    secondaryCTA: "Read Success Stories"
+  }
+};
+
+const text = content[lang];
+---
+
+<section id="contact" class="final-cta section">
+  <div class="container">
+    <div class="cta-content fade-in">
+      <div class="cta-logo-wrapper">
+        <img
+          src={`${BASE}LOGO_transparent_without_sublime.png`}
+          alt="Klartext AI"
+          class="cta-logo"
+          loading="lazy"
+          width="120"
+          height="auto"
+        />
+      </div>
+      <h2 class="cta-headline">{text.headline}</h2>
+      <p class="cta-subheadline">{text.subheadline}</p>
+
+      <div class="cta-buttons">
+        <a href="mailto:office@klartext-ai.com" class="btn btn-primary btn-large">{text.primaryCTA}</a>
+        <a href="#success-stories" class="btn btn-secondary btn-large">{text.secondaryCTA}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta {
+    background: linear-gradient(
+      135deg,
+      rgba(36, 121, 190, 0.05) 0%,
+      rgba(76, 138, 197, 0.15) 100%
+    );
+    padding: var(--space-2xl) 0;
+    margin-top: var(--space-2xl);
+  }
+
+  .cta-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta-logo-wrapper {
+    margin: 0 auto var(--space-md);
+  }
+
+  .cta-logo {
+    max-width: 120px;
+    height: auto;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 8px rgba(36, 121, 190, 0.15));
+    transition: all 0.3s ease;
+  }
+
+  .cta-logo:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .cta-headline {
+    font-size: var(--font-size-h2);
+    font-weight: 300;
+    margin-bottom: var(--space-sm);
+  }
+
+  .cta-subheadline {
+    font-size: var(--font-size-h3);
+    font-weight: 300;
+    color: var(--color-blue);
+    margin-bottom: var(--space-xl);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-large {
+    padding: 1.125rem 2.5rem;
+    font-size: 1.125rem;
+  }
+
+  @media (max-width: 768px) {
+    .final-cta {
+      padding: var(--space-xl) 0;
+    }
+
+    .cta-headline {
+      font-size: var(--font-size-h3);
+    }
+
+    .cta-subheadline {
+      font-size: var(--font-size-h4);
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-sm);
+    }
+
+    .btn-large {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,213 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+
+const content = {
+  de: {
+    title: "Impressum",
+    companyLabel: "Unternehmensname",
+    companyName: "Klartext AI FlexCo",
+    addressLabel: "Geschäftsadresse",
+    address: {
+      street: "Stubenring 24/13",
+      city: "1010 Wien",
+      country: "Österreich"
+    },
+    phoneLabel: "Telefonnummer",
+    phone: "+43 660 81010 67",
+    emailLabel: "E-Mail-Adresse",
+    email: "office@klartext-ai.com",
+    ownersLabel: "Namen der Inhaber",
+    owners: [
+      "Ruben Hetfleisch, Geschäftsführer",
+      "Daniel Toth, Geschäftsführer",
+      "Bernhard Landrichter",
+      "Christian Kaindl"
+    ],
+    vatLabel: "USt-IdNr",
+    vatNumber: "ATU81693669",
+    registerLabel: "Registernummer",
+    registerNumber: "FN 643915 i"
+  },
+  en: {
+    title: "Imprint",
+    companyLabel: "Company Name",
+    companyName: "Klartext AI FlexCo",
+    addressLabel: "Business Address",
+    address: {
+      street: "Stubenring 24/13",
+      city: "1010 Vienna",
+      country: "Austria"
+    },
+    phoneLabel: "Phone Number",
+    phone: "+43 660 81010 67",
+    emailLabel: "Email Address",
+    email: "office@klartext-ai.com",
+    ownersLabel: "Company Owners",
+    owners: [
+      "Ruben Hetfleisch, Managing Director",
+      "Daniel Toth, Managing Director",
+      "Bernhard Landrichter",
+      "Christian Kaindl"
+    ],
+    vatLabel: "VAT ID",
+    vatNumber: "ATU81693669",
+    registerLabel: "Registration Number",
+    registerNumber: "FN 643915 i"
+  }
+};
+
+const text = content[lang];
+---
+
+<section id="impressum" class="impressum section">
+  <div class="container">
+    <div class="impressum-content fade-in">
+      <h1 class="impressum-title">{text.title}</h1>
+
+      <div class="impressum-section">
+        <h2>{text.companyLabel}</h2>
+        <p>{text.companyName}</p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.addressLabel}</h2>
+        <p>
+          {text.address.street}<br>
+          {text.address.city}<br>
+          {text.address.country}
+        </p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.phoneLabel}</h2>
+        <p><a href={`tel:${text.phone.replace(/\s/g, '')}`}>{text.phone}</a></p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.emailLabel}</h2>
+        <p><a href={`mailto:${text.email}`}>{text.email}</a></p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.ownersLabel}</h2>
+        <ul>
+          {text.owners.map(owner => (
+            <li>{owner}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.vatLabel}</h2>
+        <p>{text.vatNumber}</p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.registerLabel}</h2>
+        <p>{text.registerNumber}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .impressum {
+    min-height: 80vh;
+    padding: var(--space-2xl) 0;
+    background: transparent;
+  }
+
+  .impressum-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-xl);
+  }
+
+  .impressum-title {
+    font-size: var(--font-size-h1);
+    font-weight: 300;
+    margin-bottom: var(--space-xl);
+    color: var(--color-text-dark);
+    text-align: center;
+    letter-spacing: -0.02em;
+  }
+
+  .impressum-section {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .impressum-section:last-child {
+    border-bottom: none;
+  }
+
+  .impressum-section h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-blue);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.9rem;
+  }
+
+  .impressum-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--color-text-dark);
+    margin: 0;
+  }
+
+  .impressum-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .impressum-section li {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--color-text-dark);
+    padding: var(--space-xs) 0;
+  }
+
+  .impressum-section a {
+    color: var(--color-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .impressum-section a:hover {
+    color: var(--color-blue-accent);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .impressum {
+      padding: var(--space-xl) 0;
+    }
+
+    .impressum-content {
+      padding: var(--space-md);
+    }
+
+    .impressum-title {
+      font-size: var(--font-size-h2);
+      margin-bottom: var(--space-lg);
+    }
+
+    .impressum-section h2 {
+      font-size: 0.85rem;
+    }
+
+    .impressum-section p,
+    .impressum-section li {
+      font-size: 1rem;
+    }
+  }
+</style>

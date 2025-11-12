@@ -1,0 +1,274 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+const watermarkUrl = `${BASE}LOGO_transparent_without_sublime.png`;
+
+const content = {
+  de: {
+    sectionTitle: "Warum Klartext?",
+    subtitle: "Unsere Werte definieren, wie wir arbeiten",
+    cta: "Unsere Philosophie lesen",
+    values: [
+      {
+        keyword: "Innovation",
+        shortDesc: "Wir führen, wo andere folgen",
+        fullDesc: "Unsere Expertise stammt aus Forschungsprojekten und wissenschaftlicher Arbeit. Wir entwickeln Lösungen, statt Produkte umzupacken."
+      },
+      {
+        keyword: "Miteinander",
+        shortDesc: "Wir bauen Partnerschaften, keine Projekte",
+        fullDesc: "Vertrauensbasierte Zusammenarbeit und Thought Leadership stehen im Zentrum unserer Kundenbeziehungen."
+      },
+      {
+        keyword: "Wirksamkeit",
+        shortDesc: "ROI, nicht Hype",
+        fullDesc: "Absoluter Fokus auf messbaren Geschäftserfolg. Safety-by-Design und evidenzbasierte Entwicklung sind Standard, nicht Optional."
+      }
+    ]
+  },
+  en: {
+    sectionTitle: "Why Klartext?",
+    subtitle: "Our values define how we work",
+    cta: "Read our philosophy",
+    values: [
+      {
+        keyword: "Innovation",
+        shortDesc: "We lead where others follow",
+        fullDesc: "Our expertise comes from research projects and scientific work. We develop solutions instead of repackaging products."
+      },
+      {
+        keyword: "Togetherness",
+        shortDesc: "We build partnerships, not projects",
+        fullDesc: "Trust-based collaboration and thought leadership are at the center of our client relationships."
+      },
+      {
+        keyword: "Effectiveness",
+        shortDesc: "ROI, not hype",
+        fullDesc: "Absolute focus on measurable business success. Safety-by-design and evidence-based development are standard, not optional."
+      }
+    ]
+  }
+};
+
+const text = content[lang];
+---
+
+<section class="why-klartext section" style={`--watermark-url: url('${watermarkUrl}')`}>
+  <div class="container">
+    <div class="section-header fade-in text-center">
+      <h2>{text.sectionTitle}</h2>
+      <p class="section-subtitle">{text.subtitle}</p>
+    </div>
+
+    <div class="values-split">
+      <div class="values-keywords">
+        {text.values.map((value, index) => (
+          <div class="value-item fade-in" style={`animation-delay: ${index * 0.2}s`} data-value={index}>
+            <h3 class="value-keyword">{value.keyword}</h3>
+            <p class="value-short">{value.shortDesc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="values-details">
+        {text.values.map((value, index) => (
+          <div class="value-detail glass-card" data-detail={index} style={index === 0 ? 'opacity: 1;' : 'opacity: 0;'}>
+            <h4 class="detail-keyword">{value.keyword}</h4>
+            <p class="detail-full">{value.fullDesc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="cta-container text-center fade-in">
+      <a href="#european-values" class="btn btn-primary">{text.cta}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-klartext {
+    background: transparent;
+    position: relative;
+  }
+
+  /* Subtle background logo watermark */
+  .why-klartext::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    width: 300px;
+    height: 150px;
+    background: var(--watermark-url) center/contain no-repeat;
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .section-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-sm);
+  }
+
+  .values-split {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-xl);
+    align-items: start;
+    margin-bottom: var(--space-xl);
+  }
+
+  .values-keywords {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    position: sticky;
+    top: var(--space-lg);
+  }
+
+  .value-item {
+    cursor: pointer;
+    padding: var(--space-md);
+    border-left: 4px solid transparent;
+    transition: all 0.4s ease;
+  }
+
+  .value-item:hover,
+  .value-item.active {
+    border-left-color: var(--color-blue);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+
+  .value-keyword {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-dark);
+    transition: color 0.3s ease;
+  }
+
+  .value-item:hover .value-keyword,
+  .value-item.active .value-keyword {
+    color: var(--color-blue);
+  }
+
+  .value-short {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .values-details {
+    position: relative;
+    min-height: 300px;
+  }
+
+  .value-detail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    padding: var(--space-lg);
+  }
+
+  .value-detail[style*="opacity: 0"] {
+    pointer-events: none;
+    transform: translateX(20px);
+  }
+
+  .detail-keyword {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--color-blue);
+    margin-bottom: var(--space-md);
+  }
+
+  .detail-full {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--color-text-body);
+  }
+
+  .cta-container {
+    margin-top: var(--space-xl);
+  }
+
+  @media (max-width: 1024px) {
+    .values-split {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+
+    .values-keywords {
+      position: static;
+    }
+
+    .values-details {
+      min-height: auto;
+    }
+
+    .value-detail {
+      position: static;
+      opacity: 1 !important;
+      transform: none !important;
+      pointer-events: all;
+      margin-bottom: var(--space-md);
+    }
+
+    .value-item {
+      display: none;
+    }
+
+    .value-keyword {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<script>
+  // Interactive value switching
+  document.addEventListener('DOMContentLoaded', () => {
+    const valueItems = document.querySelectorAll('.value-item');
+    const valueDetails = document.querySelectorAll('.value-detail');
+
+    if (window.innerWidth > 1024) {
+      // Set first item as active
+      if (valueItems[0]) {
+        valueItems[0].classList.add('active');
+      }
+
+      valueItems.forEach((item, index) => {
+        item.addEventListener('mouseenter', () => {
+          // Remove active from all
+          valueItems.forEach(v => v.classList.remove('active'));
+          // Add active to current
+          item.classList.add('active');
+
+          // Hide all details
+          valueDetails.forEach(d => {
+            (d as HTMLElement).style.opacity = '0';
+          });
+
+          // Show current detail
+          if (valueDetails[index]) {
+            (valueDetails[index] as HTMLElement).style.opacity = '1';
+          }
+        });
+      });
+    }
+  });
+</script>

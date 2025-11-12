@@ -1,0 +1,383 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+
+const content = {
+  de: {
+    pageTitle: "Blog & Insights",
+    pageSubtitle: "Unsere Learnings, Philosophie & Feldberichte aus der Praxis",
+    readMore: "Weiterlesen",
+    backToHome: "Zurück zur Startseite",
+    posts: [
+      {
+        id: "mit-genai-divide",
+        title: "Die GenAI-Kluft: Warum 95% der KI-Projekte scheitern",
+        excerpt: "MIT's State of AI in Business Report 2025 zeigt: Die meisten GenAI-Initiativen liefern keine messbare Geschäftswirkung.",
+        fullExcerpt: "Der MIT-Report 'The GenAI Divide' bringt es auf den Punkt: Trotz massiver Investitionen (30-40 Milliarden US-Dollar) erreichen 95% der GenAI-Projekte keine messbare P&L-Wirkung. Das Problem ist nicht die Technologie, sondern wie Organisationen sie einsetzen. Wir zeigen, was die 5% erfolgreichen Projekte anders machen.",
+        category: "Philosophie",
+        readTime: "7 min",
+        date: "2025-01-20"
+      },
+      {
+        id: "evaluation-key-to-ai",
+        title: "Warum Evaluation der Schlüssel zu erfolgreicher KI ist",
+        excerpt: "Die meisten KI-Projekte scheitern nicht an der Technologie, sondern an fehlender systematischer Evaluierung. Wir zeigen, warum kontinuierliche Messung und Validierung entscheidend für den Erfolg sind.",
+        fullExcerpt: "In der Welt der künstlichen Intelligenz gibt es einen fundamentalen Unterschied zwischen einem funktionierenden Prototyp und einem produktiven System. Dieser Unterschied liegt nicht in der Technologie selbst, sondern in der Art und Weise, wie wir ihre Leistung messen, verstehen und kontinuierlich verbessern. Evaluation-Driven Engineering bedeutet: keine Entscheidung ohne Daten, keine Annahme ohne Validierung.",
+        category: "Philosophie",
+        readTime: "5 min",
+        date: "2025-01-15"
+      },
+      {
+        id: "domain-driven-design-rfu",
+        title: "Domain-Driven Design in der Praxis: Der RFU Case",
+        excerpt: "Wie wir durch tiefes Domänenverständnis 80% Automatisierung erreicht haben.",
+        fullExcerpt: "Der RFU Case ist ein perfektes Beispiel dafür, wie Domain-Driven Design in der Praxis funktioniert. Anstatt mit einer vorgefertigten Lösung zu starten, haben wir uns intensiv mit den Geschäftsprozessen unseres Kunden aus dem Bankendienstleistungssektor auseinandergesetzt. Das Ergebnis: Eine KI-Lösung, die nicht nur funktioniert, sondern die Sprache der Domäne spricht und 80% der manuellen Arbeit automatisiert – mit einem Break-even von nur 1,5 Monaten.",
+        category: "Case Study",
+        readTime: "8 min",
+        date: "2025-01-10"
+      },
+      {
+        id: "privacy-by-design",
+        title: "Privacy by Design: Mehr als nur Compliance",
+        excerpt: "Warum Datenschutz von Anfang an Teil der Architektur sein muss.",
+        fullExcerpt: "Privacy by Design ist kein nachträgliches Feature, sondern eine fundamentale Designentscheidung. In einer Zeit, in der Datenschutz und KI oft als Widerspruch dargestellt werden, zeigen wir, dass beides Hand in Hand gehen kann – und muss. DSGVO-Konformität, EU AI Act Compliance und europäisches Hosting sind nicht optional, sondern integraler Bestandteil unserer Architektur von Tag eins an.",
+        category: "Technical",
+        readTime: "6 min",
+        date: "2025-01-05"
+      },
+      {
+        id: "end-to-end-ownership",
+        title: "End-to-End Ownership: Von der Idee bis zum Deployment",
+        excerpt: "Warum wir keine POCs bauen, sondern echte, produktive Systeme liefern.",
+        fullExcerpt: "Viele KI-Projekte enden als Proof of Concept in einer Schublade. Wir gehen einen anderen Weg: End-to-End Ownership bedeutet, dass wir von der ersten Hypothese bis zum produktiven Deployment Verantwortung übernehmen. Ein Team, volle Verantwortung, echte Implementierung – keine Übergaben, keine Wissensverluste, keine POCs ohne Zukunft.",
+        category: "Philosophie",
+        readTime: "7 min",
+        date: "2024-12-28"
+      },
+      {
+        id: "european-ai-sovereignty",
+        title: "Europäische KI-Souveränität: Warum der Standort zählt",
+        excerpt: "Innovation mit Verantwortung – Warum europäische Werte in der KI-Entwicklung wichtig sind.",
+        fullExcerpt: "Europa steht vor der Chance, eine dritte Antwort im globalen KI-Diskurs zu geben – eine, die auf Vertrauen, Transparenz und Exzellenz basiert. Während die USA auf schnelles Wachstum setzen und China auf technologischen Fortschritt ohne regulatorische Schranken, können wir Innovation mit Verantwortung verbinden. Europäisches Hosting, DSGVO-Konformität und nachvollziehbare Systeme sind nicht Hindernisse, sondern Wettbewerbsvorteile.",
+        category: "Philosophie",
+        readTime: "6 min",
+        date: "2024-12-20"
+      },
+      {
+        id: "agile-ai-development",
+        title: "Agile AI Development: Kleine Zyklen, große Wirkung",
+        excerpt: "Wie iterative Entwicklung und schnelles Feedback zu besseren KI-Systemen führen.",
+        fullExcerpt: "Agile Methoden und KI-Entwicklung passen perfekt zusammen. Statt monatelang an einem perfekten Modell zu arbeiten, setzen wir auf kleine Entwicklungszyklen, kontinuierliches Feedback und messbare Ergebnisse. So entstehen Systeme, die nicht nur technisch exzellent sind, sondern auch tatsächlich die Probleme unserer Kunden lösen.",
+        category: "Technical",
+        readTime: "5 min",
+        date: "2024-12-15"
+      }
+    ]
+  },
+  en: {
+    pageTitle: "Blog & Insights",
+    pageSubtitle: "Our learnings, philosophy & field reports from practice",
+    readMore: "Read more",
+    backToHome: "Back to homepage",
+    posts: [
+      {
+        id: "mit-genai-divide",
+        title: "The GenAI Divide: Why 95% of AI Projects Fail",
+        excerpt: "MIT's State of AI in Business Report 2025 shows: Most GenAI initiatives deliver no measurable business impact.",
+        fullExcerpt: "The MIT report 'The GenAI Divide' puts it plainly: Despite massive investments (30-40 billion USD), 95% of GenAI projects achieve no measurable P&L impact. The problem isn't the technology but how organizations deploy it. We show what the 5% successful projects do differently.",
+        category: "Philosophy",
+        readTime: "7 min",
+        date: "2025-01-20"
+      },
+      {
+        id: "evaluation-key-to-ai",
+        title: "Why Evaluation is the Key to Successful AI",
+        excerpt: "Most AI projects fail not because of technology, but due to lack of systematic evaluation.",
+        fullExcerpt: "In the world of artificial intelligence, there's a fundamental difference between a working prototype and a production system. This difference doesn't lie in the technology itself, but in how we measure, understand, and continuously improve its performance. Evaluation-Driven Engineering means: no decision without data, no assumption without validation.",
+        category: "Philosophy",
+        readTime: "5 min",
+        date: "2025-01-15"
+      },
+      {
+        id: "domain-driven-design-rfu",
+        title: "Domain-Driven Design in Practice: The RFU Case",
+        excerpt: "How we achieved 80% automation through deep domain understanding.",
+        fullExcerpt: "The RFU case is a perfect example of how Domain-Driven Design works in practice. Instead of starting with a pre-made solution, we immersed ourselves in our client's business processes in the banking services sector. The result: An AI solution that not only works but speaks the language of the domain and automates 80% of manual work – with a break-even of just 1.5 months.",
+        category: "Case Study",
+        readTime: "8 min",
+        date: "2025-01-10"
+      },
+      {
+        id: "privacy-by-design",
+        title: "Privacy by Design: More than Just Compliance",
+        excerpt: "Why data protection must be part of the architecture from the start.",
+        fullExcerpt: "Privacy by Design is not a feature added later, but a fundamental design decision. In an era where privacy and AI are often portrayed as contradictory, we demonstrate that both can – and must – go hand in hand. GDPR compliance, EU AI Act conformity, and European hosting are not optional but integral parts of our architecture from day one.",
+        category: "Technical",
+        readTime: "6 min",
+        date: "2025-01-05"
+      },
+      {
+        id: "end-to-end-ownership",
+        title: "End-to-End Ownership: From Idea to Deployment",
+        excerpt: "Why we don't build POCs, but deliver real, productive systems.",
+        fullExcerpt: "Many AI projects end up as Proof of Concepts in a drawer. We take a different path: End-to-End Ownership means we take responsibility from the first hypothesis to productive deployment. One team, full responsibility, real implementation – no handovers, no knowledge loss, no POCs without a future.",
+        category: "Philosophy",
+        readTime: "7 min",
+        date: "2024-12-28"
+      },
+      {
+        id: "european-ai-sovereignty",
+        title: "European AI Sovereignty: Why Location Matters",
+        excerpt: "Innovation with responsibility – Why European values matter in AI development.",
+        fullExcerpt: "Europe has the chance to provide a third answer in the global AI discourse – one based on trust, transparency, and excellence. While the US focuses on rapid growth and China on technological advancement without regulatory barriers, we can combine innovation with responsibility. European hosting, GDPR compliance, and traceable systems are not obstacles but competitive advantages.",
+        category: "Philosophy",
+        readTime: "6 min",
+        date: "2024-12-20"
+      },
+      {
+        id: "agile-ai-development",
+        title: "Agile AI Development: Small Cycles, Big Impact",
+        excerpt: "How iterative development and fast feedback lead to better AI systems.",
+        fullExcerpt: "Agile methodologies and AI development are a perfect match. Instead of working for months on a perfect model, we rely on small development cycles, continuous feedback, and measurable results. This creates systems that are not only technically excellent but actually solve our clients' problems.",
+        category: "Technical",
+        readTime: "5 min",
+        date: "2024-12-15"
+      }
+    ]
+  }
+};
+
+const text = content[lang];
+---
+
+<section id="blog-listing" class="blog-listing section">
+  <div class="container">
+    <div class="blog-header fade-in text-center">
+      <h1 class="blog-page-title">{text.pageTitle}</h1>
+      <p class="blog-page-subtitle">{text.pageSubtitle}</p>
+    </div>
+
+    <div class="blog-posts">
+      {text.posts.map((post, index) => (
+        <article class="blog-post-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
+          <div class="post-meta">
+            <span class="post-category">{post.category}</span>
+            <span class="post-read-time">{post.readTime}</span>
+          </div>
+
+          <h2 class="post-title">{post.title}</h2>
+          <p class="post-excerpt">{post.excerpt}</p>
+
+          <a href={lang === 'en' ? `${BASE}en/blog/${post.id}` : `${BASE}blog/${post.id}`} class="post-link">
+            {text.readMore}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 12l4-4-4-4"/>
+            </svg>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .blog-listing {
+    min-height: 80vh;
+    padding: var(--space-2xl) 0;
+    background: transparent;
+  }
+
+  .blog-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .blog-page-title {
+    font-size: var(--font-size-h1);
+    font-weight: 300;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .blog-page-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .blog-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .blog-post-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-md);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    background: rgba(255, 255, 255, 0.55) !important;
+    backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  .blog-post-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
+    background: rgba(255, 255, 255, 0.75) !important;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .post-category {
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    background: rgba(36, 121, 190, 0.1);
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+
+  .post-read-time {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    margin-left: auto;
+  }
+
+  .post-title {
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-dark);
+    line-height: 1.3;
+  }
+
+  .post-excerpt {
+    font-size: 0.95rem;
+    color: var(--color-text-body);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .post-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-blue);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: gap 0.3s ease;
+    align-self: flex-start;
+    margin-top: auto;
+  }
+
+  .post-link:hover {
+    gap: 0.75rem;
+  }
+
+  .post-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .post-link:hover svg {
+    transform: translateX(4px);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-bottom: var(--space-xl);
+    transition: all 0.3s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-blue);
+    gap: 0.75rem;
+  }
+
+  .back-link svg {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+  }
+
+  .back-link:hover svg {
+    transform: rotate(180deg) translateX(4px);
+  }
+
+  @media (max-width: 1200px) {
+    .blog-posts {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+  }
+
+  @media (max-width: 968px) {
+    .blog-posts {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-md);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .blog-listing {
+      padding: var(--space-xl) 0;
+    }
+
+    .blog-header {
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-lg);
+    }
+
+    .blog-page-title {
+      font-size: var(--font-size-h2);
+    }
+
+    .blog-page-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .blog-posts {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .blog-post-card {
+      padding: var(--space-md);
+    }
+
+    .post-title {
+      font-size: 1.25rem;
+    }
+
+    .post-excerpt {
+      font-size: 0.9rem;
+    }
+
+    .post-meta {
+      gap: var(--space-xs);
+    }
+  }
+</style>

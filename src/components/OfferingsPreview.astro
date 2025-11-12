@@ -1,0 +1,275 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+
+const content = {
+  de: {
+    sectionTitle: "Was wir anbieten",
+    subtitle: "Maßgeschneiderte Lösungen für Ihre AI-Transformation",
+    viewAllOfferings: "Alle Angebote ansehen",
+    offerings: [
+      {
+        id: "workshops",
+        title: "Workshops",
+        icon: "🎓",
+        description: "Strukturierte Workshops von Value Sprint bis Security Screening",
+        highlights: ["AI Value Sprint", "EU AI Act Readiness", "Security Screening"]
+      },
+      {
+        id: "custom-projects",
+        title: "Kundenspezifische Projekte",
+        icon: "🎯",
+        description: "Maßgeschneiderte AI-Lösungen mit nachweisbarem ROI",
+        highlights: ["Domain-Driven", "End-to-End", "Messbare Erfolge"]
+      },
+      {
+        id: "chatgpt-clone",
+        title: "Privacy-Safe GPT",
+        icon: "🛡️",
+        description: "GPT-Funktionalität mit 100% Datenkontrolle in DE/AT",
+        highlights: ["DE/AT Hosting", "GDPR-konform", "Kein 3rd-Party-Zugriff"]
+      },
+      {
+        id: "inspirational-talks",
+        title: "Inspirational Talks",
+        icon: "💡",
+        description: "Praxisnahe Einblicke in erfolgreiche AI-Transformationen",
+        highlights: ["Success Stories", "Best Practices", "Interaktive Q&A"]
+      }
+    ]
+  },
+  en: {
+    sectionTitle: "What We Offer",
+    subtitle: "Tailored solutions for your AI transformation",
+    viewAllOfferings: "View all offerings",
+    offerings: [
+      {
+        id: "workshops",
+        title: "Workshops",
+        icon: "🎓",
+        description: "Structured workshops from Value Sprint to Security Screening",
+        highlights: ["AI Value Sprint", "EU AI Act Readiness", "Security Screening"]
+      },
+      {
+        id: "custom-projects",
+        title: "Custom Projects",
+        icon: "🎯",
+        description: "Tailored AI solutions with demonstrable ROI",
+        highlights: ["Domain-Driven", "End-to-End", "Measurable Results"]
+      },
+      {
+        id: "chatgpt-clone",
+        title: "Privacy-Safe GPT",
+        icon: "🛡️",
+        description: "GPT functionality with 100% data control in DE/AT",
+        highlights: ["DE/AT Hosting", "GDPR-compliant", "No 3rd-party access"]
+      },
+      {
+        id: "inspirational-talks",
+        title: "Inspirational Talks",
+        icon: "💡",
+        description: "Practical insights into successful AI transformations",
+        highlights: ["Success Stories", "Best Practices", "Interactive Q&A"]
+      }
+    ]
+  }
+};
+
+const text = content[lang];
+---
+
+<section class="offerings-preview section">
+  <div class="container">
+    <div class="section-header fade-in text-center">
+      <h2>{text.sectionTitle}</h2>
+      <p class="section-subtitle">{text.subtitle}</p>
+    </div>
+
+    <div class="offerings-grid">
+      {text.offerings.map((offering, index) => (
+        <article class="offering-preview-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
+          <div class="offering-icon-large">{offering.icon}</div>
+          <h3 class="offering-preview-title">{offering.title}</h3>
+          <p class="offering-preview-description">{offering.description}</p>
+
+          <ul class="offering-preview-highlights">
+            {offering.highlights.map((highlight) => (
+              <li>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8l3 3 7-7" stroke="var(--color-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {highlight}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+
+    <div class="offerings-cta text-center fade-in">
+      <a href={lang === 'de' ? `${BASE}offerings` : `${BASE}en/offerings`} class="btn btn-primary">
+        {text.viewAllOfferings}
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 12l4-4-4-4"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .offerings-preview {
+    position: relative;
+    background: transparent;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-header h2 {
+    font-size: var(--font-size-h2);
+    font-weight: 300;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-sm);
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+    text-align: center;
+  }
+
+  .offerings-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-bottom: var(--space-xl);
+  }
+
+  .offering-preview-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-md);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.55) !important;
+    backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  .offering-preview-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
+    background: rgba(255, 255, 255, 0.75) !important;
+  }
+
+  .offering-icon-large {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: var(--space-sm);
+  }
+
+  .offering-preview-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-dark);
+  }
+
+  .offering-preview-description {
+    font-size: 0.9rem;
+    color: var(--color-text-body);
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+  }
+
+  .offering-preview-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .offering-preview-highlights li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xs);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .offering-preview-highlights li svg {
+    flex-shrink: 0;
+  }
+
+  .offerings-cta {
+    margin-top: var(--space-xl);
+  }
+
+  .offerings-cta .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+  }
+
+  .offerings-cta .btn:hover {
+    gap: 0.75rem;
+  }
+
+  .offerings-cta .btn svg {
+    transition: transform 0.3s ease;
+  }
+
+  .offerings-cta .btn:hover svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1200px) {
+    .offerings-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .offerings-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .section-header h2 {
+      font-size: var(--font-size-h3);
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .offering-preview-title {
+      font-size: 1.25rem;
+    }
+
+    .offering-preview-description {
+      font-size: 0.9rem;
+    }
+
+    .offering-icon-large {
+      font-size: 2.5rem;
+    }
+  }
+</style>

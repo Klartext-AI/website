@@ -1,0 +1,121 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+
+const content = {
+  de: {
+    title: "Folgen Sie uns auf LinkedIn",
+    subtitle: "Bleiben Sie auf dem Laufenden mit unseren neuesten Insights, Projekten und Thought Leadership"
+  },
+  en: {
+    title: "Follow us on LinkedIn",
+    subtitle: "Stay updated with our latest insights, projects and thought leadership"
+  }
+};
+
+const text = content[lang];
+---
+
+<section class="linkedin-feed-section">
+  <div class="container">
+    <div class="linkedin-feed-header">
+      <h2 class="section-title">{text.title}</h2>
+      <p class="section-subtitle">{text.subtitle}</p>
+    </div>
+
+    <!-- Elfsight LinkedIn Feed | Klartext AI LinkedIn Feed -->
+    <div class="linkedin-feed-wrapper">
+      <script src="https://elfsightcdn.com/platform.js" async></script>
+      <div class="elfsight-app-36e53acd-d2f6-4674-8492-de8f56add979" data-elfsight-app-lazy></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .linkedin-feed-section {
+    padding: 60px 0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(36, 121, 190, 0.02) 100%
+    );
+    position: relative;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .linkedin-feed-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--color-text-dark);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .linkedin-feed-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 968px) {
+    .linkedin-feed-section {
+      padding: 60px 0;
+    }
+
+    .linkedin-feed-header {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .linkedin-feed-section {
+      padding: 32px 0;
+    }
+
+    .container {
+      padding: 0 20px;
+    }
+
+    .linkedin-feed-header {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+    }
+  }
+</style>

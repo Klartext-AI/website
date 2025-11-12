@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SuccessStoryDetail from '../../../components/SuccessStoryDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'Automated Quote Generation | Klartext AI';
+const description = 'How a manufacturing company saves 70% time with 1000+ weekly inquiries and break-even after 5 months.';
+
+const challenge = `
+<p>Success sometimes brings unexpected challenges. A manufacturing company received over 1000 standardized inquiries via email weekly – a clear sign of strong market position, but also an operational burden.</p>
+
+<p><strong>The Problem:</strong></p>
+<ul>
+  <li>1000+ inquiries per week, many very similar</li>
+  <li>Manual quote creation ties up significant resources</li>
+  <li>Time loss despite standardized products and recurring patterns</li>
+  <li>Delays in response time affect customer satisfaction</li>
+  <li>Employees waste time on repetitive tasks instead of strategic work</li>
+</ul>
+`;
+
+const solution = `
+<p>Instead of building a generic "quote generator," we analyzed what makes successful quotes work – and learned from it.</p>
+
+<p><strong>The Approach in Detail:</strong></p>
+<ul>
+  <li><strong>Intelligent classification:</strong> Automatic categorization of incoming inquiries by type, product category, and complexity</li>
+  <li><strong>Pattern recognition:</strong> Analysis of successful past quotes to identify success patterns</li>
+  <li><strong>Automatic draft creation:</strong> AI generates promising and profitable quote drafts</li>
+  <li><strong>Final human control:</strong> Employees efficiently review and finalize drafts</li>
+  <li><strong>Continuous learning:</strong> System improves through feedback on accepted/rejected quotes</li>
+</ul>
+
+<p>What makes this solution special: It doesn't replace sales staff expertise but gives them back the time they need for strategic customer relationships.</p>
+`;
+
+const results = [
+  "70% time and cost savings in quote creation",
+  "Break-even after 5 months – solid ROI for transformative solution",
+  "Faster response times increase customer satisfaction",
+  "Higher employee satisfaction through less repetitive work",
+  "Consistent quality based on best practices",
+  "Scalability for growth without proportionally more staff"
+];
+
+const fullContent = `
+<h3>Domain-Driven Design Meets Sales</h3>
+
+<p><strong>Sales is more than numbers:</strong> We didn't just look at prices and products but analyzed the entire sales logic: What makes a quote attractive? Which phrasings work? How are prices optimally positioned?</p>
+
+<p><strong>Learning from success:</strong> Instead of generic templates, we taught the AI to recognize and apply patterns from successful quotes.</p>
+
+<p><strong>Integration into existing processes:</strong> The solution fits seamlessly into the existing workflow – from email inbox to CRM integration.</p>
+
+<h3>What We Learned</h3>
+
+<ol>
+  <li><strong>Automation doesn't mean dehumanization:</strong> The best results come when AI handles routine and humans steer strategy.</li>
+  <li><strong>Break-even isn't everything:</strong> The true value lies in scalability and the ability to keep pace with growth.</li>
+  <li><strong>Classification is critical:</strong> The quality of automatic quotes depends heavily on correct inquiry classification.</li>
+  <li><strong>Feedback loops are gold:</strong> Every finalized quote is an opportunity to improve the system.</li>
+</ol>
+
+<p>This solution is more than a "tool" – it's a strategic investment in scalability and efficiency. It shows that automation and personal service aren't opposites but can reinforce each other.</p>
+`;
+
+const metrics = {
+  "Time Savings": "70%",
+  "Break-even": "5 Months",
+  "Volume": "1000+ Requests/Week"
+};
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <SuccessStoryDetail
+    title="Automated Quote Generation"
+    client="Manufacturing Company"
+    category="Process Automation"
+    challenge={challenge}
+    solution={solution}
+    results={results}
+    metrics={metrics}
+    fullContent={fullContent}
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

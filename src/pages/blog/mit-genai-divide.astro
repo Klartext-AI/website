@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../components/BlogPostDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Die GenAI-Kluft: Warum 95% der KI-Projekte scheitern | Klartext AI Blog';
+const description = "MIT's State of AI in Business Report 2025 zeigt: Die meisten GenAI-Initiativen liefern keine messbare Geschäftswirkung. Wir erklären warum – und was man anders machen muss.";
+
+const fullContent = `
+<p>Das <a href="https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf" target="_blank" rel="noopener noreferrer">MIT</a> hat es schwarz auf weiß: <strong>95% der GenAI-Projekte scheitern.</strong></p>
+
+<p>Nicht "performen schlechter als erwartet". Nicht "brauchen länger". Sondern: Null messbare Geschäftswirkung. Kein ROI. Keine P&L-Impact.</p>
+
+<p>30-40 Milliarden Dollar Investitionen. 95% Misserfolgsquote.</p>
+
+<p><strong>Das ist nicht ein Problem – das ist die größte Geldverbrennung der Tech-Geschichte.</strong></p>
+
+<h4>Die Zahlen lügen nicht</h4>
+
+<p>MIT's "State of AI in Business 2025" Report analysierte über 300 öffentlich dokumentierte GenAI-Implementierungen, 52 Interviews mit Führungskräften und 153 Umfrageantworten.</p>
+
+<p><strong>Die Ergebnisse sind ernüchternd:</strong></p>
+
+<ul>
+  <li><strong>~5%</strong> der Organisationen erreichen messbare Mehrwert (Multi-Millionen-Dollar-Impact)</li>
+  <li><strong>~95%</strong> zeigen <strong>null</strong> messbare P&L-Wirkung</li>
+  <li><strong>80%+</strong> haben Tools wie ChatGPT/Copilot getestet</li>
+  <li><strong>~40%</strong> berichten Deployment</li>
+  <li>Aber bei enterprise-spezifischen Systemen: nur <strong>~5%</strong> erreichen volle Produktion</li>
+</ul>
+
+<p><strong>Die Kluft</strong>: Zwischen Experimentieren und Transformation liegen Welten.</p>
+
+<h4>Warum Projekte scheitern</h4>
+
+<p>Das MIT identifiziert drei Hauptgründe – und sie sind nicht technischer Natur:</p>
+
+<p><strong>1. Keine Feedback-Loops</strong><br/>
+Die meisten Systeme sind statisch. Sie lernen nicht aus Nutzung. Sie verbessern sich nicht über Zeit. Sie bleiben auf dem Stand von Tag 1.</p>
+
+<p><strong>2. Keine echte Workflow-Integration</strong><br/>
+"Wir haben einen Chatbot" ist keine Integration. Echte Integration bedeutet: Das System ist eingebettet in existierende Prozesse. Es passt zu bestehenden Workflows. Es ersetzt oder erweitert etablierte Arbeitsweisen.</p>
+
+<p><strong>3. Fehlende Kontextanpassung</strong><br/>
+Generische Lösungen funktionieren nicht. Jede Domäne, jeder Prozess, jedes Unternehmen ist anders. Ohne Anpassung an den spezifischen Kontext bleibt die KI irrelevant.</p>
+
+<p><strong>Die harte Wahrheit</strong>: Das Problem ist nicht die Technologie. Das Problem ist, wie sie eingesetzt wird.</p>
+
+<h4>Die 5% die erfolgreich sind</h4>
+
+<p>Was machen die 5% anders?</p>
+
+<ol>
+  <li><strong>Sie starten mit dem Business, nicht mit der Technologie</strong> – Nicht "Wir brauchen einen LLM-basierten Chatbot", sondern "Wir haben dieses Geschäftsproblem – wie können wir es lösen?"</li>
+  <li><strong>Sie fokussieren auf Workflow-Integration</strong> – Nicht ein standalone Tool, sondern eingebettet in existierende Prozesse.</li>
+  <li><strong>Sie bauen Feedback-Loops ein</strong> – Das System lernt aus Nutzung. Es verbessert sich kontinuierlich. Es passt sich an.</li>
+  <li><strong>Sie messen von Anfang an</strong> – Klare KPIs. Systematische Evaluation. Keine Hoffnungen, nur Daten.</li>
+  <li><strong>Sie setzen auf Domain-Driven Design</strong> – Nicht generische Lösungen, sondern spezifisch auf die Domäne zugeschnitten.</li>
+</ol>
+
+<p><strong>Kommt Ihnen bekannt vor?</strong> Das ist exakt, was wir bei Klartext AI predigen – und praktizieren.</p>
+
+<h4>Was das für Sie bedeutet</h4>
+
+<p>Wenn Sie ein KI-Projekt planen, fragen Sie sich:</p>
+
+<ol>
+  <li><strong>Integration</strong>: Ist das System wirklich in Workflows integriert, oder ist es ein Standalone-Tool?</li>
+  <li><strong>Feedback</strong>: Lernt das System aus echten Nutzung, oder bleibt es statisch?</li>
+  <li><strong>Kontext</strong>: Ist die Lösung spezifisch auf Ihre Domäne zugeschnitten, oder ist es eine generische Lösung?</li>
+  <li><strong>Messung</strong>: Haben Sie klare KPIs definiert? Messen Sie systematisch?</li>
+  <li><strong>Ownership</strong>: Haben Sie ein Team mit End-to-End-Verantwortung?</li>
+</ol>
+
+<p>Wenn Sie bei 3 oder mehr Fragen "Nein" antworten, sind Sie wahrscheinlich auf dem Weg in die 95%.</p>
+
+<h4>Unsere Antwort auf die Kluft</h4>
+
+<p>Bei Klartext AI haben wir von Anfang an gegen die 95% gearbeitet:</p>
+
+<ul>
+  <li><strong>Domain-Driven Design</strong>: Keine generischen Lösungen</li>
+  <li><strong>Evaluation-First</strong>: Systematische Messungen von Tag 1</li>
+  <li><strong>Workflow-Integration</strong>: Eingebettet in existierende Prozesse</li>
+  <li><strong>Feedback-Loops</strong>: Systeme, die lernen und sich verbessern</li>
+  <li><strong>End-to-End-Ownership</strong>: Ein Team, volle Verantwortung</li>
+</ul>
+
+<p><strong>Das Resultat</strong>: Break-even-Zeiten von 1-2 Monaten statt Jahren. ROI in Millionenhöhe statt verschwendetem Budget.</p>
+
+<p><strong>Wir sind nicht in den 95%. Wir sind die 5%.</strong></p>
+
+<p>Hier der MIT report zum Nachlesen: <a href="https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf" target="_blank" rel="noopener noreferrer">report</a></p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="Die GenAI-Kluft: Warum 95% der KI-Projekte scheitern"
+    excerpt="MIT's State of AI in Business Report 2025 zeigt: Die meisten GenAI-Initiativen liefern keine messbare Geschäftswirkung."
+    fullExcerpt="Der MIT-Report 'The GenAI Divide' bringt es auf den Punkt: Trotz massiver Investitionen (30-40 Milliarden US-Dollar) erreichen 95% der GenAI-Projekte keine messbare P&L-Wirkung. Das Problem ist nicht die Technologie, sondern wie Organisationen sie einsetzen. Wir zeigen, was die 5% erfolgreichen Projekte anders machen."
+    fullContent={fullContent}
+    category="Philosophie"
+    readTime="7 min"
+    date="2025-01-20"
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

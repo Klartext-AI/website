@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SuccessStoryDetail from '../../../components/SuccessStoryDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'Interactive Tutoring Solution for Knowledge Transfer | Klartext AI';
+const description = 'How an ATX company relieves specialist trainers by 30% through AI-powered learning platform with break-even after 1.5 years.';
+
+const challenge = `
+<p>In large organizations, onboarding is a mammoth task. Hundreds of new employees must be introduced to company culture, processes, products, and brand identity. At the same time, existing teams need continuous education.</p>
+
+<p><strong>The Problem:</strong></p>
+<ul>
+  <li>High demand for efficient, sustainable knowledge transfer for onboarding processes</li>
+  <li>Specialist trainers are overloaded and cannot personally attend to all inquiries</li>
+  <li>Classic e-learning solutions are often dry and barely engaging</li>
+  <li>Knowledge level and learning speed vary greatly between employees</li>
+  <li>Difficult to measure whether knowledge has truly been absorbed</li>
+</ul>
+`;
+
+const solution = `
+<p>We didn't build another e-learning platform but an intelligent tutor that adapts individually and makes learning an experience.</p>
+
+<p><strong>The Approach in Detail:</strong></p>
+<ul>
+  <li><strong>AI-powered, interactive tutor platform:</strong> Adaptive learning support instead of rigid courses</li>
+  <li><strong>Playful knowledge transfer:</strong> Gamification elements for higher motivation and retention</li>
+  <li><strong>Personalized learning paths:</strong> System adapts to knowledge level and learning speed</li>
+  <li><strong>Company, brand, and process knowledge:</strong> Integration of all relevant knowledge areas</li>
+  <li><strong>Seamless connection:</strong> Integration with existing knowledge management systems</li>
+  <li><strong>Continuous assessment:</strong> Measurement of learning success in real-time</li>
+</ul>
+
+<p>What makes this solution special: It combines pedagogical principles with AI technology. The result is not a "chatbot with learning material" but a true digital tutor that understands, explains, and motivates.</p>
+`;
+
+const results = [
+  "30% relief for specialist trainers to focus on complex topics and mentoring",
+  "Break-even after 1.5 years – sustainable ROI for training solutions",
+  "Higher learning motivation through gamification and interactivity",
+  "Measurable learning success through continuous assessment",
+  "Flexible scaling for new topics without rebuilding",
+  "Consistent knowledge transfer regardless of location or timing"
+];
+
+const fullContent = `
+<h3>Innovation Meets Pedagogy</h3>
+
+<p><strong>Learning is more than information:</strong> We didn't just "make knowledge accessible" but designed real learning processes – with repetition, deepening, and motivation.</p>
+
+<p><strong>Gamification with substance:</strong> Playful elements aren't self-serving but follow scientific insights about motivation and retention.</p>
+
+<p><strong>AI as tutor, not as replacement:</strong> The platform complements human trainers, doesn't replace them. The combination makes the difference.</p>
+
+<h3>What We Learned</h3>
+
+<ol>
+  <li><strong>Pedagogy before technology:</strong> The best AI models don't help if the didactic conception is missing. We worked with learning experts, not just developers.</li>
+  <li><strong>Engagement is measurable:</strong> Through continuous tracking, we understood what works and what doesn't – and optimized the platform accordingly.</li>
+  <li><strong>Integration is critical:</strong> An isolated learning platform won't be used. Seamless connection to existing systems was essential.</li>
+  <li><strong>ROI requires patience:</strong> For training solutions, break-even is longer – but the long-term value is enormous.</li>
+  <li><strong>Personalization makes the difference:</strong> Not everyone learns at the same speed or in the same way. Adaptive learning paths dramatically increase effectiveness.</li>
+</ol>
+
+<h3>More Than a Platform</h3>
+
+<p>This solution is an example of sustainable organizational development. It shows that AI can not only automate processes but also empower people – through better, more efficient, and more motivating learning.</p>
+
+<p>Knowledge is the most valuable resource of any organization. With the right technology, it's not just preserved but actively conveyed and anchored.</p>
+`;
+
+const metrics = {
+  "Relief": "30%",
+  "Break-even": "1.5 Years",
+  "Trainer Relief": "30%"
+};
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <SuccessStoryDetail
+    title="Interactive Tutoring Solution for Knowledge Transfer"
+    client="ATX Company"
+    category="Knowledge Transfer"
+    challenge={challenge}
+    solution={solution}
+    results={results}
+    metrics={metrics}
+    fullContent={fullContent}
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

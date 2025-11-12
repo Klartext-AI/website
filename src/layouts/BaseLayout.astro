@@ -1,0 +1,88 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  lang?: 'de' | 'en';
+  alwaysShowNav?: boolean;
+}
+
+const {
+  title,
+  description = 'Klartext AI - Wir bauen keine Chatbots. Wir verwandeln KI in ROI.',
+  lang = 'de',
+  alwaysShowNav = false
+} = Astro.props;
+
+import '../styles/global.css';
+import Navigation from '../components/Navigation.astro';
+const BASE = import.meta.env.BASE_URL;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <meta name="generator" content={Astro.generator}>
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href={`${BASE}favicon.ico`}>
+  <link rel="apple-touch-icon" href={`${BASE}LOGO_transparent_without_sublime.png`}>
+
+  <title>{title}</title>
+</head>
+<body>
+  <Navigation lang={lang} alwaysVisible={alwaysShowNav} />
+  <slot />
+
+  <!-- Scroll Animation Script -->
+  <script>
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with fade-in class
+    document.addEventListener('DOMContentLoaded', () => {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach(el => {
+        // Check if element is already in viewport on page load
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+
+        // Element is considered "in viewport" if it's at least partially visible
+        const isInViewport = (
+          rect.top < windowHeight &&
+          rect.bottom > 0 &&
+          rect.left < windowWidth &&
+          rect.right > 0
+        );
+
+        // If already in viewport, make it visible immediately
+        if (isInViewport) {
+          el.classList.add('visible');
+        }
+
+        // Observe for future scroll events
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

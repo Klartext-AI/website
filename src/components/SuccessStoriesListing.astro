@@ -1,0 +1,427 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+
+// Map story IDs to page URLs
+const storyUrls: Record<string, string> = {
+  'data-extraction-rfu': 'data-extraction-banking',
+  'document-generation': 'grant-application-generation',
+  'compliance-assistant': 'compliance-assistant',
+  'quote-automation': 'quote-automation',
+  'training-platform': 'training-platform'
+};
+
+const content = {
+  de: {
+    pageTitle: "Erfolgsgeschichten",
+    pageSubtitle: "Wie wir KI in messbare Geschäftserfolge verwandeln",
+    readMore: "Mehr erfahren",
+    stories: [
+      {
+        id: "data-extraction-rfu",
+        title: "KPI-Extraktion aus Jahresberichten",
+        client: "Bankendienstleister",
+        savings: "80% Zeit- & Kostenersparnis",
+        breakeven: "1,5 Monate",
+        category: "Data Extraction",
+        excerpt: "Automatisierte Extraktion quantitativer und qualitativer Informationen aus 500+ seitigen Dokumenten.",
+        fullExcerpt: "Ein führender Bankendienstleister stand vor der Herausforderung, dass Analysten zahlreiche Informationen aus umfangreichen Dokumenten extrahieren mussten. Unsere KI-Lösung übernimmt die Extraktion und liefert die Werte direkt in die eigenen Systeme. Da es sich um einen sensiblen Anwendungsbereich handelt, können Menschen alle Extraktionen zeiteffizient verifizieren, indem sie direkte Referenz-Locations und Begründungen erhalten.",
+        metrics: {
+          savings: "80%",
+          breakeven: "1,5 Monate",
+          automation: "80%"
+        }
+      },
+      {
+        id: "document-generation",
+        title: "Automatisierte Förderantragstellung",
+        client: "Förderdienstleister",
+        savings: "95% Zeit- & Kostenersparnis",
+        breakeven: "1 Monat",
+        category: "Document Generation",
+        excerpt: "Automatisierte Erstellung von Förder-Unterlagen mit höchsten Qualitätsansprüchen.",
+        fullExcerpt: "Ein Förderdienstleister benötigte eine Lösung für die zeitaufwändige Erstellung von Förderanträgen. Kunden haben eine Idee und kennen die Förderrichtlinie, können aber nicht ewig Anträge schreiben. Unsere KI orientiert sich an erfolgreichen Anträgen und schreibt hochqualitative Anträge automatisch. Der dynamische Prozess ermöglicht es dem Kunden, die Dokumentengenerierung präzise zu beeinflussen - ohne bleibende Abhängigkeit zu Klartext AI.",
+        metrics: {
+          savings: "95%",
+          breakeven: "1 Monat",
+          automation: "95%"
+        }
+      },
+      {
+        id: "compliance-assistant",
+        title: "KI-Assistent für Compliance & Wissensmanagement",
+        client: "ATX-Unternehmen",
+        savings: "80% Zeit- & Kostenersparnis",
+        breakeven: "2 Monate",
+        category: "Knowledge Management",
+        excerpt: "Automatisierte Wissensausgabe zu Fragen von Richtlinien und Compliance-Dokumenten.",
+        fullExcerpt: "Ein großes Unternehmen hatte das Problem, dass Mitarbeiter keinen Überblick über Richtlinien bei spezifischen Prozessen und Produkten hatten. Interne Ansprechpartner hatten nicht die Ressourcen, alle Fragen mit nötiger Sensibilität zu beantworten. Unsere Lösung integriert 50+ Richtlinien und Dokumente mit intelligenter Retrieval-Methodik durch Integration von Unternehmens-Metadaten (Knowledge Graph). Mitarbeiter bekommen komplexe Fragestellungen mit Referenz aus den Dokumenten beantwortet.",
+        metrics: {
+          savings: "80%",
+          breakeven: "2 Monate",
+          documents: "50+"
+        }
+      },
+      {
+        id: "quote-automation",
+        title: "Automatisierte Angebotserstellung",
+        client: "Produktionsunternehmen",
+        savings: "70% Zeit- & Kostenersparnis",
+        breakeven: "5 Monate",
+        category: "Process Automation",
+        excerpt: "Automatische Klassifizierung von Anfragen und Erstellung erfolgsversprechender Angebote.",
+        fullExcerpt: "Ein Produktionsunternehmen erhielt 1000+ standardisierte Anfragen per Mail wöchentlich. Das Unternehmen verlor viel Zeit bei der Angebotslegung, obwohl die Angebote sehr ähnlich waren. Unsere KI klassifiziert automatisch Anfragen und erstellt auf Basis erfolgreicher vergangener Angebote einen erfolgsversprechenden und lohnenden Entwurf. Mitarbeiter sparen Zeit und können den Entwurf direkt finalisieren.",
+        metrics: {
+          savings: "70%",
+          breakeven: "5 Monate",
+          volume: "1000+ Anfragen/Woche"
+        }
+      },
+      {
+        id: "training-platform",
+        title: "Interaktive Tutoren-Lösung für Wissensvermittlung",
+        client: "ATX-Unternehmen",
+        savings: "30% Entlastung",
+        breakeven: "1,5 Jahre",
+        category: "Knowledge Transfer",
+        excerpt: "KI-gestützte, interaktive Tutor-Plattform für interne Trainings und Onboarding.",
+        fullExcerpt: "Ein großes Unternehmen benötigte effiziente, nachhaltige Wissensvermittlung für Onboarding-Prozesse. Unsere KI-gestützte, interaktive Tutor-Plattform ermöglicht spielerische Vermittlung von Unternehmens-, Marken- und Prozesswissen. Fachausbilder werden um 30% entlastet durch nahtlose Anbindung an bestehende Wissensmanagement-Systeme.",
+        metrics: {
+          savings: "30%",
+          breakeven: "1,5 Jahre",
+          relief: "30% Entlastung"
+        }
+      }
+    ]
+  },
+  en: {
+    pageTitle: "Success Stories",
+    pageSubtitle: "How we transform AI into measurable business success",
+    readMore: "Learn more",
+    stories: [
+      {
+        id: "data-extraction-rfu",
+        title: "KPI Extraction from Annual Reports",
+        client: "Banking Services Provider",
+        savings: "80% Time & Cost Savings",
+        breakeven: "1.5 Months",
+        category: "Data Extraction",
+        excerpt: "Automated extraction of quantitative and qualitative information from 500+ page documents.",
+        fullExcerpt: "A leading banking services provider faced the challenge of analysts having to extract numerous pieces of information from extensive documents. Our AI solution takes over the extraction and delivers values directly into their own systems. Since this is a sensitive application area, humans can efficiently verify all extractions by receiving direct reference locations and justifications.",
+        metrics: {
+          savings: "80%",
+          breakeven: "1.5 Months",
+          automation: "80%"
+        }
+      },
+      {
+        id: "document-generation",
+        title: "Automated Grant Application Generation",
+        client: "Funding Service Provider",
+        savings: "95% Time & Cost Savings",
+        breakeven: "1 Month",
+        category: "Document Generation",
+        excerpt: "Automated creation of grant documents with the highest quality standards.",
+        fullExcerpt: "A funding service provider needed a solution for the time-consuming creation of grant applications. Clients have an idea and know the funding guidelines but can't spend forever writing applications. Our AI is based on successful applications and automatically writes high-quality applications. The dynamic process allows clients to precisely influence document generation - without permanent dependence on Klartext AI.",
+        metrics: {
+          savings: "95%",
+          breakeven: "1 Month",
+          automation: "95%"
+        }
+      },
+      {
+        id: "compliance-assistant",
+        title: "AI Assistant for Compliance & Knowledge Management",
+        client: "ATX Company",
+        savings: "80% Time & Cost Savings",
+        breakeven: "2 Months",
+        category: "Knowledge Management",
+        excerpt: "Automated knowledge delivery for questions about guidelines and compliance documents.",
+        fullExcerpt: "A large company had the problem that employees had no overview of guidelines for specific processes and products. Internal contacts didn't have the resources to answer all questions with the necessary sensitivity. Our solution integrates 50+ guidelines and documents with intelligent retrieval methodology through integration of company metadata (Knowledge Graph). Employees get complex questions answered with references from the documents.",
+        metrics: {
+          savings: "80%",
+          breakeven: "2 Months",
+          documents: "50+"
+        }
+      },
+      {
+        id: "quote-automation",
+        title: "Automated Quote Generation",
+        client: "Manufacturing Company",
+        savings: "70% Time & Cost Savings",
+        breakeven: "5 Months",
+        category: "Process Automation",
+        excerpt: "Automatic classification of requests and creation of promising quotes.",
+        fullExcerpt: "A manufacturing company received 1000+ standardized requests via email weekly. The company was losing time creating quotes even though the quotes were very similar. Our AI automatically classifies requests and creates promising and worthwhile drafts based on successful past quotes. Employees save time and can directly finalize the draft.",
+        metrics: {
+          savings: "70%",
+          breakeven: "5 Months",
+          volume: "1000+ Requests/Week"
+        }
+      },
+      {
+        id: "training-platform",
+        title: "Interactive Tutoring Solution for Knowledge Transfer",
+        client: "ATX Company",
+        savings: "30% Relief",
+        breakeven: "1.5 Years",
+        category: "Knowledge Transfer",
+        excerpt: "AI-powered, interactive tutor platform for internal training and onboarding.",
+        fullExcerpt: "A large company needed efficient, sustainable knowledge transfer for onboarding processes. Our AI-powered, interactive tutor platform enables playful transfer of company, brand, and process knowledge. Professional trainers are relieved by 30% through seamless connection to existing knowledge management systems.",
+        metrics: {
+          savings: "30%",
+          breakeven: "1.5 Years",
+          relief: "30% Relief"
+        }
+      }
+    ]
+  }
+};
+
+const text = content[lang];
+---
+
+<section id="success-stories-listing" class="success-stories-listing section">
+  <div class="container">
+    <div class="stories-header fade-in text-center">
+      <h1 class="stories-page-title">{text.pageTitle}</h1>
+      <p class="stories-page-subtitle">{text.pageSubtitle}</p>
+    </div>
+
+    <div class="stories-grid">
+      {text.stories.map((story, index) => (
+        <article class="story-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
+          <div class="story-meta">
+            <span class="story-category">{story.category}</span>
+          </div>
+
+          <h2 class="story-title">{story.title}</h2>
+          <p class="story-client">{story.client}</p>
+
+          <div class="story-metrics">
+            <div class="metric">
+              <span class="metric-icon">💰</span>
+              <span class="metric-value">{story.savings}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-icon">⚡</span>
+              <span class="metric-value">Break-even: {story.breakeven}</span>
+            </div>
+          </div>
+
+          <p class="story-excerpt">{story.excerpt}</p>
+
+          <a href={lang === 'en' ? `${BASE}en/success-stories/${storyUrls[story.id]}` : `${BASE}success-stories/${storyUrls[story.id]}`} class="story-link">
+            {text.readMore}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 12l4-4-4-4"/>
+            </svg>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .success-stories-listing {
+    min-height: 80vh;
+    padding: var(--space-2xl) 0;
+    background: transparent;
+  }
+
+  .stories-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .stories-page-title {
+    font-size: var(--font-size-h1);
+    font-weight: 300;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .stories-page-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .story-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-md);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    background: rgba(255, 255, 255, 0.55) !important;
+    backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  .story-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
+    background: rgba(255, 255, 255, 0.75) !important;
+  }
+
+  .story-meta {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .story-category {
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    background: rgba(36, 121, 190, 0.1);
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+
+  .story-title {
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-dark);
+    line-height: 1.3;
+  }
+
+  .story-client {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin-bottom: var(--space-md);
+  }
+
+  .story-metrics {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+    padding: var(--space-sm) 0;
+    border-top: 1px solid rgba(36, 121, 190, 0.1);
+    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .metric {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.85rem;
+  }
+
+  .metric-icon {
+    font-size: 1.1rem;
+  }
+
+  .metric-value {
+    color: var(--color-text-dark);
+    font-weight: 500;
+  }
+
+  .story-excerpt {
+    font-size: 0.95rem;
+    color: var(--color-text-body);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .story-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-blue);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: gap 0.3s ease;
+    align-self: flex-start;
+    margin-top: auto;
+  }
+
+  .story-link:hover {
+    gap: 0.75rem;
+  }
+
+  .story-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .story-link:hover svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1200px) {
+    .stories-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+  }
+
+  @media (max-width: 968px) {
+    .stories-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-md);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .success-stories-listing {
+      padding: var(--space-xl) 0;
+    }
+
+    .stories-header {
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-lg);
+    }
+
+    .stories-page-title {
+      font-size: var(--font-size-h2);
+    }
+
+    .stories-page-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .stories-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .story-card {
+      padding: var(--space-md);
+    }
+
+    .story-title {
+      font-size: 1.25rem;
+    }
+
+    .story-excerpt {
+      font-size: 0.9rem;
+    }
+
+    .story-metrics {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+  }
+</style>

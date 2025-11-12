@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SuccessStoryDetail from '../../components/SuccessStoryDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'KPI-Extraktion aus Jahresberichten | Klartext AI';
+const description = 'Wie ein Bankendienstleister 80% Zeit und Kosten spart durch automatisierte Datenextraktion mit Break-even nach nur 1,5 Monaten.';
+
+const challenge = `
+<p>Ein führender Bankendienstleister stand vor einer massiven Herausforderung: Analysten mussten täglich durch Dokumente mit über 500 Seiten kämpfen, um quantitative und qualitative Informationen für Risikobewertungen zu extrahieren. Jedes Detail zählte, jeder Fehler konnte kostspielig werden.</p>
+
+<p>Der manuelle Prozess band nicht nur erhebliche Ressourcen, sondern wurde auch zunehmend zum Engpass für geschäftskritische Entscheidungen. Die zentrale Frage war nicht, ob Automatisierung möglich ist, sondern wie sie in einem so sensiblen Bereich funktionieren kann, wo Fehler keine Option sind.</p>
+`;
+
+const solution = `
+<p>Bei Klartext AI wissen wir: Im Finanzwesen reicht "die KI sagt" nicht aus. Deshalb haben wir eine Lösung entwickelt, die nicht nur extrahiert, sondern auch erklärt.</p>
+
+<p><strong>Die Lösung im Detail:</strong></p>
+<ul>
+  <li><strong>Automatisierte Extraktion</strong> quantitativer und qualitativer Daten aus komplexen Dokumenten</li>
+  <li><strong>Intelligente Verifikation:</strong> Jede Extraktion wird mit direkter Referenz-Location im Originaldokument versehen</li>
+  <li><strong>Begründungs-Engine:</strong> Die KI liefert nicht nur Werte, sondern auch die Argumentation dahinter</li>
+  <li><strong>Nahtlose Integration:</strong> Direkte Einspeisung in bestehende Systeme ohne Medienbruch</li>
+  <li><strong>Human-in-the-Loop:</strong> Analysten können jede Extraktion zeiteffizient verifizieren</li>
+</ul>
+
+<p>Was uns unterscheidet: Wir haben nicht einfach ein generisches LLM auf das Problem losgelassen. Stattdessen haben wir Domain-Driven Design angewandt und die Lösung auf die spezifischen Anforderungen des Bankensektors zugeschnitten – inklusive regulatorischer Compliance und Audit-Trails.</p>
+`;
+
+const results = [
+  "80% Zeit- und Kostenersparnis – was früher Stunden dauerte, ist jetzt in Minuten erledigt",
+  "Break-Even nach nur 1,5 Monaten – schnellster ROI in unserem Portfolio",
+  "Höhere Qualität durch Konsistenz – keine übersehenen Details mehr",
+  "Skalierbarkeit ohne Mehraufwand – Volumen kann problemlos steigen",
+  "Vollständige Nachvollziehbarkeit – jede Extraktion mit Quellenangabe"
+];
+
+const fullContent = `
+<h3>Was wir gelernt haben</h3>
+
+<p>Erfolgreiche KI-Implementierung im Finanzsektor benötigt drei Dinge:</p>
+
+<ol>
+  <li><strong>Vertrauen durch Transparenz:</strong> Jede KI-Entscheidung muss nachvollziehbar sein</li>
+  <li><strong>Domain-Expertise:</strong> Generische Lösungen funktionieren nicht in regulierten Branchen</li>
+  <li><strong>Evaluation-Driven Development:</strong> Systematische Messungen von Anfang an, nicht als Nachgedanke</li>
+</ol>
+
+<p>Die Lösung läuft heute produktiv und hat die Art und Weise verändert, wie unser Kunde mit Dokumenten arbeitet. Nicht weil die KI perfekt ist – sondern weil sie transparent, verlässlich und auf echte Geschäftsprozesse zugeschnitten ist.</p>
+`;
+
+const metrics = {
+  "Zeitersparnis": "80%",
+  "Break-even": "1,5 Monate",
+  "Automatisierung": "80%"
+};
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <SuccessStoryDetail
+    title="KPI-Extraktion aus Jahresberichten"
+    client="Bankendienstleister"
+    category="Data Extraction"
+    challenge={challenge}
+    solution={solution}
+    results={results}
+    metrics={metrics}
+    fullContent={fullContent}
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

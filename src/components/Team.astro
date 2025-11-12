@@ -1,0 +1,340 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+
+const content = {
+  de: {
+    sectionTitle: "Die Köpfe hinter Klartext",
+    subtitle: "Erfahrung aus Forschung und Praxis",
+    buttonText: "Das vollständige Team kennenlernen",
+    buttonLink: `${BASE}team`,
+    team: [
+      {
+        name: "Ruben Hetfleisch",
+        role: "CEO",
+        tagline: "Innovation durch Forschung",
+        bio: "TU Darmstadt, Fraunhofer Austria, Vorstand AI Austria",
+        image: `${BASE}team/ruben.webp`,
+        linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/"
+      },
+      {
+        name: "Daniel Toth",
+        role: "COO",
+        tagline: "Wissenschaft trifft Praxis",
+        bio: "TU Wien, 6+ Jahre bei Fraunhofer Austria",
+        image: `${BASE}team/daniel.jpg`,
+        linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/"
+      },
+      {
+        name: "Felix Krause",
+        role: "CTO",
+        tagline: "Evidenz statt Annahmen",
+        bio: "AI Engineering & Data Science, AIM Vorstand und Technical Lead",
+        image: `${BASE}team/felix.png`,
+        linkedin: "https://www.linkedin.com/in/f-krause-ai/"
+      }
+    ]
+  },
+  en: {
+    sectionTitle: "Meet the minds behind Klartext",
+    subtitle: "Experience from research and practice",
+    buttonText: "Meet the full team",
+    buttonLink: `${BASE}en/team`,
+    team: [
+      {
+        name: "Ruben Hetfleisch",
+        role: "Managing Director",
+        tagline: "Innovation through research",
+        bio: "TU Darmstadt, Fraunhofer Austria, AI Austria board member",
+        image: `${BASE}team/ruben.webp`,
+        linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/"
+      },
+      {
+        name: "Daniel Toth",
+        role: "Managing Director",
+        tagline: "Science meets practice",
+        bio: "TU Wien, 6+ years at Fraunhofer Austria",
+        image: `${BASE}team/daniel.jpg`,
+        linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/"
+      },
+      {
+        name: "Felix Krause",
+        role: "CTO",
+        tagline: "Evidence over assumptions",
+        bio: "Economics & Data Science, AIM board member and technical lead",
+        image: `${BASE}team/felix.png`,
+        linkedin: "https://www.linkedin.com/in/f-krause-ai/"
+      }
+    ]
+  }
+};
+
+const text = content[lang];
+---
+
+<section id="team" class="team section">
+  <div class="container">
+    <div class="section-header fade-in text-center">
+      <h2>{text.sectionTitle}</h2>
+      <p class="section-subtitle">{text.subtitle}</p>
+    </div>
+
+    <div class="team-grid">
+      {text.team.map((member, index) => (
+        <article class="team-member fade-in" style={`animation-delay: ${index * 0.2}s`}>
+          <a
+            href={member.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="member-image-wrapper"
+            aria-label={`Visit ${member.name} on LinkedIn`}
+          >
+            <img
+              src={member.image}
+              alt={member.name}
+              class="member-image"
+              loading="lazy"
+            />
+            <div class="member-overlay">
+              <p class="member-tagline">"{member.tagline}"</p>
+              <div class="linkedin-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+          <div class="member-info">
+            <h3 class="member-name">{member.name}</h3>
+            <p class="member-role">{member.role}</p>
+            <p class="member-bio">{member.bio}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="team-button-wrapper fade-in">
+      <a href={text.buttonLink} class="team-button">
+        {text.buttonText}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .team {
+    background: transparent;
+  }
+
+  .section-header {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-sm);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .member-image-wrapper {
+    position: relative;
+    display: block;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: var(--space-md);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .member-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+  }
+
+  .member-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(36, 121, 190, 0.95) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--space-md);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .member-tagline {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.4;
+    transform: translateY(20px);
+    transition: transform 0.5s ease;
+    margin-bottom: var(--space-xs);
+  }
+
+  .linkedin-icon {
+    color: white;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .linkedin-icon svg {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  }
+
+  .team-member:hover .member-image-wrapper {
+    transform: scale(1.05);
+    box-shadow: 0 16px 48px -12px rgba(36, 121, 190, 0.4);
+  }
+
+  .team-member:hover .member-image {
+    filter: grayscale(0%);
+  }
+
+  .team-member:hover .member-overlay {
+    opacity: 1;
+  }
+
+  .team-member:hover .member-tagline {
+    transform: translateY(0);
+  }
+
+  .team-member:hover .linkedin-icon {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .member-info {
+    max-width: 300px;
+  }
+
+  .member-name {
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-dark);
+  }
+
+  .member-role {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .member-bio {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 1024px) {
+    .team-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-md);
+    }
+  }
+
+  .team-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+  }
+
+  .team-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    color: var(--color-blue);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.125rem;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .team-button:hover {
+    background: rgba(36, 121, 190, 0.95);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
+  }
+
+  @media (max-width: 768px) {
+    .team-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .member-image-wrapper {
+      width: 240px;
+      height: 240px;
+    }
+
+    /* Hide overlay on mobile - no text on images */
+    .member-overlay {
+      display: none;
+    }
+
+    .member-image {
+      filter: grayscale(0%);
+    }
+
+    .member-info {
+      margin-top: var(--space-sm);
+    }
+
+    .team-button {
+      font-size: 1rem;
+      padding: 0.875rem 2rem;
+    }
+  }
+</style>

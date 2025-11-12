@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../../components/BlogPostDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'Domain-Driven Design in Practice: The RFU Case | Klartext AI Blog';
+const description = 'How we achieved 80% automation through deep domain understanding – the RFU case shows Domain-Driven Design in practice.';
+
+const fullContent = `
+<p>There are two ways to build AI systems: You can take a generic solution and try to adapt it. Or you can start with the domain and build the technology around it.</p>
+
+<p>We always choose the second way.</p>
+
+<h4>The Generic Hammer Mistake</h4>
+
+<p>Many AI projects start with technology: "We'll take an LLM, fine-tune it a bit, and done." The problem: This solution doesn't know the business processes. It doesn't understand domain language. It doesn't know which validations are important and which errors are critical.</p>
+
+<p>The result are systems that work in 80% of cases – but don't cover exactly the 20% special cases that are critical in daily business.</p>
+
+<h4>What Domain-Driven Design Really Means</h4>
+
+<p>Domain-Driven Design (DDD) isn't a methodology you "just apply". It's a philosophy that puts understanding the business domain at the center.</p>
+
+<p><strong>Concretely, this means:</strong></p>
+
+<p><strong>1. Start with the business, not with technology</strong><br/>
+Before we talk about models, architectures, or frameworks, we ask: What problem are we solving? How does the current process work? What are the critical requirements?</p>
+
+<p><strong>2. Speak the language of the domain</strong><br/>
+In finance, there are "KPIs", "Risk Ratings", "Compliance Criteria". These terms are not interchangeable. The AI must speak the same language as the experts.</p>
+
+<p><strong>3. Model the business, not just the data</strong><br/>
+It's not just about processing documents. It's about business rules, validations, processes, dependencies.</p>
+
+<p><strong>4. Work with experts, not against them</strong><br/>
+The best solutions emerge when technology experts and domain experts work closely together.</p>
+
+<h4>The RFU Case: 500+ Pages, 80% Automation</h4>
+
+<p>Our client in the banking services sector faced a massive challenge: Analysts had to manually sift through hundreds of pages of annual reports daily to extract quantitative and qualitative KPIs.</p>
+
+<p><strong>The naive solution</strong>: Take an LLM, throw in documents, let it extract KPIs.</p>
+
+<p><strong>The problem</strong>: Which KPIs are relevant? How do you validate extraction? How do you handle contradictory information? What happens with edge cases?</p>
+
+<p><strong>Our approach</strong>:</p>
+
+<ol>
+  <li><strong>Domain analysis</strong>: We spent weeks understanding the process. Which KPIs exist? How are they defined? What are typical error sources?</li>
+  <li><strong>Formalize business logic</strong>: We made the analysts' implicit rules explicit. Which validations do they apply? Which cross-checks are necessary?</li>
+  <li><strong>Domain language as code</strong>: The software speaks the same language as the analysts. Terms like "EBIT", "Leverage Ratio", "Working Capital" aren't strings but business concepts with meaning and rules.</li>
+  <li><strong>Human-in-the-loop design</strong>: The AI extracts, but humans can verify. Every extraction comes with the exact location in the document and a justification.</li>
+</ol>
+
+<p><strong>The result</strong>: 80% of manual work automated, break-even after 1.5 months, higher quality through consistency.</p>
+
+<h4>Why Generic Solutions Fail</h4>
+
+<p>Imagine you take a generic RAG system and throw your documents in. What's missing?</p>
+
+<ul>
+  <li><strong>Domain logic</strong>: The system doesn't know what an "EBIT" is or how to validate it</li>
+  <li><strong>Business rules</strong>: No idea which cross-checks are necessary</li>
+  <li><strong>Context understanding</strong>: Can't distinguish between "EBIT 2024" and "forecast EBIT 2025"</li>
+  <li><strong>Error handling</strong>: Doesn't know what to do with contradictory information</li>
+</ul>
+
+<p>Domain-Driven Design solves these problems not through more data or better models, but through better understanding.</p>
+
+<h4>The Hard Truth About Domain Knowledge</h4>
+
+<p>Acquiring domain knowledge is time-consuming. It means talking to experts, observing processes, gathering feedback. It means not starting to code immediately.</p>
+
+<p>But it's the only way to build systems that don't just work but solve real business problems.</p>
+
+<p>The difference is measurable: Systems based on domain-driven design have higher success rates, shorter break-even times, and better user acceptance.</p>
+
+<h4>Think From Domain to Technology</h4>
+
+<p>In the end, it's a question of perspective: <strong>Do I build a technical solution and hope it fits the problem? Or do I understand the problem first and then build the solution?</strong></p>
+
+<p>At Klartext AI, we always choose the second option. Not because it's easier – but because it's the only way to create sustainable, valuable systems.</p>
+
+<p><strong>Domain-Driven Design isn't a buzzword for us. It's how we work.</strong></p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="Domain-Driven Design in Practice: The RFU Case"
+    excerpt="How we achieved 80% automation through deep domain understanding."
+    fullExcerpt="The RFU case is a perfect example of how Domain-Driven Design works in practice. Instead of starting with a pre-made solution, we immersed ourselves in our client's business processes in the banking services sector. The result: An AI solution that not only works but speaks the language of the domain and automates 80% of manual work – with a break-even of just 1.5 months."
+    fullContent={fullContent}
+    category="Case Study"
+    readTime="8 min"
+    date="2025-01-10"
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

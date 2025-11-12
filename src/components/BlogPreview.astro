@@ -1,0 +1,241 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+
+const content = {
+  de: {
+    sectionTitle: "Hinter dem Impact",
+    subtitle: "Unsere Learnings, Philosophie & Feldberichte",
+    readMore: "Weiterlesen",
+    viewAllPosts: "Alle Beiträge ansehen",
+    posts: [
+      {
+        id: "evaluation-key-to-ai",
+        title: "Warum Evaluation der Schlüssel zu erfolgreicher KI ist",
+        excerpt: "Die meisten KI-Projekte scheitern nicht an der Technologie, sondern an fehlender systematischer Evaluierung.",
+        category: "Philosophie",
+        readTime: "5 min"
+      },
+      {
+        id: "domain-driven-design-rfu",
+        title: "Domain-Driven Design in der Praxis: Der RFU Case",
+        excerpt: "Wie wir durch tiefes Domänenverständnis 80% Automatisierung erreicht haben.",
+        category: "Case Study",
+        readTime: "8 min"
+      },
+      {
+        id: "privacy-by-design",
+        title: "Privacy by Design: Mehr als nur Compliance",
+        excerpt: "Warum Datenschutz von Anfang an Teil der Architektur sein muss.",
+        category: "Technical",
+        readTime: "6 min"
+      }
+    ]
+  },
+  en: {
+    sectionTitle: "Behind the Impact",
+    subtitle: "Our learnings, philosophy & field reports",
+    readMore: "Read more",
+    viewAllPosts: "View all posts",
+    posts: [
+      {
+        id: "evaluation-key-to-ai",
+        title: "Why Evaluation is the Key to Successful AI",
+        excerpt: "Most AI projects fail not because of technology, but due to lack of systematic evaluation.",
+        category: "Philosophy",
+        readTime: "5 min"
+      },
+      {
+        id: "domain-driven-design-rfu",
+        title: "Domain-Driven Design in Practice: The RFU Case",
+        excerpt: "How we achieved 80% automation through deep domain understanding.",
+        category: "Case Study",
+        readTime: "8 min"
+      },
+      {
+        id: "privacy-by-design",
+        title: "Privacy by Design: More than Just Compliance",
+        excerpt: "Why data protection must be part of the architecture from the start.",
+        category: "Technical",
+        readTime: "6 min"
+      }
+    ]
+  }
+};
+
+const text = content[lang];
+---
+
+<section id="blog" class="blog-preview section">
+  <div class="container">
+    <div class="section-header fade-in text-center">
+      <h2>{text.sectionTitle}</h2>
+      <p class="section-subtitle">{text.subtitle}</p>
+    </div>
+
+    <div class="blog-grid">
+      {text.posts.map((post, index) => (
+        <a href={lang === 'en' ? `${BASE}en/blog/${post.id}` : `${BASE}blog/${post.id}`} class="blog-card-link">
+          <article class="blog-card glass-card fade-in" style={`animation-delay: ${index * 0.15}s`}>
+            <div class="blog-meta">
+              <span class="blog-category">{post.category}</span>
+              <span class="blog-read-time">{post.readTime}</span>
+            </div>
+
+            <h3 class="blog-title">{post.title}</h3>
+            <p class="blog-excerpt">{post.excerpt}</p>
+
+            <div class="blog-link">
+              {text.readMore}
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 12l4-4-4-4"/>
+              </svg>
+            </div>
+          </article>
+        </a>
+      ))}
+    </div>
+
+    <div class="blog-cta text-center fade-in">
+      <a href={lang === 'de' ? `${BASE}blog` : `${BASE}en/blog`} class="btn btn-secondary">
+        {text.viewAllPosts}
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 12l4-4-4-4"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .blog-preview {
+    background: transparent;
+  }
+
+  .section-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-sm);
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-md);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .blog-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+  }
+
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+
+  .blog-card-link:hover .blog-card {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
+  }
+
+  .blog-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+    font-size: 0.85rem;
+  }
+
+  .blog-category {
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .blog-read-time {
+    color: var(--color-text-muted);
+  }
+
+  .blog-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-dark);
+    line-height: 1.3;
+  }
+
+  .blog-excerpt {
+    flex-grow: 1;
+    color: var(--color-text-body);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .blog-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-blue);
+    font-weight: 600;
+    margin-top: auto;
+    transition: gap 0.3s ease;
+  }
+
+  .blog-card-link:hover .blog-link {
+    gap: 0.75rem;
+  }
+
+  .blog-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .blog-card-link:hover .blog-link svg {
+    transform: translateX(4px);
+  }
+
+  .blog-cta {
+    margin-top: var(--space-xl);
+  }
+
+  .blog-cta .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .blog-cta .btn svg {
+    transition: transform 0.3s ease;
+  }
+
+  .blog-cta .btn:hover svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+
+    .blog-cta {
+      margin-top: var(--space-lg);
+    }
+  }
+</style>

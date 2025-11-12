@@ -1,0 +1,592 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+
+const content = {
+  de: {
+    sectionTitle: "Vertrauen von führenden Organisationen",
+    subtitle: "Wir arbeiten mit innovativen Organisationen zusammen",
+    references: [
+      {
+        name: "PwC",
+        url: "https://www.pwc.at/de.html",
+        logo: `${BASE}references/PwC_Company_Logo.svg.png`
+      },
+      {
+        name: "Know-Center",
+        url: "https://www.know-center.at/en/",
+        logo: `${BASE}references/know-center.png`
+      },
+      {
+        name: "Blindenverband",
+        url: "https://www.blindenverband-wnb.at/baabsv-gmbh/home/",
+        logo: `${BASE}references/blindenverband.png`
+      },
+      {
+        name: "AIM",
+        url: "https://ai-mission.eu/",
+        logo: `${BASE}references/AIM-logo-white-cropped-small.png`
+      },
+      {
+        name: "gesetzefinden",
+        url: "https://gesetzefinden.at/",
+        logo: `${BASE}references/logo-horizontal.png`
+      },
+      {
+        name: "Stefan Adametz Rechtsanwalt",
+        url: "https://adametz.at/",
+        logo: `${BASE}references/adametz.avif`
+      },
+      {
+        name: "AI Austria",
+        url: "https://aiaustria.com/",
+        logo: `${BASE}references/AIA_Logo_pos_ohnesub.svg`
+      },
+      {
+        name: "FFG",
+        url: "https://www.ffg.at/",
+        logo: `${BASE}references/FFG_Logo_DE_CMYK.png`
+      }
+    ]
+  },
+  en: {
+    sectionTitle: "Trusted by leading organizations",
+    subtitle: "We work with innovative companies and institutions",
+    references: [
+      {
+        name: "PwC",
+        url: "https://www.pwc.at/de.html",
+        logo: `${BASE}references/PwC_Company_Logo.svg.png`
+      },
+      {
+        name: "Know-Center",
+        url: "https://www.know-center.at/en/",
+        logo: `${BASE}references/know-center.png`
+      },
+      {
+        name: "Blindenverband",
+        url: "https://www.blindenverband-wnb.at/baabsv-gmbh/home/",
+        logo: `${BASE}references/blindenverband.png`
+      },
+      {
+        name: "AIM",
+        url: "https://ai-mission.eu/",
+        logo: `${BASE}references/AIM-logo-white-cropped-small.png`
+      },
+      {
+        name: "gesetzefinden",
+        url: "https://gesetzefinden.at/",
+        logo: `${BASE}references/logo-horizontal.png`
+      },
+      {
+        name: "Stefan Adametz Rechtsanwalt",
+        url: "https://adametz.at/",
+        logo: `${BASE}references/adametz.avif`
+      },
+      {
+        name: "AI Austria",
+        url: "https://aiaustria.com/",
+        logo: `${BASE}references/AIA_Logo_pos_ohnesub.svg`
+      },
+      {
+        name: "FFG",
+        url: "https://www.ffg.at/",
+        logo: `${BASE}references/FFG_Logo_DE_CMYK.png`
+      }
+    ]
+  }
+};
+
+const text = content[lang];
+---
+
+<section id="references" class="references section">
+  <div class="container-full">
+    <div class="section-header fade-in text-center">
+      <h2 class="references-title">{text.sectionTitle}</h2>
+      <p class="references-subtitle">{text.subtitle}</p>
+    </div>
+
+    <div class="references-glass-container">
+      <div class="references-banner-wrapper" id="references-banner-wrapper">
+        <div class="references-banner" id="references-banner">
+        {/* First set of logos */}
+        {text.references.map((reference, index) => (
+          <a
+            href={reference.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="reference-item"
+            aria-label={`Visit ${reference.name} website`}
+          >
+            <div class="reference-logo-wrapper">
+              <img
+                src={reference.logo}
+                alt={reference.name}
+                class="reference-logo"
+                loading={index < 3 ? "eager" : "lazy"}
+                onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'reference-text\'>' + this.alt + '</span>';"
+              />
+            </div>
+          </a>
+        ))}
+        {/* Duplicate set for seamless loop */}
+        {text.references.map((reference) => (
+          <a
+            href={reference.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="reference-item"
+            aria-label={`Visit ${reference.name} website`}
+          >
+            <div class="reference-logo-wrapper">
+              <img
+                src={reference.logo}
+                alt={reference.name}
+                class="reference-logo"
+                loading="lazy"
+                onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'reference-text\'>' + this.alt + '</span>';"
+              />
+            </div>
+          </a>
+        ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .references {
+    padding: var(--space-2xl) 0;
+    overflow: hidden;
+  }
+
+  .container-full {
+    width: 100%;
+  }
+
+  .section-header {
+    margin-bottom: var(--space-2xl);
+    padding: 0 var(--space-md);
+  }
+
+  .references-glass-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    border-radius: 24px;
+    position: relative;
+  }
+
+  .references-title {
+    font-size: var(--font-size-h2);
+    font-weight: 300;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .references-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .references-banner-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: var(--space-lg) 0;
+  }
+
+  .references-banner {
+    display: flex;
+    gap: var(--space-xl);
+    width: fit-content;
+    cursor: grab;
+    user-select: none;
+    will-change: transform;
+  }
+
+  .references-banner:active {
+    cursor: grabbing;
+  }
+
+  .reference-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md) var(--space-lg);
+    min-width: 200px;
+    min-height: 200px;
+    flex-shrink: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.15);
+    border-radius: 12px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reference-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(36, 121, 190, 0.05) 0%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .reference-item:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.3);
+    background: rgba(255, 255, 255, 0.65);
+  }
+
+  .reference-item:hover::before {
+    opacity: 1;
+  }
+
+  .reference-logo-wrapper {
+    width: 220px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .reference-logo {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(0%) opacity(0.8);
+    transition: all 0.4s ease;
+  }
+
+  .reference-item:hover .reference-logo {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.05);
+  }
+
+  /* Fallback text styling when logo doesn't load */
+  .reference-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-dark);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 768px) {
+    .references {
+      padding: var(--space-xl) 0;
+    }
+
+    .references-glass-container {
+      margin: 0 var(--space-md);
+      border-radius: 20px;
+    }
+
+    .section-header {
+      margin-bottom: var(--space-xl);
+    }
+
+    .references-title {
+      font-size: var(--font-size-h3);
+    }
+
+    .references-subtitle {
+      font-size: 1rem;
+    }
+
+    .references-banner {
+      gap: var(--space-md); /* Reduce gap for mobile */
+      animation: scroll 30s linear infinite;
+    }
+
+    .reference-item {
+      min-width: 140px;
+      min-height: 100px;
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .reference-logo-wrapper {
+      width: 120px;
+      height: 55px;
+    }
+
+    .references-banner-wrapper::before,
+    .references-banner-wrapper::after {
+      width: 80px;
+    }
+
+    /* Always show logos in color on mobile for better visibility */
+    .reference-logo {
+      filter: grayscale(0%) opacity(0.85);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .references-glass-container {
+      margin: 0 var(--space-sm);
+      border-radius: 16px;
+    }
+
+    .references-banner {
+      animation: scroll 25s linear infinite;
+    }
+
+    .reference-item {
+      min-width: 120px;
+      min-height: 90px;
+      padding: var(--space-xs) var(--space-sm);
+    }
+
+    .reference-logo-wrapper {
+      width: 100px;
+      height: 50px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrapper = document.getElementById('references-banner-wrapper');
+    const banner = document.getElementById('references-banner');
+
+    if (!wrapper || !banner) return;
+
+    let isDragging = false;
+    let isPaused = false;
+    let startX = 0;
+    let lastX = 0;
+    let currentTranslate = 0;
+    let lastTime = Date.now();
+    let velocity = 0;
+    let animationFrameId: number;
+    let momentumAnimationId: number;
+
+    // Calculate the scroll distance - use container width for edge-to-edge scrolling
+    const bannerWidth = banner.scrollWidth;
+
+    // Scroll distance should be one complete set of logos (half the total banner width)
+    const scrollDistance = bannerWidth / 2;
+
+    // Auto-scroll animation
+    const autoScroll = () => {
+      if (!isDragging && !isPaused) {
+        // Move left by 1px every frame (adjust for speed)
+        currentTranslate -= 0.5;
+
+        // Wrap around when we've scrolled through one complete set
+        if (currentTranslate <= -scrollDistance) {
+          currentTranslate = 0;
+        }
+
+        banner.style.transform = `translateX(${currentTranslate}px)`;
+      }
+      animationFrameId = requestAnimationFrame(autoScroll);
+    };
+
+    // Start auto-scroll
+    autoScroll();
+
+    // Pause on hover
+    banner.addEventListener('mouseenter', () => {
+      isPaused = true;
+    });
+
+    banner.addEventListener('mouseleave', () => {
+      if (!isDragging) {
+        isPaused = false;
+      }
+    });
+
+    // Mouse events
+    const handleMouseDown = (e: MouseEvent) => {
+      isDragging = true;
+      isPaused = true;
+      startX = e.pageX;
+      lastX = e.pageX;
+      lastTime = Date.now();
+      velocity = 0;
+
+      // Cancel any ongoing momentum
+      if (momentumAnimationId) {
+        cancelAnimationFrame(momentumAnimationId);
+      }
+
+      banner.classList.add('dragging');
+      e.preventDefault();
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+
+      const currentTime = Date.now();
+      const timeDelta = currentTime - lastTime;
+
+      const x = e.pageX;
+      const deltaX = x - lastX;
+      currentTranslate += deltaX;
+
+      // Calculate velocity
+      if (timeDelta > 0) {
+        velocity = deltaX / timeDelta;
+      }
+
+      // Handle wrapping
+      if (currentTranslate > 0) {
+        currentTranslate = -scrollDistance;
+      } else if (currentTranslate <= -scrollDistance) {
+        currentTranslate = 0;
+      }
+
+      banner.style.transform = `translateX(${currentTranslate}px)`;
+
+      lastX = x;
+      lastTime = currentTime;
+
+      e.preventDefault();
+    };
+
+    const applyMomentum = () => {
+      const absVelocity = Math.abs(velocity);
+
+      if (absVelocity > 0.1) {
+        // Apply momentum
+        currentTranslate += velocity * 20;
+
+        // Decay velocity
+        velocity *= 0.95;
+
+        // Handle wrapping
+        if (currentTranslate > 0) {
+          currentTranslate = -scrollDistance;
+        } else if (currentTranslate <= -scrollDistance) {
+          currentTranslate = 0;
+        }
+
+        banner.style.transform = `translateX(${currentTranslate}px)`;
+
+        momentumAnimationId = requestAnimationFrame(applyMomentum);
+      } else {
+        // Momentum finished, resume auto-scroll
+        isPaused = false;
+        velocity = 0;
+      }
+    };
+
+    const handleMouseUp = () => {
+      if (!isDragging) return;
+
+      isDragging = false;
+      banner.classList.remove('dragging');
+
+      // Apply momentum
+      const absVelocity = Math.abs(velocity);
+      if (absVelocity > 0.1) {
+        applyMomentum();
+      } else {
+        isPaused = false;
+      }
+    };
+
+    // Touch events for mobile
+    const handleTouchStart = (e: TouchEvent) => {
+      isDragging = true;
+      isPaused = true;
+      startX = e.touches[0].pageX;
+      lastX = e.touches[0].pageX;
+      lastTime = Date.now();
+      velocity = 0;
+
+      if (momentumAnimationId) {
+        cancelAnimationFrame(momentumAnimationId);
+      }
+
+      banner.classList.add('dragging');
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDragging) return;
+
+      const currentTime = Date.now();
+      const timeDelta = currentTime - lastTime;
+
+      const x = e.touches[0].pageX;
+      const deltaX = x - lastX;
+      currentTranslate += deltaX;
+
+      if (timeDelta > 0) {
+        velocity = deltaX / timeDelta;
+      }
+
+      // Handle wrapping
+      if (currentTranslate > 0) {
+        currentTranslate = -scrollDistance;
+      } else if (currentTranslate <= -scrollDistance) {
+        currentTranslate = 0;
+      }
+
+      banner.style.transform = `translateX(${currentTranslate}px)`;
+
+      lastX = x;
+      lastTime = currentTime;
+
+      e.preventDefault();
+    };
+
+    const handleTouchEnd = () => {
+      handleMouseUp();
+    };
+
+    // Add event listeners
+    banner.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+
+    banner.addEventListener('touchstart', handleTouchStart, { passive: false });
+    banner.addEventListener('touchmove', handleTouchMove, { passive: false });
+    banner.addEventListener('touchend', handleTouchEnd);
+
+    // Prevent default link behavior during drag
+    banner.addEventListener('click', (e) => {
+      const totalDrag = Math.abs(lastX - startX);
+      if (totalDrag > 5) {
+        e.preventDefault();
+      }
+    }, true);
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      if (momentumAnimationId) {
+        cancelAnimationFrame(momentumAnimationId);
+      }
+    });
+  });
+</script>

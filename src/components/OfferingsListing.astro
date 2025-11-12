@@ -1,0 +1,511 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+
+const { lang = 'de' } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+
+const content = {
+  de: {
+    pageTitle: "Unsere Angebote",
+    pageSubtitle: "Maßgeschneiderte AI-Lösungen und Services für Ihren Erfolg",
+    learnMore: "Mehr erfahren",
+    ctaTitle: "Interesse an einem Angebot?",
+    ctaSubtitle: "Kontaktieren Sie uns für ein unverbindliches Erstgespräch",
+    ctaButton: "Jetzt Kontakt aufnehmen",
+    offerings: [
+      {
+        id: "ai-value-sprint",
+        title: "AI Value Sprint Workshop",
+        category: "Workshop",
+        icon: "🚀",
+        description: "In 2-3 Stunden analysieren wir mit Ihren Fachexperten Kernprozesse, challengen Abläufe und identifizieren Use Cases mit messbarem ROI. Von Prozesskomplexität zu greifbaren Ansatzpunkten.",
+        highlights: [
+          "Pain Point Analyse & Use Case Matching",
+          "ROI-basierte Priorisierung",
+          "Konkrete Umsetzungsschritte"
+        ]
+      },
+      {
+        id: "custom-projects",
+        title: "Kundenspezifische Projekte",
+        category: "Individuelle Lösung",
+        icon: "🎯",
+        description: "Von der Anforderungsanalyse bis zum produktiven Betrieb – wir entwickeln domänenspezifische AI-Lösungen mit nachweisbarem ROI. Evaluation-driven, nicht hype-driven.",
+        highlights: [
+          "Domain-Driven Design & Evaluation First",
+          "End-to-End Ownership vom Konzept bis Betrieb",
+          "Nachweisbare Erfolge mit 70-95% Zeiteinsparung"
+        ]
+      },
+      {
+        id: "chatgpt-clone",
+        title: "Data Privacy Safe GPT Clone",
+        category: "Produkt",
+        icon: "🛡️",
+        description: "Generative AI ohne Kompromisse bei Datenschutz. Alle Prompts und Daten bleiben auf deutschen/österreichischen Servern – kein Drittanbieter-Zugriff, volle Kontrolle, EU AI Act ready.",
+        highlights: [
+          "100% DE/AT Hosting – keine US-Cloud",
+          "Zero Third-Party Access zu Ihren Daten",
+          "GDPR-konform & EU AI Act ready"
+        ]
+      },
+      {
+        id: "inspirational-talks",
+        title: "Inspirational Talks",
+        category: "Vortrag",
+        icon: "💡",
+        description: "Keine Buzzwords, sondern reale Erfolge. Unsere Experten teilen Learnings aus produktiven AI-Projekten – von 80% Zeiteinsparung bis 1-Monats-Break-Even. Praxisnah, messbar, umsetzbar.",
+        highlights: [
+          "Real-World Success Stories mit KPIs",
+          "Von Hype zu ROI: Lessons Learned",
+          "Interaktive Q&A mit Technical Leads"
+        ]
+      },
+      {
+        id: "eu-ai-act-readiness",
+        title: "EU AI Act Readiness Workshop",
+        category: "Workshop",
+        icon: "⚖️",
+        description: "Machen Sie Ihre AI-Systeme EU AI Act-konform. Wir klassifizieren Risiken, identifizieren Compliance-Lücken und entwickeln einen pragmatischen Fahrplan für konforme AI-Entwicklung.",
+        highlights: [
+          "Risikoklassifizierung nach EU AI Act",
+          "Gap-Analyse & Compliance-Roadmap",
+          "Dokumentations- & Governance-Framework"
+        ]
+      },
+      {
+        id: "ai-security-screening",
+        title: "AI Security Screening Workshop",
+        category: "Workshop",
+        icon: "🔒",
+        description: "Identifizieren Sie Sicherheitsrisiken in Ihren AI-Systemen. Von Prompt Injection bis Data Leakage – wir analysieren Schwachstellen und entwickeln einen konkreten Härteplan für sichere AI-Anwendungen.",
+        highlights: [
+          "Threat Modeling & Vulnerability Assessment",
+          "Prompt Injection & Jailbreak-Testing",
+          "Security-by-Design Roadmap"
+        ]
+      }
+    ]
+  },
+  en: {
+    pageTitle: "Our Offerings",
+    pageSubtitle: "Tailored AI solutions and services for your success",
+    learnMore: "Learn more",
+    ctaTitle: "Interested in an offering?",
+    ctaSubtitle: "Contact us for a non-binding initial consultation",
+    ctaButton: "Get in Touch",
+    offerings: [
+      {
+        id: "ai-value-sprint",
+        title: "AI Value Sprint Workshop",
+        category: "Workshop",
+        icon: "🚀",
+        description: "In 2-3 hours, we analyze core processes with your domain experts, challenge workflows, and identify use cases with measurable ROI. From process complexity to tangible action points.",
+        highlights: [
+          "Pain Point Analysis & Use Case Matching",
+          "ROI-based Prioritization",
+          "Concrete Implementation Steps"
+        ]
+      },
+      {
+        id: "custom-projects",
+        title: "Custom Projects",
+        category: "Individual Solution",
+        icon: "🎯",
+        description: "From requirements analysis to production operations – we develop domain-specific AI solutions with demonstrable ROI. Evaluation-driven, not hype-driven.",
+        highlights: [
+          "Domain-Driven Design & Evaluation First",
+          "End-to-End Ownership from Concept to Operations",
+          "Proven Results with 70-95% Time Savings"
+        ]
+      },
+      {
+        id: "chatgpt-clone",
+        title: "Data Privacy Safe GPT Clone",
+        category: "Product",
+        icon: "🛡️",
+        description: "Generative AI without compromising on data privacy. All prompts and data stay on German/Austrian servers – no third-party access, full control, EU AI Act ready.",
+        highlights: [
+          "100% DE/AT Hosting – No US Cloud",
+          "Zero Third-Party Access to Your Data",
+          "GDPR-Compliant & EU AI Act Ready"
+        ]
+      },
+      {
+        id: "inspirational-talks",
+        title: "Inspirational Talks",
+        category: "Presentation",
+        icon: "💡",
+        description: "No buzzwords, just real results. Our experts share learnings from production AI projects – from 80% time savings to 1-month break-even. Practical, measurable, actionable.",
+        highlights: [
+          "Real-World Success Stories with KPIs",
+          "From Hype to ROI: Lessons Learned",
+          "Interactive Q&A with Technical Leads"
+        ]
+      },
+      {
+        id: "eu-ai-act-readiness",
+        title: "EU AI Act Readiness Workshop",
+        category: "Workshop",
+        icon: "⚖️",
+        description: "Make your AI systems EU AI Act compliant. We classify risks, identify compliance gaps, and develop a pragmatic roadmap for compliant AI development.",
+        highlights: [
+          "Risk Classification per EU AI Act",
+          "Gap Analysis & Compliance Roadmap",
+          "Documentation & Governance Framework"
+        ]
+      },
+      {
+        id: "ai-security-screening",
+        title: "AI Security Screening Workshop",
+        category: "Workshop",
+        icon: "🔒",
+        description: "Identify security risks in your AI systems. From prompt injection to data leakage – we analyze vulnerabilities and develop a concrete hardening plan for secure AI applications.",
+        highlights: [
+          "Threat Modeling & Vulnerability Assessment",
+          "Prompt Injection & Jailbreak Testing",
+          "Security-by-Design Roadmap"
+        ]
+      }
+    ]
+  }
+};
+
+const text = content[lang];
+---
+
+<section id="offerings-listing" class="offerings-listing section">
+  <div class="container">
+    <div class="offerings-header fade-in text-center">
+      <h1 class="offerings-page-title">{text.pageTitle}</h1>
+      <p class="offerings-page-subtitle">{text.pageSubtitle}</p>
+    </div>
+
+    <div class="offerings-grid">
+      {text.offerings.map((offering, index) => (
+        <article class="offering-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
+          <div class="offering-header">
+            <div class="offering-icon">{offering.icon}</div>
+            <span class="offering-category">{offering.category}</span>
+          </div>
+
+          <h2 class="offering-title">{offering.title}</h2>
+
+          <p class="offering-description">{offering.description}</p>
+
+          <ul class="offering-highlights">
+            {offering.highlights.map((highlight) => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8l3 3 7-7" stroke="var(--color-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {highlight}
+              </li>
+            ))}
+          </ul>
+
+          {offering.id === 'custom-projects' && (
+            <a href={lang === 'en' ? `${BASE}en/success-stories` : `${BASE}success-stories`} class="offering-link">
+              {text.learnMore}
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 12l4-4-4-4"/>
+              </svg>
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+
+    <div class="offerings-cta fade-in">
+      <div class="cta-content glass-card">
+        <h2 class="cta-title">{text.ctaTitle}</h2>
+        <p class="cta-subtitle">{text.ctaSubtitle}</p>
+        <a href="mailto:office@klartext-ai.com" class="cta-button">
+          {text.ctaButton}
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 10h14M12 5l5 5-5 5"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .offerings-listing {
+    min-height: 80vh;
+    padding: var(--space-2xl) 0;
+    background: transparent;
+  }
+
+  .offerings-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .offerings-page-title {
+    font-size: var(--font-size-h1);
+    font-weight: 300;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .offerings-page-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .offerings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: var(--space-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .offering-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-md);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    background: rgba(255, 255, 255, 0.55) !important;
+    backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  .offering-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
+    background: rgba(255, 255, 255, 0.75) !important;
+  }
+
+  .offering-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .offering-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+
+  .offering-category {
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.7rem;
+    background: rgba(36, 121, 190, 0.1);
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+
+  .offering-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-dark);
+    line-height: 1.3;
+  }
+
+  .offering-description {
+    font-size: 0.95rem;
+    color: var(--color-text-body);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .offering-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .offering-highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    font-size: 0.9rem;
+    color: var(--color-text-body);
+    line-height: 1.5;
+  }
+
+  .offering-highlights li svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .offering-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-blue);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: gap 0.3s ease;
+    align-self: flex-start;
+    margin-top: auto;
+  }
+
+  .offering-link:hover {
+    gap: 0.75rem;
+  }
+
+  .offering-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .offering-link:hover svg {
+    transform: translateX(4px);
+  }
+
+  .offerings-cta {
+    margin-top: var(--space-2xl);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-content {
+    padding: var(--space-2xl);
+    text-align: center;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(36, 121, 190, 0.08) 0%, rgba(76, 138, 197, 0.12) 100%),
+                rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 2px solid rgba(36, 121, 190, 0.2);
+  }
+
+  .cta-title {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-text-dark);
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.01em;
+  }
+
+  .cta-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+    line-height: 1.6;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 1rem 2.5rem;
+    background: var(--color-blue);
+    color: white;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(36, 121, 190, 0.25);
+  }
+
+  .cta-button:hover {
+    background: var(--color-blue-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.35);
+    gap: var(--space-md);
+  }
+
+  .cta-button svg {
+    transition: transform 0.3s ease;
+  }
+
+  .cta-button:hover svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1200px) {
+    .offerings-grid {
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+  }
+
+  @media (max-width: 968px) {
+    .offerings-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-md);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .offerings-listing {
+      padding: var(--space-xl) 0;
+    }
+
+    .offerings-header {
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-lg);
+    }
+
+    .offerings-page-title {
+      font-size: var(--font-size-h2);
+    }
+
+    .offerings-page-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .offerings-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .offering-card {
+      padding: var(--space-md);
+    }
+
+    .offering-title {
+      font-size: 1.25rem;
+    }
+
+    .offering-description {
+      font-size: 0.9rem;
+    }
+
+    .offering-highlights li {
+      font-size: 0.85rem;
+    }
+
+    .offerings-cta {
+      margin-top: var(--space-xl);
+    }
+
+    .cta-content {
+      padding: var(--space-lg);
+    }
+
+    .cta-title {
+      font-size: 1.5rem;
+    }
+
+    .cta-subtitle {
+      font-size: 1rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .cta-button {
+      padding: 0.875rem 2rem;
+      font-size: 1rem;
+    }
+  }
+</style>

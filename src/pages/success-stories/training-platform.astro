@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SuccessStoryDetail from '../../components/SuccessStoryDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Interaktive Tutoren-Lösung für Wissensvermittlung | Klartext AI';
+const description = 'Wie ein ATX-Unternehmen Fachausbilder um 30% entlastet durch KI-gestützte Lernplattform mit Break-even nach 1,5 Jahren.';
+
+const challenge = `
+<p>In großen Organisationen ist Onboarding eine Mammutaufgabe. Hunderte neue Mitarbeiter müssen in Unternehmenskultur, Prozesse, Produkte und Markenidentität eingeführt werden. Gleichzeitig brauchen bestehende Teams kontinuierliche Weiterbildung.</p>
+
+<p><strong>Das Problem:</strong></p>
+<ul>
+  <li>Hoher Bedarf an effizienter, nachhaltiger Wissensvermittlung für Onboarding-Prozesse</li>
+  <li>Fachausbilder sind überlastet und können nicht alle Anfragen persönlich betreuen</li>
+  <li>Klassische E-Learning-Lösungen sind oft trocken und wenig engagierend</li>
+  <li>Wissensstand und Lerngeschwindigkeit variieren stark zwischen Mitarbeitern</li>
+  <li>Schwierig zu messen, ob Wissen wirklich angekommen ist</li>
+</ul>
+`;
+
+const solution = `
+<p>Wir haben keine weitere E-Learning-Plattform gebaut, sondern einen intelligenten Tutor, der sich individuell anpasst und Lernen zum Erlebnis macht.</p>
+
+<p><strong>Der Ansatz im Detail:</strong></p>
+<ul>
+  <li><strong>KI-gestützte, interaktive Tutor-Plattform:</strong> Adaptive Lernbegleitung statt starrer Kurse</li>
+  <li><strong>Spielerische Wissensvermittlung:</strong> Gamification-Elemente für höhere Motivation und Retention</li>
+  <li><strong>Personalisierte Lernpfade:</strong> System passt sich an Wissensstand und Lerngeschwindigkeit an</li>
+  <li><strong>Unternehmens-, Marken- und Prozesswissen:</strong> Integration aller relevanten Wissensbereiche</li>
+  <li><strong>Nahtlose Anbindung:</strong> Integration an bestehende Wissensmanagement-Systeme</li>
+  <li><strong>Kontinuierliches Assessment:</strong> Messung des Lernerfolgs in Echtzeit</li>
+</ul>
+
+<p>Was diese Lösung besonders macht: Sie kombiniert pädagogische Prinzipien mit KI-Technologie. Das Resultat ist kein "Chatbot mit Lernmaterial", sondern ein echter digitaler Tutor, der versteht, erklärt und motiviert.</p>
+`;
+
+const results = [
+  "30% Entlastung der Fachausbilder für komplexe Themen und Mentoring",
+  "Break-Even nach 1,5 Jahren – nachhaltiger ROI für Trainings-Lösungen",
+  "Höhere Lernmotivation durch Gamification und Interaktivität",
+  "Messbare Lernerfolge durch kontinuierliches Assessment",
+  "Flexible Skalierung für neue Themen ohne Neuaufbau",
+  "Konsistente Wissensvermittlung unabhängig von Standort oder Zeitpunkt"
+];
+
+const fullContent = `
+<h3>Innovation trifft Pädagogik</h3>
+
+<p><strong>Lernen ist mehr als Information:</strong> Wir haben nicht nur "Wissen zugänglich gemacht", sondern echte Lernprozesse gestaltet – mit Wiederholung, Vertiefung und Motivation.</p>
+
+<p><strong>Gamification mit Substanz:</strong> Spielerische Elemente sind kein Selbstzweck, sondern folgen wissenschaftlichen Erkenntnissen über Motivation und Retention.</p>
+
+<p><strong>KI als Tutor, nicht als Ersatz:</strong> Die Plattform ergänzt menschliche Trainer, ersetzt sie nicht. Die Kombination macht den Unterschied.</p>
+
+<h3>Was wir gelernt haben</h3>
+
+<ol>
+  <li><strong>Pädagogik vor Technologie:</strong> Die besten KI-Modelle helfen nichts, wenn die didaktische Konzeption fehlt. Wir haben mit Lernexpert:innen zusammengearbeitet, nicht nur mit Entwickler:innen.</li>
+  <li><strong>Engagement ist messbar:</strong> Durch kontinuierliches Tracking haben wir verstanden, was funktioniert und was nicht – und die Plattform entsprechend optimiert.</li>
+  <li><strong>Integration ist kritisch:</strong> Eine isolierte Lernplattform wird nicht genutzt. Die nahtlose Anbindung an bestehende Systeme war essentiell.</li>
+  <li><strong>ROI braucht Geduld:</strong> Bei Trainings-Lösungen ist der Break-Even länger – aber der langfristige Wert ist enorm.</li>
+  <li><strong>Personalisierung macht den Unterschied:</strong> Nicht alle lernen gleich schnell oder auf dieselbe Art. Adaptive Lernpfade erhöhen die Effektivität dramatisch.</li>
+</ol>
+
+<h3>Mehr als eine Plattform</h3>
+
+<p>Diese Lösung ist ein Beispiel für nachhaltige Organisationsentwicklung. Sie zeigt, dass KI nicht nur Prozesse automatisieren, sondern auch Menschen befähigen kann – durch besseres, effizienteres und motivierenderes Lernen.</p>
+
+<p>Wissen ist die wertvollste Ressource jeder Organisation. Mit der richtigen Technologie wird es nicht nur bewahrt, sondern aktiv vermittelt und verankert.</p>
+`;
+
+const metrics = {
+  "Entlastung": "30%",
+  "Break-even": "1,5 Jahre",
+  "Trainer-Relief": "30%"
+};
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <SuccessStoryDetail
+    title="Interaktive Tutoren-Lösung für Wissensvermittlung"
+    client="ATX-Unternehmen"
+    category="Knowledge Transfer"
+    challenge={challenge}
+    solution={solution}
+    results={results}
+    metrics={metrics}
+    fullContent={fullContent}
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

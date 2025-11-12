@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AGB from '../components/AGB.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'AGBs - Klartext AI';
+const description = 'Allgemeine Geschäftsbedingungen von Klartext AI FlexCo';
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <AGB lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

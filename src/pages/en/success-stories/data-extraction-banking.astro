@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SuccessStoryDetail from '../../../components/SuccessStoryDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'KPI Extraction from Annual Reports | Klartext AI';
+const description = 'How a banking services provider saves 80% time and costs through automated data extraction with break-even after just 1.5 months.';
+
+const challenge = `
+<p>A leading banking services provider faced a massive challenge: Analysts had to wade through 500+ page documents daily to extract quantitative and qualitative information for risk assessments. Every detail mattered, every error could be costly.</p>
+
+<p>The manual process not only tied up significant resources but increasingly became a bottleneck for business-critical decisions. The central question wasn't whether automation was possible, but how it could work in such a sensitive area where errors are not an option.</p>
+`;
+
+const solution = `
+<p>At Klartext AI, we know: In finance, "the AI says so" isn't enough. That's why we developed a solution that doesn't just extract, but also explains.</p>
+
+<p><strong>The Solution in Detail:</strong></p>
+<ul>
+  <li><strong>Automated extraction</strong> of quantitative and qualitative data from complex documents</li>
+  <li><strong>Intelligent verification:</strong> Every extraction comes with direct reference location in the original document</li>
+  <li><strong>Reasoning engine:</strong> The AI delivers not just values, but the argumentation behind them</li>
+  <li><strong>Seamless integration:</strong> Direct feed into existing systems without media breaks</li>
+  <li><strong>Human-in-the-loop:</strong> Analysts can efficiently verify every extraction</li>
+</ul>
+
+<p>What sets us apart: We didn't just throw a generic LLM at the problem. Instead, we applied Domain-Driven Design and tailored the solution to the specific requirements of the banking sector – including regulatory compliance and audit trails.</p>
+`;
+
+const results = [
+  "80% time and cost savings – what used to take hours is now done in minutes",
+  "Break-even after just 1.5 months – fastest ROI in our portfolio",
+  "Higher quality through consistency – no more overlooked details",
+  "Scalability without additional effort – volume can increase easily",
+  "Complete traceability – every extraction with source citation"
+];
+
+const fullContent = `
+<h3>What We Learned</h3>
+
+<p>Successful AI implementation in the financial sector requires three things:</p>
+
+<ol>
+  <li><strong>Trust through transparency:</strong> Every AI decision must be traceable</li>
+  <li><strong>Domain expertise:</strong> Generic solutions don't work in regulated industries</li>
+  <li><strong>Evaluation-Driven Development:</strong> Systematic measurements from the start, not as an afterthought</li>
+</ol>
+
+<p>The solution is running in production today and has changed how our client works with documents. Not because the AI is perfect – but because it's transparent, reliable, and tailored to real business processes.</p>
+`;
+
+const metrics = {
+  "Time Savings": "80%",
+  "Break-even": "1.5 Months",
+  "Automation": "80%"
+};
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <SuccessStoryDetail
+    title="KPI Extraction from Annual Reports"
+    client="Banking Services Provider"
+    category="Data Extraction"
+    challenge={challenge}
+    solution={solution}
+    results={results}
+    metrics={metrics}
+    fullContent={fullContent}
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

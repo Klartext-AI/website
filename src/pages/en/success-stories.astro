@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SuccessStoriesListing from '../../components/SuccessStoriesListing.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Success Stories - Klartext AI';
+const description = 'How we transform AI into measurable business success. Discover our success stories with real results.';
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <SuccessStoriesListing lang="en" />
+  <Footer lang="en" />
+</BaseLayout>
