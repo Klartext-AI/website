@@ -29,6 +29,8 @@ const labels = {
 
 const text = labels[lang];
 const BASE = import.meta.env.BASE_URL;
+const SITE = Astro.site?.toString() ?? 'https://klartext-ai.github.io';
+const canonicalHref = Astro.url?.href ?? new URL(BASE, SITE).toString();
 ---
 
 <section class="blog-post-detail section">
@@ -58,6 +60,32 @@ const BASE = import.meta.env.BASE_URL;
     </article>
   </div>
 </section>
+
+<!-- Structured Data: BlogPosting for GEO/SEO -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  'headline': title,
+  'description': excerpt,
+  'articleSection': category,
+  'inLanguage': lang,
+  'datePublished': date,
+  'dateModified': date,
+  'mainEntityOfPage': canonicalHref,
+  'author': {
+    '@type': 'Organization',
+    'name': 'Klartext AI',
+    'url': SITE
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Klartext AI',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': new URL(`${BASE}LOGO_transparent.png`, SITE).toString()
+    }
+  }
+})}></script>
 
 <style>
   .blog-post-detail {

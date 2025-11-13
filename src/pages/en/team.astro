@@ -14,7 +14,7 @@ const teamMembers = [
     linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
     bio: [
       "After completing my engineering degree at TU Darmstadt in 2022, I was able to build deep expertise in artificial intelligence at Fraunhofer Austria.",
-      "As a board member of AI Austria (https://aiaustria.com/), Austria's largest AI network, I founded the GenAI Community with great passion – Austria's only platform for generative AI.",
+      `As a board member of <a href=\"https://aiaustria.com/\" target=\"_blank\" rel=\"noopener noreferrer\">AI Austria</a>, Austria's largest AI network, I founded the GenAI Community with great passion – Austria's only platform for generative AI.`,
       "Technical progress and exchange with others are particularly valuable to me. That's why I am deeply committed to this field. My goal is to make AI accessible and useful for everyone."
     ]
   },
@@ -36,27 +36,29 @@ const teamMembers = [
     linkedin: "https://www.linkedin.com/in/f-krause-ai/",
     bio: [
       "My economics studies showed me how closely people, organizations, and society are intertwined. Through my Master's in Data Science, I learned to make these connections visible in data. For me, artificial intelligence is the tool with which we can not only better understand but also shape the world.",
-      "As Chief Technology Officer of Klartext AI, I combine analytical thinking with technical implementation. My goal: to develop AI solutions that demonstrably work – reliable, understandable, and with real benefits for companies and society. Additionally, I am on the board of the tech network AIM (https://ai-mission.eu/), which unites 400 tech experts from Europe and regularly organizes popular hackathons.",
+      `As Chief Technology Officer of Klartext AI, I combine analytical thinking with technical implementation. My goal: to develop AI solutions that demonstrably work – reliable, understandable, and with real benefits for companies and society. Additionally, I am on the board of the tech network <a href=\"https://ai-mission.eu/\" target=\"_blank\" rel=\"noopener noreferrer\">AIM</a>, which unites 400 tech experts from Europe and regularly organizes popular hackathons.`,
       "I am motivated by working with a strong team to deploy the latest technologies and live a work culture based on trust, curiosity, and enjoyment of work."
     ]
   },
   {
     name: "Ondrej Hruby",
-    role: "Leitender AI & Full-Stack Entwickler",
-    image: `${BASE}team/ondrej.jpg`,
+    role: "Leading AI & Full-Stack Engineer",
+    image: `${BASE}team/ondrej.png`,
     linkedin: "https://www.linkedin.com/in/ondrej-hrubyml/",
     bio: [
-      "AI and Software Engineer transforming data into intelligent solutions. Specialist in Python, TensorFlow, and Neural Networks. Passionate about developing innovative and impactful AI solutions.",
-      "Ever since childhood, I've been captivated by the magic of technology. With a robust background in software engineering, I have seamlessly transitioned into the world of machine learning and artificial intelligence. My passion lies in harnessing the power of data to create intelligent systems that solve real-world problems and drive innovation."
+      "Bachelor in Computer Science, specialized in Software Engineering.",
+      "Pursuing a Master's in Data Science and AI.",
+      "Specializes in building end-to-end systems with AI features and cloud pipelines."
     ]
   },
   {
     name: "Hrvoje Ljubić",
-    role: "Full-Stack Entwickler",
+    role: "Full-Stack Developer",
     image: `${BASE}team/hrvoje.png`,
     linkedin: null,
     bio: [
-      "Successfully launched two products as founder. Projects for Austrian Economic Chamber, Deutsche Bahn, LG, Wirtschaftsblatt & Co. Apps with 300K+ downloads."
+      "As a versatile software developer, I am a generalist who quickly dives into new topics. I don't restrict myself to specific tools or languages; I focus on finding the best solution for the problem at hand.",
+      "My experience spans FinTech and ERP to AI chat systems, mobile apps, and gaming. With expertise in UI/UX design, I ensure that complex technology remains simple and intuitive for users."
     ]
   },
   {
@@ -65,7 +67,7 @@ const teamMembers = [
     image: `${BASE}team/anna.jpg`,
     linkedin: "https://www.linkedin.com/in/anna-poledna-19766531b/",
     bio: [
-      "Dual-degree student at Duke University and Duke Kunshan University. Currently based in Kunshan, studying Molecular Bioscience with a focus on Biogeochemistry."
+      "International academic background in data analysis and biosciences. AI enthusiast passionate about interdisciplinary projects that connect people, ideas, and technology."
     ]
   }
 ];
@@ -113,7 +115,7 @@ const teamMembers = [
               <p class="member-role">{member.role}</p>
               <div class="member-bio">
                 {member.bio.map((paragraph) => (
-                  <p>{paragraph}</p>
+                  <p set:html={paragraph}></p>
                 ))}
               </div>
             </div>

@@ -16,6 +16,22 @@ const {
 import '../styles/global.css';
 import Navigation from '../components/Navigation.astro';
 const BASE = import.meta.env.BASE_URL;
+const SITE = Astro.site?.toString() ?? 'https://klartext-ai.github.io';
+const url = Astro.url;
+// Determine canonical and language alternates
+const canonicalHref = url?.href ?? SITE;
+const pathname = url?.pathname ?? '/';
+// Remove base from pathname to compute locale alternates reliably
+const basePrefix = BASE?.endsWith('/') ? BASE : `${BASE}/`;
+const relPath = pathname.startsWith(basePrefix)
+  ? pathname.slice(basePrefix.length - 1) // keep leading '/'
+  : pathname;
+const isEN = relPath.startsWith('/en/');
+const dePath = isEN ? relPath.replace(/^\/en\//, '/') : relPath;
+const enPath = isEN ? relPath : (relPath === '/' ? '/en/' : `/en${relPath}`);
+const deHref = new URL(`${BASE.replace(/\/$/, '')}${dePath}`, SITE).toString();
+const enHref = new URL(`${BASE.replace(/\/$/, '')}${enPath}`, SITE).toString();
+const locale = lang === 'en' ? 'en_US' : 'de_DE';
 ---
 
 <!DOCTYPE html>
@@ -25,17 +41,69 @@ const BASE = import.meta.env.BASE_URL;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content={description}>
   <meta name="generator" content={Astro.generator}>
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#2479BE">
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
+  <meta property="og:site_name" content="Klartext AI">
+  <meta property="og:url" content={canonicalHref}>
+  <meta property="og:locale" content={locale}>
+  <meta property="og:image" content={`${new URL(`${BASE}LOGO_transparent.png`, SITE)}`}>
+  <meta property="og:image:alt" content="Klartext AI logo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={`${new URL(`${BASE}LOGO_transparent.png`, SITE)}`}>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href={`${BASE}favicon.ico`}>
   <link rel="apple-touch-icon" href={`${BASE}LOGO_transparent_without_sublime.png`}>
+  <link rel="canonical" href={canonicalHref}>
+  <link rel="alternate" hreflang="de" href={deHref}>
+  <link rel="alternate" hreflang="en" href={enHref}>
+  <link rel="alternate" hreflang="x-default" href={deHref}>
 
   <title>{title}</title>
+  
+  <!-- Structured Data: Organization + WebSite + WebPage -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        'name': 'Klartext AI',
+        'url': SITE,
+        'logo': new URL(`${BASE}LOGO_transparent.png`, SITE).toString(),
+        'sameAs': [
+          'https://www.linkedin.com/company/klartext-ai/'
+        ],
+        'contactPoint': [{
+          '@type': 'ContactPoint',
+          'contactType': lang === 'en' ? 'customer support' : 'Kundensupport',
+          'email': 'office@klartext-ai.com',
+          'telephone': '+43 660 81010 67',
+          'areaServed': ['AT','DE','EU'],
+          'availableLanguage': ['de','en']
+        }]
+      },
+      {
+        '@type': 'WebSite',
+        'name': 'Klartext AI',
+        'url': SITE,
+        'inLanguage': lang,
+      },
+      {
+        '@type': 'WebPage',
+        'url': canonicalHref,
+        'name': title,
+        'description': description,
+        'inLanguage': lang
+      }
+    ]
+  })}></script>
 </head>
 <body>
   <Navigation lang={lang} alwaysVisible={alwaysShowNav} />

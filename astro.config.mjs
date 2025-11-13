@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://klartext-ai.github.io',
@@ -9,5 +10,8 @@ export default defineConfig({
     routing: {
       prefixDefaultLocale: false
     }
-  }
+  },
+  integrations: [
+    sitemap()
+  ]
 });

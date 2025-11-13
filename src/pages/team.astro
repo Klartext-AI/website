@@ -14,7 +14,7 @@ const teamMembers = [
     linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
     bio: [
       "Nach meinem Ingenieurs-Studium an der TU Darmstadt, das ich 2022 abgeschlossen habe, konnte ich bei Fraunhofer Austria eine tiefgehende Expertise im Bereich künstlicher Intelligenz aufbauen.",
-      "Als Vorstandsmitglied von AI Austria (https://aiaustria.com/), dem größten KI-Netzwerk Österreichs, habe ich mit viel Herzblut die GenAI Community ins Leben gerufen – Österreichs einzige Plattform für generative KI.",
+      `Als Vorstandsmitglied von <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, dem größten KI-Netzwerk Österreichs, habe ich mit viel Herzblut die GenAI Community ins Leben gerufen – Österreichs einzige Plattform für generative KI.`,
       "Der technische Fortschritt und der Austausch mit anderen sind für mich besonders wertvoll. Deshalb engagiere ich mich intensiv in diesem Bereich. Mein Ziel ist es, KI für alle zugänglich und sinnvoll nutzbar zu machen."
     ]
   },
@@ -36,18 +36,19 @@ const teamMembers = [
     linkedin: "https://www.linkedin.com/in/f-krause-ai/",
     bio: [
       "Mein Volkswirtschaftsstudium hat mir gezeigt, wie eng Menschen, Organisationen und Gesellschaft miteinander verwoben sind. Durch den Master in Data Science habe ich gelernt, diese Zusammenhänge auch in Daten sichtbar zu machen. Künstliche Intelligenz ist für mich das Werkzeug, mit dem wir die Welt nicht nur besser verstehen, sondern auch gestalten können.",
-      "Als Technischer Geschäftsführer von Klartext AI verbinde ich analytisches Denken mit technischer Umsetzung. Mein Ziel: KI-Lösungen zu entwickeln, die nachweislich wirken – zuverlässig, verständlich und mit echtem Nutzen für Unternehmen und Gesellschaft. Zusätzlich bin ich im Vorstand des Tech-Netzwerks AIM (https://ai-mission.eu/), welches 400 tech experten aus Europa vereint und regelmäßig beliebte hackathons organisiert.",
-      "Mich motiviert es, gemeinsam mit einem starken Team neuste Technologien einzusetzen und eine Arbeitskultur zu leben, die auf Vertrauen, Neugierde und Spaß an der Arbeit basiert."
+      `Als Technischer Geschäftsführer von Klartext AI verbinde ich analytisches Denken mit technischer Umsetzung. Mein Ziel: KI-Lösungen zu entwickeln, die nachweislich wirken – zuverlässig, verständlich und mit echtem Nutzen für Unternehmen und Gesellschaft. Zusätzlich bin ich im Vorstand des Tech-Netzwerks <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AIM</a>, welches 400 Tech-Experten aus Europa vereint und regelmäßig beliebte Hackathons organisiert.`,
+      "Mich motiviert es, gemeinsam mit einem starken Team neueste Technologien einzusetzen und eine Arbeitskultur zu leben, die auf Vertrauen, Neugierde und Spaß an der Arbeit basiert."
     ]
   },
   {
     name: "Ondrej Hruby",
     role: "Leading AI & Full-Stack Engineer",
-    image: `${BASE}team/ondrej.jpg`,
+    image: `${BASE}team/ondrej.png`,
     linkedin: "https://www.linkedin.com/in/ondrej-hrubyml/",
     bio: [
-      "AI und Software Engineer, der Daten in intelligente Lösungen verwandelt. Spezialist für Python, TensorFlow und Neural Networks. Leidenschaftlich daran interessiert, innovative und wirkungsvolle KI-Lösungen zu entwickeln.",
-      "Seit meiner Kindheit bin ich von der Magie der Technologie fasziniert. Mit fundiertem Hintergrund im Software Engineering habe ich nahtlos in die Welt des maschinellen Lernens und der künstlichen Intelligenz gewechselt. Meine Leidenschaft liegt darin, die Kraft der Daten zu nutzen, um intelligente Systeme zu schaffen, die reale Probleme lösen und Innovation vorantreiben."
+      "Bachelor in Informatik mit Schwerpunkt Software Engineering.",
+      "Aktuell im Masterstudium Data Science und KI.",
+      "Spezialisiert auf den Aufbau von End-to-End-Systemen mit KI-Funktionen und Cloud-Pipelines."
     ]
   },
   {
@@ -56,7 +57,8 @@ const teamMembers = [
     image: `${BASE}team/hrvoje.png`,
     linkedin: null,
     bio: [
-      "Zwei Produkte erfolgreich als Gründer gelaunched. Projekte für Wirtschaftskammer Österreich, Deutsche Bahn, LG, Wirtschaftsblatt & Co. Apps mit 300T+ Downloads."
+      "Als vielseitiger Software-Entwickler bin ich ein Allrounder, der sich schnell in neue Themen einarbeitet. Ich beschränke mich nicht auf bestimmte Tools oder Sprachen, sondern fokussiere mich darauf, die beste Lösung für das jeweilige Problem zu finden.",
+      "Meine Erfahrung reicht von FinTech und ERP über AI-Chats bis hin zu Mobile Apps und Gaming. Dank meiner Expertise im UI/UX Design sorge ich dafür, dass komplexe Technik für Nutzer einfach und intuitiv bedienbar bleibt."
     ]
   },
   {
@@ -65,7 +67,7 @@ const teamMembers = [
     image: `${BASE}team/anna.jpg`,
     linkedin: "https://www.linkedin.com/in/anna-poledna-19766531b/",
     bio: [
-      "Dual-degree Studentin an der Duke University und Duke Kunshan University. Derzeit in Kunshan ansässig, studiere ich Molecular Bioscience mit Fokus auf Biogeochemie."
+      "Internationaler wissenschaftlicher Background in Datenanalyse und Biowissenschaften. KI-Enthusiastin mit Begeisterung für interdisziplinäre Projekte, die Menschen, Ideen und Technologie miteinander verbinden."
     ]
   }
 ];
@@ -113,7 +115,7 @@ const teamMembers = [
               <p class="member-role">{member.role}</p>
               <div class="member-bio">
                 {member.bio.map((paragraph) => (
-                  <p>{paragraph}</p>
+                  <p set:html={paragraph}></p>
                 ))}
               </div>
             </div>
@@ -128,9 +130,8 @@ const teamMembers = [
 <style>
   .team-page {
     min-height: calc(100vh - 80px);
-    padding: calc(60px + var(--space-xl)) 0 var(--space-xl); /* Replace --space-nav with 60px */
+    padding: calc(var(--space-nav) + var(--space-xl)) 0 var(--space-xl);
     background: transparent;
-    margin-top: var(--space-xl); /* Ensure consistent top spacing */
   }
 
   .page-header {
@@ -291,7 +292,7 @@ const teamMembers = [
 
   @media (max-width: 768px) {
     .team-page {
-      padding: calc(60px + var(--space-lg)) 0 var(--space-lg); /* Replace --space-nav with 60px */
+      padding: calc(60px + var(--space-lg)) 0 var(--space-lg);
     }
 
     .page-header {
@@ -324,3 +325,4 @@ const teamMembers = [
     }
   }
 </style>
+
