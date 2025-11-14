@@ -129,7 +129,6 @@ const text = content[lang];
                 alt={reference.name}
                 class="reference-logo"
                 loading={index < 3 ? "eager" : "lazy"}
-                onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'reference-text\'>' + this.alt + '</span>';"
               />
             </div>
           </a>
@@ -149,7 +148,6 @@ const text = content[lang];
                 alt={reference.name}
                 class="reference-logo"
                 loading="lazy"
-                onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'reference-text\'>' + this.alt + '</span>';"
               />
             </div>
           </a>
@@ -374,6 +372,18 @@ const text = content[lang];
   document.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.getElementById('references-banner-wrapper');
     const banner = document.getElementById('references-banner');
+
+    const replaceLogoWithText = (logo: HTMLImageElement) => {
+      const parent = logo.parentElement;
+      if (parent) {
+        parent.innerHTML = `<span class="reference-text">${logo.alt}</span>`;
+      }
+    };
+
+    const referenceLogos = document.querySelectorAll<HTMLImageElement>('.reference-logo');
+    referenceLogos.forEach((logo) => {
+      logo.addEventListener('error', () => replaceLogoWithText(logo), { once: true });
+    });
 
     if (!wrapper || !banner) return;
 

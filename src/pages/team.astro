@@ -60,7 +60,7 @@ const teamMembers = [
     image: `${BASE}team/ondrej.png`,
     linkedin: "https://www.linkedin.com/in/ondrej-hrubyml/",
     bio: [
-      "I hold a Bachelor’s degree in Computer Science with a focus on Software Engineering and am currently pursuing a Master’s in Data Science and AI. I enjoy building end-to-end systems that combine intelligent features with scalable cloud pipelines."
+      "I hold a Bachelor’s degree in Computer Science with a focus on Software Engineering and am currently pursuing a Master’s in Data Science and AI. I enjoy building end-to-end systems that combine intelligent features with scalable cloud pipelines.",
       "I’m especially motivated by challenges where AI can automate tedious tasks or unlock insights that weren’t accessible before and being part of products that will make a difference."
     ]
   },
@@ -161,12 +161,14 @@ const teamMembers = [
 <style>
   .team-page {
     min-height: calc(100vh - 80px);
-    padding: calc(var(--space-nav) + var(--space-xl)) 0 var(--space-xl);
+    /* Added more top padding (removed undefined --space-nav) */
+    padding: var(--space-2xl) 0 var(--space-xl);
     background: transparent;
   }
 
   .page-header {
     text-align: center;
+    margin-top: var(--space-lg); /* New: extra space below nav */
     margin-bottom: var(--space-2xl);
     max-width: 800px;
     margin-left: auto;
@@ -423,7 +425,8 @@ const teamMembers = [
 
   @media (max-width: 768px) {
     .team-page {
-      padding: calc(60px + var(--space-lg)) 0 var(--space-lg);
+      /* Increased top space on mobile as well */
+      padding: var(--space-xl) 0 var(--space-lg);
     }
 
     .page-header {
@@ -480,6 +483,10 @@ const teamMembers = [
       button.addEventListener('click', () => {
         const isExpanded = button.getAttribute('data-expanded') === 'true';
         const tile = button.closest('.member-tile');
+        if (!tile) {
+          return;
+        }
+
         const extraPoints = tile.querySelectorAll('.bio-extra');
         const expandText = button.querySelector('.expand-text');
 
@@ -489,17 +496,20 @@ const teamMembers = [
             point.classList.remove('expanded');
           });
           button.setAttribute('data-expanded', 'false');
-          expandText.textContent = 'Mehr anzeigen';
+          if (expandText) {
+            expandText.textContent = 'Mehr anzeigen';
+          }
         } else {
           // Expand
           extraPoints.forEach(point => {
             point.classList.add('expanded');
           });
           button.setAttribute('data-expanded', 'true');
-          expandText.textContent = 'Weniger anzeigen';
+          if (expandText) {
+            expandText.textContent = 'Weniger anzeigen';
+          }
         }
       });
     });
   });
 </script>
-

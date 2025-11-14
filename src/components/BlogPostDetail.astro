@@ -62,7 +62,7 @@ const canonicalHref = Astro.url?.href ?? new URL(BASE, SITE).toString();
 </section>
 
 <!-- Structured Data: BlogPosting for GEO/SEO -->
-<script type="application/ld+json" set:html={JSON.stringify({
+<script is:inline type="application/ld+json" set:html={JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   'headline': title,
