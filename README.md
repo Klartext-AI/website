@@ -1,4 +1,4 @@
-# Klartext AI Website 
+# Klartext AI Website
 
 Official company website for Klartext AI.
 
