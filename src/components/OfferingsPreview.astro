@@ -111,7 +111,7 @@ const text = content[lang];
     </div>
 
     <div class="offerings-cta text-center fade-in">
-      <a href={lang === 'de' ? `${BASE}offerings` : `${BASE}en/offerings`} class="btn btn-primary">
+      <a href={lang === 'de' ? `${BASE}offerings` : `${BASE}en/offerings`} class="btn btn-secondary">
         {text.viewAllOfferings}
         <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M6 12l4-4-4-4"/>
@@ -221,6 +221,7 @@ const text = content[lang];
     margin-top: var(--space-xl);
   }
 
+  /* Ensure offerings CTA button has the same spacing + icon shift behavior */
   .offerings-cta .btn {
     display: inline-flex;
     align-items: center;

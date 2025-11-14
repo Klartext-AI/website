@@ -196,15 +196,28 @@ a:hover {
 
 /* Button Styles */
 .btn {
-  display: inline-block;
-  padding: 0.875rem 2rem;
-  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2.5rem;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+  color: var(--color-blue);
+  text-decoration: none;
   font-weight: 500;
-  border-radius: 0.5rem;
-  transition: var(--transition-smooth);
+  font-size: 1.125rem;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border: none;
   text-align: center;
+}
+
+.btn:hover {
+  background: rgba(36, 121, 190, 0.95);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
 }
 
 .btn-primary {
@@ -213,20 +226,25 @@ a:hover {
 }
 
 .btn-primary:hover {
-  background: var(--color-blue-accent);
+  background: rgba(36, 121, 190, 0.95);
+  color: white;
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(36, 121, 190, 0.3);
+  box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
 }
 
 .btn-secondary {
-  background: transparent;
-  border: 2px solid var(--color-blue);
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
   color: var(--color-blue);
 }
 
 .btn-secondary:hover {
-  background: var(--color-blue);
+  background: rgba(36, 121, 190, 0.95);
   color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
 }
 
 /* Text Utilities */

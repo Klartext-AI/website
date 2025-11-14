@@ -119,9 +119,12 @@ const text = content[lang];
       ))}
     </div>
 
-    <div class="team-button-wrapper fade-in">
-      <a href={text.buttonLink} class="team-button">
+    <div class="team-button-wrapper text-center fade-in">
+      <a href={text.buttonLink} class="btn btn-secondary">
         {text.buttonText}
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 12l4-4-4-4"/>
+        </svg>
       </a>
     </div>
   </div>
@@ -285,28 +288,27 @@ const text = content[lang];
     padding-top: var(--space-md);
   }
 
-  .team-button {
+  /* Make the team button identical to offerings: spacing + icon shift */
+  .team-button-wrapper .btn {
     display: inline-flex;
     align-items: center;
-    padding: 1rem 2.5rem;
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
-    color: var(--color-blue);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.125rem;
-    border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
   }
 
-  .team-button:hover {
-    background: rgba(36, 121, 190, 0.95);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
+  .team-button-wrapper .btn svg {
+    transition: transform 0.3s ease;
   }
+
+  .team-button-wrapper .btn:hover {
+    gap: 0.75rem;
+  }
+
+  .team-button-wrapper .btn:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Removed old .team-button styles in favor of global .btn */
 
   @media (max-width: 768px) {
     .team-grid {
@@ -330,11 +332,6 @@ const text = content[lang];
 
     .member-info {
       margin-top: var(--space-sm);
-    }
-
-    .team-button {
-      font-size: 1rem;
-      padding: 0.875rem 2rem;
     }
   }
 </style>

@@ -13,7 +13,6 @@ const content = {
     offerings: "Angebote",
     values: "Werte",
     team: "Team",
-    karriere: "Karriere",
     blog: "Blog",
     contact: "Kontakt",
     language: "EN"
@@ -24,7 +23,6 @@ const content = {
     offerings: "Offerings",
     values: "Values",
     team: "Team",
-    karriere: "Careers",
     blog: "Blog",
     contact: "Contact",
     language: "DE"
@@ -73,7 +71,6 @@ if (lang === 'de') {
       <a href={lang === 'de' ? `${BASE}offerings` : `${BASE}en/offerings`} class="nav-link">{text.offerings}</a>
       <a href={lang === 'de' ? `${BASE}#european-values` : `${BASE}en#european-values`} class="nav-link">{text.values}</a>
       <a href={lang === 'de' ? `${BASE}team` : `${BASE}en/team`} class="nav-link">{text.team}</a>
-      <a href={lang === 'de' ? `${BASE}karriere` : `${BASE}en/karriere`} class="nav-link">{text.karriere}</a>
       <a href={lang === 'de' ? `${BASE}blog` : `${BASE}en/blog`} class="nav-link">{text.blog}</a>
       <!--<a href={lang === 'de' ? `${BASE}#contact` : `${BASE}en#contact`} class="nav-link nav-link-cta">{text.contact}</a>-->
       <a href=`mailto:office@klartext-ai.com` class="nav-link nav-link-cta">{text.contact}</a>
@@ -210,9 +207,10 @@ if (lang === 'de') {
   }
 
   .nav-link-cta:hover {
-    background: var(--color-blue-accent);
+    background: rgba(36, 121, 190, 0.95);
+    color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(36, 121, 190, 0.3);
+    box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
   }
 
   .nav-link-lang {
