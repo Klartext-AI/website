@@ -142,9 +142,6 @@ const text = content[lang];
 
             <div class="cta-button">
               {text.ctaCard.buttonText}
-              <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M6 12l4-4-4-4" />
-              </svg>
             </div>
           </article>
         </a>
@@ -154,9 +151,6 @@ const text = content[lang];
     <div class="stories-cta text-center fade-in">
       <a href={lang === "de" ? `${BASE}success-stories` : `${BASE}en/success-stories`} class="btn btn-secondary">
         {text.viewAllStories}
-        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M6 12l4-4-4-4" />
-        </svg>
       </a>
     </div>
   </div>
@@ -183,7 +177,7 @@ const text = content[lang];
   }
 
   .stories-grid-container {
-    padding: var(--space-md) 0;
+    padding-top: var(--space-md);
   }
 
   .stories-wrapper {
@@ -272,21 +266,7 @@ const text = content[lang];
   }
 
   .stories-cta {
-    margin-top: var(--space-xl);
-  }
-
-  .stories-cta .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .stories-cta .btn svg {
-    transition: transform 0.3s ease;
-  }
-
-  .stories-cta .btn:hover svg {
-    transform: translateX(4px);
+    margin-top: var(--section-cta-gap);
   }
 
   /* CTA Card Styles */
@@ -350,14 +330,6 @@ const text = content[lang];
     box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
   }
 
-  .cta-button svg {
-    transition: transform 0.3s ease;
-  }
-
-  .cta-card-link:hover .cta-button svg {
-    transform: translateX(4px);
-  }
-
   @media (max-width: 1024px) {
     .stories-wrapper {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -370,4 +342,3 @@ const text = content[lang];
     }
   }
 </style>
-

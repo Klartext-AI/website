@@ -3,6 +3,8 @@ interface Props {
   lang?: 'de' | 'en';
 }
 
+import Icon from './Icon.astro';
+
 const { lang = 'de' } = Astro.props;
 const BASE = import.meta.env.BASE_URL;
 
@@ -204,11 +206,15 @@ const text = content[lang];
 
           <div class="story-metrics">
             <div class="metric">
-              <span class="metric-icon">💰</span>
+              <span class="metric-icon" aria-hidden="true">
+                <Icon name="evaluation" size={16} />
+              </span>
               <span class="metric-value">{story.savings}</span>
             </div>
             <div class="metric">
-              <span class="metric-icon">⚡</span>
+              <span class="metric-icon" aria-hidden="true">
+                <Icon name="rocket" size={16} />
+              </span>
               <span class="metric-value">Break-even: {story.breakeven}</span>
             </div>
           </div>
@@ -257,13 +263,13 @@ const text = content[lang];
     line-height: 1.6;
   }
 
-  .stories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: var(--space-lg);
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-lg);
+      max-width: 1480px;
+      margin: 0 auto;
+    }
 
   .story-card {
     display: flex;
@@ -331,7 +337,8 @@ const text = content[lang];
   }
 
   .metric-icon {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    color: var(--color-blue);
   }
 
   .metric-value {

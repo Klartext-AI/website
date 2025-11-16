@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
 import Footer from '../../components/Footer.astro';
 
 const title = 'Our Team - Klartext AI';
@@ -8,11 +9,78 @@ const BASE = import.meta.env.BASE_URL;
 
 const teamMembers = [
   {
+    name: "Ruben Hetfleisch",
+    role: "CEO",
+    image: `${BASE}team/ruben.png`,
+    linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
+    summary: [
+      "Engineering degree TU Darmstadt (2022), AI expertise at Fraunhofer Austria",
+      `Board member <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, founder of GenAI Community Austria`,
+      "Passionate about technical progress and knowledge exchange"
+    ],
+    fullBio: [
+      "After completing my engineering degree at TU Darmstadt in 2022, I was able to build deep expertise in artificial intelligence at Fraunhofer Austria.",
+      `As a board member of <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, Austria's largest AI network, I founded the GenAI Community with great passion – Austria's only platform for generative AI.`,
+      "Technical progress and exchange with others are particularly valuable to me. That's why I am deeply committed to this field. My goal is to make AI accessible and useful for everyone."
+    ]
+  },
+  {
+    name: "Ondrej Hruby",
+    role: "AI & Full-Stack Engineer",
+    image: `${BASE}team/ondrej.png`,
+    linkedin: "https://www.linkedin.com/in/ondrej-hrubyml/",
+    summary: [
+      "Bachelor's in Computer Science, focus on Software Engineering; pursuing Master's in Data Science & AI",
+      "Enjoys building end-to-end systems with intelligent features and scalable cloud pipelines",
+      "Motivated by using AI to automate tedious tasks and unlock new insights"
+    ],
+    fullBio: [
+      "I hold a Bachelor's degree in Computer Science with a focus on Software Engineering and am currently pursuing a Master's in Data Science and AI. I enjoy building end-to-end systems that combine intelligent features with scalable cloud pipelines.",
+      "I'm especially motivated by challenges where AI can automate tedious tasks or unlock insights that weren't accessible before and being part of products that will make a difference."
+    ]
+  },
+  {
+    name: "Felix Krause",
+    role: "CTO",
+    image: `${BASE}team/felix.png`,
+    linkedin: "https://www.linkedin.com/in/f-krause-ai/",
+    summary: [
+      "Economics + Data Science, board member AIM tech network (400 experts)",
+      "Analytical thinking meets technical implementation for impactful AI",
+      "Work culture based on trust, curiosity, and enjoyment"
+    ],
+    fullBio: [
+      "My economics studies showed me how closely people, organizations, and society are intertwined. Through my Master's in Data Science, I learned to make these connections visible in data. For me, artificial intelligence is the tool with which we can not only better understand but also shape the world.",
+      `As Chief Technology Officer of Klartext AI, I combine analytical thinking with technical implementation. My goal: to develop AI solutions that demonstrably work – reliable, understandable, and with real benefits for companies and society. Additionally, I am on the board of the tech network <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AIM</a>, which unites 400 tech experts from Europe and regularly organizes popular hackathons.`,
+      "I am motivated by working with a strong team to deploy the latest technologies and live a work culture based on trust, curiosity, and enjoyment of work."
+    ]
+  },
+  {
+    name: "Hrvoje Ljubić",
+    role: "Full-Stack Developer",
+    image: `${BASE}team/hrvoje.png`,
+    linkedin: null,
+    summary: [
+      "Versatile generalist: FinTech, ERP, AI chats, mobile apps, gaming",
+      "Focus on best solution rather than fixed tools or languages",
+      "UI/UX expertise for intuitive, user-friendly technology"
+    ],
+    fullBio: [
+      "As a versatile software developer, I am a generalist who quickly dives into new topics. I don't restrict myself to specific tools or languages; I focus on finding the best solution for the problem at hand.",
+      "My experience spans FinTech and ERP to AI chat systems, mobile apps, and gaming. With expertise in UI/UX design, I ensure that complex technology remains simple and intuitive for users."
+    ]
+  },
+  {
     name: "Anna Poledna",
     role: "Marketing & Communications Associate",
     image: `${BASE}team/anna.png`,
     linkedin: "https://www.linkedin.com/in/anna-poledna-19766531b/",
-    bio: [
+    summary: [
+      "International background in data analysis and biosciences",
+      "AI enthusiast for interdisciplinary projects",
+      "Connects people, ideas, and technology"
+    ],
+    fullBio: [
       "International academic background in data analysis and biosciences.",
       "AI enthusiast passionate about interdisciplinary projects that connect people, ideas, and technology."
     ]
@@ -22,59 +90,15 @@ const teamMembers = [
     role: "COO",
     image: `${BASE}team/daniel.png`,
     linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/",
-    bio: [
-      "Already during my studies at TU Wien, I worked for over six years at the renowned Fraunhofer Austria Institute.",
-      "During this time, I had the privilege of working alongside Europe's leading experts on developing and implementing pioneering AI solutions.",
+    summary: [
+      "TU Wien graduate, 6+ years at Fraunhofer Austria Institute",
+      "Expertise in pioneering AI solutions from prototypes to industrial applications",
+      "Focus on technical excellence and measurable business value"
+    ],
+    fullBio: [
+      "Already during my studies at TU Wien, I worked for over six years at the renowned Fraunhofer Austria Institute. During this time, I had the privilege of working alongside Europe's leading experts on developing and implementing pioneering AI solutions.",
       "From innovative prototypes to large-scale industrial applications – I was able to realize projects that serve today as references for the practical application of artificial intelligence.",
       "These experiences showed me how technical excellence and the highest quality standards create measurable value for companies."
-    ]
-  },
-  {
-    name: "Felix Krause",
-    role: "CTO",
-    image: `${BASE}team/felix.png`,
-    linkedin: "https://www.linkedin.com/in/f-krause-ai/",
-    bio: [
-      "My economics studies showed me how closely people, organizations, and society are intertwined.",
-      "Through my Master's in Data Science, I learned to make these connections visible in data.",
-      "For me, artificial intelligence is the tool with which we can not only better understand but also shape the world.",
-      `As Chief Technology Officer of Klartext AI, I combine analytical thinking with technical implementation. My goal: to develop AI solutions that demonstrably work – reliable, understandable, and with real benefits for companies and society. Additionally, I am on the board of the tech network <a href=\"https://ai-mission.eu/\" target=\"_blank\" rel=\"noopener noreferrer\">AIM</a>, which unites 400 tech experts from Europe and regularly organizes popular hackathons.`,
-      "I am motivated by working with a strong team to deploy the latest technologies and live a work culture based on trust, curiosity, and enjoyment of work."
-    ]
-  },
-  {
-    name: "Hrvoje Ljubić",
-    role: "Full-Stack Developer",
-    image: `${BASE}team/hrvoje.png`,
-    linkedin: null,
-    bio: [
-      "As a versatile software developer, I am a generalist who quickly dives into new topics.",
-      "I don't restrict myself to specific tools or languages; I focus on finding the best solution for the problem at hand.",
-      "My experience spans FinTech and ERP to AI chat systems, mobile apps, and gaming.",
-      "With expertise in UI/UX design, I ensure that complex technology remains simple and intuitive for users."
-    ]
-  },
-  {
-    name: "Ondrej Hruby",
-    role: "Leading AI & Full-Stack Engineer",
-    image: `${BASE}team/ondrej.png`,
-    linkedin: "https://www.linkedin.com/in/ondrej-hrubyml/",
-    bio: [
-      "I hold a Bachelor’s degree in Computer Science with a focus on Software Engineering and am currently pursuing a Master’s in Data Science and AI.",
-      "I enjoy building end-to-end systems that combine intelligent features with scalable cloud pipelines.",
-      "I’m especially motivated by challenges where AI can automate tedious tasks or unlock insights that weren’t accessible before and being part of products that will make a difference."
-    ]
-  },
-  {
-    name: "Ruben Hetfleisch",
-    role: "CEO",
-    image: `${BASE}team/ruben.png`,
-    linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
-    bio: [
-      "After completing my engineering degree at TU Darmstadt in 2022, I was able to build deep expertise in artificial intelligence at Fraunhofer Austria.",
-      `As a board member of <a href=\"https://aiaustria.com/\" target=\"_blank\" rel=\"noopener noreferrer\">AI Austria</a>, Austria's largest AI network, I founded the GenAI Community with great passion – Austria's only platform for generative AI.`,
-      "Technical progress and exchange with others are particularly valuable to me.",
-      "That's why I am deeply committed to this field. My goal is to make AI accessible and useful for everyone."
     ]
   }
 ];
@@ -122,40 +146,36 @@ const teamMembers = [
             </div>
             <div class="member-bio">
               <ul class="bio-list">
-                {member.bio.slice(0, 2).map((point) => (
-                  <li class="bio-point bio-preview" set:html={point}></li>
-                ))}
-                {member.bio.length > 2 && member.bio.slice(2).map((point) => (
-                  <li class="bio-point bio-extra" set:html={point}></li>
+                {member.summary.map((point) => (
+                  <li class="bio-point" set:html={point}></li>
                 ))}
               </ul>
-              {member.bio.length > 2 && (
-                <button class="expand-btn" data-expanded="false">
-                  <span class="expand-text">Show more</span>
-                  <svg class="expand-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 6l4 4 4-4"/>
-                  </svg>
-                </button>
-              )}
+              <div class="full-bio-container">
+                {member.fullBio.map((paragraph) => (
+                  <p class="bio-paragraph" set:html={paragraph}></p>
+                ))}
+              </div>
+              <button class="expand-btn" data-expanded="false">
+                <span class="expand-text">Show more</span>
+                <svg class="expand-icon" width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 6l4 4 4-4"/>
+                </svg>
+              </button>
             </div>
           </article>
         ))}
       </div>
 
-      <section class="join-team-cta fade-in">
-        <div class="cta-content">
-          <h2 class="cta-headline">Join Our Team</h2>
-          <p class="cta-description">We're looking for people who want to shape the future of AI with us – with passion, expertise, and the ambition to create real value.</p>
-          <a href={`${BASE}en/karriere`} class="btn btn-primary btn-large">
-            Discover open positions
-            <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 12l4-4-4-4"/>
-            </svg>
-          </a>
-        </div>
-      </section>
     </div>
   </div>
+  <FinalCTA
+    lang="en"
+    headline="Join Our Team"
+    subheadline="We're looking for people who want to shape the future of AI with us."
+    primaryCTA="Discover Open Positions"
+    primaryLink={`${BASE}en/karriere`}
+    showSecondary={false}
+  />
   <Footer lang="en" />
 </BaseLayout>
 
@@ -189,18 +209,18 @@ const teamMembers = [
     color: var(--color-text-muted);
   }
 
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-lg);
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      max-width: 1480px;
+      margin: 0 auto;
+    }
 
   .member-tile {
     display: flex;
     flex-direction: column;
-    padding: var(--space-lg);
+    padding: var(--space-md);
     background: rgba(255, 255, 255, 0.35);
     backdrop-filter: blur(18px) saturate(160%);
     border: 1px solid rgba(255, 255, 255, 0.4);
@@ -327,49 +347,75 @@ const teamMembers = [
     margin-bottom: 0;
   }
 
-  .bio-extra {
-    display: none;
-    opacity: 0;
+  .full-bio-container {
     max-height: 0;
+    opacity: 0;
     overflow: hidden;
-    transition: opacity 0.3s ease, max-height 0.3s ease;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid transparent;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease 0.1s,
+                margin-top 0.4s ease,
+                padding-top 0.4s ease,
+                border-color 0.3s ease;
   }
 
-  .bio-extra.expanded {
-    display: list-item;
+  .full-bio-container.expanded {
+    max-height: 2000px;
     opacity: 1;
-    max-height: 500px;
-    margin-bottom: var(--space-sm);
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top-color: rgba(36, 121, 190, 0.5);
+  }
+
+  .bio-paragraph {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-body);
+    margin-bottom: var(--space-md);
+  }
+
+  .bio-paragraph:last-child {
+    margin-bottom: 0;
   }
 
   .expand-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.375rem;
     margin-top: var(--space-md);
-    padding: 0.5rem 1rem;
+    padding: 0;
     background: transparent;
-    border: 1px solid var(--color-blue);
+    border: none;
     color: var(--color-blue);
-    border-radius: 8px;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    font-family: inherit;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition-fast);
   }
 
   .expand-btn:hover {
-    background: var(--color-blue);
-    color: white;
+    color: var(--color-blue-accent);
+  }
+
+  .expand-btn:hover .expand-icon {
+    transform: translateY(2px);
   }
 
   .expand-icon {
     transition: transform 0.3s ease;
+    opacity: 0.7;
   }
 
   .expand-btn[data-expanded="true"] .expand-icon {
     transform: rotate(180deg);
+  }
+
+  .expand-btn[data-expanded="true"]:hover .expand-icon {
+    transform: rotate(180deg) translateY(-2px);
   }
 
   @media (max-width: 1200px) {
@@ -377,51 +423,6 @@ const teamMembers = [
       grid-template-columns: repeat(2, 1fr);
       gap: var(--space-md);
     }
-  }
-
-  .join-team-cta {
-    margin-top: var(--space-2xl);
-    padding: var(--space-2xl) var(--space-xl);
-    background: linear-gradient(
-      135deg,
-      rgba(36, 121, 190, 0.05) 0%,
-      rgba(76, 138, 197, 0.15) 100%
-    );
-    border-radius: 16px;
-    text-align: center;
-  }
-
-  .cta-content {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .cta-headline {
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    font-weight: 300;
-    margin-bottom: var(--space-md);
-    color: var(--color-text-dark);
-  }
-
-  .cta-description {
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: var(--color-text-body);
-    margin-bottom: var(--space-xl);
-  }
-
-  .btn-large {
-    padding: 1.125rem 2.5rem;
-    font-size: 1.125rem;
-    gap: 0.5rem;
-  }
-
-  .btn-large svg {
-    transition: transform 0.3s ease;
-  }
-
-  .btn-large:hover svg {
-    transform: translateX(4px);
   }
 
   @media (max-width: 768px) {
@@ -455,24 +456,6 @@ const teamMembers = [
     .bio-point {
       font-size: 0.875rem;
     }
-
-    .join-team-cta {
-      margin-top: var(--space-xl);
-      padding: var(--space-xl) var(--space-md);
-    }
-
-    .cta-headline {
-      font-size: 1.75rem;
-    }
-
-    .cta-description {
-      font-size: 1rem;
-    }
-
-    .btn-large {
-      width: 100%;
-      justify-content: center;
-    }
   }
 </style>
 
@@ -488,23 +471,42 @@ const teamMembers = [
           return;
         }
 
-        const extraPoints = tile.querySelectorAll('.bio-extra');
+        const fullBioContainer = tile.querySelector('.full-bio-container');
         const expandText = button.querySelector('.expand-text');
 
         if (isExpanded) {
           // Collapse
-          extraPoints.forEach(point => {
-            point.classList.remove('expanded');
-          });
+          if (fullBioContainer) {
+            fullBioContainer.classList.remove('expanded');
+          }
           button.setAttribute('data-expanded', 'false');
           if (expandText) {
             expandText.textContent = 'Show more';
           }
         } else {
-          // Expand
-          extraPoints.forEach(point => {
-            point.classList.add('expanded');
+          // Close all other expanded sections first
+          expandButtons.forEach(otherButton => {
+            if (otherButton !== button && otherButton.getAttribute('data-expanded') === 'true') {
+              const otherTile = otherButton.closest('.member-tile');
+              if (otherTile) {
+                const otherContainer = otherTile.querySelector('.full-bio-container');
+                const otherText = otherButton.querySelector('.expand-text');
+
+                if (otherContainer) {
+                  otherContainer.classList.remove('expanded');
+                }
+                otherButton.setAttribute('data-expanded', 'false');
+                if (otherText) {
+                  otherText.textContent = 'Show more';
+                }
+              }
+            }
           });
+
+          // Expand current section
+          if (fullBioContainer) {
+            fullBioContainer.classList.add('expanded');
+          }
           button.setAttribute('data-expanded', 'true');
           if (expandText) {
             expandText.textContent = 'Show less';

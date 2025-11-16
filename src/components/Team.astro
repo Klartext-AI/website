@@ -122,9 +122,6 @@ const text = content[lang];
     <div class="team-button-wrapper text-center fade-in">
       <a href={text.buttonLink} class="btn btn-secondary">
         {text.buttonText}
-        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M6 12l4-4-4-4"/>
-        </svg>
       </a>
     </div>
   </div>
@@ -286,28 +283,7 @@ const text = content[lang];
   .team-button-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: var(--space-xl);
-    padding-top: var(--space-md);
-  }
-
-  /* Make the team button identical to offerings: spacing + icon shift */
-  .team-button-wrapper .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: gap 0.3s ease;
-  }
-
-  .team-button-wrapper .btn svg {
-    transition: transform 0.3s ease;
-  }
-
-  .team-button-wrapper .btn:hover {
-    gap: 0.75rem;
-  }
-
-  .team-button-wrapper .btn:hover svg {
-    transform: translateX(4px);
+    margin-top: var(--section-cta-gap);
   }
 
   /* Removed old .team-button styles in favor of global .btn */

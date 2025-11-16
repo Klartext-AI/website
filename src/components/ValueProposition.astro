@@ -5,50 +5,61 @@ interface Props {
 
 const { lang = 'de' } = Astro.props;
 
+const BASE = import.meta.env.BASE_URL;
+
 const content = {
   de: {
-    headline: "Ihr Partner für anwendungsorientierte KI, die sich Ihren Prozessen anpasst - nicht umgekehrt.",
+    headline: "Ihr Partner für Ende-zu-Ende Softwarelösungen mit KI.",
+    valuesButton: "Unsere Werte entdecken",
     cards: [
       {
         title: "Domain-Driven Design",
         short: "Wir denken in Branchen, nicht in Modellen",
-        full: "Unsere Lösungen basieren auf tiefem Verständnis Ihrer Geschäftsprozesse und Fachdomäne, nicht auf generischen KI-Ansätzen."
+        full: "Unsere Lösungen basieren auf tiefem Verständnis Ihrer Geschäftsprozesse und Fachdomäne, nicht auf generischen KI-Ansätzen.",
+        link: "blog/domain-driven-design-rfu"
       },
       {
         title: "Evaluation-Driven Engineering",
         short: "Evidenz statt Annahmen",
-        full: "Jede Entscheidung wird durch systematische Evaluierung und Messungen validiert. Wir bauen auf Fakten, nicht auf Hoffnung."
+        full: "Jede Entscheidung wird durch systematische Evaluierung und Messungen validiert. Wir bauen auf Fakten, nicht auf Hoffnung.",
+        link: "blog/evaluation-key-to-ai"
       },
       {
         title: "Privacy by Design",
         short: "Sicher, konform, europäisch",
-        full: "DSGVO-Konformität, EU AI Act Compliance und europäisches Hosting sind nicht optional, sondern Teil unseres Fundaments."
+        full: "DSGVO-Konformität, EU AI Act Compliance und europäisches Hosting sind nicht optional, sondern Teil unseres Fundaments.",
+        link: "blog/privacy-by-design"
       }
     ]
   },
   en: {
-    headline: "Your partner for precision-driven AI that fits your processes - not the other way around.",
+    headline: "Your end-to-end AI solution provider.",
+    valuesButton: "Explore our values",
     cards: [
       {
         title: "Domain-Driven Design",
         short: "We think in industries, not in models",
-        full: "Our solutions are based on deep understanding of your business processes and domain expertise, not generic AI approaches."
+        full: "Our solutions are based on deep understanding of your business processes and domain expertise, not generic AI approaches.",
+        link: "en/blog/domain-driven-design-rfu"
       },
       {
         title: "Evaluation-Driven Engineering",
         short: "Evidence over assumptions",
-        full: "Every decision is validated through systematic evaluation and measurement. We build on facts, not hope."
+        full: "Every decision is validated through systematic evaluation and measurement. We build on facts, not hope.",
+        link: "en/blog/evaluation-key-to-ai"
       },
       {
         title: "Privacy by Design",
         short: "Secure, compliant, European",
-        full: "GDPR compliance, EU AI Act conformity, and European hosting are not optional but part of our foundation."
+        full: "GDPR compliance, EU AI Act conformity, and European hosting are not optional but part of our foundation.",
+        link: "en/blog/privacy-by-design"
       }
     ]
   }
 };
 
 const text = content[lang];
+const valuesHref = lang === 'de' ? `${BASE}werte` : `${BASE}en/values`;
 ---
 
 <section id="value-proposition" class="value-prop section">
@@ -57,42 +68,38 @@ const text = content[lang];
 
     <div class="cards-grid">
       {text.cards.map((card, index) => (
-        <div class="glass-card value-card fade-in" style={`animation-delay: ${index * 0.2}s`}>
-          <div class="card-icon">
-            {index === 0 && (
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <!-- Outer circle -->
-              <path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20z"/>
-
-              <!-- Vertical lines -->
-              <path d="M12 2v4"/>
-              <path d="M12 18v4"/>
-
-              <!-- Horizontal lines -->
-              <path d="M2 12h4"/>
-              <path d="M18 12h4"/>
-
-              <!-- Inner circle -->
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-
-            )}
-            {index === 1 && (
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="11" cy="11" r="8"/>
-                <path d="m21 21-4.35-4.35"/>
-                <path d="M11 8v6"/>
-                <path d="M8 11h6"/>
-              </svg>
-            )}
-            {index === 2 && (
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-            )}
+        <a href={`${BASE}${card.link}`} class="glass-card value-card fade-in" style={`animation-delay: ${index * 0.2}s`}>
+          <div class="card-header">
+            <div class="card-icon">
+              {index === 0 && (
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M3 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+                  <path d="M15 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+                  <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+                  <path d="M6 15v-1a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v1" />
+                  <path d="M12 9l0 3" />
+                </svg>
+              )}
+              {index === 1 && (
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                  <path d="M9 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                  <path d="M15 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                  <path d="M4 20h14" />
+                </svg>
+              )}
+              {index === 2 && (
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" />
+                  <path d="M15 19l2 2l4 -4" />
+                </svg>
+              )}
+            </div>
+            <h3 class="card-title">{card.title}</h3>
           </div>
-          <h3 class="card-title">{card.title}</h3>
           <p class="card-short">{card.short}</p>
           <p class="card-full">{card.full}</p>
           <div class="card-link">
@@ -101,8 +108,14 @@ const text = content[lang];
               <path d="M6 12l4-4-4-4"/>
             </svg>
           </div>
-        </div>
+        </a>
       ))}
+    </div>
+
+    <div class="values-button-wrapper text-center fade-in">
+      <a href={valuesHref} class="btn btn-secondary value-cta-button">
+        {text.valuesButton}
+      </a>
     </div>
   </div>
 </section>
@@ -132,6 +145,15 @@ const text = content[lang];
     cursor: pointer;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    display: block;
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
   }
 
   .card-icon {
@@ -141,14 +163,19 @@ const text = content[lang];
     justify-content: center;
     align-items: center;
     transition: transform 0.4s ease;
+    flex-shrink: 0;
   }
 
   .card-title {
     font-size: 1.5rem;
     font-weight: 500;
-    margin-bottom: var(--space-xs);
     color: var(--color-blue);
     text-align: center;
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-sm);
   }
 
   .card-short {
@@ -177,9 +204,11 @@ const text = content[lang];
     color: var(--color-blue);
     font-size: 0.9rem;
     font-weight: 500;
-    margin-top: var(--space-sm);
+    margin-top: 0;
     opacity: 0;
     transform: translateX(-10px);
+    max-height: 0;
+    overflow: hidden;
     transition: all 0.4s ease;
   }
 
@@ -206,10 +235,21 @@ const text = content[lang];
   .value-card:hover .card-link {
     opacity: 1;
     transform: translateX(0);
+    max-height: 40px;
+    margin-top: var(--space-sm);
   }
 
   .value-card:hover .card-link svg {
     transform: translateX(4px);
+  }
+
+  /* Values CTA Section */
+  .values-button-wrapper {
+    margin-top: var(--section-cta-gap);
+  }
+
+  .value-cta-button {
+    gap: 0.5rem;
   }
 
   @media (max-width: 768px) {
@@ -233,5 +273,6 @@ const text = content[lang];
       opacity: 1;
       transform: translateX(0);
     }
+
   }
 </style>

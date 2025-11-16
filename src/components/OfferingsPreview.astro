@@ -3,6 +3,8 @@ interface Props {
   lang?: 'de' | 'en';
 }
 
+import Icon from './Icon.astro';
+
 const { lang = 'de' } = Astro.props;
 const BASE = import.meta.env.BASE_URL;
 
@@ -77,9 +79,16 @@ const content = {
       }
     ]
   }
-};
+} as const;
 
 const text = content[lang];
+
+const offeringIcons = {
+  workshops: 'graduation',
+  'custom-projects': 'target',
+  'chatgpt-clone': 'shield',
+  'inspirational-talks': 'bulb'
+} as const;
 ---
 
 <section class="offerings-preview section">
@@ -92,7 +101,9 @@ const text = content[lang];
     <div class="offerings-grid">
       {text.offerings.map((offering, index) => (
         <article class="offering-preview-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
-          <div class="offering-icon-large">{offering.icon}</div>
+          <div class="offering-icon-large">
+            <Icon name={offeringIcons[offering.id]} size={36} />
+          </div>
           <h3 class="offering-preview-title">{offering.title}</h3>
           <p class="offering-preview-description">{offering.description}</p>
 
@@ -113,9 +124,6 @@ const text = content[lang];
     <div class="offerings-cta text-center fade-in">
       <a href={lang === 'de' ? `${BASE}offerings` : `${BASE}en/offerings`} class="btn btn-secondary">
         {text.viewAllOfferings}
-        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M6 12l4-4-4-4"/>
-        </svg>
       </a>
     </div>
   </div>
@@ -154,7 +162,7 @@ const text = content[lang];
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-md);
-    max-width: 1400px;
+    max-width: 1480px;
     margin: 0 auto;
     margin-bottom: var(--space-xl);
   }
@@ -177,8 +185,10 @@ const text = content[lang];
   }
 
   .offering-icon-large {
-    font-size: 2.5rem;
-    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-blue);
     margin-bottom: var(--space-sm);
   }
 
@@ -218,27 +228,7 @@ const text = content[lang];
   }
 
   .offerings-cta {
-    margin-top: var(--space-xl);
-  }
-
-  /* Ensure offerings CTA button has the same spacing + icon shift behavior */
-  .offerings-cta .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: gap 0.3s ease;
-  }
-
-  .offerings-cta .btn:hover {
-    gap: 0.75rem;
-  }
-
-  .offerings-cta .btn svg {
-    transition: transform 0.3s ease;
-  }
-
-  .offerings-cta .btn:hover svg {
-    transform: translateX(4px);
+    margin-top: var(--section-cta-gap);
   }
 
   @media (max-width: 1200px) {

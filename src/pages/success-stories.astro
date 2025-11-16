@@ -1,13 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SuccessStoriesListing from '../components/SuccessStoriesListing.astro';
+import FinalCTA from '../components/FinalCTA.astro';
 import Footer from '../components/Footer.astro';
 
 const title = 'Erfolgsgeschichten - Klartext AI';
 const description = 'Wie wir KI in messbare Geschäftserfolge verwandeln. Entdecken Sie unsere Success Stories mit echten Ergebnissen.';
+const BASE = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
   <SuccessStoriesListing lang="de" />
+  <FinalCTA
+    lang="de"
+    headline="Ihre Erfolgsgeschichte als nächstes?"
+    subheadline="Lassen Sie uns besprechen, wie Klartext AI Ihre Prozesse in echte Geschäftsergebnisse verwandelt."
+    primaryCTA="Projekt besprechen"
+    secondaryCTA="Unsere Angebote Entdecken"
+    secondaryLink=`${BASE}offerings`
+  />
   <Footer lang="de" />
 </BaseLayout>

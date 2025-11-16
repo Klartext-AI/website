@@ -1,12 +1,28 @@
 ---
 interface Props {
   lang?: 'de' | 'en';
+  headline?: string;
+  subheadline?: string;
+  primaryCTA?: string;
+  primaryLink?: string;
+  secondaryCTA?: string;
+  secondaryLink?: string;
+  showSecondary?: boolean;
 }
 
-const { lang = 'de' } = Astro.props;
+const {
+  lang = 'de',
+  headline,
+  subheadline,
+  primaryCTA,
+  primaryLink = 'mailto:office@klartext-ai.com',
+  secondaryCTA,
+  secondaryLink,
+  showSecondary = true
+} = Astro.props;
 const BASE = import.meta.env.BASE_URL;
 
-const content = {
+const defaultContent = {
   de: {
     headline: "Bereit für Klartext?",
     subheadline: "Lassen Sie uns KI in ROI verwandeln.",
@@ -21,7 +37,15 @@ const content = {
   }
 };
 
-const text = content[lang];
+const defaults = defaultContent[lang];
+const text = {
+  headline: headline || defaults.headline,
+  subheadline: subheadline || defaults.subheadline,
+  primaryCTA: primaryCTA || defaults.primaryCTA,
+  secondaryCTA: secondaryCTA || defaults.secondaryCTA
+};
+// Added language-aware default link for secondary CTA
+const computedSecondaryLink = secondaryLink || (lang === 'en' ? 'en/success-stories' : 'success-stories');
 ---
 
 <section id="contact" class="final-cta section">
@@ -41,8 +65,10 @@ const text = content[lang];
       <p class="cta-subheadline">{text.subheadline}</p>
 
       <div class="cta-buttons">
-        <a href="mailto:office@klartext-ai.com" class="btn btn-primary btn-large">{text.primaryCTA}</a>
-        <a href="#success-stories" class="btn btn-secondary btn-large">{text.secondaryCTA}</a>
+        <a href={primaryLink} class="btn btn-primary btn-large">{text.primaryCTA}</a>
+        {showSecondary && (
+          <a href={computedSecondaryLink} class="btn btn-secondary btn-large">{text.secondaryCTA}</a>
+        )}
       </div>
     </div>
   </div>

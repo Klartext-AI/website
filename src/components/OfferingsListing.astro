@@ -3,6 +3,8 @@ interface Props {
   lang?: 'de' | 'en';
 }
 
+import Icon from './Icon.astro';
+
 const { lang = 'de' } = Astro.props;
 const BASE = import.meta.env.BASE_URL;
 
@@ -11,9 +13,6 @@ const content = {
     pageTitle: "Unsere Angebote",
     pageSubtitle: "Maßgeschneiderte AI-Lösungen und Services für Ihren Erfolg",
     learnMore: "Mehr erfahren",
-    ctaTitle: "Interesse an einem Angebot?",
-    ctaSubtitle: "Kontaktieren Sie uns für ein unverbindliches Erstgespräch",
-    ctaButton: "Jetzt Kontakt aufnehmen",
     offerings: [
       {
         id: "ai-value-sprint",
@@ -93,9 +92,6 @@ const content = {
     pageTitle: "Our Offerings",
     pageSubtitle: "Tailored AI solutions and services for your success",
     learnMore: "Learn more",
-    ctaTitle: "Interested in an offering?",
-    ctaSubtitle: "Contact us for a non-binding initial consultation",
-    ctaButton: "Get in Touch",
     offerings: [
       {
         id: "ai-value-sprint",
@@ -171,9 +167,18 @@ const content = {
       }
     ]
   }
-};
+} as const;
+  
+ const text = content[lang];
 
-const text = content[lang];
+ const offeringIcons = {
+  'ai-value-sprint': 'rocket',
+  'custom-projects': 'target',
+  'chatgpt-clone': 'shield',
+  'inspirational-talks': 'bulb',
+  'eu-ai-act-readiness': 'scale',
+  'ai-security-screening': 'lock'
+} as const;
 ---
 
 <section id="offerings-listing" class="offerings-listing section">
@@ -183,13 +188,15 @@ const text = content[lang];
       <p class="offerings-page-subtitle">{text.pageSubtitle}</p>
     </div>
 
-    <div class="offerings-grid">
-      {text.offerings.map((offering, index) => (
-        <article class="offering-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
-          <div class="offering-header">
-            <div class="offering-icon">{offering.icon}</div>
-            <span class="offering-category">{offering.category}</span>
-          </div>
+        <div class="offerings-grid">
+          {text.offerings.map((offering, index) => (
+            <article class="offering-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
+              <div class="offering-header">
+                <div class="offering-icon">
+                  <Icon name={offeringIcons[offering.id]} size={32} />
+                </div>
+                <span class="offering-category">{offering.category}</span>
+              </div>
 
           <h2 class="offering-title">{offering.title}</h2>
 
@@ -216,19 +223,6 @@ const text = content[lang];
           )}
         </article>
       ))}
-    </div>
-
-    <div class="offerings-cta fade-in">
-      <div class="cta-content glass-card">
-        <h2 class="cta-title">{text.ctaTitle}</h2>
-        <p class="cta-subtitle">{text.ctaSubtitle}</p>
-        <a href="mailto:office@klartext-ai.com" class="cta-button">
-          {text.ctaButton}
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 10h14M12 5l5 5-5 5"/>
-          </svg>
-        </a>
-      </div>
     </div>
   </div>
 </section>
@@ -263,13 +257,13 @@ const text = content[lang];
     line-height: 1.6;
   }
 
-  .offerings-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: var(--space-lg);
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+    .offerings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: var(--space-lg);
+      max-width: 1480px;
+      margin: 0 auto;
+    }
 
   .offering-card {
     display: flex;
@@ -295,8 +289,10 @@ const text = content[lang];
   }
 
   .offering-icon {
-    font-size: 2.5rem;
-    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-blue);
   }
 
   .offering-category {
@@ -372,68 +368,6 @@ const text = content[lang];
     transform: translateX(4px);
   }
 
-  .offerings-cta {
-    margin-top: var(--space-2xl);
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .cta-content {
-    padding: var(--space-2xl);
-    text-align: center;
-    border-radius: 20px;
-    background: linear-gradient(135deg, rgba(36, 121, 190, 0.08) 0%, rgba(76, 138, 197, 0.12) 100%),
-                rgba(255, 255, 255, 0.6) !important;
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 2px solid rgba(36, 121, 190, 0.2);
-  }
-
-  .cta-title {
-    font-size: 2rem;
-    font-weight: 500;
-    color: var(--color-text-dark);
-    margin-bottom: var(--space-md);
-    letter-spacing: -0.01em;
-  }
-
-  .cta-subtitle {
-    font-size: 1.125rem;
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-xl);
-    line-height: 1.6;
-  }
-
-  .cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: 1rem 2.5rem;
-    background: var(--color-blue);
-    color: white;
-    font-size: 1.0625rem;
-    font-weight: 600;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 16px rgba(36, 121, 190, 0.25);
-  }
-
-  .cta-button:hover {
-    background: var(--color-blue-accent);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.35);
-    gap: var(--space-md);
-  }
-
-  .cta-button svg {
-    transition: transform 0.3s ease;
-  }
-
-  .cta-button:hover svg {
-    transform: translateX(4px);
-  }
-
   @media (max-width: 1200px) {
     .offerings-grid {
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -484,28 +418,6 @@ const text = content[lang];
 
     .offering-highlights li {
       font-size: 0.85rem;
-    }
-
-    .offerings-cta {
-      margin-top: var(--space-xl);
-    }
-
-    .cta-content {
-      padding: var(--space-lg);
-    }
-
-    .cta-title {
-      font-size: 1.5rem;
-    }
-
-    .cta-subtitle {
-      font-size: 1rem;
-      margin-bottom: var(--space-lg);
-    }
-
-    .cta-button {
-      padding: 0.875rem 2rem;
-      font-size: 1rem;
     }
   }
 </style>

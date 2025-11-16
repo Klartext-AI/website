@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+
+const title = 'Unsere Werte - Klartext AI';
+const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI leiten: Domain-Driven Design, Evaluation-First, Privacy by Design und europäische KI-Souveränität.';
+
+  const BASE = import.meta.env.BASE_URL;
+  
+  const content = {
+  pageTitle: "Unsere Werte",
+  pageSubtitle: "Die Prinzipien, die unsere Arbeit leiten",
+  introText: "Bei Klartext AI sind Werte keine Marketing-Schlagworte, sondern gelebte Praxis. Sie bestimmen, wie wir Projekte angehen, wie wir Technologie einsetzen und welche Verantwortung wir übernehmen. Jeder dieser Werte ist in unserer täglichen Arbeit verankert – von der ersten Konzeption bis zum produktiven Betrieb.",
+
+  valuePosts: [
+    {
+      id: "domain-driven-design-rfu",
+      title: "Domain-Driven Design in der Praxis",
+      excerpt: "Wir denken in Industrien, nicht in Modellen. Domänenwissen ist der Schlüssel zu erfolgreichen KI-Systemen.",
+      fullExcerpt: "Der RFU Case ist ein perfektes Beispiel dafür, wie Domain-Driven Design in der Praxis funktioniert. Anstatt mit einer vorgefertigten Lösung zu starten, haben wir uns intensiv mit den Geschäftsprozessen unseres Kunden aus dem Bankendienstleistungssektor auseinandergesetzt. Das Ergebnis: Eine KI-Lösung, die nicht nur funktioniert, sondern die Sprache der Domäne spricht und 80% der manuellen Arbeit automatisiert – mit einem Break-even von nur 1,5 Monaten.",
+      category: "Case Study",
+      readTime: "8 min",
+      date: "2025-01-10",
+      icon: "🎯"
+    },
+    {
+      id: "evaluation-key-to-ai",
+      title: "Evaluation-Driven Engineering",
+      excerpt: "Keine Entscheidung ohne Daten, keine Annahme ohne Validierung. Systematische Evaluierung ist der Schlüssel zum Erfolg.",
+      fullExcerpt: "In der Welt der künstlichen Intelligenz gibt es einen fundamentalen Unterschied zwischen einem funktionierenden Prototyp und einem produktiven System. Dieser Unterschied liegt nicht in der Technologie selbst, sondern in der Art und Weise, wie wir ihre Leistung messen, verstehen und kontinuierlich verbessern. Evaluation-Driven Engineering bedeutet: keine Entscheidung ohne Daten, keine Annahme ohne Validierung.",
+      category: "Philosophie",
+      readTime: "5 min",
+      date: "2025-01-15",
+      icon: "📊"
+    },
+    {
+      id: "end-to-end-ownership",
+      title: "End-to-End Ownership",
+      excerpt: "Ein Team, volle Verantwortung – von der Idee bis zum produktiven Betrieb. Keine POCs ohne Zukunft.",
+      fullExcerpt: "Viele KI-Projekte enden als Proof of Concept in einer Schublade. Wir gehen einen anderen Weg: End-to-End Ownership bedeutet, dass wir von der ersten Hypothese bis zum produktiven Deployment Verantwortung übernehmen. Ein Team, volle Verantwortung, echte Implementierung – keine Übergaben, keine Wissensverluste, keine POCs ohne Zukunft.",
+      category: "Philosophie",
+      readTime: "7 min",
+      date: "2024-12-28",
+      icon: "🤝"
+    },
+    {
+      id: "privacy-by-design",
+      title: "Privacy by Design",
+      excerpt: "Datenschutz ist kein nachträgliches Feature, sondern Teil der Grundarchitektur. DSGVO-Konformität von Tag eins.",
+      fullExcerpt: "Privacy by Design ist kein nachträgliches Feature, sondern eine fundamentale Designentscheidung. In einer Zeit, in der Datenschutz und KI oft als Widerspruch dargestellt werden, zeigen wir, dass beides Hand in Hand gehen kann – und muss. DSGVO-Konformität, EU AI Act Compliance und europäisches Hosting sind nicht optional, sondern integraler Bestandteil unserer Architektur von Tag eins an.",
+      category: "Technical",
+      readTime: "6 min",
+      date: "2025-01-05",
+      icon: "🔒"
+    },
+    {
+      id: "european-ai-sovereignty",
+      title: "Europäische KI-Souveränität",
+      excerpt: "Innovation mit Verantwortung. Europäische Werte sind nicht Ballast, sondern Wettbewerbsvorteile.",
+      fullExcerpt: "Europa steht vor der Chance, eine dritte Antwort im globalen KI-Diskurs zu geben – eine, die auf Vertrauen, Transparenz und Exzellenz basiert. Während die USA auf schnelles Wachstum setzen und China auf technologischen Fortschritt ohne regulatorische Schranken, können wir Innovation mit Verantwortung verbinden. Europäisches Hosting, DSGVO-Konformität und nachvollziehbare Systeme sind nicht Hindernisse, sondern Wettbewerbsvorteile.",
+      category: "Philosophie",
+      readTime: "6 min",
+      date: "2024-12-20",
+      icon: "🇪🇺"
+    }
+  ],
+
+  ctaTitle: "Mehr Insights?",
+  ctaText: "Entdecken Sie alle unsere Blog-Beiträge mit Learnings, Philosophie und Feldberichten aus der Praxis.",
+    ctaButton: "Zum Blog",
+    readMore: "Weiterlesen"
+  } as const;
+  
+  const valueIcons = {
+    'domain-driven-design-rfu': 'target',
+    'evaluation-key-to-ai': 'evaluation',
+    'end-to-end-ownership': 'users',
+    'privacy-by-design': 'lock',
+    'european-ai-sovereignty': 'users'
+  } as const;
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <section class="values-page section">
+    <div class="container">
+      <div class="values-header fade-in text-center">
+        <h1 class="values-page-title">{content.pageTitle}</h1>
+        <p class="values-page-subtitle">{content.pageSubtitle}</p>
+      </div>
+
+      <div class="values-intro fade-in glass-card">
+        <p class="intro-text">{content.introText}</p>
+      </div>
+
+        <div class="values-posts">
+          {content.valuePosts.map((post, index) => (
+            <article class="value-post-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
+              <div class="post-icon">
+                <Icon name={valueIcons[post.id]} size={32} />
+              </div>
+
+            <div class="post-meta">
+              <span class="post-category">{post.category}</span>
+              <span class="post-read-time">{post.readTime}</span>
+            </div>
+
+            <h2 class="post-title">{post.title}</h2>
+            <p class="post-excerpt">{post.excerpt}</p>
+
+            <a href={`${BASE}blog/${post.id}`} class="post-link">
+              {content.readMore}
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 12l4-4-4-4"/>
+              </svg>
+            </a>
+          </article>
+        ))}
+      </div>
+
+    </div>
+  </section>
+  <FinalCTA
+    lang="de"
+    headline={content.ctaTitle}
+    subheadline={content.ctaText}
+    primaryCTA={content.ctaButton}
+    primaryLink={`${BASE}blog`}
+    showSecondary={false}
+  />
+  <Footer lang="de" />
+</BaseLayout>
+
+<style>
+  .values-page {
+    min-height: 80vh;
+    padding: var(--space-2xl) 0;
+    background: transparent;
+  }
+
+  .values-header {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .values-page-title {
+    font-size: var(--font-size-h1);
+    font-weight: 300;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .values-page-subtitle {
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .values-intro {
+    max-width: 900px;
+    margin: 0 auto var(--space-2xl);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.65) !important;
+    backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  .intro-text {
+    font-size: 1.15rem;
+    color: var(--color-text-body);
+    line-height: 1.8;
+    margin: 0;
+  }
+
+    .values-posts {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-lg);
+      max-width: 1480px;
+      margin: 0 auto var(--space-2xl);
+    }
+
+  .value-post-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-md);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    background: rgba(255, 255, 255, 0.55) !important;
+    backdrop-filter: blur(20px) saturate(160%);
+    position: relative;
+  }
+
+    .value-post-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
+      background: rgba(255, 255, 255, 0.75) !important;
+    }
+  
+    .post-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-blue);
+      margin-bottom: var(--space-sm);
+      line-height: 1;
+    }
+
+  .post-meta {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .post-category {
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    background: rgba(36, 121, 190, 0.1);
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+
+  .post-read-time {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    margin-left: auto;
+  }
+
+  .post-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-dark);
+    line-height: 1.3;
+  }
+
+  .post-excerpt {
+    font-size: 1rem;
+    color: var(--color-text-body);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
+  }
+
+  .post-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-blue);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: gap 0.3s ease;
+    align-self: flex-start;
+    margin-top: auto;
+  }
+
+  .post-link:hover {
+    gap: 0.75rem;
+  }
+
+  .post-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .post-link:hover svg {
+    transform: translateX(4px);
+  }
+
+
+
+  @media (max-width: 1200px) {
+    .values-posts {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+  }
+
+  @media (max-width: 968px) {
+    .values-posts {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-md);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .values-page {
+      padding: var(--space-xl) 0;
+    }
+
+    .values-header {
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-md);
+    }
+
+    .values-page-title {
+      font-size: var(--font-size-h2);
+    }
+
+    .values-page-subtitle {
+      font-size: 1.2rem;
+    }
+
+    .values-intro {
+      padding: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+
+    .intro-text {
+      font-size: 1rem;
+    }
+
+    .values-posts {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+
+    .value-post-card {
+      padding: var(--space-md);
+    }
+
+    .post-title {
+      font-size: 1.3rem;
+    }
+
+    .post-excerpt {
+      font-size: 0.95rem;
+    }
+
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+  }
+</style>
+
+<script>
+  // Intersection Observer for fade-in animations
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        const element = entry.target as HTMLElement;
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    fadeElements.forEach(el => observer.observe(el));
+  });
+</script>

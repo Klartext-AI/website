@@ -34,15 +34,19 @@ const BASE = import.meta.env.BASE_URL;
 
 // Generate alternate language URL based on current path
 const currentPath = Astro.url.pathname;
+const pathWithoutBase = currentPath.replace(BASE, '/');
+const normalizedPath = pathWithoutBase.replace(/^\/en(\/|$)/, '/');
+
+const isActive = (target: string) =>
+  normalizedPath === target || normalizedPath.startsWith(`${target}/`);
+
 let alternateLangUrl: string;
 
 if (lang === 'de') {
   // Switching to English: add /en prefix after base
-  const pathWithoutBase = currentPath.replace(BASE, '/');
   alternateLangUrl = `${BASE}en${pathWithoutBase === '/' ? '' : pathWithoutBase}`;
 } else {
   // Switching to German: remove /en prefix
-  const pathWithoutBase = currentPath.replace(BASE, '/');
   const pathWithoutLang = pathWithoutBase.replace(/^\/en(\/|$)/, '/');
   alternateLangUrl = pathWithoutLang === '/' ? BASE : `${BASE}${pathWithoutLang.substring(1)}`;
 }
@@ -67,11 +71,36 @@ if (lang === 'de') {
     </button>
 
     <div class="nav-menu" id="nav-menu">
-      <a href={lang === 'de' ? `${BASE}success-stories` : `${BASE}en/success-stories`} class="nav-link">{text.successStories}</a>
-      <a href={lang === 'de' ? `${BASE}offerings` : `${BASE}en/offerings`} class="nav-link">{text.offerings}</a>
-      <a href={lang === 'de' ? `${BASE}#european-values` : `${BASE}en#european-values`} class="nav-link">{text.values}</a>
-      <a href={lang === 'de' ? `${BASE}team` : `${BASE}en/team`} class="nav-link">{text.team}</a>
-      <a href={lang === 'de' ? `${BASE}blog` : `${BASE}en/blog`} class="nav-link">{text.blog}</a>
+      <a
+        href={lang === 'de' ? `${BASE}success-stories` : `${BASE}en/success-stories`}
+        class={`nav-link ${isActive('/success-stories') ? 'nav-link-active' : ''}`}
+      >
+        {text.successStories}
+      </a>
+      <a
+        href={lang === 'de' ? `${BASE}offerings` : `${BASE}en/offerings`}
+        class={`nav-link ${isActive('/offerings') ? 'nav-link-active' : ''}`}
+      >
+        {text.offerings}
+      </a>
+      <a
+        href={lang === 'de' ? `${BASE}werte` : `${BASE}en/values`}
+        class={`nav-link ${isActive(lang === 'de' ? '/werte' : '/values') ? 'nav-link-active' : ''}`}
+      >
+        {text.values}
+      </a>
+      <a
+        href={lang === 'de' ? `${BASE}team` : `${BASE}en/team`}
+        class={`nav-link ${isActive('/team') ? 'nav-link-active' : ''}`}
+      >
+        {text.team}
+      </a>
+      <a
+        href={lang === 'de' ? `${BASE}blog` : `${BASE}en/blog`}
+        class={`nav-link ${isActive('/blog') ? 'nav-link-active' : ''}`}
+      >
+        {text.blog}
+      </a>
       <!--<a href={lang === 'de' ? `${BASE}#contact` : `${BASE}en#contact`} class="nav-link nav-link-cta">{text.contact}</a>-->
       <a href=`mailto:office@klartext-ai.com` class="nav-link nav-link-cta">{text.contact}</a>
       <a href={alternateLangUrl} class="nav-link nav-link-lang">{text.language}</a>
@@ -107,7 +136,7 @@ if (lang === 'de') {
   }
 
   .nav-container {
-    max-width: 1400px;
+    max-width: 1480px;
     margin: 0 auto;
     padding: 0.75rem var(--space-md);
     display: flex;
@@ -194,11 +223,19 @@ if (lang === 'de') {
     width: 100%;
   }
 
+  .nav-link.nav-link-active {
+    color: var(--color-blue);
+  }
+
+  .nav-link.nav-link-active::after {
+    width: 100%;
+  }
+
   .nav-link-cta {
     padding: 0.5rem 1.5rem;
     background: var(--color-blue);
     color: white;
-    border-radius: 2rem;
+    border-radius: 1rem;
     transition: all 0.3s ease;
   }
 
@@ -218,7 +255,7 @@ if (lang === 'de') {
     color: var(--color-blue);
     border: 2px solid var(--color-blue);
     padding: 0.35rem 1rem;
-    border-radius: 2rem;
+    border-radius: 1rem;
     transition: all 0.3s ease;
   }
 

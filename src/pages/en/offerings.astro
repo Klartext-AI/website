@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import OfferingsListing from '../../components/OfferingsListing.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
 import Footer from '../../components/Footer.astro';
 
 const title = 'Our Offerings - Klartext AI';
@@ -9,5 +10,12 @@ const description = 'Tailored AI solutions and services for your success - from 
 
 <BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
   <OfferingsListing lang="en" />
+  <FinalCTA
+    lang="en"
+    headline="Interested in an Offering?"
+    subheadline="Contact us for a non-binding initial consultation."
+    primaryCTA="Get in Touch"
+    showSecondary={false}
+  />
   <Footer lang="en" />
 </BaseLayout>

@@ -1,13 +1,23 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SuccessStoriesListing from '../../components/SuccessStoriesListing.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
 import Footer from '../../components/Footer.astro';
 
 const title = 'Success Stories - Klartext AI';
 const description = 'How we transform AI into measurable business success. Discover our success stories with real results.';
+const BASE = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
   <SuccessStoriesListing lang="en" />
+  <FinalCTA
+    lang="en"
+    headline="Ready to write your own success story?"
+    subheadline="Let’s explore how Klartext AI can turn your processes into measurable business outcomes."
+    primaryCTA="Discuss your project"
+    secondaryCTA="Check Out Our Offers"
+    secondaryLink=`${BASE}en/offerings`
+  />
   <Footer lang="en" />
 </BaseLayout>
