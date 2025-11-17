@@ -21,8 +21,8 @@ const text = content[lang];
 
 <section class="linkedin-feed-section">
   <div class="container">
-    <div class="linkedin-feed-header">
-      <h2 class="section-title">{text.title}</h2>
+    <div class="linkedin-feed-header section-header text-center">
+      <h2>{text.title}</h2>
       <p class="section-subtitle">{text.subtitle}</p>
     </div>
 
@@ -53,23 +53,12 @@ const text = content[lang];
 
   .linkedin-feed-header {
     text-align: center;
-    margin-bottom: 48px;
   }
 
-  .section-title {
-    font-size: 2.5rem;
-    font-weight: 300;
-    color: var(--color-text-dark);
-    margin-bottom: 16px;
-    letter-spacing: -0.02em;
-  }
-
-  .section-subtitle {
-    font-size: 1.1rem;
-    color: var(--color-text-muted);
-    font-weight: 300;
+  .linkedin-feed-header .section-subtitle {
     max-width: 600px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     line-height: 1.6;
   }
 
@@ -81,41 +70,25 @@ const text = content[lang];
   /* Responsive Design */
   @media (max-width: 968px) {
     .linkedin-feed-section {
-      padding: 60px 0;
+      padding: var(--space-xl) 0;
     }
 
-    .linkedin-feed-header {
-      margin-bottom: 40px;
-    }
-
-    .section-title {
-      font-size: 2rem;
-    }
-
-    .section-subtitle {
-      font-size: 1rem;
+    .linkedin-feed-header .section-subtitle {
+      font-size: 1.25rem;
     }
   }
 
   @media (max-width: 640px) {
     .linkedin-feed-section {
-      padding: 32px 0;
+      padding: var(--space-md) 0;
     }
 
     .container {
-      padding: 0 20px;
+      padding: 0 var(--space-md);
     }
 
-    .linkedin-feed-header {
-      margin-bottom: 24px;
-    }
-
-    .section-title {
-      font-size: 1.75rem;
-    }
-
-    .section-subtitle {
-      font-size: 0.95rem;
+    .linkedin-feed-header .section-subtitle {
+      font-size: 1.25rem;
     }
   }
 </style>

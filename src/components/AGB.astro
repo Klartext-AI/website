@@ -20,7 +20,15 @@ const content = {
       },
       {
         heading: "3. Leistungsumfang",
-        content: `Klartext AI bietet Dienstleistungen im Bereich der KI-gestützten Text- und Vertragsanalyse an, insbesondere zur Verbesserung der Barrierefreiheit von Texten, Verträgen und Webseiten. Die genauen Leistungen werden in einem individuellen Vertrag oder Angebot festgelegt.`
+        content: `<p>Klartext AI bietet Dienstleistungen im Bereich der Entwicklung und Implementierung maßgeschneiderter KI-Lösungen an. Dazu gehören insbesondere:</p>
+<ul>
+  <li><em>Workflow- und Dokumentenautomatisierung</em> (z. B. Extraktion, Klassifikation, Generierung, Qualitäts- und Plausibilitätsprüfungen)</li>
+  <li><em>Wissensmanagement und KI-Assistenzsysteme</em> (z. B. RAG-Architekturen, semantische Suche, interne KI-Berater)</li>
+  <li>Entwicklung von <em>Enterprise-AI-Architekturen</em>, einschließlich sicherer, auditierbarer und EU-AI-Act-konformer KI-Systeme</li>
+  <li><em>Prozessanalyse, Workshops und Beratungsleistungen</em> (z. B. AI Value Sprint, EU AI Act Workshop)</li>
+  <li>Entwicklung von <em>SaaS- und On-Premise-Tools</em> zur automatisierten Prüfung von Dokumenten auf geltende Regularien sowie zur Ausweisung von Erfüllungsgraden, Verantwortlichkeiten und Handlungsempfehlungen</li>
+</ul>
+<p>Der konkrete Leistungsumfang ergibt sich aus dem jeweiligen Angebot, Vertrag oder Projektumfang, der individuell mit dem Kunden vereinbart wird.</p>`
       },
       {
         heading: "4. Preise und Zahlung",
@@ -66,7 +74,15 @@ const content = {
       },
       {
         heading: "3. Leistungsumfang",
-        content: `Klartext AI bietet Dienstleistungen im Bereich der KI-gestützten Text- und Vertragsanalyse an, insbesondere zur Verbesserung der Barrierefreiheit von Texten, Verträgen und Webseiten. Die genauen Leistungen werden in einem individuellen Vertrag oder Angebot festgelegt.`
+        content: `<p>Klartext AI bietet Dienstleistungen im Bereich der Entwicklung und Implementierung maßgeschneiderter KI-Lösungen an. Dazu gehören insbesondere:</p>
+<ul>
+  <li><em>Workflow- und Dokumentenautomatisierung</em> (z. B. Extraktion, Klassifikation, Generierung, Qualitäts- und Plausibilitätsprüfungen)</li>
+  <li><em>Wissensmanagement und KI-Assistenzsysteme</em> (z. B. RAG-Architekturen, semantische Suche, interne KI-Berater)</li>
+  <li>Entwicklung von <em>Enterprise-AI-Architekturen</em>, einschließlich sicherer, auditierbarer und EU-AI-Act-konformer KI-Systeme</li>
+  <li><em>Prozessanalyse, Workshops und Beratungsleistungen</em> (z. B. AI Value Sprint, EU AI Act Workshop)</li>
+  <li>Entwicklung von <em>SaaS- und On-Premise-Tools</em> zur automatisierten Prüfung von Dokumenten auf geltende Regularien sowie zur Ausweisung von Erfüllungsgraden, Verantwortlichkeiten und Handlungsempfehlungen</li>
+</ul>
+<p>Der konkrete Leistungsumfang ergibt sich aus dem jeweiligen Angebot, Vertrag oder Projektumfang, der individuell mit dem Kunden vereinbart wird.</p>`
       },
       {
         heading: "4. Preise und Zahlung",
@@ -112,7 +128,7 @@ const text = content[lang];
       {text.sections.map((section) => (
         <div class="legal-section">
           <h2 class="legal-heading">{section.heading}</h2>
-          <div class="legal-text" set:html={section.content.replace(/\n\n/g, '</p><p>')} />
+          <div class="legal-text" set:html={section.content} />
         </div>
       ))}
     </div>
@@ -167,6 +183,19 @@ const text = content[lang];
 
   .legal-text p {
     margin-bottom: var(--space-md);
+  }
+
+  /* Ensure lists render nicely inside legal text */
+  .legal-text ul {
+    padding-left: 2rem;
+    margin-bottom: var(--space-md);
+    margin-top: var(--space-sm);
+    list-style-type: disc;
+  }
+
+  .legal-text li {
+    margin-bottom: 0.5rem;
+    line-height: 1.8;
   }
 
   @media (max-width: 768px) {

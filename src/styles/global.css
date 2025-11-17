@@ -175,6 +175,22 @@ a:hover {
   padding: var(--space-xl) 0;
 }
 
+.section-header {
+  margin: var(--space-xl) 0;
+}
+
+.section-header h2,
+.section-header .section-title {
+  margin-bottom: var(--space-sm);
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-sm);
+  margin-bottom: 0;
+}
+
 @media (max-width: 768px) {
   .section {
     padding: var(--space-md) 0;

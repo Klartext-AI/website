@@ -59,12 +59,14 @@ const content = {
 };
 
 const text = content[lang];
-const valuesHref = lang === 'de' ? `${BASE}werte` : `${BASE}en/values`;
+const valuesHref = lang === 'de' ? `${BASE}values` : `${BASE}en/values`;
 ---
 
 <section id="value-proposition" class="value-prop section">
   <div class="container">
-    <h2 class="value-prop-headline fade-in text-center">{text.headline}</h2>
+    <div class="section-header fade-in text-center">
+      <h2 class="value-prop-headline">{text.headline}</h2>
+    </div>
 
     <div class="cards-grid">
       {text.cards.map((card, index) => (
@@ -129,7 +131,7 @@ const valuesHref = lang === 'de' ? `${BASE}werte` : `${BASE}en/values`;
     font-size: var(--font-size-h3);
     font-weight: 300;
     max-width: 900px;
-    margin: 0 auto var(--space-xl);
+    margin: 0 auto;
     line-height: 1.5;
   }
 
@@ -263,16 +265,16 @@ const valuesHref = lang === 'de' ? `${BASE}werte` : `${BASE}en/values`;
     }
 
     /* Show full text on mobile without hover */
-    .card-full {
-      max-height: none;
-      opacity: 1;
-      margin-bottom: var(--space-sm);
-    }
+    //.card-full {
+    //  max-height: none;
+    //  opacity: 1;
+    //  margin-bottom: var(--space-sm);
+    //}
 
-    .card-link {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    //.card-link {
+      //opacity: 1;
+      //transform: translateX(0);
+    //}
 
   }
 </style>

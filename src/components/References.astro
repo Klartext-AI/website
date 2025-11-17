@@ -108,7 +108,7 @@ const text = content[lang];
   <div class="container-full">
     <div class="section-header fade-in text-center">
       <h2 class="references-title">{text.sectionTitle}</h2>
-      <p class="references-subtitle">{text.subtitle}</p>
+      <p class="section-subtitle references-subtitle">{text.subtitle}</p>
     </div>
 
     <div class="references-glass-container">
@@ -168,8 +168,7 @@ const text = content[lang];
     width: 100%;
   }
 
-  .section-header {
-    margin-bottom: var(--space-2xl);
+  .references .section-header {
     padding: 0 var(--space-md);
   }
 
@@ -193,9 +192,8 @@ const text = content[lang];
   }
 
   .references-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     color: var(--color-text-muted);
-    font-weight: 300;
     max-width: 600px;
     margin: 0 auto;
   }
@@ -306,16 +304,12 @@ const text = content[lang];
       border-radius: 20px;
     }
 
-    .section-header {
+    .references .section-header {
       margin-bottom: var(--space-xl);
     }
 
-    .references-title {
-      font-size: var(--font-size-h3);
-    }
-
     .references-subtitle {
-      font-size: 1rem;
+      font-size: 1.25rem;
     }
 
     .references-banner {
