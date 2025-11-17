@@ -8,8 +8,8 @@ const BASE = import.meta.env.BASE_URL;
 
 const content = {
   de: {
-    sectionTitle: "Vertrauen von führenden Organisationen",
-    subtitle: "Wir arbeiten mit innovativen Organisationen zusammen",
+    sectionTitle: "Unsere Kunden & Partner",
+    subtitle: "Vertrauen von führenden Organisationen",
     references: [
       {
         name: "PwC",
@@ -21,10 +21,15 @@ const content = {
         url: "https://www.know-center.at/en/",
         logo: `${BASE}references/know-center.png`
       },
+      // {
+      //   name: "Blindenverband",
+      //   url: "https://www.blindenverband-wnb.at/baabsv-gmbh/home/",
+      //   logo: `${BASE}references/blindenverband.png`
+      // },
       {
-        name: "Blindenverband",
-        url: "https://www.blindenverband-wnb.at/baabsv-gmbh/home/",
-        logo: `${BASE}references/blindenverband.png`
+        name: "Hilfsgemeinschaft",
+        url: "https://www.hilfsgemeinschaft.at/",
+        logo: `${BASE}references/hilfsgemeinschaft.svg`
       },
       {
         name: "AIM",
@@ -34,7 +39,7 @@ const content = {
       {
         name: "gesetzefinden",
         url: "https://gesetzefinden.at/",
-        logo: `${BASE}references/logo-horizontal.png`
+        logo: `${BASE}references/gesetzefinden.png`
       },
       {
         name: "Stefan Adametz Rechtsanwalt",
@@ -44,18 +49,28 @@ const content = {
       {
         name: "AI Austria",
         url: "https://aiaustria.com/",
-        logo: `${BASE}references/AIA_Logo_pos_ohnesub.svg`
+        logo: `${BASE}references/ai-austria.png`
       },
       {
         name: "FFG",
         url: "https://www.ffg.at/",
         logo: `${BASE}references/FFG_Logo_DE_CMYK.png`
+      },
+      {
+        name: "Codara",
+        url: "https://codara.com/",
+        logo: `${BASE}references/codara.svg`
+      },
+      {
+        name: "RFU",
+        url: "https://www.rfu.at/",
+        logo: `${BASE}references/rfu-research-logo.png`
       }
     ]
   },
   en: {
-    sectionTitle: "Trusted by leading organizations",
-    subtitle: "We work with innovative companies and institutions",
+    sectionTitle: "Our Clients & Partners",
+    subtitle: "Trusted by leading organizations",
     references: [
       {
         name: "PwC",
@@ -67,10 +82,15 @@ const content = {
         url: "https://www.know-center.at/en/",
         logo: `${BASE}references/know-center.png`
       },
+      // {
+      //   name: "Blindenverband",
+      //   url: "https://www.blindenverband-wnb.at/baabsv-gmbh/home/",
+      //   logo: `${BASE}references/blindenverband.png`
+      // },
       {
-        name: "Blindenverband",
-        url: "https://www.blindenverband-wnb.at/baabsv-gmbh/home/",
-        logo: `${BASE}references/blindenverband.png`
+        name: "Hilfsgemeinschaft",
+        url: "https://www.hilfsgemeinschaft.at/",
+        logo: `${BASE}references/hilfsgemeinschaft.svg`
       },
       {
         name: "AIM",
@@ -80,7 +100,7 @@ const content = {
       {
         name: "gesetzefinden",
         url: "https://gesetzefinden.at/",
-        logo: `${BASE}references/logo-horizontal.png`
+        logo: `${BASE}references/gesetzefinden.png`
       },
       {
         name: "Stefan Adametz Rechtsanwalt",
@@ -90,12 +110,22 @@ const content = {
       {
         name: "AI Austria",
         url: "https://aiaustria.com/",
-        logo: `${BASE}references/AIA_Logo_pos_ohnesub.svg`
+        logo: `${BASE}references/ai-austria.png`
       },
       {
         name: "FFG",
         url: "https://www.ffg.at/",
         logo: `${BASE}references/FFG_Logo_DE_CMYK.png`
+      },
+      {
+        name: "Codara",
+        url: "https://codara.com/",
+        logo: `${BASE}references/codara.svg`
+      },
+      {
+        name: "RFU",
+        url: "https://www.rfu.at/en/",
+        logo: `${BASE}references/rfu-research-logo.png`
       }
     ]
   }
@@ -160,7 +190,6 @@ const text = content[lang];
 
 <style>
   .references {
-    padding: var(--space-2xl) 0;
     overflow: hidden;
   }
 
@@ -295,10 +324,6 @@ const text = content[lang];
   }
 
   @media (max-width: 768px) {
-    .references {
-      padding: var(--space-xl) 0;
-    }
-
     .references-glass-container {
       margin: 0 var(--space-md);
       border-radius: 20px;
