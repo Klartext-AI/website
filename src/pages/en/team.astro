@@ -25,6 +25,23 @@ const teamMembers = [
     ]
   },
   {
+    name: "Bruno",
+    role: "Chief Happiness Officer",
+    image: `${BASE}team/bruno.png`,
+    linkedin: "https://www.instagram.com/bruno_der_kleine_baer",
+    summary: [
+      "Cockerpoo, 3.5 years old, certified mood manager.",
+      "Specialized in snack acquisition, scent tracking & strategic power naps.",
+      "Responsible for office security – at least until someone pets him."
+    ],
+    fullBio: [
+      "Bruno is our Chief Happiness Officer and officially responsible for the team's emotional stability. As a 3.5-year-old Cockerpoo, he combines the curiosity of a Cocker Spaniel with the strategic intelligence of a Poodle – a mix that shows above all in perfected naps and highly professional snack monitoring.",
+      "He completed his studies in ‘scent tracking’ with a distinct practical focus. His daily tasks include carpet quality checks, monitoring food smells, and proactively neutralizing stress through targeted tail wagging.",
+      "He also takes on office security: He reliably guards the rooms as long as no person appears with a treat – then the case is re-evaluated.",
+      "In short: Bruno ensures that Klartext AI not only builds intelligent software but also has a smarter work climate."
+    ]
+  },
+  {
     name: "Ondrej Hruby",
     role: "AI & Full-Stack Engineer",
     image: `${BASE}team/ondrej.png`,
@@ -45,7 +62,7 @@ const teamMembers = [
     image: `${BASE}team/felix.png`,
     linkedin: "https://www.linkedin.com/in/f-krause-ai/",
     summary: [
-      "Economics + Data Science, board member AIM tech network (400 experts)",
+      `Economics + Data Science, board member <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AIM</a> tech network (400 experts)`,
       "Analytical thinking meets technical implementation for impactful AI",
       "Work culture based on trust, curiosity, and enjoyment"
     ],
@@ -91,14 +108,16 @@ const teamMembers = [
     image: `${BASE}team/daniel.png`,
     linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/",
     summary: [
-      "TU Wien graduate, 6+ years at Fraunhofer Austria Institute",
-      "Expertise in pioneering AI solutions from prototypes to industrial applications",
-      "Focus on technical excellence and measurable business value"
+      "Founder & Managing Director at Klartext AI, specialized in tailor-made AI solutions.",
+      "8+ years of experience across research, industry, and complex project leadership.",
+      "Technical excellence, strategic thinking, and focus on real business impact."
     ],
     fullBio: [
-      "Already during my studies at TU Wien, I worked for over six years at the renowned Fraunhofer Austria Institute. During this time, I had the privilege of working alongside Europe's leading experts on developing and implementing pioneering AI solutions.",
-      "From innovative prototypes to large-scale industrial applications – I was able to realize projects that serve today as references for the practical application of artificial intelligence.",
-      "These experiences showed me how technical excellence and the highest quality standards create measurable value for companies."
+      "I have been working continuously since the age of 15 – in internships, student jobs, and later in research and industry projects – always with the goal of discovering which tasks truly drive me. This constant practice early on brought me to the intersection of technology, innovation, and real problem solving.",
+      "During my studies at TU Wien, which I completed in 2022 as a Diplom-Ingenieur, I gained deep experience in research and industrial application already in the Bachelor's phase. In the years that followed, this evolved into a professional focus: custom AI and digitalization projects that create measurable enterprise value and solve complex technical challenges.",
+      "At Fraunhofer Austria I led numerous projects – internal and external, often with international consortia and durations of up to three years. My strengths lie in rapid comprehension, strategic thinking, and the ability to turn ideas into functional prototypes and ultimately into industrial applications.",
+      "With Klartext AI I apply exactly this experience: We develop AI software solutions that are individually tailored to companies and generate impact where standard solutions reach their limits. Whether process optimization, automation, decision support, or – as one part of it – accessible communication: What matters is that technology solves real problems and creates sustainable impact.",
+      "Outside of work you can find me in the gym, on the football field, or cooking. In the office, Bruno – our office dog – provides the daily dose of calm and good mood."
     ]
   }
 ];
@@ -476,13 +495,13 @@ const teamMembers = [
 
         if (isExpanded) {
           // Collapse
-          if (fullBioContainer) {
-            fullBioContainer.classList.remove('expanded');
-          }
-          button.setAttribute('data-expanded', 'false');
-          if (expandText) {
-            expandText.textContent = 'Show more';
-          }
+            if (fullBioContainer) {
+              fullBioContainer.classList.remove('expanded');
+            }
+            button.setAttribute('data-expanded', 'false');
+            if (expandText) {
+              expandText.textContent = 'Show more';
+            }
         } else {
           // Close all other expanded sections first
           expandButtons.forEach(otherButton => {
