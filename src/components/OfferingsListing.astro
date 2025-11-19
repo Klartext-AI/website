@@ -85,6 +85,18 @@ const content = {
           "Prompt Injection & Jailbreak-Testing",
           "Security-by-Design Roadmap"
         ]
+      },
+      {
+        id: "hackathons",
+        title: "AI Hackathons",
+        category: "Event",
+        icon: "👥",
+        description: `Hackathons in Partnerschaft mit <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AIM</a> – intern für Ihre Software-Entwickler zum spielerischen Anwenden von AI-Tools und SDKs, extern für Employer Branding und Talent Scouting.`,
+        highlights: [
+          "Interne Events: AI-SDKs & Tools für Entwickler",
+          "Externe Events: Employer Branding & Talent Acquisition",
+          "Zielgruppen: Studenten, Young Professionals, Seniors"
+        ]
       }
     ]
   },
@@ -164,6 +176,18 @@ const content = {
           "Prompt Injection & Jailbreak Testing",
           "Security-by-Design Roadmap"
         ]
+      },
+      {
+        id: "hackathons",
+        title: "AI Hackathons",
+        category: "Event",
+        icon: "👥",
+        description: "Hackathons in partnership with <a href=\"https://ai-mission.eu/\" target=\"_blank\" rel=\"noopener noreferrer\">AIM</a> – internal events for your software developers to playfully get hands-on experience with AI tools and SDKs, external events for employer branding and talent scouting.",
+        highlights: [
+          "Internal Events: AI SDKs & Tools for Developers",
+          "External Events: Employer Branding & Talent Acquisition",
+          "Target Groups: Students, Young Professionals, Seniors"
+        ]
       }
     ]
   }
@@ -177,7 +201,8 @@ const content = {
   'chatgpt-clone': 'shield',
   'inspirational-talks': 'bulb',
   'eu-ai-act-readiness': 'scale',
-  'ai-security-screening': 'lock'
+  'ai-security-screening': 'lock',
+  'hackathons': 'users'
 } as const;
 ---
 
@@ -200,7 +225,7 @@ const content = {
 
           <h2 class="offering-title">{offering.title}</h2>
 
-          <p class="offering-description">{offering.description}</p>
+          <p class="offering-description" set:html={offering.description}></p>
 
           <ul class="offering-highlights">
             {offering.highlights.map((highlight) => (

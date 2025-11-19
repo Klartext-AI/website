@@ -17,6 +17,11 @@ import '../styles/global.css';
 import Navigation from '../components/Navigation.astro';
 const BASE = import.meta.env.BASE_URL;
 const SITE = Astro.site?.toString() ?? 'https://klartext-ai.github.io';
+
+// Tracking configuration (only active in production)
+const isProd = import.meta.env.PROD;
+const COOKIEBOT_ID = import.meta.env.PUBLIC_COOKIEBOT_ID;
+const GA4_ID = import.meta.env.PUBLIC_GA4_ID;
 const url = Astro.url;
 // Determine canonical and language alternates
 const canonicalHref = url?.href ?? SITE;
@@ -71,7 +76,101 @@ const locale = lang === 'en' ? 'en_US' : 'de_DE';
   <link rel="alternate" hreflang="x-default" href={deHref}>
 
   <title>{title}</title>
-  
+
+  <!-- Cookie Consent & Analytics (Production Only) -->
+  {isProd && COOKIEBOT_ID && (
+    <>
+      {/* Cookiebot - MUST be first script for proper consent management */}
+      <script
+        id="Cookiebot"
+        is:inline
+        src="https://consent.cookiebot.com/uc.js"
+        data-cbid={COOKIEBOT_ID}
+        data-blockingmode="auto"
+        type="text/javascript">
+      </script>
+
+      {/* Custom script to control banner visibility on scroll */}
+      <script is:inline>
+        // Hide Cookiebot banner initially, show on scroll
+        (function() {
+          let hasShownBanner = false;
+
+          function hideBanner() {
+            const banner = document.getElementById('CybotCookiebotDialog');
+            if (banner && !hasShownBanner) {
+              banner.style.display = 'none';
+            }
+          }
+
+          function showBanner() {
+            const banner = document.getElementById('CybotCookiebotDialog');
+            if (banner && !hasShownBanner) {
+              banner.style.display = 'block';
+              hasShownBanner = true;
+            }
+          }
+
+          // Hide banner on page load
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', hideBanner);
+          } else {
+            hideBanner();
+          }
+
+          // Show banner when scrolling past 100px
+          window.addEventListener('scroll', function() {
+            if (window.scrollY > 100 && !hasShownBanner) {
+              showBanner();
+            }
+          });
+
+          // Observe for when Cookiebot creates the dialog (in case it loads after scroll)
+          const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+              mutation.addedNodes.forEach(function(node) {
+                if (node.id === 'CybotCookiebotDialog') {
+                  if (window.scrollY <= 100 && !hasShownBanner) {
+                    node.style.display = 'none';
+                  }
+                }
+              });
+            });
+          });
+
+          observer.observe(document.body, { childList: true, subtree: true });
+        })();
+      </script>
+    </>
+  )}
+
+  {isProd && GA4_ID && COOKIEBOT_ID && (
+    <>
+      {/* Google Analytics 4 - Controlled by Cookiebot via prior consent */}
+      <script
+        async
+        is:inline
+        type="text/plain"
+        data-cookieconsent="statistics"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}>
+      </script>
+
+      <script
+        is:inline
+        type="text/plain"
+        data-cookieconsent="statistics"
+        set:html={`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA4_ID}', {
+            anonymize_ip: true
+          });
+        `}>
+      </script>
+    </>
+  )}
+
   <!-- Structured Data: Organization + WebSite + WebPage -->
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
     '@context': 'https://schema.org',
@@ -108,6 +207,196 @@ const locale = lang === 'en' ? 'en_US' : 'de_DE';
       }
     ]
   })}></script>
+
+  <!-- Cookiebot Banner Custom Styling -->
+  <style is:global>
+    /* Main dialog container - glassmorphism style */
+    #CybotCookiebotDialog {
+      background: var(--glass-bg) !important;
+      backdrop-filter: var(--glass-blur) !important;
+      -webkit-backdrop-filter: var(--glass-blur) !important;
+      border: 1px solid var(--glass-border) !important;
+      box-shadow: var(--glass-shadow) !important;
+      border-radius: 16px !important;
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text', 'Segoe UI', system-ui, sans-serif !important;
+      max-width: 520px !important;
+      padding: var(--space-md) !important;
+      z-index: 999 !important;
+      animation: slideUpCookie 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    }
+
+    /* Body content area */
+    #CybotCookiebotDialogBodyContent {
+      font-size: 1rem !important;
+      line-height: 1.6 !important;
+      color: var(--color-text-body) !important;
+      font-weight: 400 !important;
+    }
+
+    /* Headline/title */
+    #CybotCookiebotDialogBodyContentTitle {
+      font-size: 1.5rem !important;
+      font-weight: 500 !important;
+      color: var(--color-text-dark) !important;
+      margin-bottom: var(--space-sm) !important;
+      letter-spacing: -0.01em !important;
+    }
+
+    /* Links within the banner */
+    #CybotCookiebotDialog a {
+      color: var(--color-blue) !important;
+      text-decoration: none !important;
+      border-bottom: 1px solid transparent !important;
+      transition: border-color 0.3s ease !important;
+    }
+
+    #CybotCookiebotDialog a:hover {
+      border-bottom-color: var(--color-blue) !important;
+    }
+
+    /* Button styling - primary accept button */
+    #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll,
+    .CybotCookiebotDialogBodyButton[data-action="accept-all"] {
+      background: var(--color-blue) !important;
+      color: white !important;
+      border: none !important;
+      border-radius: 12px !important;
+      padding: 0.75rem 1.5rem !important;
+      font-size: 1rem !important;
+      font-weight: 500 !important;
+      cursor: pointer !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      box-shadow: 0 4px 12px rgba(36, 121, 190, 0.2) !important;
+    }
+
+    #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll:hover,
+    .CybotCookiebotDialogBodyButton[data-action="accept-all"]:hover {
+      background: rgba(36, 121, 190, 0.9) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 20px rgba(36, 121, 190, 0.3) !important;
+    }
+
+    /* Secondary buttons (decline, customize) */
+    #CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll,
+    #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection,
+    .CybotCookiebotDialogBodyButton[data-action="decline"],
+    .CybotCookiebotDialogBodyButton[data-action="customize"] {
+      background: transparent !important;
+      color: var(--color-text-body) !important;
+      border: 2px solid var(--color-blue) !important;
+      border-radius: 12px !important;
+      padding: 0.75rem 1.5rem !important;
+      font-size: 1rem !important;
+      font-weight: 500 !important;
+      cursor: pointer !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    #CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll:hover,
+    #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection:hover,
+    .CybotCookiebotDialogBodyButton[data-action="decline"]:hover,
+    .CybotCookiebotDialogBodyButton[data-action="customize"]:hover {
+      background: rgba(36, 121, 190, 0.05) !important;
+      border-color: var(--color-blue-accent) !important;
+      color: var(--color-blue) !important;
+    }
+
+    /* Button container spacing */
+    #CybotCookiebotDialogBodyLevelButtons {
+      display: flex !important;
+      gap: var(--space-sm) !important;
+      margin-top: var(--space-md) !important;
+      flex-wrap: wrap !important;
+    }
+
+    /* Details/expanded view styling */
+    #CybotCookiebotDialogDetail {
+      background: rgba(255, 255, 255, 0.5) !important;
+      border-radius: 12px !important;
+      padding: var(--space-md) !important;
+      margin-top: var(--space-md) !important;
+    }
+
+    /* Checkbox styling in details view */
+    .CybotCookiebotDialogBodyLevelButtonWrapper input[type="checkbox"] {
+      accent-color: var(--color-blue) !important;
+      width: 20px !important;
+      height: 20px !important;
+      cursor: pointer !important;
+    }
+
+    /* Tab buttons in details view */
+    .CybotCookiebotDialogDetailBodyContentTab {
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 2px solid transparent !important;
+      color: var(--color-text-muted) !important;
+      padding: 0.5rem 1rem !important;
+      font-weight: 500 !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .CybotCookiebotDialogDetailBodyContentTab[aria-selected="true"] {
+      border-bottom-color: var(--color-blue) !important;
+      color: var(--color-blue) !important;
+    }
+
+    .CybotCookiebotDialogDetailBodyContentTab:hover {
+      color: var(--color-blue) !important;
+    }
+
+    /* Close button (X) styling if present */
+    #CybotCookiebotDialogBodyButtonClose {
+      background: transparent !important;
+      border: none !important;
+      color: var(--color-text-muted) !important;
+      font-size: 1.5rem !important;
+      cursor: pointer !important;
+      transition: color 0.3s ease !important;
+      padding: 0.25rem !important;
+    }
+
+    #CybotCookiebotDialogBodyButtonClose:hover {
+      color: var(--color-blue) !important;
+    }
+
+    /* Smooth entrance animation for the banner */
+    @keyframes slideUpCookie {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+      #CybotCookiebotDialog {
+        max-width: calc(100vw - var(--space-md) * 2) !important;
+        padding: var(--space-sm) !important;
+        border-radius: 12px !important;
+      }
+
+      #CybotCookiebotDialogBodyContentTitle {
+        font-size: 1.25rem !important;
+      }
+
+      #CybotCookiebotDialogBodyLevelButtons {
+        flex-direction: column !important;
+      }
+
+      #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll,
+      #CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll,
+      #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection,
+      .CybotCookiebotDialogBodyButton {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <Navigation lang={lang} alwaysVisible={alwaysShowNav} />
