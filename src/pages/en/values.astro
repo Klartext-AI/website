@@ -899,7 +899,9 @@ const designPrinciples = content.valuePosts.filter((post) =>
             return;
           }
 
-          const element = entry.target;
+          const target = entry.target;
+          if (!(target instanceof HTMLElement)) return;
+          const element = target;
           element.style.opacity = '1';
           element.style.transform = 'translateY(0)';
         });

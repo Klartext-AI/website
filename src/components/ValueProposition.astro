@@ -160,7 +160,7 @@ const valuesHref = lang === 'de' ? `${BASE}values` : `${BASE}en/values`;
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setupCards);
       else setupCards();
 
-      const handleViewportChange = (ev) => {
+      const handleViewportChange = (ev: MediaQueryListEvent) => {
         // When leaving mobile, collapse all expanded cards
         if (!ev.matches) {
           document.querySelectorAll('.value-card.expanded').forEach(expEl => {
@@ -169,7 +169,14 @@ const valuesHref = lang === 'de' ? `${BASE}values` : `${BASE}en/values`;
         }
       };
 
-      try { mq.addEventListener('change', handleViewportChange); } catch { mq.addListener(handleViewportChange); }
+      if ('addEventListener' in mq) {
+        mq.addEventListener('change', handleViewportChange);
+      } else {
+        const legacyMq = mq as MediaQueryList & {
+          addListener?: (listener: (ev: MediaQueryListEvent) => void) => void;
+        };
+        legacyMq.addListener?.(handleViewportChange);
+      }
     })();
   </script>
 </section>
