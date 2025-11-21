@@ -8,12 +8,12 @@ const { lang = 'de' } = Astro.props;
 const content = {
   de: {
     main: "We don't build chatbots.",
-    subtitle: "Wir bauen AI mit Klarheit.",
+    subtitle: "Dein Partner für individuelle KI-Lösungen mit messbarem Mehrwert.",
     scrollHint: "Scroll"
   },
   en: {
     main: "We don't build chatbots.",
-    subtitle: "We build AI with clarity.",
+    subtitle: "Your partner for tailored AI solutions that deliver tangible results.",
     scrollHint: "Scroll"
   }
 };
@@ -68,11 +68,12 @@ const BASE = import.meta.env.BASE_URL;
 
   .hero-logo-wrapper {
     position: absolute;
-    top: var(--space-md);
+    top: 5rem; /* Increased from var(--space-md) to avoid navigation overlap */
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
     animation: logoFadeIn 1.5s ease 0.5s forwards;
+    z-index: 100; /* Below navigation but above other content */
   }
 
   @keyframes logoFadeIn {
@@ -228,7 +229,7 @@ const BASE = import.meta.env.BASE_URL;
     }
 
     .hero-logo-wrapper {
-      top: var(--space-sm);
+      top: 4.5rem; /* Adjusted for mobile to avoid navigation overlap */
     }
 
     .hero-logo {

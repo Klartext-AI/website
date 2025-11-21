@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../components/BlogPostDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Responsibility in AI: Progress that includes everyone | Klartext AI';
+const description =
+  'What responsibility means to us – from voluntary engagement and community work to long-term partnerships with real impact goals.';
+
+const fullContent = `
+
+<h4>Why responsibility in AI is not a “nice-to-have”</h4>
+
+<p>AI is not a neutral technology. It scales decisions and structures – and with them, errors and inequalities. Anyone who builds and deploys AI automatically influences:</p>
+
+<ul>
+  <li><strong>People</strong> – their workflows, decisions, and everyday lives</li>
+  <li><strong>Organisations</strong> – which processes are strengthened or displaced</li>
+  <li><strong>Society</strong> – how we deal with knowledge, power, and resources</li>
+</ul>
+
+<p><strong>Responsibility for us means:</strong> not ignoring this impact, but actively shaping it.</p>
+
+<blockquote>
+  “Responsibility means shaping technology for the common good – and bringing society along every step of the way.” – Ruben
+</blockquote>
+
+<h4>From community to policy: responsibility on multiple levels</h4>
+
+<p>Responsibility is not an abstract value for us, but something that shows up in concrete roles and formats:</p>
+
+<ul>
+  <li><strong>AI Austria:</strong> Designing and running open community formats where companies, researchers, and interested people talk about opportunities, risks, and practical applications of AI.</li>
+  <li><strong>European AI Forum:</strong> Helping ensure that perspectives from Austria and from practice feed into European AI debates and policy processes – from the grassroots to political decision-making.</li>
+  <li><strong>AI Impact Mission:</strong> Building and moderating a network of more than 500 European AI experts who exchange regularly and run hackathons focused purely on impact topics – free of charge, collaborative, and values-driven.</li>
+</ul>
+
+<p>This creates an ecosystem in which AI is not only discussed, but actively and collectively shaped in a responsible way.</p>
+
+<h4>Why voluntary engagement is part of our strategy</h4>
+
+<p>Voluntary work is not a “side project” for us – it is part of our identity:</p>
+
+<ul>
+  <li><strong>Open events</strong> instead of closed doors</li>
+  <li><strong>Knowledge sharing</strong> instead of pure product marketing</li>
+  <li><strong>Dialogue formats</strong> instead of one-way communication</li>
+</ul>
+
+<p>We invest time and energy in formats where people can ask questions, voice uncertainties, and learn together. Because that is the only way AI literacy can reach a broad audience – not just early adopters.</p>
+
+<h4>Partnerships instead of one-off projects</h4>
+
+<p>Responsibility also shows in how we work with our clients. We are not looking for quick “one-off projects”, but for:</p>
+
+<ul>
+  <li><strong>Long-term partnerships</strong> that grow with the organisation’s needs</li>
+  <li><strong>Realistic roadmaps</strong> instead of overambitious promises</li>
+  <li><strong>Measurable impact</strong> that makes sense not only technically, but also organisationally</li>
+</ul>
+
+<p>An AI system is never “finished”. It lives from maintenance, feedback, and further development. Responsibility for us means taking this long-term perspective into account from the very beginning – technically, organisationally, and on a human level.</p>
+
+<h4>Responsibility in product development</h4>
+
+<p>Responsibility is also a guiding principle in how we design AI systems:</p>
+
+<ul>
+  <li><strong>Privacy by Design:</strong> Data protection is part of the core architecture, not an optional add-on.</li>
+  <li><strong>Transparency about capabilities:</strong> We make it clear what a system can do – and what it cannot.</li>
+  <li><strong>Human-in-the-loop:</strong> Professionals stay in control; AI provides support.</li>
+  <li><strong>Evaluation over gut feeling:</strong> Decisions are measured, not guessed.</li>
+</ul>
+
+<p>This is how we ensure that AI does not become an end in itself, but actually helps in concrete ways – and can be corrected if necessary.</p>
+
+<h4>Bringing society along means creating spaces for dialogue</h4>
+
+<p>Many concerns around AI arise from a lack of transparency: black-box models, unclear data foundations, and decisions that cannot be understood. Responsibility also means closing this gap:</p>
+
+<ul>
+  <li>Formats where <strong>questions and criticism are explicitly welcome</strong></li>
+  <li>Language that is <strong>understandable</strong> and not only technically correct</li>
+  <li>Materials that show <strong>practical examples</strong> instead of only abstract concepts</li>
+</ul>
+
+<p>Our goal: AI solutions that not only work technically, but can be explained, contextualised, and further developed together.</p>
+
+<h4>What responsibility means for our collaborations</h4>
+
+<p>When we work with organisations, responsibility means something very concrete to us:</p>
+
+<ul>
+  <li><strong>We are open about what is (not yet) possible.</strong></li>
+  <li><strong>We prefer clean, smaller solutions</strong> over impressive but fragile setups.</li>
+  <li><strong>We think about the consequences</strong> – for users, teams, and processes.</li>
+  <li><strong>We plan with you</strong> instead of planning over your heads.</li>
+</ul>
+
+<p>Responsibility is not a label you attach to yourself, but a daily practice – in decisions, in priorities, and in how we deal with technology and people.</p>
+
+<p><strong>Our compass remains clear:</strong> progress only makes sense if it strengthens people, makes organisations more resilient, and brings society as a whole along.</p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="Responsibility in AI: Progress that includes everyone"
+    excerpt="Why responsibility for us is not a buzzword, but daily practice in community work, product development, and client projects."
+    fullExcerpt="Responsibility for us means shaping technology for the common good – and bringing society along every step of the way. From voluntary engagement at AI Austria and AI Impact Mission to long-term partnerships with our clients: we understand responsibility as a combination of transparency, dialogue, and clear technical principles."
+    fullContent={fullContent}
+    category="Philosophy"
+    readTime="6 min"
+    date="2024-12-20"
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

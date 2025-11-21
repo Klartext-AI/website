@@ -5,21 +5,35 @@ import Icon from '../components/Icon.astro';
 import FinalCTA from '../components/FinalCTA.astro';
 
 const title = 'Unsere Werte - Klartext AI';
-const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI leiten: Domain-Driven Design, Evaluation-First, Privacy by Design und europäische KI-Souveränität.';
+const description =
+  'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI leiten: Verantwortung, Thought Leadership, fachliche Exzellenz und klare Design Principles.';
 
-  const BASE = import.meta.env.BASE_URL;
-  
-  const content = {
+const BASE = import.meta.env.BASE_URL;
+
+const content = {
   pageTitle: "Unsere Werte",
-  pageSubtitle: "Die Prinzipien, die unsere Arbeit leiten",
-  introText: "Bei Klartext AI sind Werte keine Marketing-Schlagworte, sondern gelebte Praxis. Sie bestimmen, wie wir Projekte angehen, wie wir Technologie einsetzen und welche Verantwortung wir übernehmen. Jeder dieser Werte ist in unserer täglichen Arbeit verankert – von der ersten Konzeption bis zum produktiven Betrieb.",
+  pageSubtitle: "Die Prinzipien und Haltungen, die unsere Arbeit leiten",
+
+  designPrinciplesTitle: "Our Design Principles",
+  designPrinciplesSubtitle:
+    "Die technischen Leitlinien, nach denen wir KI-Systeme entwerfen und betreiben.",
+
+  valueSectionTitle: "Unsere Werte",
+  valueSectionSubtitle:
+    "Werte, die unser Handeln prägen – in Community-Arbeit, Projekten und langfristigen Partnerschaften.",
+
+  blogImpactTitle: "So prägen Werte & Prinzipien unsere Arbeit",
+  blogImpactSubtitle:
+    "Ausgewählte Blogartikel, Case Studies und Feldberichte – direkt aus unserer Arbeit mit Kund:innen, Partnern und Community.",
 
   valuePosts: [
     {
       id: "domain-driven-design-rfu",
       title: "Domain-Driven Design in der Praxis",
-      excerpt: "Wir denken in Industrien, nicht in Modellen. Domänenwissen ist der Schlüssel zu erfolgreichen KI-Systemen.",
-      fullExcerpt: "Der RFU Case ist ein perfektes Beispiel dafür, wie Domain-Driven Design in der Praxis funktioniert. Anstatt mit einer vorgefertigten Lösung zu starten, haben wir uns intensiv mit den Geschäftsprozessen unseres Kunden aus dem Bankendienstleistungssektor auseinandergesetzt. Das Ergebnis: Eine KI-Lösung, die nicht nur funktioniert, sondern die Sprache der Domäne spricht und 80% der manuellen Arbeit automatisiert – mit einem Break-even von nur 1,5 Monaten.",
+      excerpt:
+        "Wir denken in Industrien, nicht in Modellen. Domänenwissen ist der Schlüssel zu erfolgreichen KI-Systemen.",
+      fullExcerpt:
+        "Der RFU Case ist ein perfektes Beispiel dafür, wie Domain-Driven Design in der Praxis funktioniert. Anstatt mit einer vorgefertigten Lösung zu starten, haben wir uns intensiv mit den Geschäftsprozessen unseres Kunden aus dem Bankendienstleistungssektor auseinandergesetzt. Das Ergebnis: Eine KI-Lösung, die nicht nur funktioniert, sondern die Sprache der Domäne spricht und 80% der manuellen Arbeit automatisiert – mit einem Break-even von nur 1,5 Monaten.",
       category: "Case Study",
       readTime: "8 min",
       date: "2025-01-10",
@@ -28,8 +42,10 @@ const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI
     {
       id: "evaluation-key-to-ai",
       title: "Evaluation-Driven Engineering",
-      excerpt: "Keine Entscheidung ohne Daten, keine Annahme ohne Validierung. Systematische Evaluierung ist der Schlüssel zum Erfolg.",
-      fullExcerpt: "In der Welt der künstlichen Intelligenz gibt es einen fundamentalen Unterschied zwischen einem funktionierenden Prototyp und einem produktiven System. Dieser Unterschied liegt nicht in der Technologie selbst, sondern in der Art und Weise, wie wir ihre Leistung messen, verstehen und kontinuierlich verbessern. Evaluation-Driven Engineering bedeutet: keine Entscheidung ohne Daten, keine Annahme ohne Validierung.",
+      excerpt:
+        "Keine Entscheidung ohne Daten, keine Annahme ohne Validierung. Systematische Evaluierung ist der Schlüssel zum Erfolg.",
+      fullExcerpt:
+        "In der Welt der künstlichen Intelligenz gibt es einen fundamentalen Unterschied zwischen einem funktionierenden Prototyp und einem produktiven System. Dieser Unterschied liegt nicht in der Technologie selbst, sondern in der Art und Weise, wie wir ihre Leistung messen, verstehen und kontinuierlich verbessern. Evaluation-Driven Engineering bedeutet: keine Entscheidung ohne Daten, keine Annahme ohne Validierung.",
       category: "Philosophie",
       readTime: "5 min",
       date: "2025-01-15",
@@ -38,8 +54,10 @@ const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI
     {
       id: "end-to-end-ownership",
       title: "End-to-End Ownership",
-      excerpt: "Ein Team, volle Verantwortung – von der Idee bis zum produktiven Betrieb. Keine POCs ohne Zukunft.",
-      fullExcerpt: "Viele KI-Projekte enden als Proof of Concept in einer Schublade. Wir gehen einen anderen Weg: End-to-End Ownership bedeutet, dass wir von der ersten Hypothese bis zum produktiven Deployment Verantwortung übernehmen. Ein Team, volle Verantwortung, echte Implementierung – keine Übergaben, keine Wissensverluste, keine POCs ohne Zukunft.",
+      excerpt:
+        "Ein Team, volle Verantwortung – von der Idee bis zum produktiven Betrieb. Keine POCs ohne Zukunft.",
+      fullExcerpt:
+        "Viele KI-Projekte enden als Proof of Concept in einer Schublade. Wir gehen einen anderen Weg: End-to-End Ownership bedeutet, dass wir von der ersten Hypothese bis zum produktiven Deployment Verantwortung übernehmen. Ein Team, volle Verantwortung, echte Implementierung – keine Übergaben, keine Wissensverluste, keine POCs ohne Zukunft.",
       category: "Philosophie",
       readTime: "7 min",
       date: "2024-12-28",
@@ -48,8 +66,10 @@ const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI
     {
       id: "privacy-by-design",
       title: "Privacy by Design",
-      excerpt: "Datenschutz ist kein nachträgliches Feature, sondern Teil der Grundarchitektur. DSGVO-Konformität von Tag eins.",
-      fullExcerpt: "Privacy by Design ist kein nachträgliches Feature, sondern eine fundamentale Designentscheidung. In einer Zeit, in der Datenschutz und KI oft als Widerspruch dargestellt werden, zeigen wir, dass beides Hand in Hand gehen kann – und muss. DSGVO-Konformität, EU AI Act Compliance und europäisches Hosting sind nicht optional, sondern integraler Bestandteil unserer Architektur von Tag eins an.",
+      excerpt:
+        "Datenschutz ist kein nachträgliches Feature, sondern Teil der Grundarchitektur. DSGVO-Konformität von Tag eins.",
+      fullExcerpt:
+        "Privacy by Design ist kein nachträgliches Feature, sondern eine fundamentale Designentscheidung. In einer Zeit, in der Datenschutz und KI oft als Widerspruch dargestellt werden, zeigen wir, dass beides Hand in Hand gehen kann – und muss. DSGVO-Konformität, EU AI Act Compliance und europäisches Hosting sind nicht optional, sondern integraler Bestandteil unserer Architektur von Tag eins an.",
       category: "Technical",
       readTime: "6 min",
       date: "2025-01-05",
@@ -58,8 +78,10 @@ const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI
     {
       id: "european-ai-sovereignty",
       title: "Europäische KI-Souveränität",
-      excerpt: "Innovation mit Verantwortung. Europäische Werte sind nicht Ballast, sondern Wettbewerbsvorteile.",
-      fullExcerpt: "Europa steht vor der Chance, eine dritte Antwort im globalen KI-Diskurs zu geben – eine, die auf Vertrauen, Transparenz und Exzellenz basiert. Während die USA auf schnelles Wachstum setzen und China auf technologischen Fortschritt ohne regulatorische Schranken, können wir Innovation mit Verantwortung verbinden. Europäisches Hosting, DSGVO-Konformität und nachvollziehbare Systeme sind nicht Hindernisse, sondern Wettbewerbsvorteile.",
+      excerpt:
+        "Innovation mit Verantwortung. Europäische Werte sind nicht Ballast, sondern Wettbewerbsvorteile.",
+      fullExcerpt:
+        "Europa steht vor der Chance, eine dritte Antwort im globalen KI-Diskurs zu geben – eine, die auf Vertrauen, Transparenz und Exzellenz basiert. Während die USA auf schnelles Wachstum setzen und China auf technologische Entwicklungen ohne vergleichbare regulatorische Schranken, können wir Innovation mit Verantwortung verbinden. Europäisches Hosting, DSGVO-Konformität und nachvollziehbare Systeme sind nicht Hindernisse, sondern Wettbewerbsvorteile.",
       category: "Philosophie",
       readTime: "6 min",
       date: "2024-12-20",
@@ -67,19 +89,132 @@ const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI
     }
   ],
 
+  // Core values overview cards (unter dem Heading, mit Bulletpoints)
+  cards: [
+    {
+      title: "Verantwortung",
+      short: "Fortschritt, der alle mitnimmt.",
+      link: "values-verantwortung",
+      bullets: [
+        "Ehrenamtliches Engagement von Community bis Politik",
+        "Offene Formate für Dialog, Transparenz und Wissensvermittlung",
+        "Langfristige Partnerschaften statt einmaliger Projekte"
+      ]
+    },
+    {
+      title: "Thought Leadership",
+      short: "Kompetenz mit Weitblick.",
+      link: "values-thought-leadership",
+      bullets: [
+        "Verbindung von Forschung, Community und Praxis",
+        "Offener Wissensaustausch statt Hype & Buzzwords",
+        "Evidenzbasierte Orientierung für Unternehmen & Institutionen"
+      ]
+    },
+    {
+      title: "Fachliche Exzellenz",
+      short: "Technologie auf höchstem Niveau.",
+      link: "values-fachliche-exzellenz",
+      bullets: [
+        "Privacy by Design & europäische Infrastruktur",
+        "Evaluation-Driven Engineering mit klaren Metriken",
+        "Domain-Driven Design & End-to-End Ownership"
+      ]
+    }
+  ],
+
+  // Blog posts for the scrolling bar (DE-Version)
+  blogPosts: [
+    {
+      id: "mit-genai-divide",
+      title: "Die GenAI-Kluft: Warum 95% der AI-Projekte scheitern",
+      excerpt:
+        "MITs State of AI in Business Report 2025 zeigt: Die meisten GenAI-Initiativen liefern keine messbare Geschäftswirkung.",
+      category: "Philosophie",
+      readTime: "7 min",
+      date: "2025-01-20"
+    },
+    {
+      id: "evaluation-key-to-ai",
+      title: "Warum Evaluation der Schlüssel zu erfolgreicher AI ist",
+      excerpt:
+        "Die meisten AI-Projekte scheitern nicht an der Technologie, sondern an fehlender systematischer Evaluierung.",
+      category: "Philosophie",
+      readTime: "5 min",
+      date: "2025-01-15"
+    },
+    {
+      id: "domain-driven-design-rfu",
+      title: "Domain-Driven Design in der Praxis: Der RFU Case",
+      excerpt:
+        "Wie wir durch tiefes Domänenverständnis 80% Automatisierung erreicht haben.",
+      category: "Case Study",
+      readTime: "8 min",
+      date: "2025-01-10"
+    },
+    {
+      id: "privacy-by-design",
+      title: "Privacy by Design: Mehr als nur Compliance",
+      excerpt:
+        "Warum Datenschutz von Anfang an Teil der Architektur sein muss.",
+      category: "Technical",
+      readTime: "6 min",
+      date: "2025-01-05"
+    },
+    {
+      id: "end-to-end-ownership",
+      title: "End-to-End Ownership: Von der Idee bis zum Deployment",
+      excerpt:
+        "Warum wir keine POCs bauen, sondern echte, produktive Systeme liefern.",
+      category: "Philosophie",
+      readTime: "7 min",
+      date: "2024-12-28"
+    },
+    {
+      id: "european-ai-sovereignty",
+      title: "Europäische KI-Souveränität: Warum der Standort zählt",
+      excerpt:
+        "Innovation mit Verantwortung – warum europäische Werte in der KI-Entwicklung wichtig sind.",
+      category: "Philosophie",
+      readTime: "6 min",
+      date: "2024-12-20"
+    },
+    {
+      id: "agile-ai-development",
+      title: "Agile AI Development: Kleine Zyklen, große Wirkung",
+      excerpt:
+        "Wie iterative Entwicklung und schnelles Feedback zu besseren KI-Systemen führen.",
+      category: "Technical",
+      readTime: "5 min",
+      date: "2024-12-15"
+    }
+  ],
+
   ctaTitle: "Mehr Insights?",
-  ctaText: "Entdecken Sie alle unsere Blog-Beiträge mit Learnings, Philosophie und Feldberichten aus der Praxis.",
-    ctaButton: "Zum Blog",
-    readMore: "Weiterlesen"
-  } as const;
-  
-  const valueIcons = {
-    'domain-driven-design-rfu': 'domain',
-    'evaluation-key-to-ai': 'evaluation',
-    'end-to-end-ownership': 'route',
-    'privacy-by-design': 'shield',
-    'european-ai-sovereignty': 'users'
-  } as const;
+  ctaText:
+    "Entdecken Sie alle unsere Blog-Beiträge mit Learnings, Philosophie und Feldberichten aus der Praxis.",
+  ctaButton: "Zum Blog",
+  readMore: "Weiterlesen"
+} as const;
+
+const valueIcons = {
+  'domain-driven-design-rfu': 'domain',
+  'evaluation-key-to-ai': 'evaluation',
+  'end-to-end-ownership': 'route',
+  'privacy-by-design': 'shield',
+  'european-ai-sovereignty': 'users'
+} as const;
+
+// Design principles shown as cards (Subset)
+const designPrincipleIds = [
+  'domain-driven-design-rfu',
+  'evaluation-key-to-ai',
+  'privacy-by-design'
+];
+
+const designPrinciples = content.valuePosts.filter((post) =>
+  designPrincipleIds.includes(post.id)
+);
 ---
 
 <BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
@@ -90,37 +225,191 @@ const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI
         <p class="values-page-subtitle">{content.pageSubtitle}</p>
       </div>
 
-      <div class="values-intro fade-in glass-card">
-        <p class="intro-text">{content.introText}</p>
+      {/* Core Values Overview unter dem Heading */}
+      <section class="core-values-overview fade-in">
+        <div class="core-values-grid">
+          {content.cards.map((card, index) => (
+            <a
+              href={`${BASE}${card.link}`}
+              class="glass-card core-value-card"
+            >
+              <div class="core-card-header">
+                <div class="core-card-header">
+                <div class="core-card-icon">
+                  {index === 0 && (
+                    <Icon name="users" size={40} />
+                  )}
+                  {index === 1 && (
+                    <Icon name="rocket" size={40} />
+                  )}
+                  {index === 2 && (
+                    <Icon name="graduation" size={40} />
+                  )}
+                </div>
+                
+              </div>
+
+
+                <h3 class="core-card-title">{card.title}</h3>
+                <p class="core-card-short">{card.short}</p>
+              </div>
+              <ul class="core-card-bullets">
+                {card.bullets.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* Übergang zu Design Principles */}
+      <div class="values-transition text-center fade-in">
+        <p>
+          Aus diesen Werten leiten sich unsere Design Principles ab – die
+          technischen Leitlinien, nach denen wir KI-Systeme entwerfen,
+          evaluieren und betreiben.
+        </p>
       </div>
 
-        <div class="values-posts">
-          {content.valuePosts.map((post, index) => (
-            <article class="value-post-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
+      {/* Design Principles Section */}
+      <section class="design-principles-section">
+        <div class="section-header text-center fade-in">
+          <h2 class="design-principles-title">{content.designPrinciplesTitle}</h2>
+          <p class="design-principles-subtitle">
+            {content.designPrinciplesSubtitle}
+          </p>
+        </div>
+
+        <div class="values-posts principles-grid">
+          {designPrinciples.map((post, index) => (
+            <article
+              class="value-post-card glass-card fade-in"
+              style={`animation-delay: ${index * 0.1}s`}
+            >
               <div class="post-icon">
                 <Icon name={valueIcons[post.id]} size={32} />
               </div>
 
-            <div class="post-meta">
-              <span class="post-category">{post.category}</span>
-              <span class="post-read-time">{post.readTime}</span>
+              <div class="post-meta">
+                <span class="post-category">{post.category}</span>
+                <span class="post-read-time">{post.readTime}</span>
+              </div>
+
+              <h2 class="post-title">{post.title}</h2>
+              <p class="post-excerpt">{post.excerpt}</p>
+
+              <a href={`${BASE}blog/${post.id}`} class="post-link">
+                {content.readMore}
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M6 12l4-4-4-4" />
+                </svg>
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Scrolling Blog Impact Section */}
+      <section class="values-blog-impact">
+        <div class="container-full">
+          <div class="section-header text-center fade-in">
+            <h2 class="values-blog-title">{content.blogImpactTitle}</h2>
+            <p class="values-blog-subtitle">
+              {content.blogImpactSubtitle}
+            </p>
+          </div>
+
+          <div class="values-blog-glass-container">
+            <div class="values-blog-banner-wrapper">
+              <div class="values-blog-banner">
+                {/* First set of blog cards */}
+                {content.blogPosts.map((post) => (
+                  <article class="values-blog-item">
+                    <div class="values-blog-card">
+                      <div class="values-blog-meta">
+                        <span class="values-blog-category">
+                          {post.category}
+                        </span>
+                        <span class="values-blog-readtime">
+                          {post.readTime}
+                        </span>
+                      </div>
+                      <h3 class="values-blog-card-title">{post.title}</h3>
+                      <p class="values-blog-card-excerpt">
+                        {post.excerpt}
+                      </p>
+                      <a
+                        href={`${BASE}blog/${post.id}`}
+                        class="values-blog-link"
+                      >
+                        {content.readMore}
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path d="M6 12l4-4-4-4" />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                ))}
+
+                {/* Duplicate set for seamless loop */}
+                {content.blogPosts.map((post) => (
+                  <article class="values-blog-item">
+                    <div class="values-blog-card">
+                      <div class="values-blog-meta">
+                        <span class="values-blog-category">
+                          {post.category}
+                        </span>
+                        <span class="values-blog-readtime">
+                          {post.readTime}
+                        </span>
+                      </div>
+                      <h3 class="values-blog-card-title">{post.title}</h3>
+                      <p class="values-blog-card-excerpt">
+                        {post.excerpt}
+                      </p>
+                      <a
+                        href={`${BASE}blog/${post.id}`}
+                        class="values-blog-link"
+                      >
+                        {content.readMore}
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path d="M6 12l4-4-4-4" />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
-
-            <h2 class="post-title">{post.title}</h2>
-            <p class="post-excerpt">{post.excerpt}</p>
-
-            <a href={`${BASE}blog/${post.id}`} class="post-link">
-              {content.readMore}
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M6 12l4-4-4-4"/>
-              </svg>
-            </a>
-          </article>
-        ))}
-      </div>
-
+          </div>
+          
+        </div>
+      </section>
     </div>
   </section>
+
   <FinalCTA
     lang="de"
     headline={content.ctaTitle}
@@ -162,28 +451,124 @@ const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI
     line-height: 1.6;
   }
 
-  .values-intro {
-    max-width: 900px;
-    margin: 0 auto var(--space-2xl);
-    padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.65) !important;
-    backdrop-filter: blur(20px) saturate(160%);
+  /* Core values overview */
+
+  .core-values-overview {
+    margin: var(--space-2xl) 0 var(--space-xl);
   }
 
-  .intro-text {
-    font-size: 1.15rem;
-    color: var(--color-text-body);
-    line-height: 1.8;
+  .core-values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-md);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .core-value-card {
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.65) !important;
+    backdrop-filter: blur(18px) saturate(160%);
+    border-radius: 18px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .core-value-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 32px -10px rgba(36, 121, 190, 0.3);
+    background: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  .core-card-header {
+    text-align: left;
+    margin-bottom: var(--space-sm);
+  }
+
+  .core-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: var(--color-blue);
+    margin: 0 0 var(--space-xs);
+  }
+
+  .core-card-title {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    color: var(--color-text-dark);
+  }
+
+  .core-card-short {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
     margin: 0;
   }
 
-    .values-posts {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: var(--space-lg);
-      max-width: 1480px;
-      margin: 0 auto var(--space-2xl);
-    }
+  .core-card-bullets {
+    list-style: none;
+    padding-left: 0;
+    margin: var(--space-sm) 0 0;
+    font-size: 0.9rem;
+    color: var(--color-text-body);
+  }
+
+  .core-card-bullets li {
+    position: relative;
+    padding-left: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .core-card-bullets li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    color: var(--color-blue);
+    font-size: 1rem;
+  }
+
+  .values-transition {
+    max-width: 720px;
+    margin: 0 auto var(--space-2xl);
+  }
+
+  .values-transition p {
+    font-size: 1rem;
+    color: var(--color-text-body);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .design-principles-section {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .design-principles-title {
+    font-size: var(--font-size-h2);
+    margin-bottom: var(--space-xs);
+  }
+
+  .design-principles-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .values-posts.principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-lg);
+    max-width: 1480px;
+    margin: var(--space-xl) auto var(--space-2xl);
+  }
 
   .value-post-card {
     display: flex;
@@ -196,20 +581,20 @@ const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI
     position: relative;
   }
 
-    .value-post-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
-      background: rgba(255, 255, 255, 0.75) !important;
-    }
-  
-    .post-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-blue);
-      margin-bottom: var(--space-sm);
-      line-height: 1;
-    }
+  .value-post-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
+    background: rgba(255, 255, 255, 0.75) !important;
+  }
+
+  .post-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-blue);
+    margin-bottom: var(--space-sm);
+    line-height: 1;
+  }
 
   .post-meta {
     display: flex;
@@ -277,18 +662,161 @@ const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI
     transform: translateX(4px);
   }
 
+  /* Blog impact scrolling section */
 
+  .values-blog-impact {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .container-full {
+    width: 100%;
+  }
+
+  .values-blog-title {
+    font-size: var(--font-size-h2);
+    font-weight: 300;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .values-blog-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .values-blog-glass-container {
+    max-width: 1480px;
+    margin: var(--space-xl) auto 0;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .values-blog-banner-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: var(--space-md) 0;
+  }
+
+  .values-blog-banner {
+    display: flex;
+    gap: var(--space-md);
+    width: max-content;
+    will-change: transform;
+    animation: blogScroll 45s linear infinite;
+  }
+
+  .values-blog-banner:hover {
+    animation-play-state: paused;
+  }
+
+  .values-blog-item {
+    flex-shrink: 0;
+    min-width: 280px;
+    max-width: 360px;
+    padding: var(--space-sm) var(--space-sm);
+  }
+
+  .values-blog-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    padding: var(--space-md);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .values-blog-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    font-size: 0.8rem;
+  }
+
+  .values-blog-category {
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    background: rgba(36, 121, 190, 0.08);
+    border-radius: 999px;
+    font-size: 0.75rem;
+  }
+
+  .values-blog-readtime {
+    color: var(--color-text-muted);
+    margin-left: auto;
+    font-size: 0.8rem;
+  }
+
+  .values-blog-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-dark);
+  }
+
+  .values-blog-card-excerpt {
+    font-size: 0.9rem;
+    color: var(--color-text-body);
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+    flex-grow: 1;
+  }
+
+  .values-blog-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-blue);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+
+  .values-blog-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .values-blog-link:hover svg {
+    transform: translateX(3px);
+  }
+
+  @keyframes blogScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 
   @media (max-width: 1200px) {
-    .values-posts {
+    .values-posts.principles-grid {
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .core-values-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
   }
 
   @media (max-width: 968px) {
-    .values-posts {
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    .values-posts.principles-grid {
+      grid-template-columns: 1fr;
       gap: var(--space-md);
+      margin-bottom: var(--space-xl);
     }
   }
 
@@ -310,33 +838,33 @@ const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI
       font-size: 1.2rem;
     }
 
-    .values-intro {
-      padding: var(--space-md);
-      margin-bottom: var(--space-xl);
+    .core-values-overview {
+      margin: var(--space-xl) 0 var(--space-lg);
     }
 
-    .intro-text {
-      font-size: 1rem;
-    }
-
-    .values-posts {
-      grid-template-columns: 1fr;
-      gap: var(--space-md);
-      margin-bottom: var(--space-xl);
-    }
-
-    .value-post-card {
+    .core-value-card {
       padding: var(--space-md);
     }
 
-    .post-title {
-      font-size: 1.3rem;
+    .values-transition {
+      margin-bottom: var(--space-xl);
     }
 
-    .post-excerpt {
-      font-size: 0.95rem;
+    .values-blog-glass-container {
+      margin: var(--space-lg) var(--space-md) 0;
+      border-radius: 20px;
     }
 
+    .values-blog-banner {
+      gap: var(--space-sm);
+      animation-duration: 35s;
+    }
+
+    .values-blog-item {
+      min-width: 240px;
+      max-width: 280px;
+      padding: var(--space-xs);
+    }
   }
 
   @keyframes fadeIn {
@@ -357,25 +885,28 @@ const description = 'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI
 </style>
 
 <script>
-  // Intersection Observer for fade-in animations
+  // Intersection Observer für Fade-in
   document.addEventListener('DOMContentLoaded', () => {
     const fadeElements = document.querySelectorAll('.fade-in');
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) {
-          return;
-        }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
 
-        const element = entry.target as HTMLElement;
-        element.style.opacity = '1';
-        element.style.transform = 'translateY(0)';
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
+          const element = entry.target;
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
 
-    fadeElements.forEach(el => observer.observe(el));
+    fadeElements.forEach((el) => observer.observe(el));
   });
 </script>

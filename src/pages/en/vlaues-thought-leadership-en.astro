@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../components/BlogPostDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Thought Leadership: Knowledge with Depth and Direction | Klartext AI';
+const description =
+  'How we connect research, community, and practice – and why thought leadership for responsible AI development is more than just a buzzword.';
+
+const fullContent = `
+
+<h4>Why thought leadership in AI is so critical right now</h4>
+
+<p>AI has long since entered the mainstream. In Europe, more than 13&nbsp;% of companies with 10 or more employees already use AI technologies – and the trend is growing quickly. At the same time, studies show that only a small share of these organisations actually generate measurable value from their AI investments.</p>
+
+<p><strong>The gap in between:</strong> the technology exists, use cases are known – but what is missing is interpretation, orientation, and a clear understanding of what responsible AI should look like in practice.</p>
+
+<p>This is exactly where thought leadership comes in. Not as a buzzword, but as a responsibility:</p>
+
+<ul>
+  <li><strong>making sense of complex developments</strong> instead of just repeating trends</li>
+  <li><strong>building bridges between research and application</strong> instead of working in silos</li>
+  <li><strong>enabling open exchange</strong> instead of “hiding” knowledge</li>
+</ul>
+
+<blockquote>
+  “Innovation emerges where research, community, and practice come together – when we jointly define what responsible AI should look like tomorrow.” – Daniel
+</blockquote>
+
+<h4>Research, community, practice: three pillars of thought leadership</h4>
+
+<p>Thought leadership is not a single person for us, but the interplay of three layers:</p>
+
+<ol>
+  <li><strong>Research & methodology</strong>: We work with teams that have been active in AI, data science, and applied research for years – from universities to Fraunhofer environments to industry-focused projects.</li>
+  <li><strong>Community & exchange</strong>: Through networks such as AI Austria, AI Impact Mission, and the European AI Forum, we are in continuous dialogue with hundreds of experts across Europe.</li>
+  <li><strong>Practice & implementation</strong>: Our thinking does not emerge in a vacuum, but directly along real projects, use cases, and production systems.</li>
+</ol>
+
+<p>Only when these three layers come together does thought leadership emerge that provides real orientation – instead of just clever words.</p>
+
+<h4>What we actually do to share knowledge</h4>
+
+<p>Thought leadership, for us, means not hoarding knowledge but actively making it accessible. You can see this in, for example:</p>
+
+<ul>
+  <li><strong>Meetups and community events</strong> where we share insights into current projects, methods, and lessons learned – open, honest, and without sales slides.</li>
+  <li><strong>Study circles and peer sessions</strong> where we discuss papers, architectures, or new frameworks with other professionals.</li>
+  <li><strong>Talks and panels</strong> at conferences, industry events, and policy formats where we bring in practical perspectives.</li>
+  <li><strong>Articles, blog posts, and internal playbooks</strong> where we document principles, patterns, and anti-patterns.</li>
+</ul>
+
+<p>Our goal is to enable people to ask better questions, make better decisions, and use AI systems more consciously.</p>
+
+<h4>Thought leadership is more than strong opinions</h4>
+
+<p>Much of what is labelled “thought leadership” today is, in truth, branding. For us, the following applies:</p>
+
+<ul>
+  <li><strong>No thesis without substance.</strong> If we recommend something, it is based on data, practical experience, or solid research.</li>
+  <li><strong>No simple answers to complex questions.</strong> Especially in AI, uncertainty is normal – we name it instead of hiding it.</li>
+  <li><strong>No show without consequences.</strong> Thought leadership also means being uncomfortably honest on topics like data protection, fairness, or governance.</li>
+</ul>
+
+<p>Good thought leaders, for us, are those who are willing to say: “We do not know yet – but we will figure it out together with you.”</p>
+
+<h4>Formats in which we live thought leadership</h4>
+
+<p>Some examples of how this shows up in our daily work:</p>
+
+<ul>
+  <li><strong>Community building</strong> via AI Austria, AI Impact Mission, and other networks where we help design, moderate, or shape formats.</li>
+  <li><strong>Bridging disciplines</strong>: bringing data scientists, engineers, lawyers, ethicists, and domain experts to the same table – and helping them find a shared language.</li>
+  <li><strong>Open sharing</strong> of methods – for example around evaluation, prompt design, system architecture, or governance questions – so others can start faster and more safely.</li>
+  <li><strong>Mentoring and sparring</strong> for teams that want to introduce AI and face strategic or technical decisions.</li>
+</ul>
+
+<p>Over time, this creates a web of shared knowledge, reference projects, and lived best practices.</p>
+
+<h4>What organisations actually gain from thought leadership</h4>
+
+<p>Thought leadership is not an end in itself. It delivers very concrete benefits for organisations:</p>
+
+<ul>
+  <li><strong>Faster orientation</strong>: Which AI trends are relevant – and which are not?</li>
+  <li><strong>Better decisions</strong>: Which use cases are worth it, which risks are realistic?</li>
+  <li><strong>More robust strategies</strong>: How can AI be set up so that it still holds up in 2–3 years?</li>
+  <li><strong>Better communication</strong>: How do we explain internally and externally what we are doing – and why?</li>
+</ul>
+
+<p>In an environment where technologies, frameworks, and products change on a monthly basis, reliable interpretation becomes a crucial competitive advantage.</p>
+
+<h4>Our principles for responsible thought leadership</h4>
+
+<p>To keep thought leadership trustworthy, we adhere to a few simple but binding principles:</p>
+
+<ul>
+  <li><strong>Transparency</strong>: We are clear about where we are confident – and where we are not.</li>
+  <li><strong>Evidence</strong>: We prefer data, studies, and practical results over gut feeling.</li>
+  <li><strong>Independence</strong>: Our assessments are not tied to specific vendors or tools.</li>
+  <li><strong>European values</strong>: We think about AI in terms of fundamental rights, data protection, and social responsibility.</li>
+</ul>
+
+<p>Thought leadership, for us, means not just standing at the front, but also taking responsibility for what we say – and for how it is translated into action in practice.</p>
+
+<p><strong>Ultimately, it comes down to something very simple:</strong> helping people, organisations, and institutions understand and use AI in ways that truly benefit them and society.</p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="Thought Leadership: Knowledge with Depth and Direction"
+    excerpt="How we connect research, community, and practice – and why thought leadership in AI is more than a buzzword."
+    fullExcerpt="For us, thought leadership means combining scientific depth, lived community, and practical implementation in a way that creates real orientation – for companies, policy, and society. Instead of merely repeating trends, we create spaces for exchange, share methods, and bring together perspectives from research and practice."
+    fullContent={fullContent}
+    category="Philosophy"
+    readTime="6 min"
+    date="2024-12-22"
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

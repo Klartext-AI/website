@@ -5,21 +5,35 @@ import Icon from '../../components/Icon.astro';
 import FinalCTA from '../../components/FinalCTA.astro';
 
 const title = 'Our Values - Klartext AI';
-const description = 'The values and principles that guide our work at Klartext AI: Domain-Driven Design, Evaluation-First, Privacy by Design, and European AI sovereignty.';
+const description =
+  'The values and principles that guide our work at Klartext AI: responsibility, thought leadership, technical excellence and clear design principles.';
 
-  const BASE = import.meta.env.BASE_URL;
-  
-  const content = {
+const BASE = import.meta.env.BASE_URL;
+
+const content = {
   pageTitle: "Our Values",
-  pageSubtitle: "The principles that guide our work",
-  introText: "At Klartext AI, values are not marketing buzzwords but lived practice. They determine how we approach projects, how we deploy technology, and what responsibility we take. Each of these values is embedded in our daily work – from initial conception to production deployment.",
+  pageSubtitle: "The principles and attitudes that guide our work",
+
+  designPrinciplesTitle: "Our Design Principles",
+  designPrinciplesSubtitle:
+    "The technical guardrails we use to design, evaluate, and run AI systems.",
+
+  valueSectionTitle: "Our Values",
+  valueSectionSubtitle:
+    "Values that shape how we show up – in community work, client projects, and long-term partnerships.",
+
+  blogImpactTitle: "How values & principles shape our work",
+  blogImpactSubtitle:
+    "Selected articles, case studies, and field reports – directly from our work with clients, partners, and the AI community.",
 
   valuePosts: [
     {
       id: "domain-driven-design-rfu",
-      title: "Domain-Driven Design in Practice",
-      excerpt: "We think in industries, not in models. Domain knowledge is the key to successful AI systems.",
-      fullExcerpt: "The RFU case is a perfect example of how Domain-Driven Design works in practice. Instead of starting with a pre-made solution, we immersed ourselves in our client's business processes in the banking services sector. The result: An AI solution that not only works but speaks the language of the domain and automates 80% of manual work – with a break-even of just 1.5 months.",
+      title: "Domain-Driven Design in Practice: The RFU Case",
+      excerpt:
+        "We think in industries, not in models. Deep domain understanding is the key to successful AI systems.",
+      fullExcerpt:
+        "The RFU case is a perfect example of how Domain-Driven Design works in practice. Instead of starting with a pre-made solution, we immersed ourselves in our client’s business processes in the banking services sector. The result: an AI solution that not only works, but speaks the language of the domain and automates 80% of manual work – with a break-even of just 1.5 months.",
       category: "Case Study",
       readTime: "8 min",
       date: "2025-01-10",
@@ -28,8 +42,10 @@ const description = 'The values and principles that guide our work at Klartext A
     {
       id: "evaluation-key-to-ai",
       title: "Evaluation-Driven Engineering",
-      excerpt: "No decision without data, no assumption without validation. Systematic evaluation is the key to success.",
-      fullExcerpt: "In the world of artificial intelligence, there's a fundamental difference between a working prototype and a production system. This difference doesn't lie in the technology itself, but in how we measure, understand, and continuously improve its performance. Evaluation-Driven Engineering means: no decision without data, no assumption without validation.",
+      excerpt:
+        "No decisions without data, no assumptions without validation. Systematic evaluation is the key to success.",
+      fullExcerpt:
+        "In the world of artificial intelligence, there is a fundamental difference between a working prototype and a production system. That difference is not the technology itself, but how we measure, understand, and continuously improve its performance. Evaluation-Driven Engineering means: no decision without data, no assumption without validation.",
       category: "Philosophy",
       readTime: "5 min",
       date: "2025-01-15",
@@ -38,8 +54,10 @@ const description = 'The values and principles that guide our work at Klartext A
     {
       id: "end-to-end-ownership",
       title: "End-to-End Ownership",
-      excerpt: "One team, full responsibility – from idea to production deployment. No POCs without a future.",
-      fullExcerpt: "Many AI projects end up as Proof of Concepts in a drawer. We take a different path: End-to-End Ownership means we take responsibility from the first hypothesis to productive deployment. One team, full responsibility, real implementation – no handovers, no knowledge loss, no POCs without a future.",
+      excerpt:
+        "One team, full responsibility – from idea to production. No POCs without a future.",
+      fullExcerpt:
+        "Many AI projects end as proof-of-concepts in a drawer. We take a different path: End-to-End Ownership means we take responsibility from the first hypothesis to productive deployment. One team, full responsibility, real implementation – no handovers, no knowledge loss, no POCs without a future.",
       category: "Philosophy",
       readTime: "7 min",
       date: "2024-12-28",
@@ -48,8 +66,10 @@ const description = 'The values and principles that guide our work at Klartext A
     {
       id: "privacy-by-design",
       title: "Privacy by Design",
-      excerpt: "Data protection is not a feature added later, but part of the core architecture. GDPR compliance from day one.",
-      fullExcerpt: "Privacy by Design is not a feature added later, but a fundamental design decision. In an era where privacy and AI are often portrayed as contradictory, we demonstrate that both can – and must – go hand in hand. GDPR compliance, EU AI Act conformity, and European hosting are not optional but integral parts of our architecture from day one.",
+      excerpt:
+        "Privacy is not a feature on top – it is part of the core architecture. GDPR compliance from day one.",
+      fullExcerpt:
+        "Privacy by Design is not an add-on feature, but a fundamental design decision. In a time where privacy and AI are often framed as contradictions, we show that both can – and must – go hand in hand. GDPR compliance, EU AI Act readiness, and European hosting are not optional, but integral to our architecture from day one.",
       category: "Technical",
       readTime: "6 min",
       date: "2025-01-05",
@@ -58,8 +78,10 @@ const description = 'The values and principles that guide our work at Klartext A
     {
       id: "european-ai-sovereignty",
       title: "European AI Sovereignty",
-      excerpt: "Innovation with responsibility. European values are not obstacles but competitive advantages.",
-      fullExcerpt: "Europe has the chance to provide a third answer in the global AI discourse – one based on trust, transparency, and excellence. While the US focuses on rapid growth and China on technological advancement without regulatory barriers, we can combine innovation with responsibility. European hosting, GDPR compliance, and traceable systems are not obstacles but competitive advantages.",
+      excerpt:
+        "Innovation with responsibility. European values are not a burden, but a competitive edge.",
+      fullExcerpt:
+        "Europe has the opportunity to offer a third answer in the global AI discourse – one built on trust, transparency, and excellence. While the US focuses on growth at speed and China on rapid technological progress with fewer regulatory brakes, we can combine innovation with responsibility. European hosting, GDPR compliance, and traceable systems are not obstacles, they are strategic advantages.",
       category: "Philosophy",
       readTime: "6 min",
       date: "2024-12-20",
@@ -67,19 +89,132 @@ const description = 'The values and principles that guide our work at Klartext A
     }
   ],
 
-  ctaTitle: "More Insights?",
-    ctaText: "Discover all our blog posts with learnings, philosophy, and field reports from practice.",
-    ctaButton: "Go to Blog",
-    readMore: "Read more"
-  } as const;
-  
-  const valueIcons = {
-    'domain-driven-design-rfu': 'domain',
-    'evaluation-key-to-ai': 'evaluation',
-    'end-to-end-ownership': 'route',
-    'privacy-by-design': 'shield',
-    'european-ai-sovereignty': 'users'
-  } as const;
+  // Core values overview cards (directly under heading, with bullet points)
+  cards: [
+    {
+      title: "Responsibility",
+      short: "Progress that includes everyone.",
+      link: "en/values-responsibility",
+      bullets: [
+        "Voluntary engagement – from community work to policy advisory",
+        "Open formats for dialogue, transparency, and knowledge sharing",
+        "Long-term relationships instead of one-off projects"
+      ]
+    },
+    {
+      title: "Thought Leadership",
+      short: "Knowledge with depth and direction.",
+      link: "en/vlaues-thought-leadership-en",
+      bullets: [
+        "Connecting research, community, and real-world practice",
+        "Open knowledge-sharing instead of hype and buzzwords",
+        "Evidence-based orientation for companies and institutions"
+      ]
+    },
+    {
+      title: "Excellence through Technology",
+      short: "Engineering at the highest level.",
+      link: "en/values-excellence-technology",
+      bullets: [
+        "Privacy by Design & European infrastructure",
+        "Evaluation-driven engineering with clear metrics",
+        "Domain-driven design & end-to-end ownership"
+      ]
+    }
+  ],
+
+  // Blog posts for the scrolling bar (EN-Version)
+  blogPosts: [
+    {
+      id: "mit-genai-divide",
+      title: "The GenAI Divide: Why 95% of AI Projects Fail",
+      excerpt:
+        "MIT's State of AI in Business Report 2025 shows: Most GenAI initiatives deliver no measurable business impact.",
+      category: "Philosophy",
+      readTime: "7 min",
+      date: "2025-01-20"
+    },
+    {
+      id: "evaluation-key-to-ai",
+      title: "Why Evaluation is the Key to Successful AI",
+      excerpt:
+        "Most AI projects do not fail because of technology – they fail due to missing evaluation and validation.",
+      category: "Philosophy",
+      readTime: "5 min",
+      date: "2025-01-15"
+    },
+    {
+      id: "domain-driven-design-rfu",
+      title: "Domain-Driven Design in Practice: The RFU Case",
+      excerpt:
+        "How we achieved 80% automation through deep domain understanding.",
+      category: "Case Study",
+      readTime: "8 min",
+      date: "2025-01-10"
+    },
+    {
+      id: "privacy-by-design",
+      title: "Privacy by Design: More than Just Compliance",
+      excerpt:
+        "Why data protection must be part of the architecture from the very start.",
+      category: "Technical",
+      readTime: "6 min",
+      date: "2025-01-05"
+    },
+    {
+      id: "end-to-end-ownership",
+      title: "End-to-End Ownership: From Idea to Deployment",
+      excerpt:
+        "Why we don’t build POCs, but real, productive systems.",
+      category: "Philosophy",
+      readTime: "7 min",
+      date: "2024-12-28"
+    },
+    {
+      id: "european-ai-sovereignty",
+      title: "European AI Sovereignty: Why Location Matters",
+      excerpt:
+        "Innovation with responsibility – why European values matter in AI development.",
+      category: "Philosophy",
+      readTime: "6 min",
+      date: "2024-12-20"
+    },
+    {
+      id: "agile-ai-development",
+      title: "Agile AI Development: Small Cycles, Big Impact",
+      excerpt:
+        "How iterative development and fast feedback lead to better AI systems.",
+      category: "Technical",
+      readTime: "5 min",
+      date: "2024-12-15"
+    }
+  ],
+
+  ctaTitle: "Want to go deeper?",
+  ctaText:
+    "Explore all of our articles with learnings, philosophy, and hands-on field reports.",
+  ctaButton: "Go to blog",
+  readMore: "Read more"
+} as const;
+
+const valueIcons = {
+  'domain-driven-design-rfu': 'domain',
+  'evaluation-key-to-ai': 'evaluation',
+  'end-to-end-ownership': 'route',
+  'privacy-by-design': 'shield',
+  'european-ai-sovereignty': 'users'
+} as const;
+
+// Design principles shown as cards (subset)
+const designPrincipleIds = [
+  'domain-driven-design-rfu',
+  'evaluation-key-to-ai',
+  'privacy-by-design'
+];
+
+const designPrinciples = content.valuePosts.filter((post) =>
+  designPrincipleIds.includes(post.id)
+);
 ---
 
 <BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
@@ -90,37 +225,186 @@ const description = 'The values and principles that guide our work at Klartext A
         <p class="values-page-subtitle">{content.pageSubtitle}</p>
       </div>
 
-      <div class="values-intro fade-in glass-card">
-        <p class="intro-text">{content.introText}</p>
+      {/* Core Values Overview under heading */}
+      <section class="core-values-overview fade-in">
+        <div class="core-values-grid">
+          {content.cards.map((card, index) => (
+            <a
+              href={`${BASE}${card.link}`}
+              class="glass-card core-value-card"
+            >
+              <div class="core-card-header">
+                <div class="core-card-icon">
+                  {index === 0 && (
+                    <Icon name="users" size={40} />
+                  )}
+                  {index === 1 && (
+                    <Icon name="rocket" size={40} />
+                  )}
+                  {index === 2 && (
+                    <Icon name="graduation" size={40} />
+                  )}
+                </div>
+                <h3 class="core-card-title">{card.title}</h3>
+                <p class="core-card-short">{card.short}</p>
+              </div>
+              <ul class="core-card-bullets">
+                {card.bullets.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* Transition to design principles */}
+      <div class="values-transition text-center fade-in">
+        <p>
+          From these values, we derive our design principles – the technical
+          guardrails we use to design, evaluate, and run AI systems in practice.
+        </p>
       </div>
 
-        <div class="values-posts">
-          {content.valuePosts.map((post, index) => (
-            <article class="value-post-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
+      {/* Design Principles Section */}
+      <section class="design-principles-section">
+        <div class="section-header text-center fade-in">
+          <h2 class="design-principles-title">{content.designPrinciplesTitle}</h2>
+          <p class="design-principles-subtitle">
+            {content.designPrinciplesSubtitle}
+          </p>
+        </div>
+
+        <div class="values-posts principles-grid">
+          {designPrinciples.map((post, index) => (
+            <article
+              class="value-post-card glass-card fade-in"
+              style={`animation-delay: ${index * 0.1}s`}
+            >
               <div class="post-icon">
                 <Icon name={valueIcons[post.id]} size={32} />
               </div>
 
-            <div class="post-meta">
-              <span class="post-category">{post.category}</span>
-              <span class="post-read-time">{post.readTime}</span>
+              <div class="post-meta">
+                <span class="post-category">{post.category}</span>
+                <span class="post-read-time">{post.readTime}</span>
+              </div>
+
+              <h2 class="post-title">{post.title}</h2>
+              <p class="post-excerpt">{post.excerpt}</p>
+
+              <a href={`${BASE}en/blog/${post.id}`} class="post-link">
+                {content.readMore}
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M6 12l4-4-4-4" />
+                </svg>
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Scrolling Blog Impact Section */}
+      <section class="values-blog-impact">
+        <div class="container-full">
+          <div class="section-header text-center fade-in">
+            <h2 class="values-blog-title">{content.blogImpactTitle}</h2>
+            <p class="values-blog-subtitle">
+              {content.blogImpactSubtitle}
+            </p>
+          </div>
+
+          <div class="values-blog-glass-container">
+            <div class="values-blog-banner-wrapper">
+              <div class="values-blog-banner">
+                {/* First set of blog cards */}
+                {content.blogPosts.map((post) => (
+                  <article class="values-blog-item">
+                    <div class="values-blog-card">
+                      <div class="values-blog-meta">
+                        <span class="values-blog-category">
+                          {post.category}
+                        </span>
+                        <span class="values-blog-readtime">
+                          {post.readTime}
+                        </span>
+                      </div>
+                      <h3 class="values-blog-card-title">{post.title}</h3>
+                      <p class="values-blog-card-excerpt">
+                        {post.excerpt}
+                      </p>
+                      <a
+                        href={`${BASE}en/blog/${post.id}`}
+                        class="values-blog-link"
+                      >
+                        {content.readMore}
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path d="M6 12l4-4-4-4" />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                ))}
+
+                {/* Duplicate set for seamless loop */}
+                {content.blogPosts.map((post) => (
+                  <article class="values-blog-item">
+                    <div class="values-blog-card">
+                      <div class="values-blog-meta">
+                        <span class="values-blog-category">
+                          {post.category}
+                        </span>
+                        <span class="values-blog-readtime">
+                          {post.readTime}
+                        </span>
+                      </div>
+                      <h3 class="values-blog-card-title">{post.title}</h3>
+                      <p class="values-blog-card-excerpt">
+                        {post.excerpt}
+                      </p>
+                      <a
+                        href={`${BASE}en/blog/${post.id}`}
+                        class="values-blog-link"
+                      >
+                        {content.readMore}
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path d="M6 12l4-4-4-4" />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
+          </div>
 
-            <h2 class="post-title">{post.title}</h2>
-            <p class="post-excerpt">{post.excerpt}</p>
-
-            <a href={`${BASE}en/blog/${post.id}`} class="post-link">
-              {content.readMore}
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M6 12l4-4-4-4"/>
-              </svg>
-            </a>
-          </article>
-        ))}
-      </div>
-
+          
+        </div>
+      </section>
     </div>
   </section>
+
   <FinalCTA
     lang="en"
     headline={content.ctaTitle}
@@ -162,28 +446,124 @@ const description = 'The values and principles that guide our work at Klartext A
     line-height: 1.6;
   }
 
-  .values-intro {
-    max-width: 900px;
-    margin: 0 auto var(--space-2xl);
-    padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.65) !important;
-    backdrop-filter: blur(20px) saturate(160%);
+  /* Core values overview */
+
+  .core-values-overview {
+    margin: var(--space-2xl) 0 var(--space-xl);
   }
 
-  .intro-text {
-    font-size: 1.15rem;
-    color: var(--color-text-body);
-    line-height: 1.8;
+  .core-values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-md);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .core-value-card {
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.65) !important;
+    backdrop-filter: blur(18px) saturate(160%);
+    border-radius: 18px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .core-value-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 32px -10px rgba(36, 121, 190, 0.3);
+    background: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  .core-card-header {
+    text-align: left;
+    margin-bottom: var(--space-sm);
+  }
+
+  .core-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: var(--color-blue);
+    margin: 0 0 var(--space-xs);
+  }
+
+  .core-card-title {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    color: var(--color-text-dark);
+  }
+
+  .core-card-short {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
     margin: 0;
   }
 
-    .values-posts {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: var(--space-lg);
-      max-width: 1480px;
-      margin: 0 auto var(--space-2xl);
-    }
+  .core-card-bullets {
+    list-style: none;
+    padding-left: 0;
+    margin: var(--space-sm) 0 0;
+    font-size: 0.9rem;
+    color: var(--color-text-body);
+  }
+
+  .core-card-bullets li {
+    position: relative;
+    padding-left: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .core-card-bullets li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    color: var(--color-blue);
+    font-size: 1rem;
+  }
+
+  .values-transition {
+    max-width: 720px;
+    margin: 0 auto var(--space-2xl);
+  }
+
+  .values-transition p {
+    font-size: 1rem;
+    color: var(--color-text-body);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .design-principles-section {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .design-principles-title {
+    font-size: var(--font-size-h2);
+    margin-bottom: var(--space-xs);
+  }
+
+  .design-principles-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .values-posts.principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-lg);
+    max-width: 1480px;
+    margin: var(--space-xl) auto var(--space-2xl);
+  }
 
   .value-post-card {
     display: flex;
@@ -196,20 +576,20 @@ const description = 'The values and principles that guide our work at Klartext A
     position: relative;
   }
 
-    .value-post-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
-      background: rgba(255, 255, 255, 0.75) !important;
-    }
-  
-    .post-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-blue);
-      margin-bottom: var(--space-sm);
-      line-height: 1;
-    }
+  .value-post-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
+    background: rgba(255, 255, 255, 0.75) !important;
+  }
+
+  .post-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-blue);
+    margin-bottom: var(--space-sm);
+    line-height: 1;
+  }
 
   .post-meta {
     display: flex;
@@ -277,18 +657,169 @@ const description = 'The values and principles that guide our work at Klartext A
     transform: translateX(4px);
   }
 
+  /* Blog impact scrolling section */
 
+  .values-blog-impact {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .container-full {
+    width: 100%;
+  }
+
+  .values-blog-title {
+    font-size: var(--font-size-h2);
+    font-weight: 300;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .values-blog-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .values-blog-glass-container {
+    max-width: 1480px;
+    margin: var(--space-xl) auto 0;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .values-blog-banner-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: var(--space-md) 0;
+  }
+
+  .values-blog-banner {
+    display: flex;
+    gap: var(--space-md);
+    width: max-content;
+    will-change: transform;
+    animation: blogScroll 45s linear infinite;
+  }
+
+  .values-blog-banner:hover {
+    animation-play-state: paused;
+  }
+
+  .values-blog-item {
+    flex-shrink: 0;
+    min-width: 280px;
+    max-width: 360px;
+    padding: var(--space-sm) var(--space-sm);
+  }
+
+  .values-blog-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    padding: var(--space-md);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .values-blog-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    font-size: 0.8rem;
+  }
+
+  .values-blog-category {
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    background: rgba(36, 121, 190, 0.08);
+    border-radius: 999px;
+    font-size: 0.75rem;
+  }
+
+  .values-blog-readtime {
+    color: var(--color-text-muted);
+    margin-left: auto;
+    font-size: 0.8rem;
+  }
+
+  .values-blog-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-dark);
+  }
+
+  .values-blog-card-excerpt {
+    font-size: 0.9rem;
+    color: var(--color-text-body);
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+    flex-grow: 1;
+  }
+
+  .values-blog-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-blue);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+
+  .values-blog-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .values-blog-link:hover svg {
+    transform: translateX(3px);
+  }
+
+  .values-blog-button-wrapper {
+    margin-top: var(--section-cta-gap, 2.5rem);
+  }
+
+  .value-cta-button {
+    gap: 0.5rem;
+  }
+
+  @keyframes blogScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 
   @media (max-width: 1200px) {
-    .values-posts {
+    .values-posts.principles-grid {
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .core-values-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
   }
 
   @media (max-width: 968px) {
-    .values-posts {
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    .values-posts.principles-grid {
+      grid-template-columns: 1fr;
       gap: var(--space-md);
+      margin-bottom: var(--space-xl);
     }
   }
 
@@ -310,33 +841,33 @@ const description = 'The values and principles that guide our work at Klartext A
       font-size: 1.2rem;
     }
 
-    .values-intro {
-      padding: var(--space-md);
-      margin-bottom: var(--space-xl);
+    .core-values-overview {
+      margin: var(--space-xl) 0 var(--space-lg);
     }
 
-    .intro-text {
-      font-size: 1rem;
-    }
-
-    .values-posts {
-      grid-template-columns: 1fr;
-      gap: var(--space-md);
-      margin-bottom: var(--space-xl);
-    }
-
-    .value-post-card {
+    .core-value-card {
       padding: var(--space-md);
     }
 
-    .post-title {
-      font-size: 1.3rem;
+    .values-transition {
+      margin-bottom: var(--space-xl);
     }
 
-    .post-excerpt {
-      font-size: 0.95rem;
+    .values-blog-glass-container {
+      margin: var(--space-lg) var(--space-md) 0;
+      border-radius: 20px;
     }
 
+    .values-blog-banner {
+      gap: var(--space-sm);
+      animation-duration: 35s;
+    }
+
+    .values-blog-item {
+      min-width: 240px;
+      max-width: 280px;
+      padding: var(--space-xs);
+    }
   }
 
   @keyframes fadeIn {
@@ -357,25 +888,28 @@ const description = 'The values and principles that guide our work at Klartext A
 </style>
 
 <script>
-  // Intersection Observer for fade-in animations
+  // Intersection Observer for fade-in
   document.addEventListener('DOMContentLoaded', () => {
     const fadeElements = document.querySelectorAll('.fade-in');
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) {
-          return;
-        }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
 
-        const element = entry.target as HTMLElement;
-        element.style.opacity = '1';
-        element.style.transform = 'translateY(0)';
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
+          const element = entry.target;
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
 
-    fadeElements.forEach(el => observer.observe(el));
+    fadeElements.forEach((el) => observer.observe(el));
   });
 </script>

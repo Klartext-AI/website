@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogPostDetail from '../components/BlogPostDetail.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Verantwortung in der KI-Praxis: Fortschritt, der alle mitnimmt | Klartext AI';
+const description = 'Was Verantwortung für uns bedeutet – von ehrenamtlichem Engagement über Community-Arbeit bis hin zu langfristigen Partnerschaften mit echten Impact-Zielen.';
+
+const fullContent = `
+
+
+<h4>Warum Verantwortung in der KI kein „Nice-to-have“ ist</h4>
+
+<p>KI ist keine neutrale Technologie. Sie skaliert Entscheidungen, Strukturen – und damit auch Fehler und Ungleichheiten. Wer KI baut und einsetzt, hat automatisch Einfluss auf:</p>
+
+<ul>
+  <li><strong>Menschen</strong> – ihre Arbeitsabläufe, Entscheidungen und ihren Alltag</li>
+  <li><strong>Organisationen</strong> – welche Prozesse gestärkt oder verdrängt werden</li>
+  <li><strong>Gesellschaft</strong> – wie wir mit Wissen, Macht und Ressourcen umgehen</li>
+</ul>
+
+<p><strong>Verantwortung bedeutet für uns:</strong> Diese Wirkung nicht zu ignorieren, sondern aktiv zu gestalten.</p>
+
+<blockquote>
+  „Verantwortung bedeutet für uns, Technologie im Sinne des Gemeinwohls zu gestalten – und die gesamte Gesellschaft auf diesem Weg mitzunehmen.“ – Ruben
+</blockquote>
+
+<h4>Von Community bis Politik: Verantwortung auf mehreren Ebenen</h4>
+
+<p>Verantwortung ist für uns kein abstrakter Wert, sondern zeigt sich in konkreten Rollen und Formaten:</p>
+
+<ul>
+  <li><strong>AI Austria:</strong> Organisation und Durchführung offener Community-Formate, in denen Unternehmen, Forschung und Interessierte über Chancen, Risiken und praktische Anwendungen von KI sprechen.</li>
+  <li><strong>European AI Forum:</strong> Mitwirkung daran, dass die Perspektive aus Österreich und der Praxis in europäische KI-Debatten und Policy-Prozesse einfließt – von der Basis bis zur Politik.</li>
+  <li><strong>AI Impact Mission:</strong> Aufbau und Moderation eines Netzwerks von über 500 europäischen KI-Expert:innen, das sich regelmäßig austauscht und Hackathons zu reinen Impact-Themen durchführt – kostenlos, kollaborativ, werteorientiert.</li>
+</ul>
+
+<p>So entsteht ein Ökosystem, in dem KI nicht nur diskutiert, sondern gemeinsam verantwortungsvoll gestaltet wird.</p>
+
+<h4>Warum ehrenamtliches Engagement für uns zur Strategie gehört</h4>
+
+<p>Ehrenamtliche Arbeit ist bei uns kein „Nebenprojekt“, sondern Teil unserer Identität:</p>
+
+<ul>
+  <li><strong>Offene Events</strong> statt geschlossener Türen</li>
+  <li><strong>Wissensvermittlung</strong> statt reiner Produktwerbung</li>
+  <li><strong>Dialogformate</strong> statt Einbahnstraßen-Kommunikation</li>
+</ul>
+
+<p>Wir investieren Zeit und Energie in Formate, in denen Menschen Fragen stellen können, Unsicherheiten artikulieren dürfen und gemeinsam lernen. Denn nur so kann KI-Kompetenz in der Breite ankommen – nicht nur bei Early Adopters.</p>
+
+<h4>Partnerschaften statt einmaliger Projekte</h4>
+
+<p>Verantwortung zeigt sich auch in der Art, wie wir mit unseren Kund:innen arbeiten. Wir streben keine schnellen „One-off-Projekte“ an, sondern:</p>
+
+<ul>
+  <li><strong>Langfristige Partnerschaften</strong>, die mit den Bedürfnissen des Unternehmens mitwachsen</li>
+  <li><strong>Realistische Roadmaps</strong> statt überambitionierter Versprechen</li>
+  <li><strong>Messbaren Impact</strong>, der nicht nur technisch, sondern auch organisatorisch Sinn ergibt</li>
+</ul>
+
+<p>Ein KI-System ist nie „fertig“. Es lebt von Wartung, Feedback und Weiterentwicklung. Verantwortung heißt für uns, diese Langfristigkeit von Anfang an mitzudenken – technisch, organisatorisch und menschlich.</p>
+
+<h4>Verantwortung in der Produktentwicklung</h4>
+
+<p>Auch in der Art, wie wir KI-Systeme entwerfen, ist Verantwortung ein Leitprinzip:</p>
+
+<ul>
+  <li><strong>Privacy by Design:</strong> Datenschutz ist bei uns Grundarchitektur, nicht Zusatzmodul.</li>
+  <li><strong>Transparenz über Funktion:</strong> Wir machen nachvollziehbar, was ein System kann – und was nicht.</li>
+  <li><strong>Human-in-the-loop:</strong> Fachpersonen behalten die Kontrolle, KI liefert Unterstützung.</li>
+  <li><strong>Evaluation statt Bauchgefühl:</strong> Entscheidungen werden gemessen, nicht gefühlt.</li>
+</ul>
+
+<p>So stellen wir sicher, dass KI nicht zum Selbstzweck wird, sondern konkret hilft – und im Zweifel korrigierbar bleibt.</p>
+
+<h4>Gesellschaft mitnehmen heißt: Räume für Dialog schaffen</h4>
+
+<p>Viele Sorgen rund um KI entstehen aus Intransparenz: Blackbox-Modelle, unklare Datenbasis, unverständliche Entscheidungen. Verantwortung bedeutet für uns auch, diese Lücke zu schließen:</p>
+
+<ul>
+  <li>Formate, in denen <strong>Fragen und Kritik ausdrücklich erwünscht</strong> sind</li>
+  <li>Sprache, die <strong>verständlich</strong> und nicht nur technisch korrekt ist</li>
+  <li>Materialien, die <strong>Praxisbeispiele</strong> zeigen statt nur abstrakter Konzepte</li>
+</ul>
+
+<p>Unser Ziel: KI-Lösungen, die nicht nur technisch funktionieren, sondern auch erklärt, eingeordnet und gemeinsam weiterentwickelt werden können.</p>
+
+<h4>Was Verantwortung für unsere Zusammenarbeit bedeutet</h4>
+
+<p>Wenn wir mit Organisationen zusammenarbeiten, heißt Verantwortung für uns konkret:</p>
+
+<ul>
+  <li><strong>Wir sagen offen, was (noch) nicht geht.</strong></li>
+  <li><strong>Wir bevorzugen saubere, kleinere Lösungen</strong> gegenüber beeindruckenden, aber fragilen Setups.</li>
+  <li><strong>Wir denken an Folgen</strong> – für Nutzer:innen, Teams und Prozesse.</li>
+  <li><strong>Wir planen mit euch gemeinsam</strong> statt über euch hinweg.</li>
+</ul>
+
+<p>Verantwortung ist kein Label, das man sich verpasst, sondern eine tägliche Praxis – in Entscheidungen, in Prioritäten, in der Art, wie wir mit Technologie und Menschen umgehen.</p>
+
+<p><strong>Unser Kompass bleibt dabei klar:</strong> Fortschritt ist nur dann sinnvoll, wenn er Menschen stärkt, Organisationen stabiler macht und die Gesellschaft als Ganzes mitnimmt.</p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="Verantwortung in der KI-Praxis: Fortschritt, der alle mitnimmt"
+    excerpt="Warum Verantwortung für uns kein Buzzword ist, sondern tägliche Praxis in Community-Arbeit, Produktentwicklung und Kundenprojekten."
+    fullExcerpt="Verantwortung bedeutet für uns, Technologie im Sinne des Gemeinwohls zu gestalten – und die Gesellschaft auf diesem Weg mitzunehmen. Von ehrenamtlichem Engagement bei AI Austria und AI Impact Mission bis hin zu langfristigen Partnerschaften mit unseren Kund:innen: Wir verstehen Verantwortung als Kombination aus Transparenz, Dialog und klaren technischen Prinzipien."
+    fullContent={fullContent}
+    category="Philosophie"
+    readTime="6 min"
+    date="2024-12-20"
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

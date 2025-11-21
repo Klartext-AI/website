@@ -28,11 +28,12 @@ const teamMembers = [
     name: "Bruno",
     role: "Chief Happiness Officer",
     image: `${BASE}team/bruno.png`,
+    hoverImage: `${BASE}team/bruni-fun.png`,
     linkedin: "https://www.instagram.com/bruno_der_kleine_baer",
     summary: [
       "Cockerpoo, 3.5 years old, certified mood manager.",
       "Specialized in snack acquisition, scent tracking & strategic power naps.",
-      "Responsible for office security – at least until someone pets him."
+      "Responsible for office security – at least until someone pets him..."
     ],
     fullBio: [
       "Bruno is our Chief Happiness Officer and officially responsible for the team's emotional stability. As a 3.5-year-old Cockerpoo, he combines the curiosity of a Cocker Spaniel with the strategic intelligence of a Poodle – a mix that shows above all in perfected naps and highly professional snack monitoring.",
@@ -136,12 +137,29 @@ const teamMembers = [
           <article class="member-tile fade-in" style={`animation-delay: ${index * 0.1}s`}>
             <div class="tile-header">
               <div class="member-image-wrapper">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  class="member-image"
-                  loading="lazy"
-                />
+                {member.hoverImage ? (
+                  <>
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      class="member-image member-image-main"
+                      loading="lazy"
+                    />
+                    <img
+                      src={member.hoverImage}
+                      alt={member.name}
+                      class="member-image member-image-hover"
+                      loading="lazy"
+                    />
+                  </>
+                ) : (
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    class="member-image"
+                    loading="lazy"
+                  />
+                )}
               </div>
               <div class="member-info">
                 <h2 class="member-name">{member.name}</h2>
@@ -269,6 +287,7 @@ const teamMembers = [
     border: 2px solid rgba(36, 121, 190, 0.2);
     transition: all 0.4s ease;
     margin-bottom: var(--space-sm);
+    position: relative;  
   }
 
   .member-tile:hover .member-image-wrapper {
@@ -285,6 +304,25 @@ const teamMembers = [
 
   .member-tile:hover .member-image {
     transform: scale(1.05);
+  }
+
+  .member-image-main,
+  .member-image-hover {
+    position: absolute;
+    inset: 0;
+  }
+
+  .member-image-hover {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .member-image-wrapper:hover .member-image-main {
+    opacity: 0;
+  }
+
+  .member-image-wrapper:hover .member-image-hover {
+    opacity: 1;
   }
 
   .member-info {

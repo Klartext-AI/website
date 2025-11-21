@@ -1,4 +1,7 @@
 ---
+import Icon from './Icon.astro';
+
+
 interface Props {
   lang?: 'de' | 'en';
 }
@@ -9,50 +12,53 @@ const BASE = import.meta.env.BASE_URL;
 
 const content = {
   de: {
-    headline: "Ihr Partner für end-to-end Softwarelösungen mit AI.",
+    headline: "Unser Kompass.",
     valuesButton: "Unsere Werte entdecken",
     cards: [
       {
-        title: "Domain-Driven Design",
-        short: "Wir denken in Branchen, nicht in Modellen",
-        full: "Unsere Lösungen basieren auf tiefem Verständnis Ihrer Geschäftsprozesse und Fachdomäne, nicht auf generischen AI-Ansätzen.",
-        link: "blog/domain-driven-design-rfu"
+        title: "Verantwortung",
+        short: "Fortschritt, der alle mitnimmt.",
+        full:"„Verantwortung bedeutet, Technologie im Sinne des Gemeinwohls zu gestalten. Und dabei die gesamte Gesellschaft auf diesem Weg mitzunehmen.” – Ruben",
+        link: "values-verantwortung"
       },
       {
-        title: "Evaluation-Driven Engineering",
-        short: "Evidenz statt Annahmen",
-        full: "Jede Entscheidung wird durch systematische Evaluierung und Messungen validiert. Wir bauen auf Fakten, nicht auf Hoffnung.",
-        link: "blog/evaluation-key-to-ai"
+        title: "Thought Leadership",
+        short: "Kompetenz mit Weitblick.",
+        full: "„Thought Leadership heißt für uns, technologische Entwicklungen nicht nur zu verfolgen, sondern sie aktiv mitzugestalten: durch Forschung, Austausch und Lösungen, die echten Impact liefern.“ – Daniel",
+        link: "values-thought-leadership"
       },
       {
-        title: "Privacy by Design",
-        short: "Sicher, konform, europäisch",
-        full: "DSGVO-Konformität, EU AI Act Compliance und europäisches Hosting sind nicht optional, sondern Teil unseres Fundaments.",
-        link: "blog/privacy-by-design"
+        title: "Fachliche Exzellenz",
+        short: "Technologie auf höchstem Niveau.",
+        full:"„Gute KI ist kein Zufall, sondern das Ergebnis klarer Prinzipien, dynamischer Prozesse und konsequenter Evaluierung.“ – Felix",
+        link: "values-fachliche-exzellenz"
       }
     ]
   },
   en: {
-    headline: "Your end-to-end AI solution provider.",
+    headline: "What guides our work.",
     valuesButton: "Explore our values",
-    cards: [
+    cards : [
       {
-        title: "Domain-Driven Design",
-        short: "We think in industries, not in models",
-        full: "Our solutions are based on deep understanding of your business processes and domain expertise, not generic AI approaches.",
-        link: "en/blog/domain-driven-design-rfu"
+        title: "Responsibility",
+        short: "Progress that includes everyone.",
+        full:
+          "“Responsibility means shaping technology for the common good. And including society along every step of the way.” – Ruben",
+        link: "en/values-responsibility"
       },
       {
-        title: "Evaluation-Driven Engineering",
-        short: "Evidence over assumptions",
-        full: "Every decision is validated through systematic evaluation and measurement. We build on facts, not hope.",
-        link: "en/blog/evaluation-key-to-ai"
+        title: "Thought Leadership",
+        short: "Knowledge with depth and direction.",
+        full:
+          "“Innovation emerges where research, community, and practice meet. When we collectively define what responsible AI should look like tomorrow.” – Daniel",
+        link: "en/vlaues-thought-leadership-en"
       },
       {
-        title: "Privacy by Design",
-        short: "Secure, compliant, European",
-        full: "GDPR compliance, EU AI Act conformity, and European hosting are not optional but part of our foundation.",
-        link: "en/blog/privacy-by-design"
+        title: "Excellence through Technology",
+        short: "Engineering at the highest level.",
+        full:
+          "“Great AI is never accidental. It is the result of clear principles, adaptive processes, and rigorous evaluation.” – Felix",
+        link: "en/values-excellence-technology"
       }
     ]
   }
@@ -70,34 +76,18 @@ const valuesHref = lang === 'de' ? `${BASE}values` : `${BASE}en/values`;
 
     <div class="cards-grid">
       {text.cards.map((card, index) => (
-        <a href={`${BASE}${card.link}`} class="glass-card value-card fade-in" style={`animation-delay: ${index * 0.2}s`}>
+        // outer element is now a div with data-href so we can control navigation on mobile vs desktop
+        <div role="button" tabindex="0" data-href={`${BASE}${card.link}`} class="glass-card value-card fade-in" style={`animation-delay: ${index * 0.2}s`}>
           <div class="card-header">
             <div class="card-icon">
               {index === 0 && (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M3 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                  <path d="M15 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                  <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                  <path d="M6 15v-1a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v1" />
-                  <path d="M12 9l0 3" />
-                </svg>
+                <Icon name="users" size={40} />
               )}
               {index === 1 && (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
-                  <path d="M9 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
-                  <path d="M15 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
-                  <path d="M4 20h14" />
-                </svg>
+                <Icon name="rocket" size={40} />
               )}
               {index === 2 && (
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" />
-                  <path d="M15 19l2 2l4 -4" />
-                </svg>
+                <Icon name="graduation" size={40} />
               )}
             </div>
             <h3 class="card-title">{card.title}</h3>
@@ -105,12 +95,14 @@ const valuesHref = lang === 'de' ? `${BASE}values` : `${BASE}en/values`;
           <p class="card-short">{card.short}</p>
           <p class="card-full">{card.full}</p>
           <div class="card-link">
-            <span>{lang === 'de' ? 'Mehr erfahren' : 'Learn how'}</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 12l4-4-4-4"/>
-            </svg>
+            {/* inner CTA is the only real link that should always navigate */}
+            <a class="card-cta" href={`${BASE}${card.link}`}>{lang === 'de' ? 'Mehr erfahren' : 'Learn how'}
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 12l4-4-4-4"/>
+              </svg>
+            </a>
           </div>
-        </a>
+        </div>
       ))}
     </div>
 
@@ -120,6 +112,66 @@ const valuesHref = lang === 'de' ? `${BASE}values` : `${BASE}en/values`;
       </a>
     </div>
   </div>
+
+  <!-- Client-side script to toggle expanded state on mobile and navigate on desktop -->
+  <script>
+    (function(){
+      const mq = window.matchMedia('(max-width: 768px)');
+      const processedCards = new WeakSet(); // track cards we've wired listeners for
+
+      function setupCards(){
+        const cards = document.querySelectorAll('.value-card');
+        cards.forEach(cardEl => {
+          const card = cardEl; // Element reference
+          // Ensure we only attach listeners once
+          if (processedCards.has(card)) return;
+          processedCards.add(card);
+
+          const href = (card instanceof HTMLElement && card.dataset) ? card.dataset.href : undefined;
+
+          card.addEventListener('click', (e) => {
+            const target = e.target instanceof HTMLElement ? e.target : null;
+            if (target && target.closest('.card-cta')) return; // let link handle navigation
+
+            if (mq.matches) {
+              // mobile: expand/collapse only
+              e.preventDefault();
+              if (card instanceof HTMLElement) card.classList.toggle('expanded');
+            } else {
+              // desktop: navigate
+              if (href) window.location.href = href;
+            }
+          });
+
+          card.addEventListener('keydown', (e) => {
+            const key = (e instanceof KeyboardEvent) ? e.key : '';
+            if (key === 'Enter' || key === ' ') {
+              e.preventDefault();
+              if (mq.matches) {
+                if (card instanceof HTMLElement) card.classList.toggle('expanded');
+              } else if (href) {
+                window.location.href = href;
+              }
+            }
+          });
+        });
+      }
+
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setupCards);
+      else setupCards();
+
+      const handleViewportChange = (ev) => {
+        // When leaving mobile, collapse all expanded cards
+        if (!ev.matches) {
+          document.querySelectorAll('.value-card.expanded').forEach(expEl => {
+            if (expEl instanceof HTMLElement) expEl.classList.remove('expanded');
+          });
+        }
+      };
+
+      try { mq.addEventListener('change', handleViewportChange); } catch { mq.addListener(handleViewportChange); }
+    })();
+  </script>
 </section>
 
 <style>
@@ -218,6 +270,14 @@ const valuesHref = lang === 'de' ? `${BASE}values` : `${BASE}en/values`;
     transition: transform 0.3s ease;
   }
 
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
   /* Hover effects */
   .value-card:hover {
     transform: translateY(-8px);
@@ -243,6 +303,20 @@ const valuesHref = lang === 'de' ? `${BASE}values` : `${BASE}en/values`;
 
   .value-card:hover .card-link svg {
     transform: translateX(4px);
+  }
+
+  /* Expanded (mobile tap) state */
+  .value-card.expanded .card-full {
+    max-height: 200px;
+    opacity: 1;
+    margin-bottom: var(--space-sm);
+  }
+
+  .value-card.expanded .card-link {
+    opacity: 1;
+    transform: translateX(0);
+    max-height: 40px;
+    margin-top: var(--space-sm);
   }
 
   /* Values CTA Section */
@@ -271,10 +345,10 @@ const valuesHref = lang === 'de' ? `${BASE}values` : `${BASE}en/values`;
     //  margin-bottom: var(--space-sm);
     //}
 
-    //.card-link {
-      //opacity: 1;
-      //transform: translateX(0);
-    //}
+    .card-link {
+      opacity: 1;
+      transform: translateX(0);
+    }
 
   }
 </style>

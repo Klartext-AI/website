@@ -28,6 +28,7 @@ const teamMembers = [
     name: "Bruno",
     role: "Chief Happiness Officer",
     image: `${BASE}team/bruno.png`,
+    hoverImage: `${BASE}team/bruni-fun.png`,   
     linkedin: "https://www.instagram.com/bruno_der_kleine_baer",
     summary: [
         "Cockerpoo, 3,5 Jahre, zertifizierter Gute-Laune-Manager.",
@@ -94,13 +95,16 @@ const teamMembers = [
     image: `${BASE}team/anna.png`,
     linkedin: "https://www.linkedin.com/in/anna-poledna-19766531b/",
     summary: [
-      "Internationaler Background in Datenanalyse und Biowissenschaften",
-      "KI-Enthusiastin für interdisziplinäre Projekte",
-      "Verbindet Menschen, Ideen und Technologie"
+      "Wissenschaftlicher Mix aus Labor, Data Science und internationalen Projekten",
+      "Dual-Degree Duke (USA/China) mit Fokus auf Forschung & Daten",
+      "Verbindung zwischen Tech, Produkt & klarer Kommunikation"
     ],
     fullBio: [
-      "Internationaler wissenschaftlicher Background in Datenanalyse und Biowissenschaften.",
-      "KI-Enthusiastin mit Begeisterung für interdisziplinäre Projekte, die Menschen, Ideen und Technologie miteinander verbinden."
+      "Mein Weg zu Klartext AI begann nicht in einem klassischen Kommunikationsstudium, sondern in Forschungslaboren, Datenprojekten und internationalen Kooperationen. Nach meiner technischen HTL-Ausbildung Wien führte mich mein Dual-Degree-Studium an die Duke University in den USA und an die Duke Kunshan University in China. Dort verband ich Data Science, Biowissenschaften, Geospatial Analytics und Feldforschung – oft in Projekten, in denen komplexe Daten in klare Entscheidungen übersetzt werden mussten.",
+      "Diese Mischung hat meinen Arbeitsstil geprägt: analytisch, strukturiert, neugierig und interdisziplinär. Ich habe in der Mongolei geospatial Daten erhoben, in China quantitative Zellbiologie analysiert, in Wien biotechnologische Prozesse modelliert und in internationalen Teams KI-basierte Modelle für Umwelt- und Biotechnologiefragen entwickelt. Was all diese Erfahrungen verbindet: der Wunsch, Wissen verständlich zu machen und Technologie sinnvoll einzusetzen.",
+      "Was mich antreibt, ist eine gesunde Mischung aus Neugier und Begeisterung für moderne Technologie. KI fasziniert mich besonders dort, wo sie echten Mehrwert erzeugt: klare Sprache, präzise Prozesse, bessere Zugänglichkeit.",
+      "Abseits der Arbeit bin ich meistens am Berg, Basketballcourt, im Gym oder Turnsaal zu finden."
+
     ]
   },
   {
@@ -137,12 +141,29 @@ const teamMembers = [
           <article class="member-tile fade-in" style={`animation-delay: ${index * 0.1}s`}>
             <div class="tile-header">
               <div class="member-image-wrapper">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  class="member-image"
-                  loading="lazy"
-                />
+                {member.hoverImage ? (
+                  <>
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      class="member-image member-image-main"
+                      loading="lazy"
+                    />
+                    <img
+                      src={member.hoverImage}
+                      alt={member.name}
+                      class="member-image member-image-hover"
+                      loading="lazy"
+                    />
+                  </>
+                ) : (
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    class="member-image"
+                    loading="lazy"
+                  />
+                )}
               </div>
               <div class="member-info">
                 <h2 class="member-name">{member.name}</h2>
@@ -270,6 +291,7 @@ const teamMembers = [
     border: 2px solid rgba(36, 121, 190, 0.2);
     transition: all 0.4s ease;
     margin-bottom: var(--space-sm);
+    position: relative;       
   }
 
   .member-tile:hover .member-image-wrapper {
@@ -287,6 +309,25 @@ const teamMembers = [
   .member-tile:hover .member-image {
     transform: scale(1.05);
   }
+
+.member-image-main,
+.member-image-hover {
+  position: absolute;
+  inset: 0;
+}
+
+.member-image-hover {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.member-image-wrapper:hover .member-image-main {
+  opacity: 0;
+}
+
+.member-image-wrapper:hover .member-image-hover {
+  opacity: 1;
+}
 
   .member-info {
     display: flex;
