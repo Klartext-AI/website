@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://klartext-ai.github.io',
-  base: '/website/',
+  site: 'http://klartext-ai.com',
+  base: '/',
   i18n: {
     defaultLocale: 'de',
     locales: ['de', 'en'],
