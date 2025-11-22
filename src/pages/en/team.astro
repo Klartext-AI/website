@@ -28,7 +28,7 @@ const teamMembers = [
     name: "Bruno",
     role: "Chief Happiness Officer",
     image: `${BASE}team/bruno.png`,
-    hoverImage: `${BASE}team/bruni-fun.png`,
+    hoverImage: `${BASE}team/bruno-fun.png`,
     linkedin: "https://www.instagram.com/bruno_der_kleine_baer",
     summary: [
       "Cockerpoo, 3.5 years old, certified mood manager.",
@@ -61,16 +61,17 @@ const teamMembers = [
     name: "Felix Krause",
     role: "CTO",
     image: `${BASE}team/felix.png`,
+    hoverImage: `${BASE}team/felix-fun.png`,
     linkedin: "https://www.linkedin.com/in/f-krause-ai/",
     summary: [
-      `Economics + Data Science, board member <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AIM</a> tech network (400 experts)`,
+      `Economics + Data Science, board member <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AIM</a> tech network (450 experts)`,
       "Analytical thinking meets technical implementation for impactful AI",
-      "Work culture based on trust, curiosity, and enjoyment"
+      "Work culture based on trust, curiosity, and fun"
     ],
     fullBio: [
       "My economics studies showed me how closely people, organizations, and society are intertwined. Through my Master's in Data Science, I learned to make these connections visible in data. For me, artificial intelligence is the tool with which we can not only better understand but also shape the world.",
-      `As Chief Technology Officer of Klartext AI, I combine analytical thinking with technical implementation. My goal: to develop AI solutions that demonstrably work – reliable, understandable, and with real benefits for companies and society. Additionally, I am on the board of the tech network <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AIM</a>, which unites 400 tech experts from Europe and regularly organizes popular hackathons.`,
-      "I am motivated by working with a strong team to deploy the latest technologies and live a work culture based on trust, curiosity, and enjoyment of work."
+      `As Chief Technology Officer of Klartext AI, I combine analytical thinking with technical implementation. My goal: to develop AI solutions that demonstrably work – reliable, understandable, and with real benefits for companies and society. Additionally, I am on the board of the tech network <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AIM</a>, which unites 450 tech experts from Europe and regularly organizes popular hackathons.`,
+      "I am motivated by working with a strong team to deploy the latest technologies and live a work culture based on trust, curiosity, and fun at work."
     ]
   },
   {
@@ -135,6 +136,21 @@ const teamMembers = [
       <div class="team-grid">
         {teamMembers.map((member, index) => (
           <article class="member-tile fade-in" style={`animation-delay: ${index * 0.1}s`}>
+            {member.linkedin && (
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="linkedin-icon"
+                aria-label={`Visit ${member.name} on LinkedIn`}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
+            )}
             <div class="tile-header">
               <div class="member-image-wrapper">
                 {member.hoverImage ? (
@@ -164,21 +180,6 @@ const teamMembers = [
               <div class="member-info">
                 <h2 class="member-name">{member.name}</h2>
                 <p class="member-role">{member.role}</p>
-                {member.linkedin && (
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="linkedin-icon"
-                    aria-label={`Visit ${member.name} on LinkedIn`}
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                      <rect x="2" y="9" width="4" height="12"/>
-                      <circle cx="4" cy="4" r="2"/>
-                    </svg>
-                  </a>
-                )}
               </div>
             </div>
             <div class="member-bio">
@@ -255,6 +256,7 @@ const teamMembers = [
     }
 
   .member-tile {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: var(--space-md);
@@ -347,27 +349,30 @@ const teamMembers = [
   }
 
   .linkedin-icon {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-top: var(--space-xs);
     padding: 0.5rem;
     background: rgba(36, 121, 190, 0.1);
     color: var(--color-blue);
     border-radius: 50%;
     text-decoration: none;
     transition: all 0.3s ease;
+    z-index: 10;
   }
 
   .linkedin-icon:hover {
     background: var(--color-blue);
     color: white;
-    transform: translateY(-2px);
+    transform: scale(1.1);
   }
 
   .linkedin-icon svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
 
   .member-bio {

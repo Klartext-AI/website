@@ -17,25 +17,34 @@ const content = {
         name: "Ruben Hetfleisch",
         role: "CEO",
         tagline: "Innovation ist, was Wirkung hat.",
-        bio: "TU Darmstadt – M.Sc. Maschinen- & Verfahrenstechnik. Expertise in KI-Forschung & industriellen Anwendungen bei Fraunhofer Austria",
         image: `${BASE}team/ruben.png`,
-        linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/"
+        linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
+        bullets: [
+          'KI-Experte mit jahrelanger Forschungserfahrung (TU Darmstadt & Fraunhofer)',
+          'Vorstand <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a> & Österreichs Repräsentant im European AI Forum'
+        ]
       },
       {
         name: "Daniel Toth",
         role: "COO",
         tagline: "Technologie hat nur dann Wert, wenn sie reale Probleme löst.",
-        bio: "TU Wien – Wirtschaftsingenieur-Maschinenbau, Dipl.-Ing. Expertise in Forschung & Industrie seit 2016",
         image: `${BASE}team/daniel.png`,
-        linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/"
+        linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/",
+        bullets: [
+          'Industrie und Forschungserfahrung seit 2015 (TU Wien & Fraunhofer Austria)',
+          'Strategische Projektleitung und -umsetzung mit skalierbaren Ergebnissen in internationalen Konsortien'
+        ]
       },
       {
         name: "Felix Krause",
         role: "CTO",
         tagline: "Evidenz statt Annahmen",
-        bio: "Universität Wien – M.Sc. Data Science. Deep-Learning-, LLM- & AI-Engineering-Expertise aus Forschung & Industrie",
         image: `${BASE}team/felix.png`,
-        linkedin: "https://www.linkedin.com/in/f-krause-ai/"
+        linkedin: "https://www.linkedin.com/in/f-krause-ai/",
+        bullets: [
+          'Data Science Master (Universität Wien) und jahrelange AI Engineering Erfahrung',
+          'Vorstand europäisches Tech-Netzwerk <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AI Impact Mission (AIM)</a> mit 450+ KI-Expert:innen und beliebten AI Hackathons',
+        ]
       }
     ]
   },
@@ -49,25 +58,34 @@ const content = {
         name: "Ruben Hetfleisch",
         role: "CEO",
         tagline: "Innovation is what creates impact.",
-        bio: "TU Darmstadt – M.Sc. Mechanical & Process Engineering. Expertise in AI research and industrial applications at Fraunhofer Austria.",
         image: `${BASE}team/ruben.png`,
-        linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/"
+        linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
+        bullets: [
+          'AI expert with years of research experience (TU Darmstadt & Fraunhofer)',
+          'Board member of <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a> & Austria\'s representative in the European AI Forum'
+        ]
       },
       {
         name: "Daniel Toth",
         role: "COO",
         tagline: "Technology only has value when it solves real problems.",
-        bio: "TU Wien – Dipl.-Ing. in Industrial Engineering & Mechanical Engineering. Expertise in research and industry since 2016.",
         image: `${BASE}team/daniel.png`,
-        linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/"
+        linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/",
+        bullets: [
+          'Industry and research experience since 2015 (TU Wien & Fraunhofer Austria)',
+          'Strategic project leadership and execution delivering scalable results in international consortia'
+        ]
       },
       {
         name: "Felix Krause",
         role: "CTO",
         tagline: "Evidence over assumptions",
-        bio: "University of Vienna – M.Sc. Data Science. Deep learning, LLM and AI engineering expertise across research and industry.",
         image: `${BASE}team/felix.png`,
-        linkedin: "https://www.linkedin.com/in/f-krause-ai/"
+        linkedin: "https://www.linkedin.com/in/f-krause-ai/",
+        bullets: [
+          'Data Science Master (University of Vienna) and several years of AI engineering experience',
+          'Board member of European tech network <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AI Impact Mission (AIM)</a> with 450+ AI experts and organizer of popular AI hackathons'
+        ]
       }
     ]
   }
@@ -113,7 +131,13 @@ const text = content[lang];
           <div class="member-info">
             <h3 class="member-name">{member.name}</h3>
             <p class="member-role">{member.role}</p>
-            <p class="member-bio">{member.bio}</p>
+            {member.bullets && (
+              <ul class="member-bullets">
+                {member.bullets.map((b) => (
+                  <li set:html={b}></li>
+                ))}
+              </ul>
+            )}
           </div>
         </article>
       ))}
@@ -256,10 +280,29 @@ const text = content[lang];
     margin-bottom: var(--space-sm);
   }
 
-  .member-bio {
-    font-size: 1rem;
-    line-height: 1.6;
+  .member-bullets {
+    list-style: disc;
+    padding-left: 1.2rem;
+    text-align: left;
+    margin: 0;
+    display: inline-block;
+  }
+
+  .member-bullets li {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
     color: var(--color-text-muted);
+  }
+
+  .member-bullets a {
+    color: var(--color-blue);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .member-bullets a:hover {
+    text-decoration: underline;
   }
 
   @media (max-width: 1024px) {
@@ -299,6 +342,10 @@ const text = content[lang];
 
     .member-info {
       margin-top: var(--space-sm);
+    }
+
+    .member-bullets {
+      padding-left: 1.1rem;
     }
   }
 </style>

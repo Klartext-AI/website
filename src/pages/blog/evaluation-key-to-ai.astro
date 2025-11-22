@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogPostDetail from '../../components/BlogPostDetail.astro';
 import FinalCTA from '../../components/FinalCTA.astro';
@@ -14,9 +14,9 @@ const fullContent = `
 
 <p>Wir alle kennen das Phänomen: Ein KI-Prototyp zeigt beeindruckende Ergebnisse in der Demo. Alle sind begeistert. Dann kommt der Produktiveinsatz – und plötzlich häufen sich Probleme. Warum?</p>
 
-<p>Weil ein funktionierender Prototyp nicht dasselbe ist wie ein produktives System. Der Prototyp wurde mit ausgewählten Beispielen getestet, das produktive System muss mit der Realität klarkommen – inklusiv aller Edge Cases, Inkonsistenzen und unerwarteten Inputs.</p>
+<p>Weil ein funktionierender Prototyp nicht dasselbe ist wie ein produktives System. Der Prototyp wurde mit ausgewählten Beispielen getestet, das produktive System muss mit der Realität klarkommen – inklusive aller Edge Cases, Inkonsistenzen und unerwarteten Inputs.</p>
 
-<p><strong>Das Problem</strong>: Ohne systematische Evaluation wissen wir nicht, wo die Grenzen des Systems liegen. Wir wissen nicht, ob 80% oder 98% der Anfragen korrekt beantwortet werden. Wir wissen nicht, welche Fehlertypen auftreten und wie kritisch sie sind.</p>
+<p><strong>Das Problem</strong>: Ohne systematische Evaluation wissen wir nicht, wo die Grenzen des Systems liegen. Wir wissen nicht, ob 60% oder 98% der Anfragen korrekt beantwortet werden. Wir wissen nicht, welche Fehlertypen auftreten und wie kritisch sie sind.</p>
 
 <h4>Was Evaluation-Driven Engineering bedeutet</h4>
 
@@ -34,9 +34,13 @@ Wir kommunizieren nicht nur, was das System kann, sondern auch, was es nicht kan
 <p><strong>4. Feedback-Loops</strong><br/>
 Die besten Systeme lernen aus Feedback. Aber dafür muss man Feedback erst einmal erfassen, strukturieren und analysieren.</p>
 
+<h4>Verifizierbarkeit als Beschleuniger</h4>
+
+<p>Der ehemalige Tesla-AI-Direktor und OpenAI-Mitgründer Andrej Karpathy beschreibt diesen Paradigmenwechsel als <em>Software 2.0</em>: "Software 2.0 easily automates what you can verify" (Karpathy, 2024, <a href="https://threadreaderapp.com/thread/1990116666194456651.html?utm_source=tldrai" target="_blank" rel="noopener noreferrer">Threadreader</a>). Software 1.0 automatisierte alles, was wir explizit spezifizieren konnten, was zu deterministischen Ergebnissen führte; Software 2.0 automatisiert alles, was wir zuverlässig überprüfen können, basierend auf probabilistischen LLMs. Karpathys wichtigste Folgerung - "The more a task/job is verifiable, the more amenable it is to automation in the new programming paradigm" - unterstreicht unseren Ansatz: Evaluation wird zur Produktfunktion, mit der wir komplexe, API-basierte Lösungen kontinuierlich prüfen. Wir schaffen resetbare Umgebungen, schnelle Feedback-Schleifen und präzise Bewertungskriterien, damit sich Integrationen mit KI-Komponenten reproduzierbar verbessern.</p>
+
 <h4>Warum so viele KI-Projekte scheitern</h4>
 
-<p>Laut MIT's State of AI in Business Report 2025 erreichen 95% der GenAI-Projekte keine messbare Geschäftswirkung. Nicht weil die Technologie nicht funktioniert, sondern weil:</p>
+<p>Laut dem MIT-Bericht <em>State of AI in Business 2025</em> (MIT, 2025, <a href="https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf" target="_blank" rel="noopener noreferrer">PDF</a>) erreichen 95% der GenAI-Projekte keine messbare Geschäftswirkung. Nicht weil die Technologie nicht funktioniert, sondern weil:</p>
 
 <ul>
   <li><strong>Keine klaren Erfolgskriterien</strong> – Was bedeutet "besser"? Schneller? Genauer? Relevanter?</li>

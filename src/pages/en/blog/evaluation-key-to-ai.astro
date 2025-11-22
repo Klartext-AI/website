@@ -16,7 +16,7 @@ const fullContent = `
 
 <p>Because a working prototype is not the same as a production system. The prototype was tested with selected examples, the production system must handle reality – including all edge cases, inconsistencies, and unexpected inputs.</p>
 
-<p><strong>The problem</strong>: Without systematic evaluation, we don't know where the system's boundaries lie. We don't know if 80% or 98% of requests are answered correctly. We don't know which error types occur and how critical they are.</p>
+<p><strong>The problem</strong>: Without systematic evaluation, we don't know where the system's boundaries lie. We don't know if 60% or 98% of requests are answered correctly. We don't know which error types occur and how critical they are.</p>
 
 <h4>What Evaluation-Driven Engineering Means</h4>
 
@@ -34,9 +34,13 @@ We communicate not just what the system can do, but also what it cannot do. Beca
 <p><strong>4. Feedback Loops</strong><br/>
 The best systems learn from feedback. But for that, you first need to capture, structure, and analyze feedback.</p>
 
+<h4>Verifiability as an Accelerator</h4>
+
+<p>Former Tesla AI director and OpenAI co-founder Andrej Karpathy frames this shift as <em>Software 2.0</em>: "Software 2.0 easily automates what you can verify" (Karpathy, 2024, <a href="https://threadreaderapp.com/thread/1990116666194456651.html?utm_source=tldrai" target="_blank" rel="noopener noreferrer">Threadreader</a>). Software 1.0 automated whatever we could explicitly specify leading to deterministic outputs; Software 2.0 automates what we can reliably verify, based on probabilistic LLMs. Karpathy's core insight - "The more a task/job is verifiable, the more amenable it is to automation in the new programming paradigm" - explains why we treat evaluation as a product capability. We design resettable environments, tight feedback loops, and crisp acceptance criteria so AI-infused software improves every iteration while preserving measurable quality.</p>
+
 <h4>Why So Many AI Projects Fail</h4>
 
-<p>According to MIT's State of AI in Business Report 2025, 95% of GenAI projects achieve no measurable business impact. Not because the technology doesn't work, but because:</p>
+<p>According to MIT's <em>State of AI in Business 2025</em> report (MIT, 2025, <a href="https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf" target="_blank" rel="noopener noreferrer">PDF</a>), 95% of GenAI projects achieve no measurable business impact. Not because the technology doesn't work, but because:</p>
 
 <ul>
   <li><strong>No clear success criteria</strong> – What does "better" mean? Faster? More accurate? More relevant?</li>
@@ -91,3 +95,4 @@ The best systems learn from feedback. But for that, you first need to capture, s
   <FinalCTA lang="en" />
   <Footer lang="en" />
 </BaseLayout>
+
