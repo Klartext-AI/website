@@ -132,6 +132,7 @@ const content = {
 };
 
 const text = content[lang];
+const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
 ---
 
 <section id="references" class="references section">
@@ -161,6 +162,9 @@ const text = content[lang];
                 loading={index < 3 ? "eager" : "lazy"}
               />
             </div>
+            {reference.name === 'FFG' && (
+              <span class="reference-caption">{ffgCaption}</span>
+            )}
           </a>
         ))}
         {/* Duplicate set for seamless loop */}
@@ -180,6 +184,9 @@ const text = content[lang];
                 loading="lazy"
               />
             </div>
+            {reference.name === 'FFG' && (
+              <span class="reference-caption">{ffgCaption}</span>
+            )}
           </a>
         ))}
         </div>
@@ -201,16 +208,16 @@ const text = content[lang];
     padding: 0 var(--space-md);
   }
 
-    .references-glass-container {
-      max-width: 1480px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.35);
-      backdrop-filter: blur(18px) saturate(160%);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
-      border-radius: 24px;
-      position: relative;
-    }
+  .references-glass-container {
+    max-width: 1480px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    border-radius: 24px;
+    position: relative;
+  }
 
   .references-title {
     font-size: var(--font-size-h2);
@@ -251,6 +258,7 @@ const text = content[lang];
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column; /* Allow caption below logo */
     padding: var(--space-md) var(--space-lg);
     min-width: 200px;
     min-height: 200px;
@@ -299,11 +307,14 @@ const text = content[lang];
     z-index: 1;
   }
 
+  /* Make all logos visually consistent by targeting a common height
+     SVGs sometimes render smaller due to their intrinsic viewport.
+     This enforces a uniform visual height while preserving aspect ratio. */
   .reference-logo {
-    max-width: 100%;
+    height: 70px;           /* target visual height for desktop */
+    width: auto;            /* preserve aspect ratio */
+    max-width: 80%;
     max-height: 100%;
-    width: auto;
-    height: auto;
     object-fit: contain;
     filter: grayscale(0%) opacity(0.8);
     transition: all 0.4s ease;
@@ -312,6 +323,14 @@ const text = content[lang];
   .reference-item:hover .reference-logo {
     filter: grayscale(0%) opacity(1);
     transform: scale(1.05);
+  }
+
+  /* Caption below FFG logo */
+  .reference-caption {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 8px;
+    z-index: 1;
   }
 
   /* Fallback text styling when logo doesn't load */
@@ -353,14 +372,20 @@ const text = content[lang];
       height: 55px;
     }
 
+    /* Always show logos in color on mobile for better visibility */
+    .reference-logo {
+      filter: grayscale(0%) opacity(0.85);
+      height: 50px; /* align visual size on mobile */
+    }
+
     .references-banner-wrapper::before,
     .references-banner-wrapper::after {
       width: 80px;
     }
 
-    /* Always show logos in color on mobile for better visibility */
-    .reference-logo {
-      filter: grayscale(0%) opacity(0.85);
+    .reference-caption {
+      font-size: 0.8rem;
+      margin-top: 6px;
     }
   }
 
@@ -383,6 +408,15 @@ const text = content[lang];
     .reference-logo-wrapper {
       width: 100px;
       height: 50px;
+    }
+
+    .reference-logo {
+      height: 45px; /* slightly smaller for very small screens */
+    }
+
+    .reference-caption {
+      font-size: 0.75rem;
+      margin-top: 4px;
     }
   }
 </style>
