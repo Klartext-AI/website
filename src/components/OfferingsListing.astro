@@ -19,7 +19,7 @@ const content = {
         title: "AI Value Sprint Workshop",
         category: "Workshop",
         icon: "🚀",
-        description: "In 2-3 Stunden analysieren wir mit Ihren Fachexperten Kernprozesse, challengen Abläufe und identifizieren Use Cases mit messbarem ROI. Von Prozesskomplexität zu greifbaren Ansatzpunkten.",
+        description: "In 2-3 Stunden analysieren wir mit Ihren Fachexpert:innen Kernprozesse, challengen Abläufe und identifizieren Use Cases mit messbarem ROI. Von Prozesskomplexität zu greifbaren Ansatzpunkten.",
         highlights: [
           "Pain Point Analyse & Use Case Matching",
           "ROI-basierte Priorisierung",
@@ -51,11 +51,23 @@ const content = {
         ]
       },
       {
+        id: "pdf-accessibility",
+        title: "PDF/UA Accessibility Transformation",
+        category: "Produkt",
+        icon: "📄",
+        description: "Vollautomatische Umwandlung bestehender PDF-Dokumente in barrierefreie PDF/UA-Formate – mit modularer Pipeline, Human-in-the-Loop und geprüfter Konformität.",
+        highlights: [
+          "Automatisierte Transformation großer PDF-Bestände in PDF/UA",
+          "Human-in-the-Loop für Sonderfälle & sensible Inhalte",
+          "Vollständige PDF/UA-Validierung inkl. Qualitätsreports"
+        ]
+      },
+      {
         id: "inspirational-talks",
         title: "Inspirational Talks",
         category: "Vortrag",
         icon: "💡",
-        description: "Keine Buzzwords, sondern reale Erfolge. Unsere Experten teilen Learnings aus produktiven AI-Projekten – von 80% Zeiteinsparung bis 1-Monats-Break-Even. Praxisnah, messbar, umsetzbar.",
+        description: "Keine Buzzwords, sondern reale Erfolge. Unsere Expert:innen teilen Learnings aus produktiven AI-Projekten – von 80% Zeiteinsparung bis 1-Monats-Break-Even. Praxisnah, messbar, umsetzbar.",
         highlights: [
           "Real-World Success Stories mit KPIs",
           "Von Hype zu ROI: Lessons Learned",
@@ -91,11 +103,11 @@ const content = {
         title: "AI Hackathons",
         category: "Event",
         icon: "👥",
-        description: `Hackathons in Partnerschaft mit <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AIM</a> – intern für Ihre Software-Entwickler zum spielerischen Anwenden von AI-Tools und SDKs, extern für Employer Branding und Talent Scouting.`,
+        description: `Hackathons in Partnerschaft mit <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AIM</a> – intern für Ihre Software-Entwickler:innen zum spielerischen Anwenden von AI-Tools und SDKs, extern für Employer Branding und Talent Scouting.`,
         highlights: [
-          "Interne Events: AI-SDKs & Tools für Entwickler",
+          "Interne Events: AI-SDKs & Tools für Entwickler:innen",
           "Externe Events: Employer Branding & Talent Acquisition",
-          "Zielgruppen: Studenten, Young Professionals, Seniors"
+          "Zielgruppen: Student:innen, Young Professionals, Seniors"
         ]
       }
     ]
@@ -139,6 +151,18 @@ const content = {
           "100% DE/AT Hosting – No US Cloud",
           "Zero Third-Party Access to Your Data",
           "GDPR-Compliant & EU AI Act Ready"
+        ]
+      },
+      {
+        id: "pdf-accessibility",
+        title: "PDF/UA Accessibility Transformation",
+        category: "Product",
+        icon: "📄",
+        description: "Fully automated transformation of existing PDFs into accessible PDF/UA documents – with a modular pipeline, human-in-the-loop review and robust compliance checks.",
+        highlights: [
+          "Automated conversion of large PDF archives to PDF/UA",
+          "Human-in-the-loop handling for edge cases & sensitive content",
+          "Full PDF/UA validation including quality reports"
         ]
       },
       {
@@ -193,17 +217,19 @@ const content = {
   }
 } as const;
   
- const text = content[lang];
+const text = content[lang];
 
- const offeringIcons = {
+const offeringIcons = {
   'ai-value-sprint': 'rocket',
   'custom-projects': 'target',
   'chatgpt-clone': 'shield',
+  'pdf-accessibility': 'route',
   'inspirational-talks': 'bulb',
   'eu-ai-act-readiness': 'scale',
   'ai-security-screening': 'lock',
   'hackathons': 'users'
 } as const;
+
 ---
 
 <section id="offerings-listing" class="offerings-listing section">

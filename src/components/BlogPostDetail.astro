@@ -52,7 +52,7 @@ const canonicalHref = Astro.url?.href ?? new URL(BASE, SITE).toString();
 
       <div class="post-body">
         <div class="post-intro">
-          <p class="lead-text">{fullExcerpt}</p>
+        <p class="lead-text" set:html={fullExcerpt}></p>
         </div>
 
         <div class="post-main-content" set:html={fullContent} />
