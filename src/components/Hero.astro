@@ -296,8 +296,16 @@ const BASE = import.meta.env.BASE_URL;
     });
   }
 
+  const runOnReady = (callback: () => void | Promise<void>) => {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => void callback(), { once: true });
+    } else {
+      void callback();
+    }
+  };
+
   // Initialize hero animations
-  document.addEventListener('DOMContentLoaded', async () => {
+  runOnReady(async () => {
     const heroMain = document.querySelector('.hero-main') as HTMLElement;
     const heroSubtitle = document.querySelector('.hero-subtitle') as HTMLElement;
 

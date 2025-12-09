@@ -318,8 +318,16 @@ if (lang === 'de') {
 </style>
 
 <script>
+  const runOnReady = (callback: () => void) => {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', callback, { once: true });
+    } else {
+      callback();
+    }
+  };
+
   // Smooth scroll for anchor links
-  document.addEventListener('DOMContentLoaded', () => {
+  runOnReady(() => {
     const navLinks = document.querySelectorAll('.nav-link[href*="#"]');
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');

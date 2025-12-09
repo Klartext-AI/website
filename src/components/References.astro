@@ -432,7 +432,15 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  const runOnReady = (callback: () => void) => {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', callback, { once: true });
+    } else {
+      callback();
+    }
+  };
+
+  runOnReady(() => {
     const wrapper = document.getElementById('references-banner-wrapper');
     const banner = document.getElementById('references-banner');
 

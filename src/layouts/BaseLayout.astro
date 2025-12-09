@@ -433,45 +433,62 @@ const locale = lang === 'en' ? 'en_US' : 'de_DE';
 
   <!-- Scroll Animation Script -->
   <script>
+    // Run callback whether DOMContentLoaded already fired or not
+    const runOnReady = (callback: () => void) => {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', callback, { once: true });
+      } else {
+        callback();
+      }
+    };
+
     // Intersection Observer for fade-in animations
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
     // Observe all elements with fade-in class
-    document.addEventListener('DOMContentLoaded', () => {
+    runOnReady(() => {
       const fadeElements = document.querySelectorAll('.fade-in');
-      fadeElements.forEach(el => {
-        // Check if element is already in viewport on page load
-        const rect = el.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
 
-        // Element is considered "in viewport" if it's at least partially visible
-        const isInViewport = (
-          rect.top < windowHeight &&
-          rect.bottom > 0 &&
-          rect.left < windowWidth &&
-          rect.right > 0
-        );
+      if (!fadeElements.length) return;
 
-        // If already in viewport, make it visible immediately
-        if (isInViewport) {
-          el.classList.add('visible');
-        }
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, observerOptions);
 
-        // Observe for future scroll events
-        observer.observe(el);
-      });
+        fadeElements.forEach(el => {
+          // Check if element is already in viewport on page load
+          const rect = el.getBoundingClientRect();
+          const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+          const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+
+          // Element is considered "in viewport" if it's at least partially visible
+          const isInViewport = (
+            rect.top < windowHeight &&
+            rect.bottom > 0 &&
+            rect.left < windowWidth &&
+            rect.right > 0
+          );
+
+          // If already in viewport, make it visible immediately
+          if (isInViewport) {
+            el.classList.add('visible');
+          }
+
+          // Observe for future scroll events
+          observer.observe(el);
+        });
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        fadeElements.forEach(el => el.classList.add('visible'));
+      }
     });
   </script>
 </body>
