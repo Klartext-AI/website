@@ -223,7 +223,8 @@ const locale = lang === 'en' ? 'en_US' : 'de_DE';
       padding: var(--space-md) !important;
       z-index: 999 !important;
       animation: slideUpCookie 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
-      max-height: 60vh;
+      max-height: 80vh !important;
+      overflow-y: auto !important;
     }
 
     /* Body content area */
@@ -404,9 +405,16 @@ const locale = lang === 'en' ? 'en_US' : 'de_DE';
     /* Mobile responsive adjustments */
     @media (max-width: 768px) {
       #CybotCookiebotDialog {
-        max-width: calc(100vw - var(--space-md) * 2) !important;
-        padding: var(--space-sm) !important;
+        max-width: calc(100vw - 2rem) !important;
+        max-height: 85vh !important;
+        padding: 1rem !important;
         border-radius: 12px !important;
+        overflow-y: auto !important;
+        position: fixed !important;
+        bottom: 1rem !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        animation: slideUpCookieMobile 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
       }
 
       #CybotCookiebotDialogBodyContentTitle {
@@ -423,6 +431,18 @@ const locale = lang === 'en' ? 'en_US' : 'de_DE';
       .CybotCookiebotDialogBodyButton {
         width: 100% !important;
         justify-content: center !important;
+      }
+    }
+
+    /* Mobile-specific animation */
+    @keyframes slideUpCookieMobile {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
       }
     }
   </style>
