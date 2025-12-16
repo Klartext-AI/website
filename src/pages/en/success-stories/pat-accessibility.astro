@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SuccessStoryDetail from '../../../components/SuccessStoryDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'PDF Accessibility Transformation | Klartext AI';
+const description =
+  'Fully automated transformation of existing PDF documents into accessible PDF/UA formats – modular, scalable, with human-in-the-loop and verified compliance.';
+
+const challenge = `
+<p>Accessible documents are no longer a “nice-to-have”: With the <strong>Accessibility Act (BaFG)</strong>, a clear legal obligation is emerging – creating massive demand for making existing document repositories accessible quickly and reliably.</p>
+
+<p>At the same time, the current situation is sobering: Only a very small share of PDFs today are truly accessible. In Austria alone, <strong>1.3M+ people</strong> benefit directly from accessible digital content – and many more indirectly through improved usability for everyone.</p>
+
+<p><strong>The challenge:</strong></p>
+<ul>
+  <li>Manual remediation is <strong>expensive, complex</strong>, and <strong>not scalable</strong></li>
+  <li>PDF/UA requires many precise steps – errors quickly result in <strong>non-compliant</strong> documents</li>
+  <li>Large document inventories and continuous updates turn manual processes into a bottleneck</li>
+</ul>
+`;
+
+const solution = `
+<p>PAT (PDF Accessibility Transformation) is an <strong>AI-powered framework</strong> for the fully automated conversion of existing PDFs into <strong>accessible PDF/UA</strong> formats – featuring a modular pipeline, optional <strong>human-in-the-loop</strong>, and comprehensive <strong>validation</strong>.</p>
+
+<p><strong>The approach in detail:</strong></p>
+<ul>
+  <li><strong>End-to-end PDF/UA pipeline:</strong> Automates all relevant steps of PDF/UA transformation (including structure tree, tagging, reading order, alternative text, metadata, tables/lists, and heading hierarchy)</li>
+  <li><strong>LLM + NLP + rule-based logic:</strong> Semantic precision through a combination of language models, classical NLP, and deterministic rules</li>
+  <li><strong>Human-in-the-loop:</strong> Optional review loops for edge cases, sensitive content, and quality approvals</li>
+  <li><strong>Scalable batch processing:</strong> Consistent, high-quality transformation of large PDF collections</li>
+  <li><strong>Comprehensive PDF/UA validation:</strong> Including quality reports, audit logs, and traceable findings</li>
+</ul>
+
+<p>What makes PAT stand out: It is not merely an “accessibility assistant”, but a <strong>complete PDF/UA transformation</strong> offered as a standard, production-ready solution – modular, verifiable, and scalable.</p>
+`;
+
+const results = [
+  'Automated transformation of large PDF collections into PDF/UA – scalable instead of manual',
+  'Human-in-the-loop for edge cases and sensitive content – control remains with domain experts',
+  'Comprehensive PDF/UA validation including quality reports – full traceability',
+  'Greater inclusion: digital access for people with disabilities and improved usability for everyone',
+  'Sustainability and efficiency: reduced manual effort, lower rework, and scalable cost structure'
+];
+
+const fullContent = `
+<h3>Why now: Legal obligation and demand driven by BaFG</h3>
+<p>With the Accessibility Act (BaFG), expectations around digital accessibility are rising significantly. Organizations are required not only to create new documents accessibly, but above all to transform <strong>existing document repositories</strong> within reasonable timeframes and with reliable quality.</p>
+
+<h3>Innovation highlights</h3>
+<p>PAT addresses the core challenge of PDF/UA implementation: combining <strong>technical correctness</strong> with <strong>semantic precision</strong>.</p>
+<ul>
+  <li><strong>Automation of all PDF/UA steps:</strong> A unified pipeline instead of isolated tools</li>
+  <li><strong>Systematic semantics:</strong> LLM + NLP + rule-based logic for robust structures, labels, and reading order</li>
+  <li><strong>Verifiability by design:</strong> Validation and reporting as integral components – not added afterwards</li>
+</ul>
+
+<h3>Impact & value</h3>
+<ul>
+  <li><strong>Inclusion:</strong> Accessible documents enable digital access for all – directly benefiting 1.3M+ people in Austria</li>
+  <li><strong>Efficiency:</strong> Automation drastically reduces manual effort and enables true scalability</li>
+  <li><strong>Sustainability:</strong> Less manual remediation, less rework, and reduced resource consumption</li>
+</ul>
+`;
+
+const metrics = {
+  'Time savings': '80%',
+  'Break-even': '2 months'
+};
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <SuccessStoryDetail
+    title="PDF Accessibility Transformation"
+    client="Public Sector Organization"
+    category="Document Accessibility"
+    challenge={challenge}
+    solution={solution}
+    results={results}
+    metrics={metrics}
+    fullContent={fullContent}
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>
