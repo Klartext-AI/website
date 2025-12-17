@@ -10,55 +10,103 @@ const content = {
     title: "Impressum",
     companyLabel: "Unternehmensname",
     companyName: "Klartext AI FlexCo",
+    companyFormLabel: "Rechtsform",
+    companyForm: "FlexCo (FlexKapG)",
     addressLabel: "Geschäftsadresse",
     address: {
       street: "Lerchenfelder Straße 74/2/7",
       city: "1080 Wien",
       country: "Österreich"
     },
+    contactLabel: "Kontaktmöglichkeiten",
     phoneLabel: "Telefonnummer",
     phone: "+43 660 81010 67",
     emailLabel: "E-Mail-Adresse",
     email: "office@klartext-ai.com",
-    ownersLabel: "Namen der Inhaber",
+    businessPurposeLabel: "Unternehmensgegenstand",
+    businessPurpose: [
+      "Dienstleistungen in der automatischen Datenverarbeitung und Informationstechnik.",
+      "Entwicklung und Betrieb von KI-gestützten Softwarelösungen mit Fokus auf Barrierefreiheit und verständliche Aufbereitung komplexer Informationen (z.B. Finanz- und Rechtsdokumente)."
+    ],
+    ownersLabel: "Gewerberechtliche Geschäftsführung",
     owners: [
-      "Ruben Hetfleisch, Geschäftsführer",
+      "Ruben Helmut Hetfleisch, gewerberechtlicher Geschäftsführer",
       "Daniel Toth, Geschäftsführer",
       "Bernhard Landrichter",
       "Christian Kaindl"
     ],
-    vatLabel: "USt-IdNr",
+    vatLabel: "UID-Nummer",
     vatNumber: "ATU81693669",
-    registerLabel: "Registernummer",
-    registerNumber: "FN 643915 i"
+    registerLabel: "Firmenbuchnummer",
+    registerNumber: "FN 643915 i",
+    registerCourtLabel: "Firmenbuchgericht",
+    registerCourt: "Handelsgericht Wien",
+    gisaLabel: "GISA-Zahl",
+    gisaNumber: "38048296",
+    glnLabel: "GLN (Global Location Number)",
+    glnNumber: "9110037185289",
+    authorityLabel: "Zuständige Aufsichtsbehörde gem. ECG",
+    authority: "Magistratisches Bezirksamt des VIII. Bezirkes, 1080 Wien",
+    chamberLabel: "Mitgliedschaft bei der Wirtschaftskammer",
+    chamber: "Mitglied der Wirtschaftskammer Wien, Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie",
+    chamberLinkLabel: "WKO-Unternehmensprofil",
+    chamberLink: "https://firmen.wko.at/klartext-ai-flexco/wien/?firmaid=e53c4fce-7663-480b-859b-e0c3caddd822&suchbegriff=klartext%20ai",
+    capitalLabel: "Stammkapital",
+    capitalInfo: "Das eingetragene Stammkapital ergibt sich aus dem Firmenbuch der Klartext AI FlexCo.",
+    ecommerceLabel: "Anwendbare berufsrechtliche Vorschriften",
+    ecommerceInfo: "E-Commerce-Gesetz (ECG), Unternehmensgesetzbuch (UGB), Gewerbeordnung (GewO) in der jeweils geltenden Fassung."
   },
   en: {
     title: "Imprint",
     companyLabel: "Company Name",
     companyName: "Klartext AI FlexCo",
+    companyFormLabel: "Legal Form",
+    companyForm: "FlexCo (Austrian flexible corporation, FlexKapG)",
     addressLabel: "Business Address",
     address: {
       street: "Lerchenfelder Straße 74/2/7",
       city: "1080 Vienna",
       country: "Austria"
     },
+    contactLabel: "Contact Details",
     phoneLabel: "Phone Number",
     phone: "+43 660 81010 67",
     emailLabel: "Email Address",
     email: "office@klartext-ai.com",
-    ownersLabel: "Company Owners",
+    businessPurposeLabel: "Business Purpose",
+    businessPurpose: [
+      "Services in automatic data processing and information technology.",
+      "Development and operation of AI-powered software solutions with a focus on accessibility and clear communication of complex information (e.g. financial and legal documents)."
+    ],
+    ownersLabel: "Managing Directors / Trade Representative",
     owners: [
-      "Ruben Hetfleisch, Managing Director",
-      "Daniel Toth, Managing Director",
+      "Ruben Helmut Hetfleisch, managing director and trade representative under trade law",
+      "Daniel Toth, managing director",
       "Bernhard Landrichter",
       "Christian Kaindl"
     ],
     vatLabel: "VAT ID",
     vatNumber: "ATU81693669",
-    registerLabel: "Registration Number",
-    registerNumber: "FN 643915 i"
+    registerLabel: "Commercial Register Number",
+    registerNumber: "FN 643915 i",
+    registerCourtLabel: "Commercial Register Court",
+    registerCourt: "Commercial Court of Vienna (Handelsgericht Wien)",
+    gisaLabel: "GISA Number",
+    gisaNumber: "38048296",
+    glnLabel: "GLN (Global Location Number)",
+    glnNumber: "9110037185289",
+    authorityLabel: "Supervisory Authority pursuant to the E-Commerce Act",
+    authority: "Magistrate District Office of the 8th District, 1080 Vienna",
+    chamberLabel: "Chamber Membership",
+    chamber: "Member of the Vienna Economic Chamber, Professional Association for Management Consultancy, Accounting and Information Technology",
+    chamberLinkLabel: "WKO company profile",
+    chamberLink: "https://firmen.wko.at/klartext-ai-flexco/wien/?firmaid=e53c4fce-7663-480b-859b-e0c3caddd822&suchbegriff=klartext%20ai",
+    capitalLabel: "Share Capital",
+    capitalInfo: "The registered share capital is as recorded in the commercial register for Klartext AI FlexCo.",
+    ecommerceLabel: "Applicable Professional Regulations",
+    ecommerceInfo: "E-Commerce Act (ECG), Austrian Commercial Code (UGB), Trade Regulation Act (GewO), each as amended."
   }
-};
+} as const;
 
 const text = content[lang];
 ---
@@ -74,6 +122,11 @@ const text = content[lang];
       </div>
 
       <div class="impressum-section">
+        <h2>{text.companyFormLabel}</h2>
+        <p>{text.companyForm}</p>
+      </div>
+
+      <div class="impressum-section">
         <h2>{text.addressLabel}</h2>
         <p>
           {text.address.street}<br>
@@ -83,22 +136,41 @@ const text = content[lang];
       </div>
 
       <div class="impressum-section">
-        <h2>{text.phoneLabel}</h2>
-        <p><a href={`tel:${text.phone.replace(/\s/g, '')}`}>{text.phone}</a></p>
+        <h2>{text.contactLabel}</h2>
+        <p>
+          {text.phoneLabel}:
+          <a href={`tel:${text.phone.replace(/\s/g, '')}`}>{text.phone}</a><br>
+          {text.emailLabel}:
+          <a href={`mailto:${text.email}`}>{text.email}</a>
+        </p>
       </div>
 
       <div class="impressum-section">
-        <h2>{text.emailLabel}</h2>
-        <p><a href={`mailto:${text.email}`}>{text.email}</a></p>
+        <h2>{text.businessPurposeLabel}</h2>
+        <ul>
+          {text.businessPurpose.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
       </div>
 
       <div class="impressum-section">
         <h2>{text.ownersLabel}</h2>
         <ul>
-          {text.owners.map(owner => (
+          {text.owners.map((owner) => (
             <li>{owner}</li>
           ))}
         </ul>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.registerLabel}</h2>
+        <p>{text.registerNumber}</p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.registerCourtLabel}</h2>
+        <p>{text.registerCourt}</p>
       </div>
 
       <div class="impressum-section">
@@ -107,8 +179,38 @@ const text = content[lang];
       </div>
 
       <div class="impressum-section">
-        <h2>{text.registerLabel}</h2>
-        <p>{text.registerNumber}</p>
+        <h2>{text.gisaLabel}</h2>
+        <p>{text.gisaNumber}</p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.glnLabel}</h2>
+        <p>{text.glnNumber}</p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.authorityLabel}</h2>
+        <p>{text.authority}</p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.chamberLabel}</h2>
+        <p>{text.chamber}</p>
+        <p>
+          <a href={text.chamberLink} target="_blank" rel="noopener noreferrer">
+            {text.chamberLinkLabel}
+          </a>
+        </p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.capitalLabel}</h2>
+        <p>{text.capitalInfo}</p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.ecommerceLabel}</h2>
+        <p>{text.ecommerceInfo}</p>
       </div>
     </div>
   </div>

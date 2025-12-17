@@ -1,0 +1,83 @@
+---
+import 'vanilla-cookieconsent/dist/cookieconsent.css';
+
+interface Props {
+  lang: 'de' | 'en';
+  gaId: string;
+}
+
+const { lang, gaId } = Astro.props;
+---
+
+<div id="cc-container" data-lang={lang} data-ga-id={gaId}></div>
+
+<script>
+  import { run } from 'vanilla-cookieconsent';
+  import { createConfig } from './CookieConsentConfig';
+
+  const container = document.getElementById('cc-container');
+  if (!container) throw new Error('Cookie consent container not found');
+  
+  const lang = container.dataset.lang as 'de' | 'en';
+  const gaId = container.dataset.gaId!;
+
+  let hasShownBanner = false;
+
+  const loadGA = () => {
+    if ((window as any).__gaLoaded) return;
+    (window as any).__gaLoaded = true;
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+    document.head.appendChild(gaScript);
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    function gtag(...args: any[]){(window as any).dataLayer.push(args);}
+    gtag('js', new Date());
+    gtag('config', gaId, { anonymize_ip: true });
+  };
+
+  const config = createConfig(lang, loadGA);
+  run(config);
+
+  // Hide banner initially, show on scroll (after 60px)
+  const hideBanner = () => {
+    const modal = document.querySelector('#cc-main .cm');
+    if (modal && !hasShownBanner && !(window as any).CookieConsent?.validConsent()) {
+      modal.classList.add('cc-hidden');
+    }
+  };
+
+  const showBanner = () => {
+    const modal = document.querySelector('#cc-main .cm');
+    if (modal && !hasShownBanner) {
+      modal.classList.remove('cc-hidden');
+      hasShownBanner = true;
+    }
+  };
+
+  // Wait for modal to be rendered, then hide it
+  setTimeout(hideBanner, 100);
+
+  // Show banner when scrolling past 60px
+  const handleScroll = () => {
+    if (window.scrollY > 60 && !hasShownBanner && !(window as any).CookieConsent?.validConsent()) {
+      showBanner();
+      window.removeEventListener('scroll', handleScroll);
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll);
+
+  // Observe for when the modal is added to DOM
+  const observer = new MutationObserver(() => {
+    const modal = document.querySelector('#cc-main .cm');
+    if (modal && !hasShownBanner && !(window as any).CookieConsent?.validConsent()) {
+      if (window.scrollY <= 60) {
+        modal.classList.add('cc-hidden');
+      }
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+</script>
+
