@@ -52,6 +52,11 @@ const content = {
         logo: `${BASE}references/ai-austria.png`
       },
       {
+        name: "Terre des Hommes Deutschland e. V.",
+        url: "https://www.tdh.de/",
+        logo: `${BASE}references/terre-des-hommes-ge.svg`
+      },
+      {
         name: "FFG",
         url: "https://www.ffg.at/",
         logo: `${BASE}references/FFG_Logo_DE_CMYK.png`
@@ -116,6 +121,11 @@ const content = {
         name: "AI Austria",
         url: "https://aiaustria.com/",
         logo: `${BASE}references/ai-austria.png`
+      },
+      {
+        name: "Terre des Hommes Deutschland e. V.",
+        url: "https://www.tdh.de/en",
+        logo: `${BASE}references/terre-des-hommes-ge.svg`
       },
       {
         name: "FFG",
@@ -328,6 +338,18 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
     object-fit: contain;
     filter: grayscale(0%) opacity(0.8);
     transition: all 0.4s ease;
+  }
+
+  /* Make the white Terre des Hommes SVG visible on the light background
+     by inverting its colors and adding a subtle drop shadow. This targets
+     the specific filename placed in public/references. */
+  .reference-logo[src*="terre-des-hommes-ge.svg"] {
+    filter: invert(1);
+  }
+
+  .reference-item:hover .reference-logo[src*="terre-des-hommes-ge.svg"] {
+    filter: invert(1);
+    transform: scale(1.05);
   }
 
   .reference-item:hover .reference-logo {
