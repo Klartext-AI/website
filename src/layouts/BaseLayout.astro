@@ -22,6 +22,11 @@ const SITE = Astro.site?.toString() ?? 'https://klartext-ai.github.io';
 // Tracking configuration (only active in production)
 const isProd = import.meta.env.PROD;
 const GA4_ID = import.meta.env.PUBLIC_GA4_ID;
+
+// Warn if GA4_ID is missing in production build
+if (isProd && !GA4_ID) {
+  console.warn('⚠️  WARNING: PUBLIC_GA4_ID is not set. Google Analytics will not be loaded.');
+}
 const url = Astro.url;
 // Determine canonical and language alternates
 const canonicalHref = url?.href ?? SITE;

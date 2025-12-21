@@ -99,7 +99,9 @@ export const createConfig = (lang: 'de' | 'en', onAnalyticsAccept: () => void): 
       }
     }
   },
-  onFirstConsent() {
+  onConsent() {
+    // This fires on every page load when consent already exists
+    // AND after first consent is given
     if ((window as any).CookieConsent?.acceptedCategory('analytics')) {
       onAnalyticsAccept();
     }
