@@ -11,6 +11,41 @@ const { lang, gaId } = Astro.props;
 
 <div id="cc-container" data-lang={lang} data-ga-id={gaId}></div>
 
+<!-- Google Consent Mode v2: Load gtag.js immediately with default denied consent -->
+<!-- This allows Google to detect the tag while respecting GDPR -->
+<script is:inline define:vars={{ gaId }}>
+  // Initialize dataLayer and gtag immediately
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // Make gtag globally available
+  window.gtag = gtag;
+
+  // Set default consent to denied (GDPR compliant)
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied',
+    'wait_for_update': 500
+  });
+
+  // Initialize GA4 (won't collect data until consent is granted)
+  gtag('js', new Date());
+  gtag('config', gaId, { anonymize_ip: true });
+
+  // Store gaId for the gtag script to load
+  window.__GA4_ID = gaId;
+</script>
+<script is:inline>
+  // Load gtag.js script dynamically
+  (function() {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.__GA4_ID;
+    document.head.appendChild(s);
+  })();
+</script>
+
 <script>
   import { run } from 'vanilla-cookieconsent';
   import { createConfig } from './CookieConsentConfig';
@@ -19,34 +54,20 @@ const { lang, gaId } = Astro.props;
   if (!container) throw new Error('Cookie consent container not found');
   
   const lang = container.dataset.lang as 'de' | 'en';
-  const gaId = container.dataset.gaId!;
 
   let hasShownBanner = false;
 
-  const loadGA = () => {
-    if ((window as any).__gaLoaded) return;
-    (window as any).__gaLoaded = true;
+  // Update Google Consent Mode when user accepts analytics
+  const updateGoogleConsent = () => {
+    if ((window as any).__consentUpdated) return;
+    (window as any).__consentUpdated = true;
 
-    // Initialize dataLayer before anything else
-    (window as any).dataLayer = (window as any).dataLayer || [];
-
-    // Define gtag globally so it can be used after script loads
-    (window as any).gtag = function(...args: any[]) {
-      (window as any).dataLayer.push(args);
-    };
-
-    // Load the GA script
-    const gaScript = document.createElement('script');
-    gaScript.async = true;
-    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
-    document.head.appendChild(gaScript);
-
-    // Queue initial commands
-    (window as any).gtag('js', new Date());
-    (window as any).gtag('config', gaId, { anonymize_ip: true });
+    (window as any).gtag('consent', 'update', {
+      'analytics_storage': 'granted'
+    });
   };
 
-  const config = createConfig(lang, loadGA);
+  const config = createConfig(lang, updateGoogleConsent);
   run(config);
 
   // Hide banner initially, show on scroll (after 60px)
