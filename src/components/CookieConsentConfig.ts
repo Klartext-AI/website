@@ -1,6 +1,6 @@
 import type { CookieConsentConfig } from 'vanilla-cookieconsent';
 
-export const createConfig = (lang: 'de' | 'en', onAnalyticsAccept: () => void): CookieConsentConfig => ({
+export const createConfig = (lang: 'de' | 'en', onConsentChange: () => void): CookieConsentConfig => ({
   guiOptions: {
     consentModal: {
       layout: 'box wide',
@@ -17,7 +17,15 @@ export const createConfig = (lang: 'de' | 'en', onAnalyticsAccept: () => void): 
   },
   categories: {
     necessary: { enabled: true, readOnly: true },
-    analytics: {}
+    analytics: {
+      // Clear GA cookies if user later opts out
+      autoClear: {
+        cookies: [
+          { name: /^_ga/ },   // Matches _ga, _ga_XXXXXX
+          { name: '_gid' },
+        ],
+      },
+    }
   },
   language: {
     default: lang,
@@ -99,17 +107,8 @@ export const createConfig = (lang: 'de' | 'en', onAnalyticsAccept: () => void): 
       }
     }
   },
-  onConsent() {
-    // This fires on every page load when consent already exists
-    // AND after first consent is given
-    if ((window as any).CookieConsent?.acceptedCategory('analytics')) {
-      onAnalyticsAccept();
-    }
-  },
-  onChange({ changedCategories }) {
-    if (changedCategories.includes('analytics') && (window as any).CookieConsent?.acceptedCategory('analytics')) {
-      onAnalyticsAccept();
-    }
-  }
+  // Called on first consent AND on every page load when consent already exists
+  onFirstConsent: onConsentChange,
+  onConsent: onConsentChange,
+  onChange: onConsentChange,
 });
-

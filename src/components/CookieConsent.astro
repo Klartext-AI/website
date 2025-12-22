@@ -11,69 +11,74 @@ const { lang, gaId } = Astro.props;
 
 <div id="cc-container" data-lang={lang} data-ga-id={gaId}></div>
 
-<!-- Google Consent Mode v2: Load gtag.js immediately with default denied consent -->
-<!-- This allows Google to detect the tag while respecting GDPR -->
-<script is:inline define:vars={{ gaId }}>
-  // Initialize dataLayer and gtag immediately
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  // Make gtag globally available
-  window.gtag = gtag;
-
-  // Set default consent to denied (GDPR compliant)
-  gtag('consent', 'default', {
-    'ad_storage': 'denied',
-    'ad_user_data': 'denied',
-    'ad_personalization': 'denied',
-    'analytics_storage': 'denied',
-    'wait_for_update': 500
-  });
-
-  // Initialize GA4 (won't collect data until consent is granted)
-  gtag('js', new Date());
-  gtag('config', gaId, { anonymize_ip: true });
-
-  // Store gaId for the gtag script to load
-  window.__GA4_ID = gaId;
-</script>
-<script is:inline>
-  // Load gtag.js script dynamically
-  (function() {
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.__GA4_ID;
-    document.head.appendChild(s);
-  })();
-</script>
-
 <script>
-  import { run } from 'vanilla-cookieconsent';
+  import * as CookieConsent from 'vanilla-cookieconsent';
   import { createConfig } from './CookieConsentConfig';
+
+  // Extend window for TypeScript
+  declare global {
+    interface Window {
+      dataLayer: any[];
+      gtag: (...args: any[]) => void;
+    }
+  }
 
   const container = document.getElementById('cc-container');
   if (!container) throw new Error('Cookie consent container not found');
   
   const lang = container.dataset.lang as 'de' | 'en';
+  const gaId = container.dataset.gaId!;
 
-  let hasShownBanner = false;
-
-  // Update Google Consent Mode when user accepts analytics
-  const updateGoogleConsent = () => {
-    if ((window as any).__consentUpdated) return;
-    (window as any).__consentUpdated = true;
-
-    (window as any).gtag('consent', 'update', {
-      'analytics_storage': 'granted'
-    });
+  // 1. Initialize dataLayer and gtag function
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() {
+    window.dataLayer.push(arguments);
   };
 
-  const config = createConfig(lang, updateGoogleConsent);
-  run(config);
+  // 2. Set default consent to DENIED before loading gtag.js
+  // This ensures no data is collected until user consents
+  window.gtag('consent', 'default', {
+    analytics_storage: 'denied',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+  });
 
-  // Hide banner initially, show on scroll (after 60px)
+  // 3. Load gtag.js immediately (with consent denied, no data sent yet)
+  (function loadGtagScript() {
+    if (document.querySelector('script[data-gtag="true"]')) return;
+
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`;
+    s.dataset.gtag = 'true';
+    document.head.appendChild(s);
+  })();
+
+  // 4. Initialize GA4 (won't collect data until consent is granted)
+  window.gtag('js', new Date());
+  window.gtag('config', gaId, { anonymize_ip: true });
+
+  // 5. Handler called on consent events - updates consent state
+  function updateFromCookieConsent() {
+    const analyticsGranted = CookieConsent.acceptedCategory('analytics');
+
+    // Update Google's consent state
+    window.gtag('consent', 'update', {
+      analytics_storage: analyticsGranted ? 'granted' : 'denied',
+    });
+  }
+
+  // Run CookieConsent with callbacks
+  const config = createConfig(lang, updateFromCookieConsent);
+  CookieConsent.run(config);
+
+  // --- Banner visibility control (show after scroll) ---
+  let hasShownBanner = false;
+
   const hideBanner = () => {
     const modal = document.querySelector('#cc-main .cm');
-    if (modal && !hasShownBanner && !(window as any).CookieConsent?.validConsent()) {
+    if (modal && !hasShownBanner && !CookieConsent.validConsent()) {
       modal.classList.add('cc-hidden');
     }
   };
@@ -91,7 +96,7 @@ const { lang, gaId } = Astro.props;
 
   // Show banner when scrolling past 60px
   const handleScroll = () => {
-    if (window.scrollY > 60 && !hasShownBanner && !(window as any).CookieConsent?.validConsent()) {
+    if (window.scrollY > 60 && !hasShownBanner && !CookieConsent.validConsent()) {
       showBanner();
       window.removeEventListener('scroll', handleScroll);
     }
@@ -102,7 +107,7 @@ const { lang, gaId } = Astro.props;
   // Observe for when the modal is added to DOM
   const observer = new MutationObserver(() => {
     const modal = document.querySelector('#cc-main .cm');
-    if (modal && !hasShownBanner && !(window as any).CookieConsent?.validConsent()) {
+    if (modal && !hasShownBanner && !CookieConsent.validConsent()) {
       if (window.scrollY <= 60) {
         modal.classList.add('cc-hidden');
       }
