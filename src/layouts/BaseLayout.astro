@@ -13,6 +13,7 @@ const {
   alwaysShowNav = false
 } = Astro.props;
 
+import '@fontsource/inter/latin.css';
 import '../styles/global.css';
 import Navigation from '../components/Navigation.astro';
 import CookieConsent from '../components/CookieConsent.astro';
@@ -53,10 +54,6 @@ const locale = lang === 'en' ? 'en_US' : 'de_DE';
   <meta name="generator" content={Astro.generator}>
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#2479BE">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">

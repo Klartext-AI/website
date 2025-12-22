@@ -26,14 +26,24 @@ const { lang, gaId } = Astro.props;
   const loadGA = () => {
     if ((window as any).__gaLoaded) return;
     (window as any).__gaLoaded = true;
+
+    // Initialize dataLayer before anything else
+    (window as any).dataLayer = (window as any).dataLayer || [];
+
+    // Define gtag globally so it can be used after script loads
+    (window as any).gtag = function(...args: any[]) {
+      (window as any).dataLayer.push(args);
+    };
+
+    // Load the GA script
     const gaScript = document.createElement('script');
     gaScript.async = true;
     gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
     document.head.appendChild(gaScript);
-    (window as any).dataLayer = (window as any).dataLayer || [];
-    function gtag(...args: any[]){(window as any).dataLayer.push(args);}
-    gtag('js', new Date());
-    gtag('config', gaId, { anonymize_ip: true });
+
+    // Queue initial commands
+    (window as any).gtag('js', new Date());
+    (window as any).gtag('config', gaId, { anonymize_ip: true });
   };
 
   const config = createConfig(lang, loadGA);
