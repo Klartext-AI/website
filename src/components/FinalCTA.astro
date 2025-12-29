@@ -45,7 +45,7 @@ const text = {
   secondaryCTA: secondaryCTA || defaults.secondaryCTA
 };
 // Added language-aware default link for secondary CTA
-const computedSecondaryLink = secondaryLink || (lang === 'en' ? 'en/success-stories' : 'success-stories');
+const computedSecondaryLink = secondaryLink || (lang === 'en' ? `${BASE}en/success-stories` : `${BASE}success-stories`);
 ---
 
 <section id="contact" class="final-cta section">
