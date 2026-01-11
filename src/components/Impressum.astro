@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { lang = 'de' } = Astro.props;
+const MAP_URL = "https://maps.app.goo.gl/QGynv1LF7EQwVgry7";
 
 const content = {
   de: {
@@ -128,11 +129,18 @@ const text = content[lang];
 
       <div class="impressum-section">
         <h2>{text.addressLabel}</h2>
-        <p>
-          {text.address.street}<br>
-          {text.address.city}<br>
-          {text.address.country}
-        </p>
+        <a
+          href={MAP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="impressum-address-link"
+        >
+          <p>
+            {text.address.street}<br>
+            {text.address.city}<br>
+            {text.address.country}
+          </p>
+        </a>
       </div>
 
       <div class="impressum-section">
@@ -282,6 +290,17 @@ const text = content[lang];
     color: var(--color-blue);
     text-decoration: none;
     transition: color 0.3s ease;
+  }
+
+  .impressum-address-link {
+    display: inline-block;
+    color: var(--color-text-dark);
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .impressum-address-link:hover {
+    color: var(--color-blue);
+    transform: translateX(4px);
   }
 
   .impressum-section a:hover {

@@ -5,6 +5,7 @@ interface Props {
 
 const { lang = 'de' } = Astro.props;
 const BASE = import.meta.env.BASE_URL;
+const MAP_URL = "https://maps.app.goo.gl/QGynv1LF7EQwVgry7";
 
 const content = {
   de: {
@@ -76,9 +77,16 @@ const text = content[lang];
           <div class="footer-section">
             <h4 class="footer-section-title">{text.address.title}</h4>
             <address class="footer-address">
-              <p>{text.address.street}</p>
-              <p>{text.address.city}</p>
-              <p>{text.address.country}</p>
+              <a
+                href={MAP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="address-link"
+              >
+                <p>{text.address.street}</p>
+                <p>{text.address.city}</p>
+                <p>{text.address.country}</p>
+              </a>
             </address>
           </div>
 
@@ -208,6 +216,18 @@ const text = content[lang];
   .footer-address {
     font-style: normal;
     line-height: 1.9;
+  }
+
+  .address-link {
+    color: var(--color-text-body);
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .address-link:hover {
+    color: var(--color-blue);
+    transform: translateX(4px);
   }
 
   .footer-address p {
