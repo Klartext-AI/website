@@ -9,8 +9,8 @@ const BASE = import.meta.env.BASE_URL;
 // Map story IDs to page URLs
 const storyUrls: Record<string, string> = {
   'data-extraction-rfu': 'data-extraction-banking',
-  'document-generation': 'grant-application-generation',
-  'compliance-assistant': 'compliance-assistant'
+  'pat-accessibility': 'pat-accessibility',
+  'quote-automation': 'quote-automation'
 };
 
 const content = {
@@ -34,20 +34,20 @@ const content = {
         description: "Automatisierte Extraktion von KPIs aus Finanzdokumenten mit domänenspezifischer AI."
       },
       {
-        id: "document-generation",
-        title: "Förderantrags-generierung",
-        industry: "Funding Applications",
-        metric: "95% Zeitersparnis",
-        breakeven: "Break-even: 1 Monat",
-        description: "Vollautomatische Generierung von Förderanträgen mit kontextbewusster AI-Unterstützung."
-      },
-      {
-        id: "compliance-assistant",
-        title: "Compliance Assistant",
-        industry: "Knowledge Management",
+        id: "pat-accessibility",
+        title: "PDF Accessibility Transformation",
+        industry: "Document Accessibility",
         metric: "80% Zeitersparnis",
         breakeven: "Break-even: 2 Monate",
-        description: "Intelligente Wissenssuche mit verifizierten Antworten und vollständiger Quellenangabe."
+        description: "Vollautomatische Umwandlung bestehender PDFs in barrierefreie PDF/UA-Formate."
+      },
+      {
+        id: "quote-automation",
+        title: "Automatisierte Angebotserstellung",
+        industry: "Process Automation",
+        metric: "70% Zeitersparnis",
+        breakeven: "Break-even: 5 Monate",
+        description: "Automatische Klassifizierung von Anfragen und Erstellung erfolgsversprechender Angebote."
       }
     ]
   },
@@ -71,20 +71,20 @@ const content = {
         description: "Automated extraction and processing of financial documents using domain-specific AI."
       },
       {
-        id: "document-generation",
-        title: "Automatic Funding Application Generation",
-        industry: "Funding Applications",
-        metric: "95% time savings",
-        breakeven: "Break-even: 1 month",
-        description: "Fully automated generation of funding applications with context-aware AI support."
-      },
-      {
-        id: "compliance-assistant",
-        title: "Compliance Assistant",
-        industry: "Knowledge Management",
+        id: "pat-accessibility",
+        title: "PDF Accessibility Transformation",
+        industry: "Document Accessibility",
         metric: "80% time savings",
         breakeven: "Break-even: 2 months",
-        description: "Intelligent knowledge search with verified answers and complete source attribution."
+        description: "Fully automated transformation of existing PDFs into accessible PDF/UA formats."
+      },
+      {
+        id: "quote-automation",
+        title: "Automated Quote Generation",
+        industry: "Process Automation",
+        metric: "70% time savings",
+        breakeven: "Break-even: 5 months",
+        description: "Automatic classification of requests and creation of promising quotes."
       }
     ]
   }
@@ -102,34 +102,49 @@ const text = content[lang];
 
     <div class="stories-grid-container">
       <div class="stories-wrapper">
-        {text.stories.map((story, index) => (
-          <a
-            href={
-              lang === "en"
-                ? `${BASE}en/success-stories/${storyUrls[story.id]}`
-                : `${BASE}success-stories/${storyUrls[story.id]}`
-            }
-            class="story-card-link"
-          >
-            <article class="story-card glass-card" style={`animation-delay: ${index * 0.15}s`}>
-              <h3 class="story-title">{story.title}</h3>
+        {text.stories.map((story, index) => {
+          const storySlug = storyUrls[story.id];
+          const storyHref = storySlug
+            ? (lang === "en"
+              ? `${BASE}en/success-stories/${storySlug}`
+              : `${BASE}success-stories/${storySlug}`)
+            : null;
 
-              <div class="story-metrics">
-                <div class="metric-badge metric-primary">{story.metric}</div>
-                <div class="metric-badge metric-secondary">{story.breakeven}</div>
-              </div>
+          return storyHref ? (
+            <a href={storyHref} class="story-card-link">
+              <article class="story-card glass-card" style={`animation-delay: ${index * 0.15}s`}>
+                <h3 class="story-title">{story.title}</h3>
 
-              <p class="story-description">{story.description}</p>
+                <div class="story-metrics">
+                  <div class="metric-badge metric-primary">{story.metric}</div>
+                  <div class="metric-badge metric-secondary">{story.breakeven}</div>
+                </div>
 
-              <div class="story-link">
-                {text.readMore}
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M6 12l4-4-4-4" />
-                </svg>
-              </div>
-            </article>
-          </a>
-        ))}
+                <p class="story-description">{story.description}</p>
+
+                <div class="story-link">
+                  {text.readMore}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 12l4-4-4-4" />
+                  </svg>
+                </div>
+              </article>
+            </a>
+          ) : (
+            <div class="story-card-link is-disabled" aria-disabled="true">
+              <article class="story-card glass-card" style={`animation-delay: ${index * 0.15}s`}>
+                <h3 class="story-title">{story.title}</h3>
+
+                <div class="story-metrics">
+                  <div class="metric-badge metric-primary">{story.metric}</div>
+                  <div class="metric-badge metric-secondary">{story.breakeven}</div>
+                </div>
+
+                <p class="story-description">{story.description}</p>
+              </article>
+            </div>
+          );
+        })}
 
         <a
           href={lang === "de" ? `${BASE}offerings` : `${BASE}en/offerings`}
@@ -197,6 +212,15 @@ const text = content[lang];
   .story-card-link:hover .story-card {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 16px 48px -12px rgba(36, 121, 190, 0.35);
+  }
+
+  .story-card-link.is-disabled {
+    cursor: default;
+  }
+
+  .story-card-link.is-disabled:hover .story-card {
+    transform: none;
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
   }
 
   .story-title {

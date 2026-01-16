@@ -12,7 +12,7 @@ const { lang, gaId } = Astro.props;
 <div id="cc-container" data-lang={lang} data-ga-id={gaId}></div>
 
 <script>
-  import * as CookieConsent from 'vanilla-cookieconsent';
+import * as CookieConsent from 'vanilla-cookieconsent';
   import { createConfig } from './CookieConsentConfig';
 
   // Extend window for TypeScript
@@ -116,4 +116,3 @@ const { lang, gaId } = Astro.props;
 
   observer.observe(document.body, { childList: true, subtree: true });
 </script>
-

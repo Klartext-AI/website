@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../../components/BlogPostDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'Cybersecurity in the Era of AI: New Threats, New Defenses | Klartext AI Blog';
+const description = 'Artificial Intelligence is not just transforming business processes — it is reshaping the cybersecurity landscape itself.';
+
+const fullContent = `
+<p>At Klartext AI, we believe in <strong>responsible AI adoption with measurable impact</strong>, not buzzwords. Cybersecurity in the AI era epitomises this responsibility: the potential for <em>AI-enabled innovation</em> must be matched by rigorous evaluation, robust design, and measurable security outcomes. </p>
+
+<hr />
+
+<h3><strong>AI’s Double Role in Cybersecurity</strong></h3>
+
+<p>AI’s influence on cybersecurity is profound and paradoxical:</p>
+
+<ul>
+  <li>As a <em>defensive force</em>, AI enhances threat detection, automates incident response, and enables predictive risk analysis. It helps defenders spot anomalies across massive data sets and accelerate response times beyond human capacity. (<a href="https://www.researchgate.net/publication/376308829_AI_AND_CYBERSECURITY_-NEW_THREATS_AND_OPPORTUNITIES?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">ResearchGate</a>)</li>
+  <li>As an <em>offensive enabler</em>, AI tools empower attackers to automate and scale attacks, craft hyper-realistic social engineering lures, and develop malware that evolves faster than traditional defences. (<a href="https://www.morganstanley.com/articles/ai-cybersecurity-new-era?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">Morgan Stanley</a>)</li>
+</ul>
+
+<h3><strong>New Forms of AI-Powered Attacks</strong></h3>
+
+<h4><strong>1. Hyper-Realistic Social Engineering</strong></h4>
+
+<p>AI models generate targeted phishing emails, deepfake audio/video, and impersonation attempts that are difficult for users — and even some automated systems — to detect. These attacks exploit human trust and psychological cues at scale. (<a href="https://www.visma.com/resources/content/why-cybersecurity-is-more-crucial-than-ever?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">Visma</a>)</p>
+
+<h4><strong>2. Automated and Polymorphic Malware</strong></h4>
+
+<p>Unlike static threats, AI-generated malware can constantly change its code signature and behaviour, evading signature-based tools and evading detection. This trend, seen in 2025 threat reports, highlights the dynamic nature of modern cyber threats. (<a href="https://deepstrike.io/blog/ai-cybersecurity-threats-2025?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">DeepStrike</a>)</p>
+
+<h4><strong>3. Prompt Injection and Model Manipulation</strong></h4>
+
+<p>Malicious actors can craft input prompts that manipulate AI systems’ behaviour, potentially exposing data, triggering unauthorized workflows, or bypassing safeguards. Prompt injection is now recognised as a critical vector by cybersecurity agencies.
+
+<h4><strong>4. State-Powered and Organised Cyber Operations</strong></h4>
+
+<p>National and organised actors increasingly leverage AI for reconnaissance, automated exploitation, and disinformation — from automated phishing campaigns to large-scale infiltration efforts. (<a href="https://apnews.com/article/ad678e5192dd747834edf4de03ac84ee?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">AP News</a>)</p>
+
+<h3><strong>Strategic Defensive Imperatives</strong></h3>
+
+<h4><strong>AI-Augmented Detection and Response</strong></h4>
+
+<p>AI can detect subtle patterns and anomalies that traditional tools miss, shifting organisations toward <em>proactive defence</em>. Continuous monitoring and behavioural analytics are key components of this model. (<a href="https://www.researchgate.net/publication/376308829_AI_AND_CYBERSECURITY_-NEW_THREATS_AND_OPPORTUNITIES?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">ResearchGate</a>)</p>
+
+<h4><strong>Human-in-the-Loop Governance</strong></h4>
+
+<p>Responsible AI requires human oversight alongside machine speed. Automated systems must be supervised, with human analysts validating high-impact decisions — particularly in cybersecurity environments where false positives and false negatives carry real risk. (<a href="https://www.enisa.europa.eu/sites/default/files/publications/Artificial%20Intelligence%20and%20Cybersecurity%20Research.pdf?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">ENISA</a>)</p>
+
+<h4><strong>Continuous Evaluation and Simulation</strong></h4>
+
+<p>Rigorous testing — including simulated attack scenarios and security screening of AI models — ensures systems behave as intended even under adversarial conditions. This evaluation-driven approach reflects Klartext AI’s engineering philosophy: <em>no assumption without data, no decision without validation</em>.
+
+<h4><strong>Regulatory and Policy Alignment</strong></h4>
+
+<p>Emerging guidelines, such as draft NIST frameworks, emphasize securing AI assets and integrating them into broader risk management programs. Compliance with standards like the EU AI Act enhances long-term resilience. (<a href="https://www.nist.gov/news-events/news/2025/12/draft-nist-guidelines-rethink-cybersecurity-ai-era?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">NIST</a>)</p>
+
+<h3><strong>A New Security Mindset: AI as Partner, Not Panacea</strong></h3>
+
+<p>AI is not magic; it is a powerful <em>technology stack</em> that must be treated with discipline:</p>
+
+<ul>
+  <li><strong>Design for security</strong> — from model architecture to data governance.</li>
+  <li><strong>Measure performance and safety</strong> — with clear KPIs for detection accuracy, false-positive rates, and response times.</li>
+  <li><strong>Invest in talent and training</strong> — empowering teams to interpret AI outputs and manage complex incidents.</li>
+</ul>
+
+<p>This mindset aligns with our core values at Klartext AI: <em>responsibility, domain knowledge, and measurable outcomes</em>. </p>
+
+<h3><strong>Conclusion: The Cybersecurity Paradigm Shift</strong></h3>
+
+<p>The AI era does not eliminate cyber risk — it <em>elevates it</em>. Attackers and defenders alike now have access to tools that operate at unprecedented scale and speed. Organisations that succeed will be those who adopt AI not just for innovation, but for resilient, responsible security practices.</p>
+
+<p>To stay ahead, organisations must <strong>think strategically, engineer responsibly, and evaluate continuously</strong> — ensuring that AI is a force for protection, not vulnerability.</p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="Cybersecurity in the Era of AI: New Threats, New Defenses"
+    excerpt="Artificial Intelligence is not just transforming business processes — it is reshaping the cybersecurity landscape itself."
+    fullExcerpt="Artificial Intelligence is not just transforming business processes — it is reshaping the cybersecurity landscape itself. For organisations and leaders, this dual-edged evolution means confronting a rapidly expanding threat surface while harnessing new tools to safeguard digital trust."
+    fullContent={fullContent}
+    category="Technical"
+    readTime="7 min"
+    date="2025-01-25"
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

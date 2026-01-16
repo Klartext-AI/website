@@ -175,7 +175,7 @@ const valuesHref = lang === 'de' ? `${BASE}values` : `${BASE}en/values`;
         const legacyMq = mq as MediaQueryList & {
           addListener?: (listener: (ev: MediaQueryListEvent) => void) => void;
         };
-        legacyMq.addListener?.(handleViewportChange);
+        legacyMq.addEventListener?.('change', handleViewportChange);
       }
     })();
   </script>
