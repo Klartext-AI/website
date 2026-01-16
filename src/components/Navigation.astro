@@ -13,6 +13,7 @@ const content = {
     offerings: "Angebote",
     values: "Werte",
     team: "Team",
+    careers: "Karriere",
     blog: "Blog",
     contact: "Kontakt",
     language: "EN"
@@ -23,6 +24,7 @@ const content = {
     offerings: "Offerings",
     values: "Values",
     team: "Team",
+    careers: "Careers",
     blog: "Blog",
     contact: "Contact",
     language: "DE"
@@ -94,6 +96,12 @@ if (lang === 'de') {
         class={`nav-link ${isActive('/team') ? 'nav-link-active' : ''}`}
       >
         {text.team}
+      </a>
+      <a
+        href={lang === 'de' ? `${BASE}karriere` : `${BASE}en/karriere`}
+        class={`nav-link ${isActive('/karriere') ? 'nav-link-active' : ''}`}
+      >
+        {text.careers}
       </a>
       <a
         href={lang === 'de' ? `${BASE}blog` : `${BASE}en/blog`}
