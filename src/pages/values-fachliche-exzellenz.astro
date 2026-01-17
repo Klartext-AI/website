@@ -8,6 +8,8 @@ const title = 'Fachliche Exzellenz: Engineering, das trägt | Klartext AI';
 const description =
   'Warum gute KI kein Zufall ist – und wie Prinzipien wie Privacy by Design, Evaluation-Driven Engineering und Domain-Driven Design in der Praxis aussehen.';
 
+const BASE = import.meta.env.BASE_URL;
+
 const fullContent = `
 
 <h4>Warum fachliche Exzellenz in der KI entscheidend ist</h4>
@@ -16,8 +18,17 @@ const fullContent = `
 
 <p><strong>Fachliche Exzellenz bedeutet für uns:</strong> KI nicht als „Magie“, sondern als Ingenieurdisziplin zu behandeln. Mit Prinzipien, Standards, Tests und klaren Qualitätskriterien.</p>
 
-<blockquote>
-  „Funktionierende KI ist das Ergebnis klarer Kommunikation, iterativer Entwicklung und konsequenter Evaluierung.“ – Felix
+<blockquote class="quote-with-avatar">
+  <img
+    src="${BASE}team/felix.jpg"
+    alt="Felix Krause"
+    class="quote-avatar"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="quote-text">
+    <p>„Funktionierende KI ist das Ergebnis klarer Kommunikation, iterativer Entwicklung und konsequenter Evaluierung.“ – Felix</p>
+  </div>
 </blockquote>
 
 <h4>Von Modell-Spielerei zu robusten Systemen</h4>
@@ -51,7 +62,7 @@ const fullContent = `
 
 <ul>
   <li><strong>Use-Case-spezifische Metriken:</strong> Wir definieren Metriken, die zur Domäne passen – von Precision/Recall über Fehlerraten bis hin zu fachlich sinnvollen KPIs.</li>
-  <li><strong>Realistische Testdaten:</strong> Wir testen nicht nur auf „Best-Case“-Samples, sondern auch auf Edge Cases, Rauschen und echten Produktionsdaten.</li>
+  <li><strong>Realistische Testdaten:</strong> Wir testen nicht nur auf „Best-Case“-Samples, sondern insbesondere auf Edge Cases und echten Produktionsdaten.</li>
   <li><strong>Kontinuierliches Monitoring:</strong> Nach dem Go-Live überwachen wir Drift, Datenqualität und Systemverhalten laufend.</li>
   <li><strong>Human-in-the-loop:</strong> Kritische Entscheidungen bleiben bei Fachpersonen – das System macht Vorschläge, keine unumkehrbaren Urteile.</li>
 </ul>

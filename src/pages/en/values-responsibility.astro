@@ -8,6 +8,8 @@ const title = 'Responsibility in AI: Progress that includes everyone | Klartext 
 const description =
   'What responsibility means to us – from voluntary engagement and community work to long-term partnerships with real impact goals.';
 
+const BASE = import.meta.env.BASE_URL;
+
 const fullContent = `
 
 <h4>Why responsibility in AI is not a “nice-to-have”</h4>
@@ -22,8 +24,17 @@ const fullContent = `
 
 <p><strong>Responsibility for us means:</strong> not ignoring this impact, but actively shaping it.</p>
 
-<blockquote>
-  “Responsibility means shaping technology for the common good – and bringing society along every step of the way.” – Ruben
+<blockquote class="quote-with-avatar">
+  <img
+    src="${BASE}team/ruben.jpg"
+    alt="Ruben Hetfleisch"
+    class="quote-avatar"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="quote-text">
+    <p>“Responsibility means shaping technology for the common good – and bringing society along every step of the way.” – Ruben</p>
+  </div>
 </blockquote>
 
 <h4>From community to policy: responsibility on multiple levels</h4>

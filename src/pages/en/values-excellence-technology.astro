@@ -8,6 +8,8 @@ const title = 'Technical Excellence: Engineering that lasts | Klartext AI';
 const description =
   'Why good AI is never an accident – and how principles like Privacy by Design, evaluation-driven engineering, and domain-driven design play out in practice.';
 
+const BASE = import.meta.env.BASE_URL;
+
 const fullContent = `
 
 <h4>Why technical excellence in AI is crucial</h4>
@@ -16,8 +18,17 @@ const fullContent = `
 
 <p><strong>Technical excellence for us means:</strong> treating AI not as “magic”, but as an engineering discipline. With principles, standards, tests, and clear quality criteria.</p>
 
-<blockquote>
-  “Great AI is never accidental. It is the result of clear communication, iterative development, and rigorous evaluation.” – Felix
+<blockquote class="quote-with-avatar">
+  <img
+    src="${BASE}team/felix.jpg"
+    alt="Felix Krause"
+    class="quote-avatar"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="quote-text">
+    <p>“Great AI is never accidental. It is the result of clear communication, iterative development, and rigorous evaluation.” – Felix</p>
+  </div>
 </blockquote>
 
 <h4>From model tinkering to robust systems</h4>
@@ -51,7 +62,7 @@ const fullContent = `
 
 <ul>
   <li><strong>Use-case-specific metrics:</strong> we define metrics that fit the domain – from precision/recall and error rates to domain-relevant KPIs.</li>
-  <li><strong>Realistic test data:</strong> we test not only on “best-case” samples, but also on edge cases, noise, and real production data.</li>
+  <li><strong>Realistic test data:</strong> we test not only on “best-case” samples, but in particular on edge cases, and real production data.</li>
   <li><strong>Continuous monitoring:</strong> after go-live, we continuously monitor drift, data quality, and system behaviour.</li>
   <li><strong>Human in the loop:</strong> critical decisions remain with professionals – the system makes suggestions, not irreversible judgments.</li>
 </ul>

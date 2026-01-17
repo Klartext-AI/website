@@ -8,6 +8,8 @@ const title = 'Thought Leadership: Wissen, das vorausdenkt | Klartext AI';
 const description =
   'Wie wir Forschung, Community und Praxis verbinden – und warum Thought Leadership für verantwortungsvolle KI-Entwicklung mehr ist als nur ein Schlagwort.';
 
+const BASE = import.meta.env.BASE_URL;
+
 const fullContent = `
 
 
@@ -25,8 +27,17 @@ const fullContent = `
   <li><strong>offenen Austausch ermöglichen</strong> statt Wissen zu „verstecken“</li>
 </ul>
 
-<blockquote>
-  „Innovation entsteht dort, wo Forschung, Community und Praxis zusammenkommen – wenn wir gemeinsam definieren, wie verantwortungsvolle KI von morgen aussieht.“ – Daniel
+<blockquote class="quote-with-avatar">
+  <img
+    src="${BASE}team/daniel.jpg"
+    alt="Daniel Toth"
+    class="quote-avatar"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="quote-text">
+    <p>„Innovation entsteht dort, wo Forschung, Community und Praxis zusammenkommen – wenn wir gemeinsam definieren, wie verantwortungsvolle KI von morgen aussieht.“ – Daniel</p>
+  </div>
 </blockquote>
 
 <h4>Forschung, Community, Praxis: Drei Säulen von Thought Leadership</h4>
@@ -35,7 +46,7 @@ const fullContent = `
 
 <ol>
   <li><strong>Forschung & Methodik</strong>: Wir arbeiten mit Teams zusammen, die seit Jahren in KI, Data Science und angewandter Forschung aktiv sind – von Universitäten über Fraunhofer-Umfelder bis hin zu industrienahen Projekten.</li>
-  <li><strong>Community & Austausch</strong>: Über Netzwerke wie <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AI Impact Mission</a> und das European AI Forum sind wir kontinuierlich im Dialog mit hunderten Expert:innen in Europa.</li>
+  <li><strong>Community & Austausch</strong>: Über Netzwerke wie <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AI Impact Mission</a> und das <a href="https://eaiforum.org/" target="_blank" rel="noopener noreferrer">European AI Forum</a> sind wir kontinuierlich im Dialog mit hunderten Expert:innen in Europa.</li>
   <li><strong>Praxis & Umsetzung</strong>: Unsere Gedanken entstehen nicht im Vakuum, sondern direkt entlang realer Projekte, Use Cases und Produktionssysteme.</li>
 </ol>
 

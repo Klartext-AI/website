@@ -240,6 +240,32 @@ const canonicalHref = Astro.url?.href ?? new URL(BASE, SITE).toString();
     color: var(--color-text-muted);
   }
 
+  .post-main-content :global(blockquote.quote-with-avatar) {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .post-main-content :global(blockquote.quote-with-avatar .quote-avatar) {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(36, 121, 190, 0.2);
+  }
+
+  .post-main-content :global(blockquote.quote-with-avatar .quote-text) {
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+
+  .post-main-content :global(blockquote.quote-with-avatar .quote-text p) {
+    margin: 0;
+  }
+
   .post-main-content :global(code) {
     background: rgba(36, 121, 190, 0.1);
     padding: 0.2em 0.4em;
@@ -276,6 +302,22 @@ const canonicalHref = Astro.url?.href ?? new URL(BASE, SITE).toString();
     .post-meta-header {
       flex-direction: column;
       gap: var(--space-sm);
+    }
+
+    .post-main-content :global(blockquote.quote-with-avatar) {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .post-main-content :global(blockquote.quote-with-avatar .quote-text) {
+      padding-left: 0;
+      text-align: center;
+    }
+
+    .post-main-content :global(blockquote.quote-with-avatar .quote-avatar) {
+      width: 56px;
+      height: 56px;
     }
   }
 </style>

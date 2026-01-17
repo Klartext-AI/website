@@ -6,7 +6,7 @@ import FinalCTA from '../components/FinalCTA.astro';
 
 const title = 'Unsere Werte - Klartext AI';
 const description =
-  'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI leiten: Verantwortung, Thought Leadership, fachliche Exzellenz und klare Design Principles.';
+  'Die Werte und Prinzipien, die unsere Arbeit bei Klartext AI leiten: Verantwortung, Pioniergeist, fachliche Exzellenz und klare Design Principles.';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -190,7 +190,7 @@ const content = {
     },
     {
       id: "agile-ai-development",
-      title: "Agile AI Development: Kleine Zyklen, große Wirkung",
+      title: "Agile KI Software-Entwicklung: Kleine Zyklen, große Wirkung",
       excerpt:
         "Wie iterative Entwicklung und schnelles Feedback zu besseren KI-Systemen führen.",
       category: "Technical",
@@ -267,6 +267,19 @@ const designPrinciples = content.valuePosts.filter((post) =>
                   <li>{item}</li>
                 ))}
               </ul>
+              <div class="core-card-cta">
+                <span>{content.readMore}</span>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M6 12l4-4-4-4" />
+                </svg>
+              </div>
             </a>
           ))}
         </div>
@@ -541,6 +554,25 @@ const designPrinciples = content.valuePosts.filter((post) =>
     top: 0.1rem;
     color: var(--color-blue);
     font-size: 1rem;
+  }
+
+  .core-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    font-size: 0.95rem;
+    color: var(--color-blue);
+    font-weight: 500;
+  }
+
+  .core-card-cta svg {
+    transition: transform 0.2s ease;
+  }
+
+  .core-value-card:hover .core-card-cta svg {
+    transform: translateX(4px);
   }
 
   .values-transition {

@@ -7,6 +7,8 @@ import Footer from '../components/Footer.astro';
 const title = 'Verantwortung in der KI-Praxis: Fortschritt, der alle mitnimmt | Klartext AI';
 const description = 'Was Verantwortung für uns bedeutet – von ehrenamtlichem Engagement über Community-Arbeit bis hin zu langfristigen Partnerschaften mit echten Impact-Zielen.';
 
+const BASE = import.meta.env.BASE_URL;
+
 const fullContent = `
 
 
@@ -22,8 +24,17 @@ const fullContent = `
 
 <p><strong>Verantwortung bedeutet für uns:</strong> Diese Wirkung nicht zu ignorieren, sondern aktiv zu gestalten.</p>
 
-<blockquote>
-  „Verantwortung bedeutet für uns, Technologie im Sinne des Gemeinwohls zu gestalten – und die gesamte Gesellschaft auf diesem Weg mitzunehmen.“ – Ruben
+<blockquote class="quote-with-avatar">
+  <img
+    src="${BASE}team/ruben.jpg"
+    alt="Ruben Hetfleisch"
+    class="quote-avatar"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="quote-text">
+    <p>„Verantwortung bedeutet für uns, Technologie im Sinne des Gemeinwohls zu gestalten – und die gesamte Gesellschaft auf diesem Weg mitzunehmen.“ – Ruben</p>
+  </div>
 </blockquote>
 
 <h4>Von Community bis Politik: Verantwortung auf mehreren Ebenen</h4>

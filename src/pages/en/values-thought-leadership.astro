@@ -8,6 +8,8 @@ const title = 'Thought Leadership: Knowledge with Depth and Direction | Klartext
 const description =
   'How we connect research, community, and practice – and why thought leadership for responsible AI development is more than just a buzzword.';
 
+const BASE = import.meta.env.BASE_URL;
+
 const fullContent = `
 
 <h4>Why thought leadership in AI is so critical right now</h4>
@@ -24,8 +26,17 @@ const fullContent = `
   <li><strong>enabling open exchange</strong> instead of “hiding” knowledge</li>
 </ul>
 
-<blockquote>
-  “Innovation emerges where research, community, and practice come together – when we jointly define what responsible AI should look like tomorrow.” – Daniel
+<blockquote class="quote-with-avatar">
+  <img
+    src="${BASE}team/daniel.jpg"
+    alt="Daniel Toth"
+    class="quote-avatar"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="quote-text">
+    <p>“Innovation emerges where research, community, and practice come together – when we jointly define what responsible AI should look like tomorrow.” – Daniel</p>
+  </div>
 </blockquote>
 
 <h4>Research, community, practice: three pillars of thought leadership</h4>
@@ -34,7 +45,7 @@ const fullContent = `
 
 <ol>
   <li><strong>Research & methodology</strong>: We work with teams that have been active in AI, data science, and applied research for years – from universities to Fraunhofer environments to industry-focused projects.</li>
-  <li><strong>Community & exchange</strong>: Through networks such as <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AI Impact Mission</a>, and the European AI Forum, we are in continuous dialogue with hundreds of experts across Europe.</li>
+  <li><strong>Community & exchange</strong>: Through networks such as <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, <a href="https://ai-mission.eu/" target="_blank" rel="noopener noreferrer">AI Impact Mission</a>, and the <a href="https://eaiforum.org/" target="_blank" rel="noopener noreferrer">European AI Forum</a>, we are in continuous dialogue with hundreds of experts across Europe.</li>
   <li><strong>Practice & implementation</strong>: Our thinking does not emerge in a vacuum, but directly along real projects, use cases, and production systems.</li>
 </ol>
 
