@@ -1,77 +1,57 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
 
 const BASE = import.meta.env.BASE_URL;
-
-// Detect language from URL path (works for /en/... and everything else -> de)
-const pathname = Astro.url.pathname.replace(BASE, '/');
-const lang = pathname.startsWith('/en') ? 'en' : 'de';
+const lang = 'en';
 
 const copy = {
-  de: {
-    title: '404 – Seite nicht gefunden | Klartext AI',
-    description: 'Diese Seite existiert nicht (mehr). Bruno hat überall gesucht – aber wir bringen dich zurück auf Kurs.',
-    kicker: 'Wuff. 404.',
-    headline: 'Bruno hat überall gesucht. Mit Lupe.',
-    body: "Diese Seite gibt's leider nicht (mehr) – aber wir bringen dich schnell zurück auf Kurs.",
-    biscuit: 'Keks werfen 🍪 (neu laden)',
-    biscuitMsg: 'Bruno ist motiviert. Er sucht weiter…',
-    primary: 'Zur Startseite',
-    secondary: 'Unsere Angebote',
-    tertiary: 'Erfolgsgeschichten',
-    contact: 'Kontakt'
-  },
-  en: {
-    title: "404 – Page not found | Klartext AI",
-    description: "This page doesn't exist (anymore). Bruno looked everywhere — but we'll get you back on track.",
-    kicker: 'Woof. 404.',
-    headline: 'Bruno looked everywhere.',
-    body: "This page doesn't exist (anymore) — but we'll get you back on track.",
-    biscuit: 'Throw a biscuit 🍪 (reload)',
-    biscuitMsg: 'Bruno is motivated. He keeps searching…',
-    primary: 'Back to Home',
-    secondary: 'Our Offerings',
-    tertiary: 'Success Stories',
-    contact: 'Contact'
-  }
-} as const;
-
-const t = copy[lang];
+  title: "404 – Page not found | Klartext AI",
+  description: "This page doesn't exist (anymore). Bruno looked everywhere — but we'll get you back on track.",
+  kicker: 'Woof. 404.',
+  headline: 'Bruno looked everywhere.',
+  body: "This page doesn't exist (anymore) — but we'll get you back on track.",
+  biscuit: 'Throw a biscuit 🍪 (reload)',
+  biscuitMsg: 'Bruno is motivated. He keeps searching…',
+  primary: 'Back to Home',
+  secondary: 'Our Offerings',
+  tertiary: 'Success Stories',
+  contact: 'Contact'
+};
 
 // Route targets
-const hrefHome = lang === 'en' ? `${BASE}en/` : `${BASE}`;
-const hrefOfferings = lang === 'en' ? `${BASE}en/offerings` : `${BASE}offerings`;
-const hrefStories = lang === 'en' ? `${BASE}en/success-stories` : `${BASE}success-stories`;
-const hrefContact = lang === 'en' ? `${BASE}en/contact` : `${BASE}contact`;
+const hrefHome = `${BASE}en/`;
+const hrefOfferings = `${BASE}en/offerings`;
+const hrefStories = `${BASE}en/success-stories`;
+const hrefContact = `${BASE}en/contact`;
 
 // Bruno image
 const brunoImg = `${BASE}bruno/bruno-magnifier.png`;
 ---
 
-<BaseLayout title={t.title} description={t.description} lang={lang} alwaysShowNav={true}>
+<BaseLayout title={copy.title} description={copy.description} lang={lang} alwaysShowNav={true}>
   <main class="bruno-404">
     <div class="container">
       <div class="hero">
-        <p class="kicker">{t.kicker}</p>
-        <h1 class="headline">{t.headline}</h1>
+        <p class="kicker">{copy.kicker}</p>
+        <h1 class="headline">{copy.headline}</h1>
 
         <div class="bruno-wrap">
           <img class="bruno-img" src={brunoImg} alt="Bruno with a magnifying glass" loading="eager" />
         </div>
 
-        <p class="body">{t.body}</p>
+        <p class="body">{copy.body}</p>
 
         <div class="actions">
-          <a class="btn primary" href={hrefHome}>{t.primary}</a>
-          <a class="btn" href={hrefOfferings}>{t.secondary}</a>
-          <a class="btn" href={hrefStories}>{t.tertiary}</a>
-          <a class="btn ghost" href={hrefContact}>{t.contact}</a>
+          <a class="btn primary" href={hrefHome}>{copy.primary}</a>
+          <a class="btn" href={hrefOfferings}>{copy.secondary}</a>
+          <a class="btn" href={hrefStories}>{copy.tertiary}</a>
+          <a class="btn ghost" href={hrefContact}>{copy.contact}</a>
         </div>
 
         <div class="biscuit-row">
-          <button class="biscuit" id="biscuit-btn" type="button">{t.biscuit}</button>
-          <span class="biscuit-msg" id="biscuit-msg" hidden>{t.biscuitMsg}</span>
+          <button class="biscuit" id="biscuit-btn" type="button">{copy.biscuit}</button>
+          <span class="biscuit-msg" id="biscuit-msg" hidden>{copy.biscuitMsg}</span>
         </div>
       </div>
     </div>
