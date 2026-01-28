@@ -179,7 +179,8 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
                 src={reference.logo}
                 alt={reference.name}
                 class="reference-logo"
-                loading={index < 3 ? "eager" : "lazy"}
+                loading="eager"
+                fetchpriority={index < 3 ? "high" : "auto"}
               />
             </div>
             {reference.name === 'FFG' && (
@@ -201,7 +202,7 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
                 src={reference.logo}
                 alt={reference.name}
                 class="reference-logo"
-                loading="lazy"
+                loading="eager"
               />
             </div>
             {reference.name === 'FFG' && (
@@ -263,7 +264,7 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
 
   .references-banner {
     display: flex;
-    gap: var(--space-xl);
+    gap: var(--space-lg);
     width: fit-content;
     cursor: grab;
     user-select: none;
@@ -279,9 +280,9 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
     align-items: center;
     justify-content: center;
     flex-direction: column; /* Allow caption below logo */
-    padding: var(--space-md) var(--space-lg);
-    min-width: 200px;
-    min-height: 200px;
+    padding: var(--space-sm) var(--space-md);
+    min-width: 140px;
+    min-height: 140px;
     flex-shrink: 0;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background: rgba(255, 255, 255, 0.4);
@@ -318,8 +319,8 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
   }
 
   .reference-logo-wrapper {
-    width: 220px;
-    height: 90px;
+    width: 180px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -389,30 +390,31 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
     }
 
     .references-banner {
-      gap: var(--space-md); /* Reduce gap for mobile */
+      gap: var(--space-sm); /* Reduce gap for mobile */
       animation: scroll 30s linear infinite;
     }
 
     .reference-item {
-      min-width: 140px;
-      min-height: 100px;
-      padding: var(--space-sm) var(--space-md);
+      min-width: 110px;
+      min-height: 90px;
+      padding: var(--space-xs) var(--space-sm);
     }
 
     .reference-logo-wrapper {
-      width: 120px;
-      height: 55px;
+      width: 100px;
+      height: 50px;
     }
 
     /* Always show logos in color on mobile for better visibility */
     .reference-logo {
       filter: grayscale(0%) opacity(0.85);
-      height: 50px; /* align visual size on mobile */
+      height: 45px; /* align visual size on mobile */
     }
 
     .references-banner-wrapper::before,
     .references-banner-wrapper::after {
       width: 80px;
+      padding: var(--space-md) 0;
     }
 
     .reference-caption {
@@ -428,22 +430,23 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
     }
 
     .references-banner {
+      gap: var(--space-xs);
       animation: scroll 25s linear infinite;
     }
 
     .reference-item {
-      min-width: 120px;
-      min-height: 90px;
+      min-width: 100px;
+      min-height: 80px;
       padding: var(--space-xs) var(--space-sm);
     }
 
     .reference-logo-wrapper {
-      width: 100px;
-      height: 50px;
+      width: 90px;
+      height: 45px;
     }
 
     .reference-logo {
-      height: 45px; /* slightly smaller for very small screens */
+      height: 40px; /* slightly smaller for very small screens */
     }
 
     .reference-caption {
@@ -480,6 +483,15 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
 
     if (!wrapper || !banner) return;
 
+    // Preload all logo images so they render before tiles enter the viewport
+    const allLogos = banner.querySelectorAll<HTMLImageElement>('.reference-logo');
+    allLogos.forEach((img) => {
+      if (img.src) {
+        const preload = new Image();
+        preload.src = img.src;
+      }
+    });
+
     let isDragging = false;
     let isPaused = false;
     let startX = 0;
@@ -490,21 +502,22 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
     let animationFrameId: number;
     let momentumAnimationId: number;
 
-    // Calculate the scroll distance - use container width for edge-to-edge scrolling
-    const bannerWidth = banner.scrollWidth;
-
-    // Scroll distance should be one complete set of logos (half the total banner width)
-    const scrollDistance = bannerWidth / 2;
+    // Measure the exact offset of the duplicate set's first item for a seamless loop
+    const items = banner.querySelectorAll<HTMLElement>('.reference-item');
+    const firstSetCount = items.length / 2;
+    const scrollDistance = (items[firstSetCount] as HTMLElement).offsetLeft - (items[0] as HTMLElement).offsetLeft;
 
     // Auto-scroll animation
     const autoScroll = () => {
       if (!isDragging && !isPaused) {
         // Move left by 1px every frame (adjust for speed)
-        currentTranslate -= 0.5;
+        // Faster on big screens (>1024px), also faster on mobile
+        const scrollSpeed = window.innerWidth > 1024 ? 1.5 : 1.0;
+        currentTranslate -= scrollSpeed;
 
-        // Wrap around when we've scrolled through one complete set
+        // Seamless wrap around when we've scrolled through one complete set
         if (currentTranslate <= -scrollDistance) {
-          currentTranslate = 0;
+          currentTranslate += scrollDistance;
         }
 
         banner.style.transform = `translateX(${currentTranslate}px)`;
@@ -559,11 +572,11 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
         velocity = deltaX / timeDelta;
       }
 
-      // Handle wrapping
+      // Handle seamless wrapping
       if (currentTranslate > 0) {
-        currentTranslate = -scrollDistance;
+        currentTranslate -= scrollDistance;
       } else if (currentTranslate <= -scrollDistance) {
-        currentTranslate = 0;
+        currentTranslate += scrollDistance;
       }
 
       banner.style.transform = `translateX(${currentTranslate}px)`;
@@ -584,11 +597,11 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
         // Decay velocity
         velocity *= 0.95;
 
-        // Handle wrapping
+        // Handle seamless wrapping
         if (currentTranslate > 0) {
-          currentTranslate = -scrollDistance;
+          currentTranslate -= scrollDistance;
         } else if (currentTranslate <= -scrollDistance) {
-          currentTranslate = 0;
+          currentTranslate += scrollDistance;
         }
 
         banner.style.transform = `translateX(${currentTranslate}px)`;
@@ -646,11 +659,11 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
         velocity = deltaX / timeDelta;
       }
 
-      // Handle wrapping
+      // Handle seamless wrapping
       if (currentTranslate > 0) {
-        currentTranslate = -scrollDistance;
+        currentTranslate -= scrollDistance;
       } else if (currentTranslate <= -scrollDistance) {
-        currentTranslate = 0;
+        currentTranslate += scrollDistance;
       }
 
       banner.style.transform = `translateX(${currentTranslate}px)`;
