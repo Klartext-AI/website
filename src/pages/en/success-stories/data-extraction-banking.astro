@@ -1,73 +1,1168 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import SuccessStoryDetail from '../../../components/SuccessStoryDetail.astro';
 import FinalCTA from '../../../components/FinalCTA.astro';
 import Footer from '../../../components/Footer.astro';
+import Icon from '../../../components/Icon.astro';
 
 const title = 'KPI Extraction from Annual Reports | Klartext AI';
-const description = 'How a banking services provider saves 80% time and costs through automated data extraction with break-even after just 1.5 months.';
+const description =
+  'How a banking service provider saves 80% time and costs through automated data extraction with break-even after just 1.5 months.';
 
-const challenge = `
-<p>A leading banking services provider faced a massive challenge: Analysts had to wade through 500+ page documents daily to extract quantitative and qualitative information for risk assessments. Every detail mattered, every error could be costly.</p>
-
-<p>The manual process not only tied up significant resources but increasingly became a bottleneck for business-critical decisions. The central question wasn't whether automation was possible, but how it could work in such a sensitive area where errors are not an option.</p>
-`;
-
-const solution = `
-<p>At Klartext AI, we know: In finance, "the AI says so" isn't enough. That's why we developed a solution that doesn't just extract, but also explains.</p>
-
-<p><strong>The Solution in Detail:</strong></p>
-<ul>
-  <li><strong>Automated extraction</strong> of quantitative and qualitative data from complex documents</li>
-  <li><strong>Intelligent verification:</strong> Every extraction comes with direct reference location in the original document</li>
-  <li><strong>Reasoning engine:</strong> The AI delivers not just values, but the argumentation behind them</li>
-  <li><strong>Seamless integration:</strong> Direct feed into existing systems without media breaks</li>
-  <li><strong>Human-in-the-loop:</strong> Analysts can efficiently verify every extraction</li>
-</ul>
-
-<p>What sets us apart: We didn't just throw a generic LLM at the problem. Instead, we applied Domain-Driven Design and tailored the solution to the specific requirements of the banking sector – including regulatory compliance and audit trails.</p>
-`;
-
-const results = [
-  "80% time and cost savings – what used to take hours is now done in minutes",
-  "Break-even after just 1.5 months – fastest ROI in our portfolio",
-  "Higher quality through consistency – no more overlooked details",
-  "Scalability without additional effort – volume can increase easily",
-  "Complete traceability – every extraction with source citation"
-];
-
-const fullContent = `
-<h3>What We Learned</h3>
-
-<p>Successful AI implementation in the financial sector requires three things:</p>
-
-<ol>
-  <li><strong>Trust through transparency:</strong> Every AI decision must be traceable</li>
-  <li><strong>Domain expertise:</strong> Generic solutions don't work in regulated industries</li>
-  <li><strong>Evaluation-Driven Development:</strong> Systematic measurements from the start, not as an afterthought</li>
-</ol>
-
-<p>The solution is running in production today and has changed how our client works with documents. Not because the AI is perfect – but because it's transparent, reliable, and tailored to real business processes.</p>
-`;
-
-const metrics = {
-  "Time Savings": "80%",
-  "Break-even": "1.5 Months",
-};
+const BASE = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
-  <SuccessStoryDetail
-    title="KPI Extraction from Annual Reports"
-    client="Banking Services Provider"
-    category="Data Extraction"
-    challenge={challenge}
-    solution={solution}
-    results={results}
-    metrics={metrics}
-    fullContent={fullContent}
-    lang="en"
-  />
+  <main class="product-detail">
+    <div class="container">
+      <a href={`${BASE}success-stories`} class="back-link">← Back to Success Stories</a>
+
+      <article class="content fade-in">
+        <header class="hero">
+          <span class="badge">Data Extraction</span>
+          <h1 class="headline">KPI Extraction from Annual Reports</h1>
+        </header>
+
+        <!-- Metrics highlight -->
+        <div class="metrics-highlight">
+          <div class="metric-item">
+            <span class="metric-label">Time Savings</span>
+            <span class="metric-value-large">80%</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Break-even</span>
+            <span class="metric-value-large">1.5 Months</span>
+          </div>
+        </div>
+
+        <!-- FLOW: Steps -->
+        <section class="flow">
+          <!-- STEP 01 – Text links, Video rechts -->
+          <div class="step-zigzag step-zigzag-left">
+            <div class="step-zigzag-content">
+              <div class="step-top">
+                <span class="step-number">01</span>
+                <div class="step-text">
+                  <div class="step-title">Upload up to 50 Files</div>
+                  <div class="step-caption">Drag & drop, all reports at once.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-zigzag-media">
+              <div class="media-card media-card-lg">
+                <video
+                  muted
+                  playsinline
+                  preload="metadata"
+                  class="media-video hover-play pause-at-end"
+                >
+                  <source src="/kpi_extraction_product_files/select_files.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 02 – Video links, Text rechts -->
+          <div class="step-zigzag step-zigzag-right">
+            <div class="step-zigzag-media">
+              <div class="media-card media-card-lg">
+                <video muted playsinline preload="metadata" class="media-video hover-play pause-at-end" data-start-time="1">
+                  <source src="/kpi_extraction_product_files/start_processing.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+
+            <div class="step-zigzag-content">
+              <div class="step-top">
+                <span class="step-number">02</span>
+                <div class="step-text">
+                  <div class="step-title">Press Start and Go</div>
+                  <div class="step-caption">Extraction, matching and source references automatically.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 03 – Results Overview -->
+          <div class="step-results">
+            <div class="step-top">
+              <span class="step-number">03</span>
+              <div class="step-text">
+                <div class="step-title">Check out results</div>
+                <div class="step-caption">
+                  At a glance: what was found – and what wasn't. So you can follow up immediately.
+                </div>
+              </div>
+            </div>
+
+            <div class="result-cards">
+              <div class="result-card">
+                <div class="result-icon-float">
+                  <Icon name="KPIs_found" size={110} class="result-icon-svg" />
+                </div>
+
+                <div class="result-body">
+                  <div class="result-title">KPIs found</div>
+                  <div class="result-text">
+                    Extracted values are available in structured format and immediately exportable.
+                  </div>
+                </div>
+
+                <div class="result-metric">
+                  <div class="metric-value">—</div>
+                  <div class="metric-label">Hits</div>
+                </div>
+              </div>
+
+              <div class="result-card">
+                <div class="result-icon-float">
+                  <Icon name="KPIs_not_found" size={110} class="result-icon-svg" />
+                </div>
+
+                <div class="result-body">
+                  <div class="result-title">KPIs not found</div>
+                  <div class="result-text">
+                    Missing KPIs are transparently marked.
+                  </div>
+                </div>
+
+                <div class="result-metric">
+                  <div class="metric-value">—</div>
+                  <div class="metric-label">Gaps</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 04 – Filter & Sort -->
+          <div class="step step-filter-sort">
+            <div class="step-top">
+              <span class="step-number">04</span>
+              <div class="step-text">
+                <div class="step-title">Filter and Sort KPIs</div>
+                <div class="step-caption">Flexible data processing – exactly the values you need.</div>
+              </div>
+            </div>
+
+            <div class="media-card">
+              <video muted playsinline preload="metadata" class="media-video hover-play pause-at-end">
+                <source src="/kpi_extraction_product_files/filter_sort.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          <!-- STEP 05 & 06 – Search & AI Explanation -->
+          <div class="step-row sync-pair">
+            <!-- STEP 05 – links -->
+            <div class="step step-left">
+              <div class="step-top">
+                <span class="step-number">05</span>
+                <div class="step-text">
+                  <div class="step-title">Search for Desired KPIs</div>
+                  <div class="step-caption">
+                    Directly check if a KPI is present.
+                  </div>
+                </div>
+              </div>
+
+              <div class="media-card search-media sync-ignore">
+                <video muted playsinline preload="metadata" class="media-video hover-play pause-at-end">
+                  <source src="/kpi_extraction_product_files/Search_1.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+
+            <!-- STEP 06 – rechts -->
+            <div class="step step-right step-big">
+              <div class="step-top">
+                <span class="step-number">06</span>
+                <div class="step-text">
+                  <div class="step-title">AI Explanation of Value Origins</div>
+                  <div class="step-caption">
+                    For each KPI, it's transparently explained where the value comes from –
+                    and if necessary, how it was calculated.
+                  </div>
+                </div>
+              </div>
+
+              <div class="media-card sync-ignore">
+                <video muted playsinline preload="metadata" class="media-video hover-play pause-at-end">
+                  <source src="/kpi_extraction_product_files/Search_2.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <!-- CLOSING -->
+          <div class="closing-card">
+            <div class="closing-badge">More Clarity. Less Busy Work.</div>
+
+            <h2 class="closing-title">Many more features await you.</h2>
+
+            <p class="closing-subtitle">
+              Instead of investing hundreds of work hours in manual analysis, we automate exactly the steps
+              that can be cleanly and traceably automated.
+            </p>
+          </div>
+
+          <!-- STORY DETAILS SECTION -->
+          <div class="story-section">
+
+            <!-- Challenge -->
+            <div class="story-block">
+              <h2 class="story-block-title">Background Story</h2>
+              <div class="story-block-content">
+                <p>A rating agency faced a massive challenge: analysts had to fight their way through documents with over 500 pages daily to extract quantitative and qualitative information for risk assessments. Every detail counted, every error could be costly.</p>
+                <p>The manual process not only tied up significant resources, but also increasingly became a bottleneck for business-critical decisions. The central question was not whether automation is possible, but how it can work in such a sensitive area where errors are not an option.</p>
+              </div>
+            </div>
+
+            <!-- Solution -->
+            <div class="story-block">
+              <h2 class="story-block-title">Our Solution</h2>
+              <div class="story-block-content">
+                <p>At Klartext AI we know: In finance, "the AI says" is not enough. That's why we developed a solution that not only extracts, but also explains.</p>
+                <ul class="solution-list">
+                  <li><strong>Automated extraction</strong> of quantitative and qualitative data from complex documents</li>
+                  <li><strong>Intelligent verification:</strong> Each extraction is provided with a direct reference location in the original document</li>
+                  <li><strong>Reasoning engine:</strong> The AI delivers not only values, but also the reasoning behind them</li>
+                  <li><strong>Seamless integration:</strong> Direct feeding into existing systems without media disruption</li>
+                  <li><strong>Human-in-the-loop:</strong> Analysts can verify each extraction time-efficiently</li>
+                </ul>
+                <p>What distinguishes us: We didn't just unleash a generic LLM on the problem. Instead, we applied Domain-Driven Design and tailored the solution to the specific requirements of the banking sector – including regulatory compliance and audit trails.</p>
+              </div>
+            </div>
+
+            <!-- Results -->
+            <div class="story-block">
+              <h2 class="story-block-title">The Results</h2>
+              <div class="results-list">
+                <div class="result-item-check">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  <p>80% time and cost savings – what used to take hours is now done in minutes</p>
+                </div>
+                <div class="result-item-check">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  <p>Break-even after only 1.5 months – fastest ROI in our portfolio</p>
+                </div>
+                <div class="result-item-check">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  <p>Higher quality through consistency – no more overlooked details</p>
+                </div>
+                <div class="result-item-check">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  <p>Scalability without additional effort – volume can increase without problems</p>
+                </div>
+                <div class="result-item-check">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  <p>Complete traceability – every extraction with source reference</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Learnings -->
+            <div class="story-block">
+              <h2 class="story-block-title">What We Learned</h2>
+              <div class="story-block-content">
+                <p>Successful AI implementation in the financial sector requires three things:</p>
+                <ol class="learnings-list">
+                  <li><strong>Trust through transparency:</strong> Every AI decision must be traceable</li>
+                  <li><strong>Domain expertise:</strong> Generic solutions don't work in regulated industries</li>
+                  <li><strong>Evaluation-Driven Development:</strong> Systematic measurements from the start, not as an afterthought</li>
+                </ol>
+                <p>The solution is running in production today and has changed the way our client works with documents. Not because the AI is perfect – but because it is transparent, reliable, and tailored to real business processes.</p>
+              </div>
+            </div>
+          </div>
+
+        </section>
+      </article>
+    </div>
+  </main>
+
   <FinalCTA lang="en" />
   <Footer lang="en" />
 </BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all videos on the page
+    const allVideos = document.querySelectorAll('.media-video');
+
+    // Set up each video for infinite loop
+    allVideos.forEach((v) => {
+      v.loop = true;
+      v.muted = true;
+      v.playsInline = true;
+
+      const startTime = parseFloat(v.dataset.startTime) || 0;
+
+      // Show first frame on load
+      v.addEventListener('loadeddata', () => {
+        try {
+          v.currentTime = startTime || 0.001;
+        } catch (_) {}
+      }, { once: true });
+
+      v.addEventListener('loadedmetadata', () => {
+        v.load();
+      }, { once: true });
+    });
+
+    // Create IntersectionObserver for scroll-based autoplay
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        const startTime = parseFloat(video.dataset.startTime) || 0;
+
+        if (entry.isIntersecting) {
+          // Video is visible - play it
+          video.currentTime = startTime;
+          video.play().catch(() => {
+            // Autoplay blocked - that's okay
+          });
+        } else {
+          // Video is not visible - pause it
+          video.pause();
+        }
+      });
+    }, {
+      threshold: 0.3, // Start playing when 30% visible
+      rootMargin: '0px'
+    });
+
+    // Observe all videos
+    allVideos.forEach((video) => {
+      videoObserver.observe(video);
+    });
+
+    // Handle synced video pairs
+    document.querySelectorAll('.sync-pair').forEach((pair) => {
+      const videos = Array.from(pair.querySelectorAll('video'));
+      if (videos.length < 2) return;
+
+      // Set up sync pair observer
+      const syncObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Play all videos in the pair together
+            videos.forEach((v) => {
+              v.currentTime = 0;
+              v.play().catch(() => {});
+            });
+          } else {
+            // Pause all videos in the pair
+            videos.forEach((v) => v.pause());
+          }
+        });
+      }, {
+        threshold: 0.3,
+        rootMargin: '0px'
+      });
+
+      syncObserver.observe(pair);
+
+      // Unobserve individual videos in sync pairs from main observer
+      videos.forEach((v) => videoObserver.unobserve(v));
+    });
+
+  });
+</script>
+
+<style>
+  /* PRODUCT DETAIL PAGE */
+  .product-detail {
+    padding: var(--space-2xl) 0;
+    background: transparent;
+  }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-blue);
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: var(--space-xl);
+    transition: all 0.3s ease;
+  }
+
+  .back-link:hover {
+    transform: translateX(-4px);
+    color: var(--color-blue-accent);
+  }
+
+  /* HERO / HEADER */
+  .hero {
+    text-align: center;
+    margin: var(--space-lg) 0 var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .badge {
+    display: inline-block;
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 1rem;
+    background: rgba(36, 121, 190, 0.1);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .headline {
+    font-size: var(--font-size-h1);
+    font-weight: 300;
+    margin: var(--space-md) 0;
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  /* FLOW / STEPS */
+  .flow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    margin: var(--space-2xl) 0;
+  }
+
+  /* ZIGZAG LAYOUT FOR STEPS 01 & 02 */
+  .step-zigzag {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .step-zigzag-left {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .step-zigzag-right {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .step-zigzag-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .step-zigzag-media {
+    display: flex;
+    justify-content: center;
+  }
+
+  .step-zigzag-right .step-zigzag-media {
+    order: -1;
+  }
+
+  .step {
+    display: grid;
+    gap: var(--space-md);
+    justify-items: center;
+  }
+
+  .step:nth-child(1) {
+    justify-items: start;
+  }
+
+  .step:nth-child(2) {
+    justify-items: end;
+  }
+
+  .step-top {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .step-row {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--color-blue);
+    background: rgba(36, 121, 190, 0.1);
+    border: 1px solid rgba(36, 121, 190, 0.2);
+    flex: 0 0 auto;
+  }
+
+  .step-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-top: 0;
+  }
+
+  .step-caption {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+  }
+
+
+  .step-filter-sort .media-card {
+    max-width: 500px;
+  }
+
+  .media-card {
+    border-radius: 1rem;
+    max-width: 520px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.15);
+    line-height: 0;
+    width: 100%;
+    margin-top: var(--space-md);
+    transition: var(--transition-smooth);
+    backdrop-filter: blur(8px);
+  }
+
+  .media-card:hover {
+    box-shadow: 0 12px 32px rgba(36, 121, 190, 0.2);
+  }
+
+  .media-card-lg {
+    max-width: 1000px;
+  }
+
+  .step-big .media-card {
+    max-width: 1050px;
+  }
+
+  .step:nth-child(1) .media-card,
+  .step:nth-child(1) .step-top {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .step:nth-child(2) .media-card,
+  .step:nth-child(2) .step-top {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .step-right {
+    justify-items: end;
+  }
+
+  .step-right .media-card,
+  .step-right .step-top {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .media-video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* STEP RESULTS SECTION */
+  .step-results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .result-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .result-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-md);
+    padding: 3.5rem var(--space-md) var(--space-md);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.12);
+    transition: var(--transition-smooth);
+    backdrop-filter: blur(8px);
+  }
+
+  .result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(36, 121, 190, 0.18);
+  }
+
+  .result-icon-float {
+    position: absolute;
+    top: -36px;
+    left: 18px;
+    width: 150px;
+    height: 80px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 28px rgba(36, 121, 190, 0.15);
+    backdrop-filter: blur(8px);
+  }
+
+  .result-icon-svg {
+    width: 130px;
+    height: auto;
+    display: block;
+    color: var(--color-blue);
+  }
+
+  .result-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 0.25rem;
+  }
+
+  .result-text {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .result-metric {
+    text-align: right;
+    padding-left: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.1rem;
+  }
+
+  .metric-value {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--color-blue);
+    line-height: 1;
+  }
+
+  .metric-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* CLOSING CARD */
+  .closing-card {
+    padding: var(--space-lg);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.12);
+    backdrop-filter: blur(8px);
+    text-align: center;
+  }
+
+  .closing-badge {
+    display: inline-block;
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 1rem;
+    background: rgba(36, 121, 190, 0.1);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .closing-title {
+    margin: var(--space-md) 0;
+    font-size: var(--font-size-h2);
+    font-weight: 400;
+    color: var(--color-blue);
+    line-height: 1.2;
+  }
+
+  .closing-subtitle {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--color-text-body);
+    line-height: 1.7;
+    max-width: 80ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .search-media {
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* STORY DETAILS SECTION */
+  .story-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .metrics-highlight {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.12);
+    backdrop-filter: blur(8px);
+  }
+
+  .metric-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .metric-label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+  }
+
+  .metric-value-large {
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--color-blue);
+    line-height: 1.2;
+  }
+
+  .story-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .story-block-title {
+    font-size: var(--font-size-h3);
+    font-weight: 400;
+    color: var(--color-blue);
+    position: relative;
+    padding-bottom: var(--space-sm);
+  }
+
+  .story-block-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--color-blue);
+  }
+
+  .story-block-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--color-text-body);
+  }
+
+  .story-block-content p {
+    margin-bottom: var(--space-md);
+  }
+
+  .story-block-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .solution-list {
+    margin: var(--space-md) 0;
+    padding-left: var(--space-lg);
+    list-style: disc;
+  }
+
+  .solution-list li {
+    margin-bottom: var(--space-sm);
+    line-height: 1.7;
+  }
+
+  .solution-list li strong {
+    color: var(--color-text-dark);
+  }
+
+  .learnings-list {
+    margin: var(--space-md) 0;
+    padding-left: var(--space-lg);
+  }
+
+  .learnings-list li {
+    margin-bottom: var(--space-sm);
+    line-height: 1.7;
+  }
+
+  .learnings-list li strong {
+    color: var(--color-text-dark);
+  }
+
+  .results-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .result-item-check {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(36, 121, 190, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .result-item-check:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.15);
+  }
+
+  .result-item-check svg {
+    flex-shrink: 0;
+    color: var(--color-blue);
+    margin-top: 2px;
+  }
+
+  .result-item-check p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    margin: 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 820px) {
+    .headline {
+      font-size: var(--font-size-h2);
+    }
+
+    .result-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .step-row {
+      grid-template-columns: 1fr;
+    }
+
+    .closing-title {
+      font-size: var(--font-size-h3);
+    }
+
+    /* Zigzag layout stacks on tablet */
+    .step-zigzag {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .step-zigzag-right .step-zigzag-media {
+      order: 1;
+    }
+
+    .step-zigzag-right .step-zigzag-content {
+      order: 0;
+    }
+
+    .step-zigzag-content {
+      text-align: center;
+    }
+
+    .step-zigzag-content .step-top {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .product-detail {
+      padding: var(--space-lg) 0;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .headline {
+      font-size: 1.5rem;
+      line-height: 1.3;
+    }
+
+    .hero {
+      margin: var(--space-md) 0;
+      padding-bottom: var(--space-md);
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+    }
+
+    /* Step number smaller on mobile */
+    .step-number {
+      width: 32px;
+      height: 32px;
+      font-size: 0.7rem;
+    }
+
+    .step-title {
+      font-size: 1rem;
+    }
+
+    .step-caption {
+      font-size: 0.875rem;
+    }
+
+    /* Step top: stack vertically with number on top */
+    .step-top {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--space-sm);
+    }
+
+    /* Flow section */
+    .flow {
+      gap: var(--space-xl);
+      margin: var(--space-lg) 0;
+    }
+
+    .step-zigzag {
+      margin-bottom: 0;
+    }
+
+    /* Media cards full width on mobile */
+    .media-card,
+    .media-card-lg,
+    .step-big .media-card,
+    .step-filter-sort .media-card,
+    .search-media {
+      max-width: 100%;
+      border-radius: 0.75rem;
+    }
+
+    /* Results section */
+    .result-cards {
+      gap: var(--space-lg);
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+    }
+
+    .result-card {
+      padding: 3rem var(--space-sm) var(--space-sm);
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+
+    .result-icon-float {
+      width: 120px;
+      height: 65px;
+      top: -28px;
+      left: 12px;
+    }
+
+    .result-icon-svg {
+      width: 100px;
+    }
+
+    .result-metric {
+      text-align: left;
+      padding-left: 0;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .metric-value {
+      font-size: 1rem;
+    }
+
+    /* Step row for steps 05/06 */
+    .step-row {
+      gap: var(--space-lg);
+    }
+
+    .step-row .step {
+      justify-items: center !important;
+    }
+
+    .step-row .step .step-top {
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .step-left,
+    .step-right {
+      justify-items: center !important;
+    }
+
+    .step:nth-child(1),
+    .step:nth-child(2) {
+      justify-items: center !important;
+    }
+
+    .step-right .media-card,
+    .step-right .step-top,
+    .step:nth-child(2) .media-card,
+    .step:nth-child(2) .step-top,
+    .step:nth-child(1) .media-card,
+    .step:nth-child(1) .step-top {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Filter sort step */
+    .step-filter-sort .step-top {
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Step results */
+    .step-results .step-top {
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Closing card */
+    .closing-card {
+      padding: var(--space-md);
+    }
+
+    .closing-badge {
+      font-size: 0.75rem;
+    }
+
+    .closing-title {
+      font-size: 1.25rem;
+    }
+
+    .closing-subtitle {
+      font-size: 0.95rem;
+    }
+
+    /* Story section mobile */
+    .story-section {
+      gap: var(--space-lg);
+    }
+
+    .metrics-highlight {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+    }
+
+    .metric-value-large {
+      font-size: 1.75rem;
+    }
+
+    .story-block-title {
+      font-size: 1.25rem;
+      text-align: center;
+    }
+
+    .story-block-title::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .story-block-content {
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .solution-list,
+    .learnings-list {
+      text-align: left;
+      padding-left: var(--space-md);
+    }
+
+    .results-list {
+      grid-template-columns: 1fr;
+    }
+
+    .result-item-check {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .result-item-check svg {
+      margin-top: 0;
+      margin-bottom: var(--space-xs);
+    }
+
+    .result-item-check p {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .headline {
+      font-size: 1.35rem;
+    }
+
+    .step-title {
+      font-size: 0.95rem;
+    }
+
+    .step-caption {
+      font-size: 0.825rem;
+    }
+
+    .result-title {
+      font-size: 0.875rem;
+    }
+
+    .result-text {
+      font-size: 0.825rem;
+    }
+
+    .closing-title {
+      font-size: 1.1rem;
+    }
+  }
+</style>

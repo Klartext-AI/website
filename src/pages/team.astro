@@ -323,13 +323,19 @@ const teamMembers = [
   transition: opacity 0.3s ease;
 }
 
-.member-image-wrapper:hover .member-image-main {
-  opacity: 0;
+/* ✅ Desktop: echtes Hover */
+@media (hover: hover) and (pointer: fine) {
+  .member-image-wrapper:hover .member-image-main { opacity: 0; }
+  .member-image-wrapper:hover .member-image-hover { opacity: 1; }
 }
 
-.member-image-wrapper:hover .member-image-hover {
-  opacity: 1;
+/* ✅ Mobile: Toggle per Klick */
+@media (hover: none) and (pointer: coarse) {
+  .member-image-wrapper.is-toggled .member-image-main { opacity: 0; }
+  .member-image-wrapper.is-toggled .member-image-hover { opacity: 1; }
 }
+
+
 
   .member-info {
     display: flex;
@@ -527,57 +533,56 @@ const teamMembers = [
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    
     const expandButtons = document.querySelectorAll('.expand-btn');
 
     expandButtons.forEach(button => {
       button.addEventListener('click', () => {
         const isExpanded = button.getAttribute('data-expanded') === 'true';
         const tile = button.closest('.member-tile');
-        if (!tile) {
-          return;
-        }
+        if (!tile) return;
 
         const fullBioContainer = tile.querySelector('.full-bio-container');
         const expandText = button.querySelector('.expand-text');
 
         if (isExpanded) {
-          // Collapse
-          if (fullBioContainer) {
-            fullBioContainer.classList.remove('expanded');
-          }
+          fullBioContainer?.classList.remove('expanded');
           button.setAttribute('data-expanded', 'false');
-          if (expandText) {
-            expandText.textContent = 'Mehr anzeigen';
-          }
+          if (expandText) expandText.textContent = 'Mehr anzeigen';
         } else {
-          // Close all other expanded sections first
-          expandButtons.forEach(otherButton => {
-            if (otherButton !== button && otherButton.getAttribute('data-expanded') === 'true') {
-              const otherTile = otherButton.closest('.member-tile');
-              if (otherTile) {
-                const otherContainer = otherTile.querySelector('.full-bio-container');
-                const otherText = otherButton.querySelector('.expand-text');
+        expandButtons.forEach(otherButton => {
+          if (otherButton !== button && otherButton.getAttribute('data-expanded') === 'true') {
+            const otherTile = otherButton.closest('.member-tile');
+            if (!otherTile) return;
 
-                if (otherContainer) {
-                  otherContainer.classList.remove('expanded');
-                }
-                otherButton.setAttribute('data-expanded', 'false');
-                if (otherText) {
-                  otherText.textContent = 'Mehr anzeigen';
-                }
-              }
-            }
-          });
+            const otherContainer = otherTile.querySelector('.full-bio-container');
+            if (otherContainer) otherContainer.classList.remove('expanded');
 
-          // Expand current section
-          if (fullBioContainer) {
-            fullBioContainer.classList.add('expanded');
+            otherButton.setAttribute('data-expanded', 'false');
+
+            const otherText = otherButton.querySelector('.expand-text');
+            if (otherText) otherText.textContent = 'Mehr anzeigen';
           }
+        });
+
+          fullBioContainer?.classList.add('expanded');
           button.setAttribute('data-expanded', 'true');
-          if (expandText) {
-            expandText.textContent = 'Weniger anzeigen';
-          }
+          if (expandText) expandText.textContent = 'Weniger anzeigen';
         }
+      });
+    });
+
+
+    const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    if (!isTouch) return;
+
+    document.querySelectorAll('.member-image-wrapper').forEach(wrapper => {
+      if (!wrapper.querySelector('.member-image-hover')) return;
+
+      wrapper.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        wrapper.classList.toggle('is-toggled');
       });
     });
   });
