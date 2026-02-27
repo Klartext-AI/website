@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../components/BlogPostDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Explainable AI: Warum Vertrauen durch Verstehbarkeit entsteht | Klartext AI Blog';
+const description = 'KI-Entscheidungen dürfen keine Blackbox sein. Wir erklären, wie Human-in-the-Loop-Ansätze und Explainability echte Transparenz, Sicherheit und Akzeptanz schaffen.';
+
+const fullContent = `
+<p>KI-Systeme werden oft als mysteriöse "Blackbox" wahrgenommen: Daten gehen hinein, eine Entscheidung kommt heraus, aber niemand weiß genau, warum. In der Theorie ist das faszinierend – in der Geschäftspraxis ist es ein massives Risiko.</p>
+
+<p>Wenn eine KI einen Kredit ablehnt, eine medizinische Diagnose unterstützt oder einen kritischen Prozess in der Logistik steuert, reicht ein "Die KI sagt das so" nicht aus. Wir brauchen Nachvollziehbarkeit.</p>
+
+<p><strong>Bei Klartext AI setzen wir auf Explainable AI (XAI) und Human-in-the-Loop, um Vertrauen von der ersten Zeile Code an aufzubauen.</strong></p>
+
+<h4>Das Problem der Blackbox</h4>
+
+<p>Viele moderne KI-Modelle – insbesondere Deep Learning und große Sprachmodelle (LLMs) – sind so komplex, dass selbst ihre Entwickler die internen Entscheidungspfade nicht im Detail vorhersagen können. Ohne Erklärbarkeit entstehen vier typische Probleme:</p>
+
+<ul>
+  <li><strong>Mangelndes Vertrauen:</strong> Teams ignorieren das System, weil sie den Ergebnissen nicht blind vertrauen wollen.</li>
+  <li><strong>Haftungsrisiken:</strong> Wer übernimmt Verantwortung, wenn Entscheidungen nicht begründet werden können?</li>
+  <li><strong>Bias-Gefahr:</strong> Verzerrungen bleiben unbemerkt, wenn niemand versteht, was das Modell "gelernt" hat.</li>
+  <li><strong>Compliance:</strong> Regulatorik verlangt Transparenz und menschliche Aufsicht – besonders bei kritischen Anwendungen.</li>
+</ul>
+
+<h4>Explainability: Die KI lernt zu begründen</h4>
+
+<p>Explainable AI bedeutet, Techniken einzusetzen, die die Logik hinter einem Ergebnis offenlegen. Das Ziel ist nicht, den gesamten mathematischen Prozess zu zeigen, sondern die <strong>entscheidenden Faktoren</strong> verständlich zu machen.</p>
+
+<p>Stellen Sie sich ein System zur Betrugserkennung vor. Eine Blackbox sagt: "Risiko 85%". Eine erklärbare KI sagt: "Risiko 85%, weil die IP-Adresse untypisch ist und der Transaktionswert deutlich über dem Durchschnitt der letzten 30 Tage liegt."</p>
+
+<p><strong>Das ist der Unterschied zwischen einer bloßen Behauptung und einer belastbaren Entscheidungsgrundlage.</strong></p>
+
+<h4>Human-in-the-Loop: Der Mensch als Korrektiv</h4>
+
+<p>Technologie allein löst das Vertrauensproblem nicht. Deshalb nutzen wir den <strong>Human-in-the-Loop (HITL)</strong>-Ansatz: Die KI ersetzt den Menschen nicht, sie arbeitet ihm zu – strukturiert, nachvollziehbar und kontrollierbar.</p>
+
+<p><strong>1. Vorschlag statt Diktat</strong><br/>
+Die KI bereitet Informationen auf und macht einen fundierten Vorschlag – inklusive Begründung. Der menschliche Experte prüft und entscheidet.</p>
+
+<p><strong>2. Feedback-Schleife</strong><br/>
+Korrekturen durch Expert:innen fließen zurück ins System. So wird das Modell präziser und domänenspezifischer – ohne dass es "freidreht".</p>
+
+<p><strong>3. Unsicherheits-Handling</strong><br/>
+Bei Grenzfällen erkennt die KI ihre eigene Unsicherheit und eskaliert an Menschen, statt zu raten. Das ist nicht nur safer – es ist auch die Basis für robustes Lernen.</p>
+
+<h4>Der Mehrwert für Unternehmen</h4>
+
+<p><strong>Sicherheit:</strong> Expert:innen behalten die finale Kontrolle – auch in kritischen Prozessen.</p>
+<p><strong>Schnellere Akzeptanz:</strong> Teams arbeiten lieber mit Tools, die sie verstehen und die sie unterstützen, statt sie zu bevormunden.</p>
+<p><strong>Bessere Datenqualität:</strong> Durch kontinuierliches Feedback wird das System mit der Zeit präziser – und die Datenbasis sauberer.</p>
+
+<h4>Fazit: Transparenz ist kein Nice-to-have</h4>
+
+<p>In vielen Unternehmen scheitern KI-Projekte nicht an der Technologie, sondern an Vertrauen, Haftung und fehlender Nachvollziehbarkeit. Explainability ist deshalb nicht optional – sie ist Voraussetzung für produktive KI.</p>
+
+<p>Wir bauen keine Systeme, die Menschen ersetzen sollen. Wir bauen Systeme, die Menschen erklären, <em>warum</em> sie etwas vorschlagen – damit Menschen fundiert entscheiden können.</p>
+
+<p><strong>Denn nur wer versteht, kann wirklich Verantwortung übernehmen.</strong></p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="Explainable AI: Warum Vertrauen durch Verstehbarkeit entsteht"
+    excerpt="KI-Entscheidungen dürfen keine Blackbox sein. Wir zeigen, wie Explainability und Human-in-the-Loop Transparenz und Sicherheit schaffen."
+    fullExcerpt="In kritischen Geschäftsprozessen reicht es nicht aus, dass eine KI ‚recht hat‘ – man muss verstehen, warum. Explainability (XAI) ist für uns kein optionales Feature, sondern die Voraussetzung für operative Sicherheit. Mit Human-in-the-Loop-Schnittstellen bleiben KI-Vorschläge nachvollziehbar – und Expert:innen behalten die Kontrolle über finale Entscheidungen."
+    fullContent={fullContent}
+    category="Philosophie"
+    readTime="6 min"
+    date="2026-02-26"
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

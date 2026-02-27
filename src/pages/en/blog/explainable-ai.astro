@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../../components/BlogPostDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'Explainable AI: Why Trust Comes from Understanding | Klartext AI Blog';
+const description = "AI decisions shouldn't be a black box. We explain how human-in-the-loop approaches and explainability create real transparency and safety.";
+
+const fullContent = `
+<p>AI systems are often perceived as mysterious "black boxes": Data goes in, a decision comes out, but nobody really knows why. In theory, that's fascinating – in business practice, it's a massive risk.</p>
+
+<p>If an AI denies a loan, makes a medical diagnosis, or controls a critical process in logistics, a simple "the AI says so" is not enough. We need traceability.</p>
+
+<p><strong>At Klartext AI, we rely on Explainable AI (XAI) and Human-in-the-Loop to build trust from the very first line of code.</strong></p>
+
+<h4>The Black Box Problem</h4>
+<p>Most modern AI models, especially deep learning and large language models (LLMs), are so complex that even their developers can't fully predict the internal decision paths. Without explainability, four main problems arise:</p>
+<ul>
+	<li><strong>Lack of trust:</strong> Employees ignore the system because they don't want to blindly trust the results.</li>
+	<li><strong>Liability risks:</strong> Who takes responsibility if a wrong decision can't be justified?</li>
+	<li><strong>Bias danger:</strong> Without transparency, racist, gender-based, or illogical biases in the data go unnoticed.</li>
+	<li><strong>Compliance:</strong> The EU AI Act explicitly requires transparency and human oversight for high-risk systems.</li>
+</ul>
+
+<h4>Explainability: AI learns to justify</h4>
+<p>Explainable AI means using techniques that reveal the logic behind a result. The goal is not to show the entire mathematical process, but to name the <strong>decisive factors</strong>.</p>
+
+<p>Imagine a fraud detection system. A black box says: "Risk 85%". An explainable AI says: "Risk 85%, because the IP address is unusual and the transaction value is significantly above the average of the last 30 days."</p>
+
+<p><strong>That makes the difference between a mere assertion and a solid basis for decision-making.</strong></p>
+
+<h4>Human-in-the-Loop: Humans as Corrective</h4>
+<p>Technology alone doesn't solve the trust problem. That's why our software products use the <strong>Human-in-the-Loop (HITL)</strong> approach. This means: The AI doesn't replace humans, it supports them.</p>
+
+<p><strong>1. Suggestion instead of Dictate</strong></p>
+<p>The AI prepares data and makes a well-founded suggestion – including the reasons (explainability). The human expert reviews this suggestion.</p>
+
+<p><strong>2. Feedback loop</strong></p>
+<p>If the human corrects a decision, the system learns from it. This interaction not only improves the model, but ensures that the AI stays within the guardrails of human domain experts.</p>
+
+<p><strong>3. Quality control</strong></p>
+<p>Especially in critical edge cases, the AI recognizes its own uncertainty and automatically forwards the case to a human instead of guessing.</p>
+
+<h4>The Added Value for Companies</h4>
+<p><strong>Safety:</strong> Experts retain final control. This reduces the fear of "runaway" algorithms.</p>
+<p><strong>Faster acceptance:</strong> Employees prefer to work with a tool they understand and that supports them in their work, rather than patronizing them.</p>
+<p><strong>Better data quality:</strong> Thanks to constant expert feedback, the system becomes more precise and domain-specific every day.</p>
+
+<h4>Conclusion: Transparency is not a "nice-to-have"</h4>
+<p>In a world where AI investments often fail due to lack of trust or regulatory hurdles (as the current debate about "MIT studies" and failure rates shows), explainability is the key to success.</p>
+
+<p>We don't build systems that want to replace humans. We build intelligent tools that explain to humans why they do what they do. <strong>Because only those who understand can truly decide.</strong></p>
+`;
+---
+
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+	<BlogPostDetail
+		title="Explainable AI: Why Trust Comes from Understanding"
+		excerpt="AI decisions shouldn't be a black box. We explain how human-in-the-loop approaches create transparency and trust."
+		fullExcerpt="In critical business processes, it’s not enough for an AI to be 'right' – you need to understand why. For us, Explainability (XAI) isn't an optional feature; it's a prerequisite for operational safety. By using strategic Human-in-the-Loop interfaces, we ensure that AI suggestions remain traceable for humans and that experts retain control over final decisions."
+		fullContent={fullContent}
+		category="Philosophy"
+		readTime="6 min"
+		date="2026-02-26"
+		lang="en"
+	/>
+	<FinalCTA lang="en" />
+	<Footer lang="en" />
+</BaseLayout>

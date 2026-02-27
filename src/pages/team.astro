@@ -9,22 +9,6 @@ const BASE = import.meta.env.BASE_URL;
 
 const teamMembers = [
   {
-    name: "Ruben Hetfleisch",
-    role: "Geschäftsführer",
-    image: `${BASE}team/ruben.jpg`,
-    linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
-    summary: [
-      "Ingenieurs-Studium TU Darmstadt (2022), KI-Expertise bei Fraunhofer Austria",
-      `Vorstandsmitglied <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, Gründer der GenAI Community Österreichs`,
-      "Leidenschaft für technischen Fortschritt und Wissensaustausch"
-    ],
-    fullBio: [
-      "Nach meinem Ingenieurs-Studium an der TU Darmstadt, das ich 2022 abgeschlossen habe, konnte ich bei Fraunhofer Austria eine tiefgehende Expertise im Bereich künstlicher Intelligenz aufbauen.",
-      `Als Vorstandsmitglied von <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, dem größten KI-Netzwerk Österreichs, habe ich mit viel Herzblut die GenAI Community ins Leben gerufen – Österreichs einzige Plattform für generative KI.`,
-      "Der technische Fortschritt und der Austausch mit anderen sind für mich besonders wertvoll. Deshalb engagiere ich mich intensiv in diesem Bereich. Mein Ziel ist es, KI für alle zugänglich und sinnvoll nutzbar zu machen."
-    ]
-  },
-  {
     name: "Bruno",
     role: "Chief Happiness Officer",
     image: `${BASE}team/bruno.png`,
@@ -43,19 +27,20 @@ const teamMembers = [
     ]
   },
   {
-    name: "Ondrej Hruby",
-    role: "AI & Full-Stack Engineer",
-    image: `${BASE}team/ondrej.jpg`,
-    linkedin: "https://www.linkedin.com/in/ondrej-hrubyml/",
+    name: "Ruben Hetfleisch",
+    role: "Geschäftsführer",
+    image: `${BASE}team/ruben.jpg`,
+    hoverImage: `${BASE}team/ruben-fun.jpeg`,
+    linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
     summary: [
-      "Bachelor in Computer Science (Schwerpunkt Software Engineering), Master in Data Science & AI (laufend)",
-      "Entwickelt End-to-End-Systeme mit intelligenten Features und skalierbaren Cloud-Pipelines",
-      "Motiviert von KI, die mühsame Aufgaben automatisiert und neue Einblicke ermöglicht"
+      "Ingenieurs-Studium TU Darmstadt (2022), KI-Expertise bei Fraunhofer Austria",
+      `Vorstandsmitglied <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, Gründer der GenAI Community Österreichs`,
+      "Leidenschaft für technischen Fortschritt und Wissensaustausch"
     ],
     fullBio: [
-      "Ich habe einen Bachelor in Computer Science mit Schwerpunkt Software Engineering und verfolge aktuell einen Master in Data Science und AI.",
-      "Ich baue gerne End-to-End-Systeme, die intelligente Funktionen mit skalierbaren Cloud-Pipelines verbinden.",
-      "Besonders motivieren mich Herausforderungen, bei denen KI mühsame Aufgaben automatisiert oder neue Einblicke ermöglicht, die zuvor nicht zugänglich waren – und Teil von Produkten zu sein, die wirklich einen Unterschied machen."
+      "Nach meinem Ingenieurs-Studium an der TU Darmstadt, das ich 2022 abgeschlossen habe, konnte ich bei Fraunhofer Austria eine tiefgehende Expertise im Bereich künstlicher Intelligenz aufbauen.",
+      `Als Vorstandsmitglied von <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, dem größten KI-Netzwerk Österreichs, habe ich mit viel Herzblut die GenAI Community ins Leben gerufen – Österreichs einzige Plattform für generative KI.`,
+      "Der technische Fortschritt und der Austausch mit anderen sind für mich besonders wertvoll. Deshalb engagiere ich mich intensiv in diesem Bereich. Mein Ziel ist es, KI für alle zugänglich und sinnvoll nutzbar zu machen."
     ]
   },
   {
@@ -79,6 +64,7 @@ const teamMembers = [
     name: "Hrvoje Ljubić",
     role: "Full-Stack Developer",
     image: `${BASE}team/hrvoje.jpg`,
+    hoverImage: `${BASE}team/hrvoje-fun.png`,
     linkedin: null,
     summary: [
       "Vielseitiger Allrounder: FinTech, ERP, AI-Chats, Mobile Apps, Gaming",
@@ -94,6 +80,7 @@ const teamMembers = [
     name: "Anna Poledna",
     role: "Marketing & Communications Associate",
     image: `${BASE}team/anna.jpg`,
+    hoverImage: `${BASE}team/anna-fun.jpg`,
     linkedin: "https://www.linkedin.com/in/anna-poledna-19766531b/",
     summary: [
       "Wissenschaftlicher Mix aus Labor, Data Science und internationalen Projekten",
@@ -109,9 +96,44 @@ const teamMembers = [
     ]
   },
   {
+    name: "Benjamin Raumauf",
+    role: "Full-Stack Developer",
+    image: `${BASE}team/benjamin.png`,
+    hoverImage: `${BASE}team/benjamin-fun.jpg`,
+    linkedin: "https://www.linkedin.com/in/benjamin-raumauf/",
+    summary: [
+      "Masterstudium Wirtschaftsingenieur – Maschinenbau an der TU Wien.",
+      "Projektmanagement-Erfahrung als wissenschaftlicher Mitarbeiter an der TU Wien.",
+      "Software- & KI-basierte Prozessoptimierung als Freelancer in unterschiedlichsten Unternehmen und Branchen."
+    ],
+    fullBio: [
+      "Im Rahmen meines Masterstudiums Wirtschaftsingenieurwesen – Maschinenbau an der TU Wien habe ich ein breites technisches Fundament mit betriebswirtschaftlichem Denken verbunden. Als wissenschaftlicher Mitarbeiter an der TU Wien konnte ich wertvolle Erfahrung im Projektmanagement sammeln.",
+      "Parallel dazu habe ich mich als Selbstständiger auf software- und KI-basierte Prozessoptimierung spezialisiert. Dabei durfte ich mit unterschiedlichsten Kunden aus den Bereichen Personalvermittlung, Maschinenbau und Messtechnik zusammenarbeiten – immer mit dem Ziel, durch smarte Technologie echten Mehrwert in bestehenden Abläufen zu schaffen.",
+      "Was mich antreibt, ist die Überzeugung, dass KI und Automatisierung kein Selbstzweck sind, vielmehr Menschen in ihrer Arbeit entlasten und ihnen Freiraum schaffen, damit sie sich auf das Wesentliche konzentrieren können."
+    ]
+  },
+  {
+    name: "Maximilian Süss",
+    role: "AI Engineer",
+    image: `${BASE}team/max.png`,
+    hoverImage: `${BASE}team/max-fun.jpeg`,
+    linkedin: "https://www.linkedin.com/in/maximilian-suess/",
+    summary: [
+      "AI/ML-Experte mit Hintergrund in Full-Stack-Softwareentwicklung.",
+      "Dipl.-Ing. (ausstehend) an der TU Wien und BSc an der LMU München.",
+      "Kombination wissenschaftlicher Strenge mit einem agilen Mindset."
+    ],
+    fullBio: [
+      "Ich bin AI Engineer mit Erfahrung aus Software Engineering und Quantencomputing. Ich habe in kleinen Teams und Startup-Umfeldern gearbeitet und dabei an Projekten mitgewirkt, von ersten Ideen bis hin zu fertigen Produkten, die im Alltag eingesetzt werden.",
+      "Was mir an meiner Arbeit am meisten Freude bereitet, ist die kreative Natur des Programmierens. Ich lerne gerne Neues, erkunde unbekannte Problemräume und verwandle komplexe Ideen Schritt für Schritt in etwas Klares und Zugängliches.",
+      "Ich lege großen Wert darauf, Technologie zu entwickeln, die wirklich nützlich ist. Ich möchte Software schaffen, die echten Menschen hilft, Reibung reduziert und sich in der Praxis bewährt. Bei Klartext AI arbeite ich an KI-Systemen, die durchdacht sind, sich an realen Bedürfnissen orientieren und einfach funktionieren."
+    ]
+  },
+  {
     name: "Daniel Toth",
     role: "Operativer Geschäftsführer",
     image: `${BASE}team/daniel.jpg`,
+    hoverImage: `${BASE}team/daniel-fun.png`,
     linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/",
     summary: [
       "Gründer & Geschäftsführer von Klartext AI, spezialisiert auf maßgeschneiderte KI-Lösungen.",
@@ -125,7 +147,8 @@ const teamMembers = [
       "Mit Klartext AI setze ich genau diese Erfahrung ein: Wir entwickeln KI-Softwarelösungen, die individuell auf Unternehmen zugeschnitten sind und dort Wirkung entfalten, wo Standardlösungen an ihre Grenzen stoßen. Ob Prozessoptimierung, Automatisierung, Entscheidungsunterstützung oder – als ein Teil davon – barrierefreie Kommunikation: Wichtig ist, dass Technologie reale Probleme löst und nachhaltigen Impact erzeugt.",
       "Privat findet man mich im Gym, am Fußballplatz oder beim Kochen. Im Büro sorgt Bruno, unser Office Dog, täglich für die nötige Portion Gelassenheit und gute Stimmung."
     ]
-  }
+  },
+  
 ];
 ---
 

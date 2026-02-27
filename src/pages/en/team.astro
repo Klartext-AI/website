@@ -9,22 +9,6 @@ const BASE = import.meta.env.BASE_URL;
 
 const teamMembers = [
   {
-    name: "Ruben Hetfleisch",
-    role: "CEO",
-    image: `${BASE}team/ruben.jpg`,
-    linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
-    summary: [
-      "Engineering degree TU Darmstadt (2022), AI expertise at Fraunhofer Austria",
-      `Board member <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, founder of GenAI Community Austria`,
-      "Passionate about technical progress and knowledge exchange"
-    ],
-    fullBio: [
-      "After completing my engineering degree at TU Darmstadt in 2022, I was able to build deep expertise in artificial intelligence at Fraunhofer Austria.",
-      `As a board member of <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, Austria's largest AI network, I founded the GenAI Community with great passion – Austria's only platform for generative AI.`,
-      "Technical progress and exchange with others are particularly valuable to me. That's why I am deeply committed to this field. My goal is to make AI accessible and useful for everyone."
-    ]
-  },
-  {
     name: "Bruno",
     role: "Chief Happiness Officer",
     image: `${BASE}team/bruno.png`,
@@ -43,18 +27,20 @@ const teamMembers = [
     ]
   },
   {
-    name: "Ondrej Hruby",
-    role: "AI & Full-Stack Engineer",
-    image: `${BASE}team/ondrej.jpg`,
-    linkedin: "https://www.linkedin.com/in/ondrej-hrubyml/",
+    name: "Ruben Hetfleisch",
+    role: "CEO",
+    image: `${BASE}team/ruben.jpg`,
+    hoverImage: `${BASE}team/ruben-fun.jpeg`,
+    linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
     summary: [
-      "Bachelor's in Computer Science, focus on Software Engineering; pursuing Master's in Data Science & AI",
-      "Enjoys building end-to-end systems with intelligent features and scalable cloud pipelines",
-      "Motivated by using AI to automate tedious tasks and unlock new insights"
+      "Engineering degree TU Darmstadt (2022), AI expertise at Fraunhofer Austria",
+      `Board member <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, founder of GenAI Community Austria`,
+      "Passionate about technical progress and knowledge exchange"
     ],
     fullBio: [
-      "I hold a Bachelor's degree in Computer Science with a focus on Software Engineering and am currently pursuing a Master's in Data Science and AI. I enjoy building end-to-end systems that combine intelligent features with scalable cloud pipelines.",
-      "I'm especially motivated by challenges where AI can automate tedious tasks or unlock insights that weren't accessible before and being part of products that will make a difference."
+      "After completing my engineering degree at TU Darmstadt in 2022, I was able to build deep expertise in artificial intelligence at Fraunhofer Austria.",
+      `As a board member of <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, Austria's largest AI network, I founded the GenAI Community with great passion – Austria's only platform for generative AI.`,
+      "Technical progress and exchange with others are particularly valuable to me. That's why I am deeply committed to this field. My goal is to make AI accessible and useful for everyone."
     ]
   },
   {
@@ -78,6 +64,7 @@ const teamMembers = [
     name: "Hrvoje Ljubić",
     role: "Full-Stack Developer",
     image: `${BASE}team/hrvoje.jpg`,
+    hoverImage: `${BASE}team/hrvoje-fun.png`,
     linkedin: null,
     summary: [
       "Versatile generalist: FinTech, ERP, AI chats, mobile apps, gaming",
@@ -91,8 +78,9 @@ const teamMembers = [
   },
   {
     name: "Anna Poledna",
-    role: "Marketing & Communications Associate",
+    role: "Business Development",
     image: `${BASE}team/anna.jpg`,
+    hoverImage: `${BASE}team/anna-fun.jpg`,
     linkedin: "https://www.linkedin.com/in/anna-poledna-19766531b/",
     summary: [
       "International background in data analysis and biosciences",
@@ -105,23 +93,59 @@ const teamMembers = [
     ]
   },
   {
-    name: "Daniel Toth",
-    role: "COO",
-    image: `${BASE}team/daniel.jpg`,
-    linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/",
-    summary: [
-      "Founder & Managing Director at Klartext AI, specialized in tailor-made AI solutions.",
-      "8+ years of experience across research, industry, and complex project leadership.",
-      "Technical excellence, strategic thinking, and focus on real business impact."
-    ],
-    fullBio: [
-      "I have been working continuously since the age of 15 – in internships, student jobs, and later in research and industry projects – always with the goal of discovering which tasks truly drive me. This constant practice early on brought me to the intersection of technology, innovation, and real problem solving.",
-      "During my studies at TU Wien, which I completed in 2022 as a Diplom-Ingenieur, I gained deep experience in research and industrial application already in the Bachelor's phase. In the years that followed, this evolved into a professional focus: custom AI and digitalization projects that create measurable enterprise value and solve complex technical challenges.",
-      "At Fraunhofer Austria I led numerous projects – internal and external, often with international consortia and durations of up to three years. My strengths lie in rapid comprehension, strategic thinking, and the ability to turn ideas into functional prototypes and ultimately into industrial applications.",
-      "With Klartext AI I apply exactly this experience: We develop AI software solutions that are individually tailored to companies and generate impact where standard solutions reach their limits. Whether process optimization, automation, decision support, or – as one part of it – accessible communication: What matters is that technology solves real problems and creates sustainable impact.",
-      "Outside of work you can find me in the gym, on the football field, or cooking. In the office, Bruno – our office dog – provides the daily dose of calm and good mood."
-    ]
-  }
+      name: "Benjamin Raumauf",
+      role: "Full-Stack Developer",
+      image: `${BASE}team/benjamin.png`,
+      hoverImage: `${BASE}team/benjamin-fun.jpg`,
+      linkedin: "https://www.linkedin.com/in/benjamin-raumauf/",
+      summary: [
+        "Master's in Industrial Engineering – Mechanical Engineering at TU Wien",
+        "Project management experience as a research associate at TU Wien",
+        "Software & AI-based process optimization as a freelancer in various companies and industries"
+      ],
+      fullBio: [
+        "During my master's studies in Industrial Engineering – Mechanical Engineering at TU Wien, I combined a broad technical foundation with business thinking. As a research associate at TU Wien, I gained valuable experience in project management.",
+        "In parallel, I specialized as a freelancer in software- and AI-based process optimization. I had the opportunity to work with a wide range of clients from personnel services, mechanical engineering, and measurement technology – always with the goal of creating real added value in existing processes through smart technology.",
+        "What drives me is the conviction that AI and automation are not ends in themselves, but rather relieve people in their work and give them the freedom to focus on what really matters."
+      ]
+    },
+    {
+      name: "Maximilian Süss",
+      role: "AI Engineer",
+      image: `${BASE}team/max.png`,
+      hoverImage: `${BASE}team/max-fun.jpeg`,
+      linkedin: "https://www.linkedin.com/in/maximilian-suess/",
+      summary: [
+        "AI/ML expert with a background in full-stack software development.",
+        "Dipl.-Ing. candidate at TU Wien and BSc from LMU Munich.",
+        "Combines scientific rigor with an agile, product-oriented mindset."
+      ],
+      fullBio: [
+        "I am an AI Engineer with experience in software engineering and quantum computing. I have worked in small teams and startup environments, contributing to projects from early-stage ideas to fully deployed products used in everyday operations.",
+        "What I enjoy most about my work is the creative nature of programming. I like learning new things, exploring unfamiliar problem spaces, and turning complex ideas into something clear and accessible step by step.",
+        "I care deeply about building technology that is genuinely useful. My goal is to create software that helps real people, reduces friction, and proves itself in practice. At Klartext AI, I work on AI systems that are thoughtful, grounded in real needs, and designed to simply work."
+      ]
+    },
+    {
+      name: "Daniel Toth",
+      role: "COO",
+      image: `${BASE}team/daniel.jpg`,
+      hoverImage: `${BASE}team/daniel-fun.png`,
+      linkedin: "https://www.linkedin.com/in/daniel-toth-381b0b214/",
+      summary: [
+        "Founder & Managing Director at Klartext AI, specialized in tailor-made AI solutions.",
+        "8+ years of experience across research, industry, and complex project leadership.",
+        "Technical excellence, strategic thinking, and focus on real business impact."
+      ],
+      fullBio: [
+        "I have been working continuously since the age of 15 – in internships, student jobs, and later in research and industry projects – always with the goal of discovering which tasks truly drive me. This constant practice early on brought me to the intersection of technology, innovation, and real problem solving.",
+        "During my studies at TU Wien, which I completed in 2022 as a Diplom-Ingenieur, I gained deep experience in research and industrial application already in the Bachelor's phase. In the years that followed, this evolved into a professional focus: custom AI and digitalization projects that create measurable enterprise value and solve complex technical challenges.",
+        "At Fraunhofer Austria I led numerous projects – internal and external, often with international consortia and durations of up to three years. My strengths lie in rapid comprehension, strategic thinking, and the ability to turn ideas into functional prototypes and ultimately into industrial applications.",
+        "With Klartext AI I apply exactly this experience: We develop AI software solutions that are individually tailored to companies and generate impact where standard solutions reach their limits. Whether process optimization, automation, decision support, or – as one part of it – accessible communication: What matters is that technology solves real problems and creates sustainable impact.",
+        "Outside of work you can find me in the gym, on the football field, or cooking. In the office, Bruno – our office dog – provides the daily dose of calm and good mood."
+      ]
+    },
+    
 ];
 ---
 
