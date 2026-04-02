@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../components/BlogPostDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Warum wir intern Big Tech den Rücken kehren | Klartext AI Blog';
+const description = 'Digitale Souveränität ist kein einmaliges Projekt – sie ist ein Prozess. Wie Klartext AI Slack und Google Meet durch eine vollständig selbst gehostete Collaboration-Suite auf europäischem Stack ersetzt hat.';
+
+const fullContent = `
+
+<h4>Was wir gebaut haben</h4>
+
+<p>Unsere gesamte Collaboration-Suite ist jetzt 100% selbst gehostet – auf europäischer Infrastruktur. Keine US-Server. Keine Drittanbieter-Datenverarbeitung. Unsere Daten, unsere Regeln, unsere Sicherheit.</p>
+
+<p>Der Stack:</p>
+
+<ul>
+  <li><strong><a href="https://matrix.org/" target="_blank" rel="noopener">Matrix Protocol</a></strong> – der offene Standard für sichere, dezentralisierte Kommunikation</li>
+  <li><strong><a href="https://element.io/en" target="_blank" rel="noopener">Element</a> / <a href="https://github.com/cinnyapp/cinny" target="_blank" rel="noopener">Cinny</a></strong> – Matrix-Clients für Chat und Messaging</li>
+  <li><strong><a href="https://jitsi.org/" target="_blank" rel="noopener">Jitsi</a></strong> – selbst gehostete Videokonferenzen</li>
+  <li><strong><a href="https://www.hetzner.com/" target="_blank" rel="noopener">Hetzner</a></strong> – europäisches Infrastruktur-Hosting</li>
+</ul>
+
+<p>Wer uns anruft: Seid bereit, ein Meeting zu betreten, das vollständig auf europäischem Stack läuft.</p>
+
+<h4>Warum das zählt</h4>
+
+<p>Die meisten Startups wählen den Weg des geringsten Widerstands: Google Workspace, Slack, Microsoft Teams. Fertig. Bequem, ja – aber bequem ist nicht dasselbe wie souverän.</p>
+
+<p><strong>Echte Datensouveränität.</strong> Unsere Kommunikation läuft nicht mehr über US-Server. Wir hosten unsere gesamte Collaboration-Suite auf eigener Infrastruktur. Unsere Daten, unsere Regeln, unsere Sicherheit.</p>
+
+<p><strong>Privacy by Design.</strong> Während andere über die DSGVO nur reden, leben wir sie. End-to-End-Verschlüsselung (E2EE) ist bei uns kein optionales Häkchen, sondern der Standard.</p>
+
+<p><strong>Open Source Power.</strong> Mit dem Matrix-Protokoll setzen wir auf die Zukunft der dezentralen Kommunikation. Keine Walled Gardens mehr. Wir sind Owner unserer Tools – keine Mieter.</p>
+
+<p><strong>Deep Integration.</strong> Unser eigener KlarBot ist kein oberflächliches Plugin. Er ist tief in unsere verschlüsselte Infrastruktur eingewebt und hilft uns, Workflows zu automatisieren – ohne dass ein einziges Byte unser System verlässt.</p>
+
+<h4>Souveränität ist eine Richtung, kein Ziel</h4>
+
+<p>Wir wissen: Das ist ein Schritt, keine Ziellinie. Es gibt noch viel mehr zu tun. Aber jede bedeutsame Verschiebung in Richtung digitaler Unabhängigkeit beginnt mit genau dieser Art von Entscheidung: Bequemlichkeit durch Überzeugung ersetzen.</p>
+
+<p>Was noch fehlt: GIFs. Steht ganz oben auf der Prioritätenliste. Wir arbeiten daran.</p>
+
+<p>Ein riesiges Dankeschön an unser team für die enorme Zeit und Recherche, die sie investiert haben, um diesen Stack zum Laufen zu bringen – und sicherzustellen, dass unsere Vision von digitaler Souveränität technisch präzise umgesetzt wird. Starke Arbeit.</p>
+
+<p>Wenn ihr Fragen habt oder so etwas selbst umsetzen möchtet: Meldet euch. Wir teilen gerne, was wir gelernt haben.</p>
+
+<p><em>Tech-Stack-Referenzen: <a href="https://matrix.org/" target="_blank" rel="noopener">Matrix Protocol</a> · <a href="https://element.io/en" target="_blank" rel="noopener">Element</a> · <a href="https://github.com/cinnyapp/cinny" target="_blank" rel="noopener">Cinny</a> · <a href="https://jitsi.org/" target="_blank" rel="noopener">Jitsi</a></em></p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="Warum wir intern Big Tech den Rücken kehren"
+    excerpt="Digitale Souveränität ist kein einmaliges Projekt – sie ist ein Prozess. Wie wir Slack und Google Meet durch einen vollständig selbst gehosteten europäischen Stack ersetzt haben."
+    fullExcerpt="Die meisten Startups wählen den Weg des geringsten Widerstands: Google Workspace, Slack, Microsoft Teams. Bequem? Ja. Souverän? Nein. Bei Klartext AI haben wir uns eine andere Frage gestellt: Warum nicht unsere eigene Collaboration-Suite bauen? Ein paar Abende und Nächte später hatte unser Team ein vollständig selbst gehostetes Setup auf Basis von Matrix, Jitsi und europäischer Infrastruktur aufgebaut. Keine US-Server, E2E-Verschlüsselung als Standard und unser eigener KlarBot tief integriert. So haben wir es gemacht – und warum es zählt."
+    fullContent={fullContent}
+    category="Technical"
+    readTime="4 min"
+    date="2026-03-16"
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

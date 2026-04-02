@@ -5,7 +5,7 @@ import FinalCTA from '../../components/FinalCTA.astro';
 import Footer from '../../components/Footer.astro';
 
 const title = 'Interaktive Tutoren-Lösung für Wissensvermittlung | Klartext AI';
-const description = 'Wie ein ATX-Unternehmen Fachausbilder um 30% entlastet durch KI-gestützte Lernplattform mit Break-even nach 1,5 Jahren.';
+const description = 'Wie ein ATX-Unternehmen mit KI-gestützter interaktiver Tutor-Plattform Fachausbilder entlastet und Onboarding sowie Weiterbildung skalierbar macht.';
 
 const challenge = `
 <p>In großen Organisationen ist Onboarding eine Mammutaufgabe. Hunderte neue Mitarbeiter:innen müssen in Unternehmenskultur, Prozesse, Produkte und Markenidentität eingeführt werden. Gleichzeitig brauchen bestehende Teams kontinuierliche Weiterbildung.</p>
@@ -38,7 +38,6 @@ const solution = `
 
 const results = [
   "30% Entlastung der Fachausbilder für komplexe Themen und Mentoring",
-  "Break-Even nach 1,5 Jahren – nachhaltiger ROI für Trainings-Lösungen",
   "Höhere Lernmotivation durch Gamification und Interaktivität",
   "Messbare Lernerfolge durch kontinuierliches Assessment",
   "Flexible Skalierung für neue Themen ohne Neuaufbau",
@@ -60,7 +59,7 @@ const fullContent = `
   <li><strong>Pädagogik vor Technologie:</strong> Die besten KI-Modelle helfen nichts, wenn die didaktische Konzeption fehlt. Wir haben mit Lernexpert:innen zusammengearbeitet, nicht nur mit Entwickler:innen.</li>
   <li><strong>Engagement ist messbar:</strong> Durch kontinuierliches Tracking haben wir verstanden, was funktioniert und was nicht – und die Plattform entsprechend optimiert.</li>
   <li><strong>Integration ist kritisch:</strong> Eine isolierte Lernplattform wird nicht genutzt. Die nahtlose Anbindung an bestehende Systeme war essentiell.</li>
-  <li><strong>ROI braucht Geduld:</strong> Bei Trainings-Lösungen ist der Break-Even länger – aber der langfristige Wert ist enorm.</li>
+  <li><strong>Langfristiger Wert:</strong> Bei Trainings-Lösungen liegt der echte Nutzen in der nachhaltigen Entlastung und dem skalierbaren Wissenstransfer.</li>
   <li><strong>Personalisierung macht den Unterschied:</strong> Nicht alle lernen gleich schnell oder auf dieselbe Art. Adaptive Lernpfade erhöhen die Effektivität dramatisch.</li>
 </ol>
 
@@ -71,10 +70,11 @@ const fullContent = `
 <p>Wissen ist die wertvollste Ressource jeder Organisation. Mit der richtigen Technologie wird es nicht nur bewahrt, sondern aktiv vermittelt und verankert.</p>
 `;
 
-const metrics = {
-  "Entlastung": "30%",
-  "Break-even": "1,5 Jahre"
-};
+const highlights = [
+  { icon: "graduation" as const, label: "Spielend lernen", description: "Gamification nach wissenschaftlichen Motivations- und Lernprinzipien" },
+  { icon: "route" as const, label: "Adaptive Lernpfade", description: "Personalisierte Vermittlung je nach Lerntempo und -stil" },
+  { icon: "domain" as const, label: "Systemintegration", description: "Nahtlose Anbindung an bestehende Wissensmanagement-Systeme" }
+];
 ---
 
 <BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
@@ -85,7 +85,7 @@ const metrics = {
     challenge={challenge}
     solution={solution}
     results={results}
-    metrics={metrics}
+    highlights={highlights}
     fullContent={fullContent}
     lang="de"
   />

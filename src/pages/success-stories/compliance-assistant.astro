@@ -5,7 +5,7 @@ import FinalCTA from '../../components/FinalCTA.astro';
 import Footer from '../../components/Footer.astro';
 
 const title = 'KI-Assistent für Compliance & Wissensmanagement | Klartext AI';
-const description = 'Wie ein ATX-Unternehmen 80% Zeit spart durch intelligenten Compliance-Assistenten mit Break-even nach 2 Monaten.';
+const description = 'Wie ein ATX-Unternehmen mit AI-gestütztem Compliance-Assistenten 50+ Richtlinien intelligent zugänglich macht und Mitarbeiter:innen schnell verlässliche Antworten mit Quellenangaben erhalten.';
 
 const challenge = `
 <p>In großen Organisationen ist Compliance-Wissen oft in hunderten von Dokumenten verstreut. Ein führendes ATX-Unternehmen mit über 50 Compliance-Richtlinien, internen Handbüchern und Prozessdokumenten stand vor dieser Herausforderung.</p>
@@ -37,8 +37,6 @@ const solution = `
 `;
 
 const results = [
-  "80% Zeit- und Kostenersparnis bei Compliance-Anfragen",
-  "Break-Even nach nur 2 Monaten durch reduzierte Anfragen an Expert:innen",
   "Entlastung der Compliance-Teams für strategische Themen",
   "Konsistente Compliance-Anwendung über alle Abteilungen",
   "Nachvollziehbarkeit für Audits durch vollständige Quellenangaben"
@@ -65,11 +63,11 @@ const fullContent = `
 <p>Diese Lösung ist ein Paradebeispiel für Evaluation-Driven und Domain-Driven Development. Nicht "schnell einen Chatbot bauen", sondern systematisch eine Lösung entwickeln, die echte Geschäftsprobleme löst.</p>
 `;
 
-const metrics = {
-  "Zeitersparnis": "80%",
-  "Break-even": "2 Monate",
-  "Dokumente": "50+"
-};
+const highlights = [
+  { icon: "domain" as const, label: "Knowledge Graph", description: "50+ Richtlinien und Dokumente intelligent verknüpft und kontextuell durchsuchbar" },
+  { icon: "evaluation" as const, label: "Antworten mit Quellenangabe", description: "Jede KI-Antwort referenziert die genaue Stelle im Originaldokument" },
+  { icon: "shield" as const, label: "Semantisches Retrieval", description: "Nicht nur Keyword-Suche – die KI versteht Zusammenhänge und Kontext" }
+];
 ---
 
 <BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
@@ -80,7 +78,7 @@ const metrics = {
     challenge={challenge}
     solution={solution}
     results={results}
-    metrics={metrics}
+    highlights={highlights}
     fullContent={fullContent}
     lang="de"
   />

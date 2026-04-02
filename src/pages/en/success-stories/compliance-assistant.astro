@@ -5,7 +5,7 @@ import FinalCTA from '../../../components/FinalCTA.astro';
 import Footer from '../../../components/Footer.astro';
 
 const title = 'AI Assistant for Compliance & Knowledge Management | Klartext AI';
-const description = 'How an ATX company saves 80% time through intelligent compliance assistant with break-even after 2 months.';
+const description = 'How an ATX company makes 50+ compliance guidelines intelligently accessible with AI – employees get reliable answers with source citations.';
 
 const challenge = `
 <p>In large organizations, compliance knowledge is often scattered across hundreds of documents. A leading ATX company with over 50 compliance guidelines, internal manuals, and process documents faced this challenge.</p>
@@ -37,8 +37,6 @@ const solution = `
 `;
 
 const results = [
-  "80% time and cost savings on compliance inquiries",
-  "Break-even after just 2 months through reduced inquiries to experts",
   "Relief for compliance teams to focus on strategic topics",
   "Consistent compliance application across all departments",
   "Traceability for audits through complete source citations"
@@ -65,11 +63,11 @@ const fullContent = `
 <p>This solution is a prime example of Evaluation-Driven and Domain-Driven Development. Not "quickly build a chatbot," but systematically develop a solution that solves real business problems.</p>
 `;
 
-const metrics = {
-  "Time Savings": "80%",
-  "Break-even": "2 Months",
-  "Documents": "50+"
-};
+const highlights = [
+  { icon: "domain" as const, label: "Knowledge Graph", description: "50+ guidelines and documents intelligently linked and contextually searchable" },
+  { icon: "evaluation" as const, label: "Answers with source citations", description: "Every AI answer references the exact location in the original document" },
+  { icon: "shield" as const, label: "Semantic retrieval", description: "Not just keyword search – the AI understands relationships and context" }
+];
 ---
 
 <BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
@@ -80,7 +78,7 @@ const metrics = {
     challenge={challenge}
     solution={solution}
     results={results}
-    metrics={metrics}
+    highlights={highlights}
     fullContent={fullContent}
     lang="en"
   />

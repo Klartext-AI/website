@@ -5,7 +5,7 @@ import FinalCTA from '../../../components/FinalCTA.astro';
 import Footer from '../../../components/Footer.astro';
 
 const title = 'Automated Quote Generation | Klartext AI';
-const description = 'How a manufacturing company saves 70% time with 1000+ weekly inquiries and break-even after 5 months.';
+const description = 'How a manufacturing company handles 1000+ weekly inquiries faster with AI-powered quote generation – freeing staff for strategic work.';
 
 const challenge = `
 <p>Success sometimes brings unexpected challenges. A manufacturing company received over 1000 standardized inquiries via email weekly – a clear sign of strong market position, but also an operational burden.</p>
@@ -36,8 +36,6 @@ const solution = `
 `;
 
 const results = [
-  "70% time and cost savings in quote creation",
-  "Break-even after 5 months – solid ROI for transformative solution",
   "Faster response times increase customer satisfaction",
   "Higher employee satisfaction through less repetitive work",
   "Consistent quality based on best practices",
@@ -57,7 +55,7 @@ const fullContent = `
 
 <ol>
   <li><strong>Automation doesn't mean dehumanization:</strong> The best results come when AI handles routine and humans steer strategy.</li>
-  <li><strong>Break-even isn't everything:</strong> The true value lies in scalability and the ability to keep pace with growth.</li>
+  <li><strong>Scalability is key:</strong> The true value lies in the ability to keep pace with growth without proportionally more effort.</li>
   <li><strong>Classification is critical:</strong> The quality of automatic quotes depends heavily on correct inquiry classification.</li>
   <li><strong>Feedback loops are gold:</strong> Every finalized quote is an opportunity to improve the system.</li>
 </ol>
@@ -65,11 +63,11 @@ const fullContent = `
 <p>This solution is more than a "tool" – it's a strategic investment in scalability and efficiency. It shows that automation and personal service aren't opposites but can reinforce each other.</p>
 `;
 
-const metrics = {
-  "Time Savings": "70%",
-  "Break-even": "5 Months",
-  "Volume": "1000+ Requests/Week"
-};
+const highlights = [
+  { icon: "rocket" as const, label: "1,000+ requests/week", description: "Fully automatic classification and prioritization of incoming inquiries" },
+  { icon: "target" as const, label: "Success-based", description: "AI learns from patterns of successful past quotes" },
+  { icon: "users" as const, label: "Human at the center", description: "Staff review and finalize – the AI delivers the draft" }
+];
 ---
 
 <BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
@@ -80,7 +78,7 @@ const metrics = {
     challenge={challenge}
     solution={solution}
     results={results}
-    metrics={metrics}
+    highlights={highlights}
     fullContent={fullContent}
     lang="en"
   />

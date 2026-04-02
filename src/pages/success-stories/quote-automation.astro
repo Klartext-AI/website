@@ -5,7 +5,7 @@ import FinalCTA from '../../components/FinalCTA.astro';
 import Footer from '../../components/Footer.astro';
 
 const title = 'Automatisierte Angebotserstellung | Klartext AI';
-const description = 'Wie ein Produktionsunternehmen 70% Zeit spart bei 1000+ wöchentlichen Anfragen mit Break-even nach 5 Monaten.';
+const description = 'Wie ein Produktionsunternehmen bei 1000+ wöchentlichen Anfragen mit KI-gestützter Angebotserstellung schneller reagiert und Mitarbeiter:innen für strategische Arbeit freisetzt.';
 
 const challenge = `
 <p>Erfolg bringt manchmal unerwartete Herausforderungen mit sich. Ein Produktionsunternehmen erhielt wöchentlich über 1000 standardisierte Anfragen per E-Mail – ein klares Zeichen für starke Marktposition, aber auch eine operative Belastung.</p>
@@ -36,8 +36,6 @@ const solution = `
 `;
 
 const results = [
-  "70% Zeit- und Kostenersparnis bei der Angebotserstellung",
-  "Break-Even nach 5 Monaten – solider ROI für transformative Lösung",
   "Schnellere Reaktionszeiten erhöhen Kundenzufriedenheit",
   "Höhere Zufriedenheit der Mitarbeitenden durch weniger repetitive Arbeit",
   "Konsistente Qualität basierend auf Best Practices",
@@ -57,7 +55,7 @@ const fullContent = `
 
 <ol>
   <li><strong>Automatisierung bedeutet nicht Entmenschlichung:</strong> Die besten Ergebnisse kommen, wenn KI die Routine übernimmt und Menschen die Strategie steuern.</li>
-  <li><strong>Break-Even ist nicht alles:</strong> Der wahre Wert liegt in der Skalierbarkeit und der Fähigkeit, mit Wachstum Schritt zu halten.</li>
+  <li><strong>Skalierbarkeit ist entscheidend:</strong> Der wahre Wert liegt in der Fähigkeit, mit Wachstum Schritt zu halten.</li>
   <li><strong>Klassifikation ist kritisch:</strong> Die Qualität der automatischen Angebote hängt stark von der korrekten Klassifikation der Anfragen ab.</li>
   <li><strong>Feedback-Loops sind Gold:</strong> Jedes finalisierte Angebot ist eine Chance, das System zu verbessern.</li>
 </ol>
@@ -65,11 +63,11 @@ const fullContent = `
 <p>Diese Lösung ist mehr als ein "Tool" – sie ist eine strategische Investition in Skalierbarkeit und Effizienz. Sie zeigt, dass Automatisierung und persönlicher Service keine Gegensätze sind, sondern sich gegenseitig verstärken können.</p>
 `;
 
-const metrics = {
-  "Zeitersparnis": "70%",
-  "Break-even": "5 Monate",
-  "Volumen": "1000+ Anfragen/Woche"
-};
+const highlights = [
+  { icon: "rocket" as const, label: "1.000+ Anfragen/Woche", description: "Vollautomatische Klassifizierung und Priorisierung eingehender Anfragen" },
+  { icon: "target" as const, label: "Erfolgsbasiert", description: "Die KI lernt aus Mustern erfolgreicher Angebote der Vergangenheit" },
+  { icon: "users" as const, label: "Mensch im Mittelpunkt", description: "Mitarbeiter prüfen und finalisieren – die KI liefert den Entwurf" }
+];
 ---
 
 <BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
@@ -80,7 +78,7 @@ const metrics = {
     challenge={challenge}
     solution={solution}
     results={results}
-    metrics={metrics}
+    highlights={highlights}
     fullContent={fullContent}
     lang="de"
   />

@@ -27,76 +27,61 @@ const content = {
         id: "data-extraction-rfu",
         title: "KPI-Extraktion aus Jahresberichten",
         client: "Bankendienstleister",
-        savings: "80% Zeit- & Kostenersparnis",
-        breakeven: "1,5 Monate",
+        facts: [
+          { icon: "evaluation", text: "100-seitige Reports in Minuten ausgewertet" },
+          { icon: "lock", text: "Direkter Quellenlink für jeden extrahierten KPI" }
+        ],
         category: "Data Extraction",
         excerpt: "Automatisierte Extraktion quantitativer und qualitativer Informationen aus 500+ seitigen Dokumenten.",
-        fullExcerpt: "Ein führender Bankendienstleister stand vor der Herausforderung, dass Analysten zahlreiche Informationen aus umfangreichen Dokumenten extrahieren mussten. Unsere AI-Lösung übernimmt die Extraktion und liefert die Werte direkt in die eigenen Systeme. Da es sich um einen sensiblen Anwendungsbereich handelt, können Menschen alle Extraktionen zeiteffizient verifizieren, indem sie direkte Referenz-Locations und Begründungen erhalten.",
-        metrics: {
-          savings: "80%",
-          breakeven: "1,5 Monate",
-          automation: "80%"
-        }
+        fullExcerpt: "Ein führender Bankendienstleister stand vor der Herausforderung, dass Analysten zahlreiche Informationen aus umfangreichen Dokumenten extrahieren mussten. Unsere AI-Lösung übernimmt die Extraktion und liefert die Werte direkt in die eigenen Systeme. Da es sich um einen sensiblen Anwendungsbereich handelt, können Menschen alle Extraktionen zeiteffizient verifizieren, indem sie direkte Referenz-Locations und Begründungen erhalten."
       },
       {
         id: "pat-accessibility",
         title: "PDF Accessibility Transformation",
         client: "Verwaltungsorganisation",
-        savings: "80% Zeit- & Kostenersparnis",
-        breakeven: "2 Monate",
+        facts: [
+          { icon: "shield", text: "Vollautomatisch PDF/UA-konform" },
+          { icon: "users", text: "Human-in-the-Loop für Sonderfälle" }
+        ],
         category: "Document Accessibility",
         excerpt: "Vollautomatische Umwandlung bestehender PDFs in barrierefreie PDF/UA-Formate – modular mit Human-in-the-Loop und geprüfter Konformität.",
-        fullExcerpt: "PAT transformiert große PDF-Bestände vollautomatisch in PDF/UA. Eine modulare Pipeline kombiniert LLM + NLP + Regelwerk für semantische Präzision. Human-in-the-Loop deckt Sonderfälle & sensible Inhalte ab, und eine vollständige PDF/UA-Validierung liefert Qualitätsreports und nachvollziehbare Ergebnisse.",
-        metrics: {
-          savings: "80%",
-          breakeven: "2 Monate",
-          compliance: "PDF/UA-konform"
-        }
+        fullExcerpt: "PAT transformiert große PDF-Bestände vollautomatisch in PDF/UA. Eine modulare Pipeline kombiniert LLM + NLP + Regelwerk für semantische Präzision. Human-in-the-Loop deckt Sonderfälle & sensible Inhalte ab, und eine vollständige PDF/UA-Validierung liefert Qualitätsreports und nachvollziehbare Ergebnisse."
       },
       {
         id: "compliance-assistant",
         title: "AI-Assistent für Compliance & Wissensmanagement",
         client: "ATX-Unternehmen",
-        savings: "80% Zeit- & Kostenersparnis",
-        breakeven: "2 Monate",
+        facts: [
+          { icon: "domain", text: "Knowledge Graph über 50+ Dokumente" },
+          { icon: "evaluation", text: "Antworten mit direktem Quellenlink" }
+        ],
         category: "Knowledge Management",
         excerpt: "Automatisierte Wissensausgabe zu Fragen von Richtlinien und Compliance-Dokumenten.",
-        fullExcerpt: "Ein großes Unternehmen hatte das Problem, dass Mitarbeiter keinen Überblick über Richtlinien bei spezifischen Prozessen und Produkten hatten. Interne Ansprechpartner hatten nicht die Ressourcen, alle Fragen mit nötiger Sensibilität zu beantworten. Unsere Lösung integriert 50+ Richtlinien und Dokumente mit intelligenter Retrieval-Methodik durch Integration von Unternehmens-Metadaten (Knowledge Graph). Mitarbeiter bekommen komplexe Fragestellungen mit Referenz aus den Dokumenten beantwortet.",
-        metrics: {
-          savings: "80%",
-          breakeven: "2 Monate",
-          documents: "50+"
-        }
+        fullExcerpt: "Ein großes Unternehmen hatte das Problem, dass Mitarbeiter keinen Überblick über Richtlinien bei spezifischen Prozessen und Produkten hatten. Interne Ansprechpartner hatten nicht die Ressourcen, alle Fragen mit nötiger Sensibilität zu beantworten. Unsere Lösung integriert 50+ Richtlinien und Dokumente mit intelligenter Retrieval-Methodik durch Integration von Unternehmens-Metadaten (Knowledge Graph). Mitarbeiter bekommen komplexe Fragestellungen mit Referenz aus den Dokumenten beantwortet."
       },
       {
         id: "quote-automation",
         title: "Automatisierte Angebotserstellung",
         client: "Produktionsunternehmen",
-        savings: "70% Zeit- & Kostenersparnis",
-        breakeven: "5 Monate",
+        facts: [
+          { icon: "rocket", text: "1.000+ Anfragen/Woche automatisch klassifiziert" },
+          { icon: "target", text: "Lernt aus erfolgreichen Angeboten" }
+        ],
         category: "Process Automation",
         excerpt: "Automatische Klassifizierung von Anfragen und Erstellung erfolgsversprechender Angebote.",
-        fullExcerpt: "Ein Produktionsunternehmen erhielt 1000+ standardisierte Anfragen per Mail wöchentlich. Das Unternehmen verlor viel Zeit bei der Angebotslegung, obwohl die Angebote sehr ähnlich waren. Unsere AI klassifiziert automatisch Anfragen und erstellt auf Basis erfolgreicher vergangener Angebote einen erfolgsversprechenden und lohnenden Entwurf. Mitarbeiter sparen Zeit und können den Entwurf direkt finalisieren.",
-        metrics: {
-          savings: "70%",
-          breakeven: "5 Monate",
-          volume: "1000+ Anfragen/Woche"
-        }
+        fullExcerpt: "Ein Produktionsunternehmen erhielt 1000+ standardisierte Anfragen per Mail wöchentlich. Das Unternehmen verlor viel Zeit bei der Angebotslegung, obwohl die Angebote sehr ähnlich waren. Unsere AI klassifiziert automatisch Anfragen und erstellt auf Basis erfolgreicher vergangener Angebote einen erfolgsversprechenden und lohnenden Entwurf. Mitarbeiter sparen Zeit und können den Entwurf direkt finalisieren."
       },
       {
         id: "training-platform",
         title: "Interaktive Tutoren-Lösung für Wissensvermittlung",
         client: "ATX-Unternehmen",
-        savings: "30% Entlastung",
-        breakeven: "1,5 Jahre",
+        facts: [
+          { icon: "graduation", text: "Gamification nach wissenschaftlichen Lernprinzipien" },
+          { icon: "route", text: "Adaptive Lernpfade & Systemintegration" }
+        ],
         category: "Knowledge Transfer",
         excerpt: "AI-gestützte, interaktive Tutor-Plattform für interne Trainings und Onboarding.",
-        fullExcerpt: "Ein großes Unternehmen benötigte effiziente, nachhaltige Wissensvermittlung für Onboarding-Prozesse. Unsere AI-gestützte, interaktive Tutor-Plattform ermöglicht spielerische Vermittlung von Unternehmens-, Marken- und Prozesswissen. Fachausbilder werden um 30% entlastet durch nahtlose Anbindung an bestehende Wissensmanagement-Systeme.",
-        metrics: {
-          savings: "30%",
-          breakeven: "1,5 Jahre",
-          relief: "30% Entlastung"
-        }
+        fullExcerpt: "Ein großes Unternehmen benötigte effiziente, nachhaltige Wissensvermittlung für Onboarding-Prozesse. Unsere AI-gestützte, interaktive Tutor-Plattform ermöglicht spielerische Vermittlung von Unternehmens-, Marken- und Prozesswissen. Fachausbilder werden um 30% entlastet durch nahtlose Anbindung an bestehende Wissensmanagement-Systeme."
       }
     ]
   },
@@ -109,76 +94,61 @@ const content = {
         id: "data-extraction-rfu",
         title: "KPI Extraction from Annual Reports",
         client: "Banking Services Provider",
-        savings: "80% Time & Cost Savings",
-        breakeven: "1.5 Months",
+        facts: [
+          { icon: "evaluation", text: "100+ page reports analyzed in minutes" },
+          { icon: "lock", text: "Direct source link for every extracted KPI" }
+        ],
         category: "Data Extraction",
         excerpt: "Automated extraction of quantitative and qualitative information from 500+ page documents.",
-        fullExcerpt: "A leading banking services provider faced the challenge of analysts having to extract numerous pieces of information from extensive documents. Our AI solution takes over the extraction and delivers values directly into their own systems. Since this is a sensitive application area, humans can efficiently verify all extractions by receiving direct reference locations and justifications.",
-        metrics: {
-          savings: "80%",
-          breakeven: "1.5 Months",
-          automation: "80%"
-        }
+        fullExcerpt: "A leading banking services provider faced the challenge of analysts having to extract numerous pieces of information from extensive documents. Our AI solution takes over the extraction and delivers values directly into their own systems. Since this is a sensitive application area, humans can efficiently verify all extractions by receiving direct reference locations and justifications."
       },
       {
         id: "pat-accessibility",
         title: "PDF Accessibility Transformation",
         client: "Public Sector Organization",
-        savings: "80% Time & Cost Savings",
-        breakeven: "2 Months",
+        facts: [
+          { icon: "shield", text: "Fully automated PDF/UA compliance" },
+          { icon: "users", text: "Human-in-the-loop for edge cases" }
+        ],
         category: "Document Accessibility",
         excerpt: "Fully automated transformation of existing PDFs into accessible PDF/UA formats – modular, scalable, with human-in-the-loop and verified compliance.",
-        fullExcerpt: "PAT transforms large PDF repositories into PDF/UA fully automatically. A modular pipeline combines LLMs, NLP, and rule-based logic for semantic precision. Human-in-the-loop workflows cover edge cases and sensitive content, while full PDF/UA validation provides transparent quality reports and traceable results.",
-        metrics: {
-          savings: "80%",
-          breakeven: "2 Months",
-          compliance: "PDF/UA compliant"
-        }
+        fullExcerpt: "PAT transforms large PDF repositories into PDF/UA fully automatically. A modular pipeline combines LLMs, NLP, and rule-based logic for semantic precision. Human-in-the-loop workflows cover edge cases and sensitive content, while full PDF/UA validation provides transparent quality reports and traceable results."
       },
       {
         id: "compliance-assistant",
         title: "AI Assistant for Compliance & Knowledge Management",
         client: "ATX Company",
-        savings: "80% Time & Cost Savings",
-        breakeven: "2 Months",
+        facts: [
+          { icon: "domain", text: "Knowledge Graph across 50+ documents" },
+          { icon: "evaluation", text: "Answers with direct source reference" }
+        ],
         category: "Knowledge Management",
         excerpt: "Automated knowledge delivery for questions about guidelines and compliance documents.",
-        fullExcerpt: "A large company had the problem that employees had no overview of guidelines for specific processes and products. Internal contacts didn't have the resources to answer all questions with the necessary sensitivity. Our solution integrates 50+ guidelines and documents with intelligent retrieval methodology through integration of company metadata (Knowledge Graph). Employees get complex questions answered with references from the documents.",
-        metrics: {
-          savings: "80%",
-          breakeven: "2 Months",
-          documents: "50+"
-        }
+        fullExcerpt: "A large company had the problem that employees had no overview of guidelines for specific processes and products. Internal contacts didn't have the resources to answer all questions with the necessary sensitivity. Our solution integrates 50+ guidelines and documents with intelligent retrieval methodology through integration of company metadata (Knowledge Graph). Employees get complex questions answered with references from the documents."
       },
       {
         id: "quote-automation",
         title: "Automated Quote Generation",
         client: "Manufacturing Company",
-        savings: "70% Time & Cost Savings",
-        breakeven: "5 Months",
+        facts: [
+          { icon: "rocket", text: "1,000+ requests/week auto-classified" },
+          { icon: "target", text: "Learns from successful past quotes" }
+        ],
         category: "Process Automation",
         excerpt: "Automatic classification of requests and creation of promising quotes.",
-        fullExcerpt: "A manufacturing company received 1000+ standardized requests via email weekly. The company was losing time creating quotes even though the quotes were very similar. Our AI automatically classifies requests and creates promising and worthwhile drafts based on successful past quotes. Employees save time and can directly finalize the draft.",
-        metrics: {
-          savings: "70%",
-          breakeven: "5 Months",
-          volume: "1000+ Requests/Week"
-        }
+        fullExcerpt: "A manufacturing company received 1000+ standardized requests via email weekly. The company was losing time creating quotes even though the quotes were very similar. Our AI automatically classifies requests and creates promising and worthwhile drafts based on successful past quotes. Employees save time and can directly finalize the draft."
       },
       {
         id: "training-platform",
         title: "Interactive Tutoring Solution for Knowledge Transfer",
         client: "ATX Company",
-        savings: "30% Relief",
-        breakeven: "1.5 Years",
+        facts: [
+          { icon: "graduation", text: "Gamification based on learning science" },
+          { icon: "route", text: "Adaptive paths & system integration" }
+        ],
         category: "Knowledge Transfer",
         excerpt: "AI-powered, interactive tutor platform for internal training and onboarding.",
-        fullExcerpt: "A large company needed efficient, sustainable knowledge transfer for onboarding processes. Our AI-powered, interactive tutor platform enables playful transfer of company, brand, and process knowledge. Professional trainers are relieved by 30% through seamless connection to existing knowledge management systems.",
-        metrics: {
-          savings: "30%",
-          breakeven: "1.5 Years",
-          relief: "30% Relief"
-        }
+        fullExcerpt: "A large company needed efficient, sustainable knowledge transfer for onboarding processes. Our AI-powered, interactive tutor platform enables playful transfer of company, brand, and process knowledge. Professional trainers are relieved by 30% through seamless connection to existing knowledge management systems."
       }
     ]
   }
@@ -204,20 +174,18 @@ const text = content[lang];
           <h2 class="story-title">{story.title}</h2>
           <p class="story-client">{story.client}</p>
 
-          <div class="story-metrics">
-            <div class="metric">
-              <span class="metric-icon" aria-hidden="true">
-                <Icon name="evaluation" size={16} />
-              </span>
-              <span class="metric-value">{story.savings}</span>
+          {story.facts && story.facts.length > 0 && (
+            <div class="story-facts">
+              {story.facts.map(fact => (
+                <div class="story-fact">
+                  <span class="fact-icon" aria-hidden="true">
+                    <Icon name={fact.icon as any} size={14} />
+                  </span>
+                  <span class="fact-text">{fact.text}</span>
+                </div>
+              ))}
             </div>
-            <div class="metric">
-              <span class="metric-icon" aria-hidden="true">
-                <Icon name="rocket" size={16} />
-              </span>
-              <span class="metric-value">Break-even: {story.breakeven}</span>
-            </div>
-          </div>
+          )}
 
           <p class="story-excerpt">{story.excerpt}</p>
 
@@ -320,28 +288,31 @@ const text = content[lang];
     margin-bottom: var(--space-md);
   }
 
-  .story-metrics {
+  .story-facts {
     display: flex;
-    gap: var(--space-md);
+    flex-direction: column;
+    gap: 0.4rem;
     margin-bottom: var(--space-md);
     padding: var(--space-sm) 0;
     border-top: 1px solid rgba(36, 121, 190, 0.1);
     border-bottom: 1px solid rgba(36, 121, 190, 0.1);
   }
 
-  .metric {
+  .story-fact {
     display: flex;
     align-items: center;
-    gap: var(--space-xs);
-    font-size: 0.85rem;
+    gap: 0.5rem;
+    font-size: 0.82rem;
   }
 
-  .metric-icon {
-    font-size: 1.2rem;
+  .fact-icon {
     color: var(--color-blue);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
   }
 
-  .metric-value {
+  .fact-text {
     color: var(--color-text-dark);
     font-weight: 500;
   }

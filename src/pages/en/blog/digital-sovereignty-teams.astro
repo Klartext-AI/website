@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../../components/BlogPostDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const title = 'Why We\'re Breaking Up with Big Tech | Klartext AI Blog';
+const description = 'Digital sovereignty is not a one-off – it is a process. How Klartext AI replaced Slack and Google Meet with a fully self-hosted, European-stack collaboration suite.';
+
+const fullContent = `
+
+<h4>What We Built</h4>
+
+<p>Our entire collaboration suite is now 100% self-hosted on European infrastructure. No US servers. No third-party data processing. Our data, our rules, our security.</p>
+
+<p>The stack:</p>
+
+<ul>
+  <li><strong><a href="https://matrix.org/" target="_blank" rel="noopener">Matrix Protocol</a></strong> – the open standard for secure, decentralised communication</li>
+  <li><strong><a href="https://element.io/en" target="_blank" rel="noopener">Element</a> / <a href="https://github.com/cinnyapp/cinny" target="_blank" rel="noopener">Cinny</a></strong> – Matrix clients for chat and messaging</li>
+  <li><strong><a href="https://jitsi.org/" target="_blank" rel="noopener">Jitsi</a></strong> – self-hosted video conferencing</li>
+  <li><strong><a href="https://www.hetzner.com/" target="_blank" rel="noopener">Hetzner</a></strong> – European infrastructure hosting</li>
+</ul>
+
+<p>When you call us, be prepared to enter a meeting running entirely on a European stack.</p>
+
+<h4>Why This Matters</h4>
+
+<p>Most startups take the path of least resistance: Google Workspace, Slack, Microsoft Teams. Done. Comfortable, yes. But comfortable is not the same as sovereign.</p>
+
+<p><strong>Real data ownership.</strong> Our communication no longer routes through US servers. We host our entire collaboration suite on our own infrastructure. Our data, our rules, our security.</p>
+
+<p><strong>Privacy by Design.</strong> While others talk about GDPR, we live it. End-to-end encryption (E2EE) is not an optional checkbox here – it is the default.</p>
+
+<p><strong>Open Source Power.</strong> With the Matrix protocol, we are investing in the future of decentralised communication. No more walled gardens. We own our tools – we are not just renting them.</p>
+
+<p><strong>Deep Integration.</strong> Our own KlarBot is not a surface-level plugin. It is woven deeply into our encrypted infrastructure and helps us automate workflows without a single byte leaving our systems.</p>
+
+<h4>Sovereignty Is a Direction, Not a Destination</h4>
+
+<p>We know this is one step, not the finish line. There is still much more to do. But every meaningful shift towards digital independence starts with exactly this kind of decision: replacing convenience with conviction.</p>
+
+<p>One thing still missing: GIFs. High priority. We are working on it.</p>
+
+<p>A huge thank you to our team for the enormous amount of time and research they invested to make this stack work – and to ensure our vision of digital sovereignty is implemented with technical precision. Outstanding work.</p>
+
+<p>If you have questions or want to build something similar yourself, get in touch. We are happy to share what we have learned.</p>
+
+<p><em>Tech stack references: <a href="https://matrix.org/" target="_blank" rel="noopener">Matrix Protocol</a> · <a href="https://element.io/en" target="_blank" rel="noopener">Element</a> · <a href="https://github.com/cinnyapp/cinny" target="_blank" rel="noopener">Cinny</a> · <a href="https://jitsi.org/" target="_blank" rel="noopener">Jitsi</a></em></p>
+`;
+
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <BlogPostDetail
+    title="Why We're Breaking Up with Big Tech"
+    excerpt="Digital sovereignty is not a one-off – it is a process. How we replaced Slack and Google Meet with a fully self-hosted European stack."
+    fullExcerpt="Most startups take the path of least resistance: Google Workspace, Slack, Microsoft Teams. Convenient? Yes. Sovereign? No. At Klartext AI, we asked ourselves a different question – why not build our own collaboration suite? A few evenings and nights later, our team had assembled a fully self-hosted setup running on Matrix, Jitsi, and European infrastructure. No US servers, end-to-end encryption by default, and our own KlarBot integrated at the core. Here is how we did it – and why it matters."
+    fullContent={fullContent}
+    category="Technical"
+    readTime="4 min"
+    date="2026-03-16"
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

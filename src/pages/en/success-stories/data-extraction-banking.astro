@@ -6,7 +6,7 @@ import Icon from '../../../components/Icon.astro';
 
 const title = 'KPI Extraction from Annual Reports | Klartext AI';
 const description =
-  'How a banking service provider saves 80% time and costs through automated data extraction with break-even after just 1.5 months.';
+  'How a banking service provider reduces KPI extraction from 100+ page documents from 4 days to 15 minutes – with human-in-the-loop for maximum precision.';
 
 const BASE = import.meta.env.BASE_URL;
 ---
@@ -22,15 +22,62 @@ const BASE = import.meta.env.BASE_URL;
           <h1 class="headline">KPI Extraction from Reports - structured and efficient</h1>
         </header>
 
-        <!-- Metrics highlight -->
-        <div class="metrics-highlight">
-          <div class="metric-item">
-            <span class="metric-label">Time Savings</span>
-            <span class="metric-value-large">80%</span>
+        <!-- Highlights -->
+        <div class="story-highlights-custom">
+          <div class="highlight-item-custom">
+            <div class="highlight-icon-custom">
+              <Icon name="evaluation" size={22} />
+            </div>
+            <div class="highlight-text-custom">
+              <span class="highlight-label-custom">100+ page reports in minutes</span>
+              <span class="highlight-desc-custom">Extracts what analysts used to spend days on – now done in under 15 minutes</span>
+            </div>
           </div>
-          <div class="metric-item">
-            <span class="metric-label">Break-even</span>
-            <span class="metric-value-large">1.5 Months</span>
+          <div class="highlight-item-custom">
+            <div class="highlight-icon-custom">
+              <Icon name="lock" size={22} />
+            </div>
+            <div class="highlight-text-custom">
+              <span class="highlight-label-custom">Direct source link</span>
+              <span class="highlight-desc-custom">Every extracted KPI points to the exact location in the document – full audit trail</span>
+            </div>
+          </div>
+          <div class="highlight-item-custom">
+            <div class="highlight-icon-custom">
+              <Icon name="users" size={22} />
+            </div>
+            <div class="highlight-text-custom">
+              <span class="highlight-label-custom">Human-in-the-loop</span>
+              <span class="highlight-desc-custom">Human confirms, AI proposes – the analyst stays in control</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why not just ChatGPT? -->
+        <div class="why-section">
+          <p class="why-intro">Not a generic chatbot – a tool built for exactly this task.</p>
+          <div class="why-points">
+            <div class="why-point">
+              <span class="why-num">01</span>
+              <div>
+                <strong>No context limit, no copy-paste.</strong>
+                The tool processes hundreds of pages in a single pass, caching-optimized – all reports at once, no manual preparation.
+              </div>
+            </div>
+            <div class="why-point">
+              <span class="why-num">02</span>
+              <div>
+                <strong>Structured extraction with conflict resolution.</strong>
+                KPIs land directly in a defined schema. Conflicting values across documents are automatically flagged for review.
+              </div>
+            </div>
+            <div class="why-point">
+              <span class="why-num">03</span>
+              <div>
+                <strong>Human-in-the-loop instead of a black box.</strong>
+                Every value is verifiable with a direct source link. Analysts confirm – the AI proposes. No post-processing in Excel.
+              </div>
+            </div>
           </div>
         </div>
 
@@ -241,13 +288,13 @@ const BASE = import.meta.env.BASE_URL;
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p>80% time and cost savings – what used to take hours is now done in minutes</p>
+                  <p>Instead of 4 days of manual extraction – now done in 15 minutes, optimized for human-in-the-loop</p>
                 </div>
                 <div class="result-item-check">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p>Break-even after only 1.5 months – fastest ROI in our portfolio</p>
+                  <p>Full traceability: every extraction with direct reference to the location in the document</p>
                 </div>
                 <div class="result-item-check">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -738,6 +785,102 @@ const BASE = import.meta.env.BASE_URL;
     border-top: 1px solid rgba(36, 121, 190, 0.1);
   }
 
+  .story-highlights-custom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    border-radius: 1rem;
+  }
+
+  .highlight-item-custom {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .highlight-icon-custom {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(36, 121, 190, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-blue);
+  }
+
+  .highlight-text-custom {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .highlight-label-custom {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    line-height: 1.3;
+  }
+
+  .highlight-desc-custom {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .why-section {
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-xl) var(--space-xl);
+    border-left: 3px solid var(--color-blue);
+    background: rgba(36, 121, 190, 0.03);
+    border-radius: 0 0.75rem 0.75rem 0;
+  }
+
+  .why-intro {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--color-blue);
+    margin-bottom: var(--space-lg);
+    letter-spacing: -0.01em;
+  }
+
+  .why-points {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .why-point {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-text-body);
+  }
+
+  .why-num {
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-blue);
+    letter-spacing: 0.08em;
+    margin-top: 0.3rem;
+    opacity: 0.6;
+  }
+
+  .why-point strong {
+    color: var(--color-text-dark);
+    font-weight: 600;
+  }
+
   .metrics-highlight {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -771,6 +914,13 @@ const BASE = import.meta.env.BASE_URL;
     font-weight: 300;
     color: var(--color-blue);
     line-height: 1.2;
+  }
+
+  .metric-sublabel {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    margin-top: 0.25rem;
   }
 
   .story-block {
@@ -1087,6 +1237,12 @@ const BASE = import.meta.env.BASE_URL;
     /* Story section mobile */
     .story-section {
       gap: var(--space-lg);
+    }
+
+    .story-highlights-custom {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      padding: var(--space-lg);
     }
 
     .metrics-highlight {

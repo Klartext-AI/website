@@ -64,10 +64,10 @@ const fullContent = `
 </ul>
 `;
 
-const metrics = {
-  'Time savings': '80%',
-  'Break-even': '2 months'
-};
+const highlights = [
+  { icon: "shield" as const, label: "PDF/UA compliant", description: "Fully automated transformation to current accessibility standards" },
+  { icon: "users" as const, label: "Human-in-the-loop", description: "Edge cases and sensitive content remain under human control" }
+];
 ---
 
 <BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
@@ -78,7 +78,7 @@ const metrics = {
     challenge={challenge}
     solution={solution}
     results={results}
-    metrics={metrics}
+    highlights={highlights}
     fullContent={fullContent}
     lang="en"
   />

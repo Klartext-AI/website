@@ -29,24 +29,21 @@ const content = {
         id: "data-extraction-rfu",
         title: "KPI Datenextraktion",
         industry: "Banking Services",
-        metric: "80% Zeitersparnis",
-        breakeven: "Break-even: 1,5 Monate",
+        metric: "100-seitige Reports: Minuten statt Tage",
         description: "Automatisierte Extraktion von KPIs aus Finanzdokumenten mit domänenspezifischer AI."
       },
       {
         id: "pat-accessibility",
         title: "PDF Accessibility Transformation",
         industry: "Document Accessibility",
-        metric: "80% Zeitersparnis",
-        breakeven: "Break-even: 2 Monate",
+        metric: undefined,
         description: "Vollautomatische Umwandlung bestehender PDFs in barrierefreie PDF/UA-Formate."
       },
       {
         id: "quote-automation",
         title: "Automatisierte Angebotserstellung",
         industry: "Process Automation",
-        metric: "70% Zeitersparnis",
-        breakeven: "Break-even: 5 Monate",
+        metric: undefined,
         description: "Automatische Klassifizierung von Anfragen und Erstellung erfolgsversprechender Angebote."
       }
     ]
@@ -66,24 +63,21 @@ const content = {
         id: "data-extraction-rfu",
         title: "KPI Data Extraction",
         industry: "Banking Services",
-        metric: "80% time savings",
-        breakeven: "Break-even: 1.5 months",
+        metric: "100+ page reports: minutes, not days",
         description: "Automated extraction and processing of financial documents using domain-specific AI."
       },
       {
         id: "pat-accessibility",
         title: "PDF Accessibility Transformation",
         industry: "Document Accessibility",
-        metric: "80% time savings",
-        breakeven: "Break-even: 2 months",
+        metric: undefined,
         description: "Fully automated transformation of existing PDFs into accessible PDF/UA formats."
       },
       {
         id: "quote-automation",
         title: "Automated Quote Generation",
         industry: "Process Automation",
-        metric: "70% time savings",
-        breakeven: "Break-even: 5 months",
+        metric: undefined,
         description: "Automatic classification of requests and creation of promising quotes."
       }
     ]
@@ -115,10 +109,11 @@ const text = content[lang];
               <article class="story-card glass-card" style={`animation-delay: ${index * 0.15}s`}>
                 <h3 class="story-title">{story.title}</h3>
 
-                <div class="story-metrics">
-                  <div class="metric-badge metric-primary">{story.metric}</div>
-                  <div class="metric-badge metric-secondary">{story.breakeven}</div>
-                </div>
+                {story.metric && (
+                  <div class="story-metrics">
+                    <div class="metric-badge metric-primary">{story.metric}</div>
+                  </div>
+                )}
 
                 <p class="story-description">{story.description}</p>
 
@@ -135,10 +130,11 @@ const text = content[lang];
               <article class="story-card glass-card" style={`animation-delay: ${index * 0.15}s`}>
                 <h3 class="story-title">{story.title}</h3>
 
-                <div class="story-metrics">
-                  <div class="metric-badge metric-primary">{story.metric}</div>
-                  <div class="metric-badge metric-secondary">{story.breakeven}</div>
-                </div>
+                {story.metric && (
+                  <div class="story-metrics">
+                    <div class="metric-badge metric-primary">{story.metric}</div>
+                  </div>
+                )}
 
                 <p class="story-description">{story.description}</p>
               </article>

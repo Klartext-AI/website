@@ -66,10 +66,10 @@ const fullContent = `
 
 `;
 
-const metrics = {
-  'Zeitersparnis': '80%',
-  'Break-even': '2 Monate'
-};
+const highlights = [
+  { icon: "shield" as const, label: "PDF/UA-konform", description: "Vollautomatische Transformation nach aktuellem Barrierefreiheitsstandard" },
+  { icon: "users" as const, label: "Human-in-the-Loop", description: "Sonderfälle und sensible Inhalte bleiben unter menschlicher Kontrolle" }
+];
 ---
 
 <BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
@@ -80,7 +80,7 @@ const metrics = {
     challenge={challenge}
     solution={solution}
     results={results}
-    metrics={metrics}
+    highlights={highlights}
     fullContent={fullContent}
     lang="de"
   />
