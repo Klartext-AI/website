@@ -1,0 +1,459 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Klartext AI - Links';
+const description = 'All Klartext AI channels at a glance.';
+const BASE = import.meta.env.BASE_URL;
+
+const primaryLinks = [
+  {
+    href: 'https://klartext-ai.com/',
+    label: 'Website',
+    sub: 'klartext-ai.com',
+    icon: 'globe'
+  },
+  {
+    href: 'https://www.linkedin.com/company/klartext-ai',
+    label: 'LinkedIn',
+    sub: '@klartext-ai',
+    icon: 'linkedin'
+  },
+  {
+    href: 'https://www.instagram.com/klartextai/',
+    label: 'Instagram',
+    sub: '@klartextai',
+    icon: 'instagram'
+  }
+];
+
+const moreLinks = [
+  {
+    href: 'https://www.youtube.com/@KlartextAI',
+    label: 'YouTube',
+    sub: '@KlartextAI',
+    icon: 'youtube'
+  },
+  {
+    href: 'https://www.facebook.com/profile.php?id=61589510556370',
+    label: 'Facebook',
+    sub: 'Klartext AI',
+    icon: 'facebook'
+  },
+  {
+    href: 'https://open.spotify.com/user/31vz5zzehw3xn3dkxyfjukbzd6jy?si=4e306de0c3364bc4',
+    label: 'Spotify',
+    sub: 'Klartext AI',
+    icon: 'spotify'
+  },
+  {
+    href: 'https://x.com/Klartextai',
+    label: 'X',
+    sub: '@Klartextai',
+    icon: 'x'
+  },
+  {
+    href: 'https://www.tiktok.com/@klar.text.ai?lang=en-GB',
+    label: 'TikTok',
+    sub: '@klar.text.ai',
+    icon: 'tiktok'
+  },
+  {
+    href: 'https://www.reddit.com/user/Klartext_ai/',
+    label: 'Reddit',
+    sub: 'u/Klartext_ai',
+    icon: 'reddit'
+  }
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+  <main class="linktree-page">
+    <div class="linktree-container">
+      <header class="linktree-header fade-in">
+        <p class="tagline">Great to have you here!</p>
+        <p class="tagline">Follow us on your favorite channel.</p>
+      </header>
+
+      <section class="links-section">
+        <ul class="link-list">
+          {primaryLinks.map((link, i) => (
+            <li class="link-item fade-in" style={`animation-delay: ${0.1 + i * 0.08}s`}>
+              <a href={link.href} class="link-card glass-card" target="_blank" rel="noopener noreferrer">
+                <span class="link-icon" aria-hidden="true">
+                  {link.icon === 'globe' && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                  )}
+                  {link.icon === 'linkedin' && (
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.4v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+                    </svg>
+                  )}
+                  {link.icon === 'instagram' && (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                  )}
+                </span>
+                <span class="link-text">
+                  <span class="link-label">{link.label}</span>
+                  <span class="link-sub">{link.sub}</span>
+                </span>
+                <svg class="link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <details class="more-channels fade-in">
+          <summary class="more-summary glass-card">
+            <span class="more-label">More channels</span>
+            <svg class="more-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </summary>
+
+          <ul class="link-list more-list">
+            {moreLinks.map((link) => (
+              <li class="link-item">
+                <a href={link.href} class="link-card glass-card" target="_blank" rel="noopener noreferrer">
+                  <span class="link-icon" aria-hidden="true">
+                    {link.icon === 'youtube' && (
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6z"/>
+                      </svg>
+                    )}
+                    {link.icon === 'facebook' && (
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/>
+                      </svg>
+                    )}
+                    {link.icon === 'spotify' && (
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm5.5 17.3a.75.75 0 0 1-1.03.25c-2.82-1.72-6.38-2.1-10.57-1.15a.75.75 0 1 1-.33-1.46c4.59-1.04 8.52-.6 11.68 1.33.36.22.47.69.25 1.03zm1.47-3.27a.94.94 0 0 1-1.29.3c-3.23-1.98-8.16-2.56-11.98-1.4a.94.94 0 1 1-.55-1.8c4.37-1.32 9.8-.68 13.52 1.6.45.27.59.86.3 1.3zm.13-3.4c-3.87-2.3-10.27-2.51-13.97-1.39a1.12 1.12 0 1 1-.66-2.15c4.25-1.29 11.31-1.04 15.78 1.61a1.12 1.12 0 1 1-1.15 1.93z"/>
+                      </svg>
+                    )}
+                    {link.icon === 'x' && (
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                      </svg>
+                    )}
+                    {link.icon === 'tiktok' && (
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.66a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.09z"/>
+                      </svg>
+                    )}
+                    {link.icon === 'reddit' && (
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm6.13 13.7c.02.16.04.31.04.47 0 2.4-2.79 4.36-6.23 4.36s-6.23-1.96-6.23-4.36c0-.16.02-.31.04-.47a1.52 1.52 0 1 1 1.7-2.45 7.65 7.65 0 0 1 4.16-1.32l.8-3.75a.34.34 0 0 1 .4-.26l2.62.56a1.05 1.05 0 1 1-.1.41l-2.34-.5-.72 3.37a7.6 7.6 0 0 1 4.1 1.31 1.52 1.52 0 1 1 1.76 2.63zM8.38 13.6a1.1 1.1 0 1 0 2.2 0 1.1 1.1 0 0 0-2.2 0zm6.07 2.84a.35.35 0 0 0-.5-.5 3.34 3.34 0 0 1-3.9 0 .35.35 0 0 0-.5.5 4.03 4.03 0 0 0 4.9 0zm-.92-1.74a1.1 1.1 0 1 0 0-2.2 1.1 1.1 0 0 0 0 2.2z"/>
+                      </svg>
+                    )}
+                  </span>
+                  <span class="link-text">
+                    <span class="link-label">{link.label}</span>
+                    <span class="link-sub">{link.sub}</span>
+                  </span>
+                  <svg class="link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .linktree-page {
+    min-height: calc(100vh - 60px);
+    padding: calc(60px + var(--space-md)) 0 var(--space-2xl);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .linktree-container {
+    width: 100%;
+    max-width: 560px;
+    padding: 0 var(--space-md);
+  }
+
+  .linktree-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .linktree-logo {
+    max-width: 140px;
+    height: auto;
+    margin: 0 auto var(--space-md);
+    display: block;
+  }
+
+  .linktree-header h1 {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 300;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .tagline {
+    font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+    color: var(--color-text-dark);
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .tagline + .tagline {
+    margin-top: 0.5rem;
+  }
+
+  .links-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .link-item {
+    width: 100%;
+  }
+
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--color-text-dark);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .link-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(36, 121, 190, 0.04) 0%, rgba(76, 138, 197, 0.0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .link-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px -10px rgba(36, 121, 190, 0.28);
+    border-color: rgba(36, 121, 190, 0.35);
+  }
+
+  .link-card:hover::before {
+    opacity: 1;
+  }
+
+  .link-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(36, 121, 190, 0.08);
+    color: var(--color-blue);
+    transition: var(--transition-smooth);
+  }
+
+  .link-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .link-card:hover .link-icon {
+    background: var(--color-blue);
+    color: #fff;
+  }
+
+  .link-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .link-label {
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: var(--color-text-dark);
+    line-height: 1.2;
+  }
+
+  .link-sub {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .link-arrow {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: var(--color-blue);
+    opacity: 0.6;
+    transition: var(--transition-smooth);
+  }
+
+  .link-card:hover .link-arrow {
+    opacity: 1;
+    transform: translate(2px, -2px);
+  }
+
+  .more-channels {
+    margin-top: var(--space-sm);
+  }
+
+  .more-channels[open] .more-icon {
+    transform: rotate(180deg);
+  }
+
+  .more-summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.25rem;
+    border-radius: 14px;
+    user-select: none;
+    transition: var(--transition-smooth);
+  }
+
+  .more-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .more-summary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px -10px rgba(36, 121, 190, 0.25);
+  }
+
+  .more-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-dark);
+    letter-spacing: 0.01em;
+  }
+
+  .more-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--color-blue);
+    transition: transform 0.3s ease;
+  }
+
+  .more-list {
+    margin-top: var(--space-sm);
+    animation: revealDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes revealDown {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.15);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @media (max-width: 540px) {
+    .linktree-page {
+      padding: calc(60px + var(--space-sm)) 0 var(--space-xl);
+    }
+
+    .linktree-container {
+      padding: 0 var(--space-sm);
+    }
+
+    .linktree-logo {
+      max-width: 110px;
+    }
+
+    .link-card {
+      padding: 0.875rem 1rem;
+      gap: 0.875rem;
+    }
+
+    .link-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .link-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .link-label {
+      font-size: 1rem;
+    }
+
+    .link-sub {
+      font-size: 0.8125rem;
+    }
+  }
+</style>
