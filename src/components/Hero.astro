@@ -35,14 +35,14 @@ const BASE = import.meta.env.BASE_URL;
 
   <div class="hero-content">
     <h1 class="hero-title">
-      <span class="hero-main" data-text={text.main}></span>
+      <span class="hero-main" data-text={text.main}><noscript>{text.main}</noscript></span>
     </h1>
-    <p class="hero-subtitle fade-subtitle" data-text={text.subtitle}></p>
+    <p class="hero-subtitle fade-subtitle" data-text={text.subtitle}><noscript>{text.subtitle}</noscript></p>
   </div>
 
-  <div class="scroll-hint">
+  <div class="scroll-hint" aria-hidden="true">
     <span>{text.scrollHint}</span>
-    <svg class="scroll-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <svg class="scroll-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
       <path d="M12 5v14M5 12l7 7 7-7"/>
     </svg>
   </div>
@@ -179,7 +179,6 @@ const BASE = import.meta.env.BASE_URL;
     text-align: center;
     transform: translateY(10px);
     transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1), transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
     white-space: normal; /* Allow wrapping if needed; height stabilized by preloading text */
   }
 
@@ -272,6 +271,39 @@ const BASE = import.meta.env.BASE_URL;
       font-size: 1.1rem;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-logo-wrapper {
+      animation: none;
+      opacity: 1;
+      transform: translateX(-50%);
+    }
+
+    .hero-main {
+      animation: none;
+      opacity: 1;
+      border-color: transparent;
+    }
+
+    .hero-main::after {
+      display: none;
+    }
+
+    .hero-subtitle {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .scroll-hint {
+      animation: none;
+      opacity: 1;
+    }
+
+    .scroll-arrow {
+      animation: none;
+    }
+  }
 </style>
 
 <script>
@@ -312,6 +344,14 @@ const BASE = import.meta.env.BASE_URL;
     if (heroMain && heroSubtitle) {
       const mainText = heroMain.getAttribute('data-text') || '';
 
+      // Skip animation for users who prefer reduced motion
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        heroMain.textContent = mainText;
+        heroSubtitle.textContent = heroSubtitle.getAttribute('data-text') || '';
+        heroSubtitle.classList.add('visible');
+        return;
+      }
+
       // Preload subtitle text immediately (kept hidden) to stabilize layout height
       heroSubtitle.textContent = heroSubtitle.getAttribute('data-text') || '';
 
@@ -340,9 +380,27 @@ const BASE = import.meta.env.BASE_URL;
 
       await typeText(heroMain, mainText, typingSpeed);
 
-      // Reveal subtitle after typing completes
+      // Reveal subtitle: set will-change just before animating, clear after
       await new Promise(resolve => setTimeout(resolve, 650));
+      heroSubtitle.style.willChange = 'opacity, transform';
       heroSubtitle.classList.add('visible');
+      heroSubtitle.addEventListener('transitionend', () => {
+        heroSubtitle.style.willChange = 'auto';
+      }, { once: true });
+    }
+
+    // Pause the bounce animation when the hero scrolls out of view
+    const scrollArrow = document.querySelector('.scroll-arrow') as HTMLElement | null;
+    if (scrollArrow) {
+      const heroSection = document.querySelector('.hero') as HTMLElement | null;
+      if (heroSection && 'IntersectionObserver' in window) {
+        const arrowObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            scrollArrow.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+          });
+        }, { threshold: 0 });
+        arrowObserver.observe(heroSection);
+      }
     }
   });
 </script>

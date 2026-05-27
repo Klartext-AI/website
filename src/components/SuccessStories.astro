@@ -130,7 +130,7 @@ const text = content[lang];
             : null;
 
           return (
-            <a href={storyHref ?? '#'} class={`story-card-link${!storyHref ? ' is-disabled' : ''}`} aria-disabled={!storyHref}>
+            <a href={storyHref ?? '#'} class={`story-card-link${!storyHref ? ' is-disabled' : ''}`} {... (!storyHref ? { 'aria-disabled': 'true', tabindex: '-1' } : {})}>
               <article class="story-card glass-card" style={`animation-delay: ${index * 0.15}s`}>
                 <div class="story-meta">
                   <span class="story-category">{story.category}</span>
@@ -155,7 +155,7 @@ const text = content[lang];
                 {storyHref && (
                   <div class="story-link">
                     {text.readMore}
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                       <path d="M6 12l4-4-4-4" />
                     </svg>
                   </div>
@@ -226,7 +226,7 @@ const text = content[lang];
     flex-direction: column;
     height: 100%;
     padding: var(--space-md);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease;
     background: rgba(255, 255, 255, 0.55) !important;
     backdrop-filter: blur(20px) saturate(160%);
   }

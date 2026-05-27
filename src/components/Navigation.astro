@@ -66,13 +66,13 @@ if (lang === 'de') {
       />
     </a>
 
-    <button class="nav-toggle" aria-label="Toggle navigation" id="nav-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu" id="nav-toggle">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
     </button>
 
-    <div class="nav-menu" id="nav-menu">
+    <div class="nav-menu" id="nav-menu" role="navigation" aria-label={lang === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
       <a
         href={lang === 'de' ? `${BASE}success-stories` : `${BASE}en/success-stories`}
         class={`nav-link ${isActive('/success-stories') ? 'nav-link-active' : ''}`}
@@ -111,7 +111,7 @@ if (lang === 'de') {
       </a>
       <!--<a href={lang === 'de' ? `${BASE}#contact` : `${BASE}en#contact`} class="nav-link nav-link-cta">{text.contact}</a>-->
       <a href=`mailto:office@klartext-ai.com` class="nav-link nav-link-cta">{text.contact}</a>
-      <a href={alternateLangUrl} class="nav-link nav-link-lang">{text.language}</a>
+      <a href={alternateLangUrl} class="nav-link nav-link-lang" aria-label={lang === 'de' ? 'Switch to English' : 'Zur deutschen Version wechseln'}>{text.language}</a>
     </div>
   </div>
 </nav>
@@ -122,6 +122,7 @@ if (lang === 'de') {
     top: 0;
     left: 0;
     width: 100%;
+    padding-top: env(safe-area-inset-top, 0);
     z-index: 1000;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px) saturate(180%);
@@ -182,7 +183,7 @@ if (lang === 'de') {
     width: 25px;
     height: 2px;
     background: var(--color-blue);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
   .nav-toggle.active span:nth-child(1) {
@@ -217,10 +218,12 @@ if (lang === 'de') {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 0;
+    width: 100%;
     height: 2px;
     background: var(--color-blue);
-    transition: width 0.3s ease;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
   }
 
   .nav-link:hover {
@@ -228,7 +231,7 @@ if (lang === 'de') {
   }
 
   .nav-link:hover::after {
-    width: 100%;
+    transform: scaleX(1);
   }
 
   .nav-link.nav-link-active {
@@ -236,7 +239,7 @@ if (lang === 'de') {
   }
 
   .nav-link.nav-link-active::after {
-    width: 100%;
+    transform: scaleX(1);
   }
 
   .nav-link-cta {
@@ -302,11 +305,13 @@ if (lang === 'de') {
       gap: var(--space-sm);
       box-shadow: 0 8px 24px rgba(36, 121, 190, 0.15);
       transform: translateX(-100%);
-      transition: transform 0.3s ease;
+      visibility: hidden;
+      transition: transform 0.3s ease, visibility 0.3s ease;
     }
 
     .nav-menu.active {
       transform: translateX(0);
+      visibility: visible;
     }
 
     .nav-link {
@@ -376,13 +381,16 @@ if (lang === 'de') {
     // Mobile menu toggle
     if (navToggle && navMenu) {
       navToggle.addEventListener('click', () => {
+        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
         navToggle.classList.toggle('active');
         navMenu.classList.toggle('active');
+        navToggle.setAttribute('aria-expanded', String(!isExpanded));
       });
     }
 
     // Show navigation on scroll and add scrolled class
     let hasShownNav = false;
+    let isScrolled = false;
 
     // Check if navigation should always be visible
     if (nav && nav.dataset.alwaysVisible === 'true') {
@@ -400,13 +408,15 @@ if (lang === 'de') {
           hasShownNav = true;
         }
 
-        // Add scrolled class for additional shadow
-        if (scrollY > 50) {
+        // Guard redundant DOM mutations on the scrolled class
+        if (scrollY > 50 && !isScrolled) {
           nav.classList.add('scrolled');
-        } else {
+          isScrolled = true;
+        } else if (scrollY <= 50 && isScrolled) {
           nav.classList.remove('scrolled');
+          isScrolled = false;
         }
       }
-    });
+    }, { passive: true });
   });
 </script>
