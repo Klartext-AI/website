@@ -12,15 +12,8 @@ const content = {
   de: {
     sectionTitle: "Was wir anbieten",
     subtitle: "Maßgeschneiderte Lösungen für Ihre KI-Transformation",
-    viewAllOfferings: "Alle Angebote ansehen",
+    viewAllOfferings: "Alle Leistungen ansehen",
     offerings: [
-      {
-        id: "workshops",
-        title: "Workshops",
-        icon: "🎓",
-        description: "Strukturierte Workshops von Value Sprint bis Security Screening",
-        highlights: ["AI Value Sprint", "EU AI Act Readiness", "Security Screening"]
-      },
       {
         id: "custom-projects",
         title: "Kundenspezifische Projekte",
@@ -29,11 +22,18 @@ const content = {
         highlights: ["Domain-Driven", "End-to-End", "Messbare Erfolge"]
       },
       {
-        id: "chatgpt-clone",
-        title: "Privacy-Safe GPT",
-        icon: "🛡️",
-        description: "GPT-Funktionalität mit 100% Datenkontrolle in DE/AT",
-        highlights: ["DE/AT Hosting", "GDPR-konform", "Kein 3rd-Party-Zugriff"]
+        id: "workshops",
+        title: "Workshops",
+        icon: "🎓",
+        description: "Strukturierte Workshops von Value Sprint bis Security Screening",
+        highlights: ["AI Value Sprint", "EU AI Act Readiness", "Security Screening"]
+      },
+      {
+        id: "pdf-accessibility",
+        title: "PDF/UA Accessibility",
+        icon: "📄",
+        description: "Vollautomatische Umwandlung von PDFs in barrierefreie PDF/UA-Dokumente",
+        highlights: ["Automatisierte Transformation", "Human-in-the-Loop", "Geprüfte PDF/UA-Konformität"]
       },
       {
         id: "inspirational-talks",
@@ -47,15 +47,8 @@ const content = {
   en: {
     sectionTitle: "What We Offer",
     subtitle: "Tailored solutions for your AI transformation",
-    viewAllOfferings: "View all offerings",
+    viewAllOfferings: "View all services",
     offerings: [
-      {
-        id: "workshops",
-        title: "Workshops",
-        icon: "🎓",
-        description: "Structured workshops from Value Sprint to Security Screening",
-        highlights: ["AI Value Sprint", "EU AI Act Readiness", "Security Screening"]
-      },
       {
         id: "custom-projects",
         title: "Custom Projects",
@@ -64,11 +57,18 @@ const content = {
         highlights: ["Domain-Driven", "End-to-End", "Measurable Results"]
       },
       {
-        id: "chatgpt-clone",
-        title: "Privacy-Safe GPT",
-        icon: "🛡️",
-        description: "GPT functionality with 100% data control in DE/AT",
-        highlights: ["DE/AT Hosting", "GDPR-compliant", "No 3rd-party access"]
+        id: "workshops",
+        title: "Workshops",
+        icon: "🎓",
+        description: "Structured workshops from Value Sprint to Security Screening",
+        highlights: ["AI Value Sprint", "EU AI Act Readiness", "Security Screening"]
+      },
+      {
+        id: "pdf-accessibility",
+        title: "PDF/UA Accessibility",
+        icon: "📄",
+        description: "Fully automated conversion of PDFs into accessible PDF/UA documents",
+        highlights: ["Automated transformation", "Human-in-the-loop", "Verified PDF/UA compliance"]
       },
       {
         id: "inspirational-talks",
@@ -86,7 +86,7 @@ const text = content[lang];
 const offeringIcons = {
   workshops: 'graduation',
   'custom-projects': 'target',
-  'chatgpt-clone': 'shield',
+  'pdf-accessibility': 'route',
   'inspirational-talks': 'bulb'
 } as const;
 ---
@@ -122,7 +122,7 @@ const offeringIcons = {
     </div>
 
     <div class="offerings-cta text-center fade-in">
-      <a href={lang === 'de' ? `${BASE}offerings` : `${BASE}en/offerings`} class="btn btn-secondary">
+      <a href={lang === 'de' ? `${BASE}leistungen` : `${BASE}en/services`} class="btn btn-secondary">
         {text.viewAllOfferings}
       </a>
     </div>

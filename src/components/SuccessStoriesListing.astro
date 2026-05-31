@@ -166,7 +166,11 @@ const text = content[lang];
 
     <div class="stories-grid">
       {text.stories.map((story, index) => (
-        <article class="story-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
+        <a
+          href={lang === 'en' ? `${BASE}en/success-stories/${storyUrls[story.id]}` : `${BASE}success-stories/${storyUrls[story.id]}`}
+          class="story-card glass-card fade-in"
+          style={`animation-delay: ${index * 0.1}s`}
+        >
           <div class="story-meta">
             <span class="story-category">{story.category}</span>
           </div>
@@ -189,13 +193,13 @@ const text = content[lang];
 
           <p class="story-excerpt">{story.excerpt}</p>
 
-          <a href={lang === 'en' ? `${BASE}en/success-stories/${storyUrls[story.id]}` : `${BASE}success-stories/${storyUrls[story.id]}`} class="story-link">
+          <span class="story-link">
             {text.readMore}
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M6 12l4-4-4-4"/>
             </svg>
-          </a>
-        </article>
+          </span>
+        </a>
       ))}
     </div>
   </div>
@@ -247,6 +251,9 @@ const text = content[lang];
     height: 100%;
     background: rgba(255, 255, 255, 0.55) !important;
     backdrop-filter: blur(20px) saturate(160%);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
   }
 
   .story-card:hover {
@@ -337,7 +344,7 @@ const text = content[lang];
     margin-top: auto;
   }
 
-  .story-link:hover {
+  .story-card:hover .story-link {
     gap: 0.75rem;
   }
 
@@ -345,7 +352,7 @@ const text = content[lang];
     transition: transform 0.3s ease;
   }
 
-  .story-link:hover svg {
+  .story-card:hover .story-link svg {
     transform: translateX(4px);
   }
 

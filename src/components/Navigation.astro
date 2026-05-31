@@ -10,7 +10,7 @@ const content = {
   de: {
     home: "Home",
     successStories: "Erfolgsgeschichten",
-    offerings: "Angebote",
+    offerings: "Leistungen",
     values: "Werte",
     team: "Team",
     careers: "Karriere",
@@ -21,7 +21,7 @@ const content = {
   en: {
     home: "Home",
     successStories: "Success Stories",
-    offerings: "Offerings",
+    offerings: "Services",
     values: "Values",
     team: "Team",
     careers: "Careers",
@@ -42,16 +42,24 @@ const normalizedPath = pathWithoutBase.replace(/^\/en(\/|$)/, '/');
 const isActive = (target: string) =>
   normalizedPath === target || normalizedPath.startsWith(`${target}/`);
 
-let alternateLangUrl: string;
+// Most pages share the same slug across languages. The services page is the
+// exception (de: /leistungen, en: /services), so map between the two when
+// building the language-switch URLs. Compare on a slash-insensitive key so a
+// trailing slash on normalizedPath (e.g. "/leistungen/") still matches.
+const slugKey = normalizedPath !== '/' ? normalizedPath.replace(/\/$/, '') : '/';
+const deSlugOverrides: Record<string, string> = { '/services': '/leistungen' };
+const enSlugOverrides: Record<string, string> = { '/leistungen': '/services' };
+const deSlug = deSlugOverrides[slugKey] ?? normalizedPath;
+const enSlug = enSlugOverrides[slugKey] ?? normalizedPath;
 
-if (lang === 'de') {
-  // Switching to English: add /en prefix after base
-  alternateLangUrl = `${BASE}en${pathWithoutBase === '/' ? '' : pathWithoutBase}`;
-} else {
-  // Switching to German: remove /en prefix
-  const pathWithoutLang = pathWithoutBase.replace(/^\/en(\/|$)/, '/');
-  alternateLangUrl = pathWithoutLang === '/' ? BASE : `${BASE}${pathWithoutLang.substring(1)}`;
-}
+// Build both language URLs from the language-neutral path so the segmented
+// control can render DE and EN as siblings (current one highlighted).
+const deUrl = deSlug === '/' ? BASE : `${BASE}${deSlug.substring(1)}`;
+const enUrl = enSlug === '/' ? `${BASE}en` : `${BASE}en${enSlug}`;
+
+// The whole control is a single toggle: clicking anywhere switches to the
+// other language. So it links to the alternate of the current page.
+const toggleUrl = lang === 'de' ? enUrl : deUrl;
 ---
 
 <nav class="navigation" id="main-nav" data-always-visible={alwaysVisible ? 'true' : 'false'}>
@@ -66,52 +74,65 @@ if (lang === 'de') {
       />
     </a>
 
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu" id="nav-toggle">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </button>
+    <div class="nav-right">
+      <div class="nav-menu" id="nav-menu" role="navigation" aria-label={lang === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
+        <a
+          href={lang === 'de' ? `${BASE}success-stories` : `${BASE}en/success-stories`}
+          class={`nav-link ${isActive('/success-stories') ? 'nav-link-active' : ''}`}
+        >
+          {text.successStories}
+        </a>
+        <a
+          href={lang === 'de' ? `${BASE}leistungen` : `${BASE}en/services`}
+          class={`nav-link ${isActive(lang === 'de' ? '/leistungen' : '/services') ? 'nav-link-active' : ''}`}
+        >
+          {text.offerings}
+        </a>
+        <a
+          href={lang === 'de' ? `${BASE}values` : `${BASE}en/values`}
+          class={`nav-link ${isActive(lang === 'de' ? '/werte' : '/values') ? 'nav-link-active' : ''}`}
+        >
+          {text.values}
+        </a>
+        <a
+          href={lang === 'de' ? `${BASE}team` : `${BASE}en/team`}
+          class={`nav-link ${isActive('/team') ? 'nav-link-active' : ''}`}
+        >
+          {text.team}
+        </a>
+        <a
+          href={lang === 'de' ? `${BASE}karriere` : `${BASE}en/karriere`}
+          class={`nav-link ${isActive('/karriere') ? 'nav-link-active' : ''}`}
+        >
+          {text.careers}
+        </a>
+        <a
+          href={lang === 'de' ? `${BASE}blog` : `${BASE}en/blog`}
+          class={`nav-link ${isActive('/blog') ? 'nav-link-active' : ''}`}
+        >
+          {text.blog}
+        </a>
+        <!--<a href={lang === 'de' ? `${BASE}#contact` : `${BASE}en#contact`} class="nav-link nav-link-cta">{text.contact}</a>-->
+        <a href=`mailto:office@klartext-ai.com` class="nav-link nav-link-cta">{text.contact}</a>
+      </div>
 
-    <div class="nav-menu" id="nav-menu" role="navigation" aria-label={lang === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
       <a
-        href={lang === 'de' ? `${BASE}success-stories` : `${BASE}en/success-stories`}
-        class={`nav-link ${isActive('/success-stories') ? 'nav-link-active' : ''}`}
+        href={toggleUrl}
+        class="lang-switch"
+        id="lang-switch"
+        data-lang={lang}
+        hreflang={lang === 'de' ? 'en' : 'de'}
+        aria-label={lang === 'de' ? 'Switch to English' : 'Zur deutschen Version wechseln'}
       >
-        {text.successStories}
+        <span class={`lang-option ${lang === 'de' ? 'lang-option-active' : ''}`} data-lang="de">DE</span>
+        <span class={`lang-option ${lang === 'en' ? 'lang-option-active' : ''}`} data-lang="en">EN</span>
       </a>
-      <a
-        href={lang === 'de' ? `${BASE}offerings` : `${BASE}en/offerings`}
-        class={`nav-link ${isActive('/offerings') ? 'nav-link-active' : ''}`}
-      >
-        {text.offerings}
-      </a>
-      <a
-        href={lang === 'de' ? `${BASE}values` : `${BASE}en/values`}
-        class={`nav-link ${isActive(lang === 'de' ? '/werte' : '/values') ? 'nav-link-active' : ''}`}
-      >
-        {text.values}
-      </a>
-      <a
-        href={lang === 'de' ? `${BASE}team` : `${BASE}en/team`}
-        class={`nav-link ${isActive('/team') ? 'nav-link-active' : ''}`}
-      >
-        {text.team}
-      </a>
-      <a
-        href={lang === 'de' ? `${BASE}karriere` : `${BASE}en/karriere`}
-        class={`nav-link ${isActive('/karriere') ? 'nav-link-active' : ''}`}
-      >
-        {text.careers}
-      </a>
-      <a
-        href={lang === 'de' ? `${BASE}blog` : `${BASE}en/blog`}
-        class={`nav-link ${isActive('/blog') ? 'nav-link-active' : ''}`}
-      >
-        {text.blog}
-      </a>
-      <!--<a href={lang === 'de' ? `${BASE}#contact` : `${BASE}en#contact`} class="nav-link nav-link-cta">{text.contact}</a>-->
-      <a href=`mailto:office@klartext-ai.com` class="nav-link nav-link-cta">{text.contact}</a>
-      <a href={alternateLangUrl} class="nav-link nav-link-lang" aria-label={lang === 'de' ? 'Switch to English' : 'Zur deutschen Version wechseln'}>{text.language}</a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu" id="nav-toggle">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 </nav>
@@ -198,6 +219,12 @@ if (lang === 'de') {
     transform: rotate(-45deg) translate(7px, -7px);
   }
 
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
   .nav-menu {
     display: flex;
     align-items: center;
@@ -261,22 +288,78 @@ if (lang === 'de') {
     box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
   }
 
-  .nav-link-lang {
+  /* Segmented language switch: one toggle showing DE | EN, current highlighted.
+     The whole pill is a single link — clicking anywhere switches language. */
+  .lang-switch {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 2px;
+    padding: 2px;
+    border-radius: 999px;
+    border: 1px solid rgba(36, 121, 190, 0.25);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    box-shadow: 0 2px 10px -6px rgba(36, 121, 190, 0.25);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .lang-switch:hover {
+    border-color: rgba(36, 121, 190, 0.5);
+    box-shadow: 0 4px 14px -6px rgba(36, 121, 190, 0.4);
+  }
+
+  .lang-option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
     font-weight: 600;
-    color: var(--color-blue);
-    border: 2px solid var(--color-blue);
-    padding: 0.35rem 1rem;
-    border-radius: 1rem;
-    transition: all 0.3s ease;
+    letter-spacing: 0.03em;
+    color: var(--color-text-muted);
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    line-height: 1;
+    transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
   }
 
-  .nav-link-lang::after {
-    display: none;
-  }
-
-  .nav-link-lang:hover {
+  .lang-option-active {
+    color: #fff;
     background: var(--color-blue);
-    color: white;
+    box-shadow: 0 2px 8px -2px rgba(36, 121, 190, 0.5);
+  }
+
+  /* Browser-language nudge (no banner): a calm, persistent tint on the other
+     language so the hint survives until the nav scrolls into view, plus a short
+     pulse for motion-enabled users to catch the eye. Cleared on interaction. */
+  .lang-option.lang-suggest {
+    color: var(--color-blue);
+    background: rgba(36, 121, 190, 0.1);
+    box-shadow: 0 0 0 1px rgba(36, 121, 190, 0.3);
+    animation: langPulse 1.6s ease-in-out 3;
+  }
+
+  @keyframes langPulse {
+    0%, 100% {
+      box-shadow: 0 0 0 1px rgba(36, 121, 190, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 0 5px rgba(36, 121, 190, 0.18);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lang-option.lang-suggest {
+      animation: none;
+    }
+  }
+
+  /* Desktop: grow the toggle so its height matches the Contact CTA
+     (0.95rem text * 1.6 line-height + 0.5rem*2 padding ≈ 40px). */
+  @media (min-width: 769px) {
+    .lang-option {
+      padding: 0.67rem 0.95rem;
+    }
   }
 
   @media (max-width: 768px) {
@@ -324,8 +407,9 @@ if (lang === 'de') {
       margin-top: var(--space-sm);
     }
 
-    .nav-link-lang {
-      margin-top: var(--space-xs);
+    /* Keep the language switch beside the hamburger, outside the menu */
+    .nav-right {
+      gap: 0.6rem;
     }
   }
 </style>
@@ -385,6 +469,56 @@ if (lang === 'de') {
         navToggle.classList.toggle('active');
         navMenu.classList.toggle('active');
         navToggle.setAttribute('aria-expanded', String(!isExpanded));
+      });
+    }
+
+    // Browser-language nudge: if the visitor's preferred language differs from
+    // the page language, gently pulse the other option in the switch (no banner).
+    const langSwitch = document.getElementById('lang-switch');
+    if (langSwitch) {
+      const NUDGE_KEY = 'kt-lang-nudge-seen';
+      let alreadySeen = false;
+      try {
+        alreadySeen = localStorage.getItem(NUDGE_KEY) === '1';
+      } catch (e) {
+        alreadySeen = false;
+      }
+
+      if (!alreadySeen) {
+        const pageLang = langSwitch.dataset.lang === 'en' ? 'en' : 'de';
+        const browserLangs = (navigator.languages && navigator.languages.length)
+          ? navigator.languages
+          : [navigator.language || ''];
+        const prefersGerman = browserLangs.some(l => l.toLowerCase().startsWith('de'));
+
+        // German page + non-German visitor -> suggest EN.
+        // English page + German visitor -> suggest DE.
+        let suggest = null;
+        if (pageLang === 'de' && !prefersGerman) suggest = 'en';
+        else if (pageLang === 'en' && prefersGerman) suggest = 'de';
+
+        if (suggest) {
+          const target = langSwitch.querySelector(`.lang-option[data-lang="${suggest}"]`);
+          if (target) {
+            target.classList.add('lang-suggest');
+            // Show the nudge only once per visitor.
+            try {
+              localStorage.setItem(NUDGE_KEY, '1');
+            } catch (e) { /* ignore */ }
+          }
+        }
+      }
+
+      // Record the manual language choice (and stop nudging) the moment they
+      // engage with the switch. The destination language is the opposite of the
+      // current page. The root auto-redirect reads this and won't override it.
+      langSwitch.addEventListener('click', () => {
+        const current = langSwitch.dataset.lang === 'en' ? 'en' : 'de';
+        const chosen = current === 'de' ? 'en' : 'de';
+        try {
+          localStorage.setItem(NUDGE_KEY, '1');
+          localStorage.setItem('kt-lang-choice', chosen);
+        } catch (e) { /* ignore */ }
       });
     }
 

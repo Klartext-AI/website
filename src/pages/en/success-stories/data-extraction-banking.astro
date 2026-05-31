@@ -18,8 +18,8 @@ const BASE = import.meta.env.BASE_URL;
 
       <article class="content fade-in">
         <header class="hero">
-          <span class="badge">Data Extraction</span>
-          <h1 class="headline">KPI Extraction from Reports - structured and efficient</h1>
+          <span class="badge">Klartext Extract</span>
+          <h1 class="headline">From &gt;1,000 pages to verified answers in minutes</h1>
         </header>
 
         <!-- Highlights -->
@@ -29,8 +29,8 @@ const BASE = import.meta.env.BASE_URL;
               <Icon name="evaluation" size={22} />
             </div>
             <div class="highlight-text-custom">
-              <span class="highlight-label-custom">100+ page reports in minutes</span>
-              <span class="highlight-desc-custom">Extracts what analysts used to spend days on – now done in under 15 minutes</span>
+              <span class="highlight-label-custom">More than just KPIs</span>
+              <span class="highlight-desc-custom">Values, text &amp; complex answers – incl. conflict resolution</span>
             </div>
           </div>
           <div class="highlight-item-custom">
@@ -38,8 +38,8 @@ const BASE = import.meta.env.BASE_URL;
               <Icon name="lock" size={22} />
             </div>
             <div class="highlight-text-custom">
-              <span class="highlight-label-custom">Direct source link</span>
-              <span class="highlight-desc-custom">Every extracted KPI points to the exact location in the document – full audit trail</span>
+              <span class="highlight-label-custom">Direct source reference</span>
+              <span class="highlight-desc-custom">Points to the exact location – verification in seconds</span>
             </div>
           </div>
           <div class="highlight-item-custom">
@@ -47,35 +47,35 @@ const BASE = import.meta.env.BASE_URL;
               <Icon name="users" size={22} />
             </div>
             <div class="highlight-text-custom">
-              <span class="highlight-label-custom">Human-in-the-loop</span>
-              <span class="highlight-desc-custom">Human confirms, AI proposes – the analyst stays in control</span>
+              <span class="highlight-label-custom">&gt;97% accuracy at scale</span>
+              <span class="highlight-desc-custom">1,000+ pages, multiple documents – cost-efficient</span>
             </div>
           </div>
         </div>
 
         <!-- Why not just ChatGPT? -->
         <div class="why-section">
-          <p class="why-intro">Not a generic chatbot – a tool built for exactly this task.</p>
+          <p class="why-intro">Not a generic chatbot – a tool built for exactly your use case.</p>
           <div class="why-points">
             <div class="why-point">
               <span class="why-num">01</span>
               <div>
-                <strong>No context limit, no copy-paste.</strong>
-                The tool processes hundreds of pages in a single pass, caching-optimized – all reports at once, no manual preparation.
+                <strong>Tailored to your use case.</strong>
+                Domain knowledge, fields &amp; questions – matched precisely to your task.
               </div>
             </div>
             <div class="why-point">
               <span class="why-num">02</span>
               <div>
-                <strong>Structured extraction with conflict resolution.</strong>
-                KPIs land directly in a defined schema. Conflicting values across documents are automatically flagged for review.
+                <strong>Conflict resolution instead of a black box.</strong>
+                Conflicts detected automatically, flagged or escalated to a human.
               </div>
             </div>
             <div class="why-point">
               <span class="why-num">03</span>
               <div>
-                <strong>Human-in-the-loop instead of a black box.</strong>
-                Every value is verifiable with a direct source link. Analysts confirm – the AI proposes. No post-processing in Excel.
+                <strong>The human decides.</strong>
+                AI proposes and cites the source – the human verifies and judges.
               </div>
             </div>
           </div>
@@ -467,16 +467,16 @@ const BASE = import.meta.env.BASE_URL;
     font-weight: 600;
     color: var(--color-blue);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.4rem 1rem;
+    letter-spacing: 0.06em;
+    padding: 0.65rem 1.7rem;
     background: rgba(36, 121, 190, 0.1);
-    border-radius: 6px;
-    font-size: 0.85rem;
+    border-radius: 8px;
+    font-size: 1.3rem;
     margin-bottom: var(--space-md);
   }
 
   .headline {
-    font-size: var(--font-size-h1);
+    font-size: var(--font-size-h2);
     font-weight: 300;
     margin: var(--space-md) 0;
     color: var(--color-text-dark);
@@ -789,7 +789,7 @@ const BASE = import.meta.env.BASE_URL;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-md);
-    padding: var(--space-xl);
+    padding: var(--space-md);
     margin-bottom: var(--space-2xl);
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(18px) saturate(160%);
@@ -823,31 +823,31 @@ const BASE = import.meta.env.BASE_URL;
   }
 
   .highlight-label-custom {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--color-text-dark);
     line-height: 1.3;
   }
 
   .highlight-desc-custom {
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     color: var(--color-text-muted);
     line-height: 1.5;
   }
 
   .why-section {
     margin-bottom: var(--space-2xl);
-    padding: var(--space-xl) var(--space-xl);
+    padding: var(--space-md);
     border-left: 3px solid var(--color-blue);
     background: rgba(36, 121, 190, 0.03);
     border-radius: 0 0.75rem 0.75rem 0;
   }
 
   .why-intro {
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: var(--color-blue);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
     letter-spacing: -0.01em;
   }
 
@@ -861,7 +861,7 @@ const BASE = import.meta.env.BASE_URL;
     display: flex;
     align-items: flex-start;
     gap: var(--space-md);
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     line-height: 1.65;
     color: var(--color-text-body);
   }
@@ -1077,13 +1077,30 @@ const BASE = import.meta.env.BASE_URL;
     }
 
     .headline {
-      font-size: 1.5rem;
+      font-size: 2rem;
       line-height: 1.3;
     }
 
     .hero {
       margin: var(--space-md) 0;
       padding-bottom: var(--space-md);
+    }
+
+    /* Why section: shrink the oversized desktop padding so text isn't
+       squeezed into a thin column on mobile */
+    .why-section {
+      margin-bottom: var(--space-xl);
+      padding: var(--space-md) var(--space-sm);
+    }
+
+    .why-intro {
+      font-size: 1.1rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .why-point {
+      gap: var(--space-sm);
+      font-size: 1rem;
     }
 
     .badge {
@@ -1298,7 +1315,7 @@ const BASE = import.meta.env.BASE_URL;
 
   @media (max-width: 400px) {
     .headline {
-      font-size: 1.35rem;
+      font-size: 1.75rem;
     }
 
     .step-title {
