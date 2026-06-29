@@ -205,6 +205,11 @@ const offeringIcons = {
   'hackathons': 'users'
 } as const;
 
+const linkMap: Record<string, string> = {
+  'custom-projects': lang === 'en' ? `${BASE}en/success-stories` : `${BASE}success-stories`,
+  'pdf-accessibility': lang === 'en' ? `${BASE}en/success-stories/pat-accessibility` : `${BASE}success-stories/pat-accessibility`,
+};
+
 ---
 
 <section id="offerings-listing" class="offerings-listing section">
@@ -216,8 +221,8 @@ const offeringIcons = {
 
         <div class="offerings-grid">
           {text.offerings.map((offering, index) => {
-            const isLinked = offering.id === 'custom-projects';
-            const href = lang === 'en' ? `${BASE}en/success-stories` : `${BASE}success-stories`;
+            const isLinked = offering.id in linkMap;
+            const href = linkMap[offering.id];
             const Tag = isLinked ? 'a' : 'article';
             return (
             <Tag
@@ -258,6 +263,7 @@ const offeringIcons = {
         </Tag>
             );
           })}
+      </div>
     </div>
   </div>
 </section>

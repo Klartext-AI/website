@@ -1,0 +1,886 @@
+---
+interface Props {
+  scene: 'transform' | 'reader' | 'pipeline' | 'validation';
+  lang?: 'de' | 'en';
+}
+
+const { scene, lang = 'de' } = Astro.props;
+
+const content = {
+  de: {
+    before: 'Ungetaggt',
+    after: 'PDF/UA · getaggt',
+    badge: 'konform',
+    heading: 'Jahresbericht 2024',
+    altText: 'Alt-Text ✓',
+    tableLabel: 'Tabelle',
+    steps: ['Struktur', 'Tags', 'Lese­reihenfolge', 'Alt-Texte', 'Report'],
+    pipelineDone: 'PDF/UA-konform · Report erstellt',
+    readerLabels: [
+      { tag: 'Überschrift · Ebene 1', text: '„Jahresbericht 2024"' },
+      { tag: 'Absatz', text: '„Fließtext, zwei Sätze"' },
+      { tag: 'Grafik · Alt-Text', text: '„Diagramm: Umsatz steigt um 12 %"' },
+      { tag: 'Tabelle', text: '„2 Spalten, 2 Zeilen"' }
+    ],
+    validationTitle: 'PDF/UA',
+    validationSub: 'konform',
+    validationStandards: 'WCAG 2.x · EN 301 549',
+    report: 'pruefbericht.pdf'
+  },
+  en: {
+    before: 'Untagged',
+    after: 'PDF/UA · tagged',
+    badge: 'validated',
+    heading: 'Annual Report 2024',
+    altText: 'Alt text ✓',
+    tableLabel: 'Table',
+    steps: ['Structure', 'Tags', 'Reading order', 'Alt text', 'Report'],
+    pipelineDone: 'PDF/UA compliant · report generated',
+    readerLabels: [
+      { tag: 'Heading · level 1', text: '"Annual Report 2024"' },
+      { tag: 'Paragraph', text: '"Body text, two sentences"' },
+      { tag: 'Graphic · alt text', text: '"Chart: revenue up 12%"' },
+      { tag: 'Table', text: '"2 columns, 2 rows"' }
+    ],
+    validationTitle: 'PDF/UA',
+    validationSub: 'validated',
+    validationStandards: 'WCAG 2.x · EN 301 549',
+    report: 'validation_report.pdf'
+  }
+};
+
+const text = content[lang];
+---
+
+{scene === 'transform' && (
+  <div class="pat-anim pat-transform" aria-hidden="true">
+    <div class="tr-stage">
+      <div class="tr-glow"></div>
+      <div class="tr-floater">
+        <div class="tr-card">
+          <div class="tr-scan"></div>
+
+          <div class="tr-raw">
+            <div class="tr-rh"></div>
+            <div class="tr-rl" style="width:100%"></div>
+            <div class="tr-rl" style="width:94%"></div>
+            <div class="tr-rl" style="width:86%"></div>
+            <div class="tr-img-raw">▢</div>
+            <div class="tr-rl" style="width:96%"></div>
+            <div class="tr-rl" style="width:68%"></div>
+            <div class="tr-tbl-raw">
+              <span></span><span></span><span></span>
+              <span class="tr-tbl-alt"></span><span class="tr-tbl-alt"></span><span class="tr-tbl-alt"></span>
+            </div>
+          </div>
+
+          <div class="tr-struct">
+            <div class="tr-srow">
+              <div class="tr-snum">1</div>
+              <div>
+                <div class="tr-tag">H1</div>
+                <div class="tr-h1">{text.heading}</div>
+              </div>
+            </div>
+            <div class="tr-srow">
+              <div class="tr-snum">2</div>
+              <div>
+                <div class="tr-tag">P</div>
+                <div class="tr-slines">
+                  <span style="width:100%"></span>
+                  <span style="width:86%"></span>
+                  <span style="width:72%"></span>
+                </div>
+              </div>
+            </div>
+            <div class="tr-srow">
+              <div class="tr-snum">3</div>
+              <div style="flex:1;position:relative">
+                <div class="tr-simg">▲<span class="tr-alt">{text.altText}</span></div>
+              </div>
+            </div>
+            <div class="tr-srow">
+              <div class="tr-snum">4</div>
+              <div>
+                <div class="tr-tag">{text.tableLabel}</div>
+                <div class="tr-stbl">
+                  <span class="tr-stbl-h"></span><span class="tr-stbl-h"></span><span class="tr-stbl-h"></span>
+                  <span class="tr-stbl-d"></span><span class="tr-stbl-d"></span><span class="tr-stbl-d"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tr-badge">
+            <span class="tr-badge-icon">✓</span>
+            <span class="tr-badge-text">PDF/UA<br /><span class="tr-badge-sub">{text.badge}</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+{scene === 'reader' && (
+  <div class="pat-anim pat-reader" aria-hidden="true">
+    <div class="reader-card">
+      <div class="reader-doc-wrap">
+        <div class="reader-doc-inner">
+          <div class="reader-doc-title">{text.heading}</div>
+          <span class="reader-line"></span>
+          <span class="reader-line narrow"></span>
+          <div class="reader-image"></div>
+          <div class="reader-table">
+            <span></span><span></span>
+            <span></span><span></span>
+          </div>
+          <div class="reader-focus"></div>
+        </div>
+      </div>
+      <div class="reader-output">
+        <div class="reader-eq">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="reader-captions">
+          {text.readerLabels.map((item, index) => (
+            <div class={`reader-caption reader-caption-${index + 1}`}>
+              <span class="reader-caption-tag">{item.tag}</span>
+              <span class="reader-caption-text">{item.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+{scene === 'pipeline' && (
+  <div class="pat-anim pat-pipeline" aria-hidden="true">
+    <div class="pipeline-track"><span class="pipeline-fill"></span></div>
+    <div class="pipeline-steps">
+      {text.steps.map((step, index) => (
+        <div class={`pipeline-step step-${index + 1}`}>
+          <span aria-hidden="true">✓</span>
+          <small>{step}</small>
+        </div>
+      ))}
+    </div>
+    <div class="pipeline-done"><span>✓ {text.pipelineDone}</span></div>
+  </div>
+)}
+
+{scene === 'validation' && (
+  <div class="pat-anim pat-validation" aria-hidden="true">
+    <div class="validation-card">
+      <div class="validation-stamp">
+        <span class="validation-check">✓</span>
+        <div>
+          <strong>{text.validationTitle}</strong>
+          <small>{text.validationSub}</small>
+        </div>
+      </div>
+      <div class="validation-standards">{text.validationStandards}</div>
+      <div class="validation-report">
+        <span class="report-icon">📄</span>
+        <span class="report-name">{text.report}</span>
+      </div>
+    </div>
+  </div>
+)}
+
+<style>
+  .pat-anim {
+    --pat-blue: #2479BE;
+    --pat-green: #2E9E6B;
+    width: 100%;
+  }
+
+  /* ===================== TRANSFORM ===================== */
+  .pat-transform {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tr-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 420px;
+    height: 520px;
+    max-width: 100%;
+  }
+
+  .tr-glow {
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2479BE, transparent 68%);
+    filter: blur(24px);
+    animation: pat-glow-pulse 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .tr-floater {
+    position: relative;
+    z-index: 1;
+    width: 340px;
+    max-width: 100%;
+    animation: pat-float-y 6s ease-in-out infinite;
+  }
+
+  .tr-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 340 / 420;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 72px rgba(20, 50, 80, 0.24);
+    border: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .tr-scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -10%;
+    height: 48px;
+    z-index: 6;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent, rgba(36, 121, 190, 0.22) 45%, rgba(36, 121, 190, 0.45) 50%, rgba(36, 121, 190, 0.22) 55%, transparent);
+    box-shadow: 0 0 20px rgba(36, 121, 190, 0.35);
+    animation: pat-scan 9s linear infinite;
+  }
+
+  .tr-raw {
+    position: absolute;
+    inset: 0;
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: pat-raw-fade 9s infinite;
+  }
+
+  .tr-rh {
+    height: 18px;
+    width: 62%;
+    background: #D7DEE5;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .tr-rl {
+    height: 8px;
+    background: #E2E8EE;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .tr-img-raw {
+    height: 80px;
+    background: #E2E8EE;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #C2CDD7;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+
+  .tr-tbl-raw {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .tr-tbl-raw span {
+    height: 15px;
+    background: #E2E8EE;
+    border-radius: 3px;
+    display: block;
+  }
+
+  .tr-tbl-raw span.tr-tbl-alt {
+    background: #E9EEF2;
+  }
+
+  .tr-struct {
+    position: absolute;
+    inset: 0;
+    padding: 28px 24px 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: pat-tagged-fade 9s infinite;
+  }
+
+  .tr-tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    color: #2479BE;
+    background: #EAF3FB;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    font-family: monospace;
+  }
+
+  .tr-srow {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .tr-snum {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #2479BE;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  .tr-h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #16334A;
+    line-height: 1.2;
+  }
+
+  .tr-slines {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .tr-slines span {
+    height: 7px;
+    background: #cdd8e1;
+    border-radius: 3px;
+    display: block;
+  }
+
+  .tr-simg {
+    position: relative;
+    height: 72px;
+    background: linear-gradient(135deg, #EAF3FB, #DCEBF7);
+    border-radius: 8px;
+    border: 1px solid rgba(36, 121, 190, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2479BE;
+    font-size: 22px;
+  }
+
+  .tr-alt {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    background: #2E9E6B;
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  .tr-stbl {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    margin-top: 3px;
+  }
+
+  .tr-stbl span {
+    height: 14px;
+    border-radius: 3px;
+    display: block;
+  }
+
+  .tr-stbl-h { background: rgba(36, 121, 190, 0.8); }
+  .tr-stbl-d { background: #dde7ef; }
+
+  .tr-badge {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    z-index: 7;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #2E9E6B;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(46, 158, 107, 0.4);
+    animation: pat-badge-pop 9s infinite;
+  }
+
+  .tr-badge-icon { font-size: 17px; }
+
+  .tr-badge-text {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .tr-badge-sub {
+    font-weight: 500;
+    font-size: 10px;
+    opacity: 0.85;
+  }
+
+  /* ===================== READER ===================== */
+  .pat-reader {
+    padding: 1.5rem;
+  }
+
+  .reader-card {
+    display: flex;
+    gap: 1rem;
+    background: #0E2638;
+    border-radius: 14px;
+    padding: 1.25rem;
+    align-items: stretch;
+    min-height: 240px;
+  }
+
+  .reader-doc-wrap {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .reader-doc-inner {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 10px;
+    padding: 16px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 200px;
+  }
+
+  .reader-doc-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #E8F2FB;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+
+  .reader-line {
+    display: block;
+    width: 100%;
+    height: 9px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    flex-shrink: 0;
+  }
+
+  .reader-line.narrow {
+    width: 78%;
+  }
+
+  .reader-image {
+    display: block;
+    flex-shrink: 0;
+    height: 48px;
+    background: rgba(79, 163, 227, 0.28);
+    border: 1px solid rgba(79, 163, 227, 0.28);
+    border-radius: 8px;
+  }
+
+  .reader-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .reader-table span {
+    display: block;
+    height: 14px;
+    background: rgba(79, 163, 227, 0.45);
+    border-radius: 3px;
+  }
+
+  .reader-focus {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 18%;
+    border: 2px solid #4FA3E3;
+    border-radius: 8px;
+    background: rgba(79, 163, 227, 0.12);
+    box-shadow: 0 0 16px rgba(79, 163, 227, 0.4);
+    animation: pat-sr-ring 9s ease-in-out infinite;
+  }
+
+  .reader-output {
+    width: 145px;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: #fff;
+    min-width: 0;
+  }
+
+  .reader-eq {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 20px;
+  }
+
+  .reader-eq span {
+    width: 4px;
+    height: 20px;
+    background: #4FA3E3;
+    border-radius: 2px;
+    transform-origin: center;
+    animation: pat-eq 0.9s ease-in-out infinite;
+  }
+
+  .reader-eq span:nth-child(2) { animation-delay: 0.15s; }
+  .reader-eq span:nth-child(3) { animation-delay: 0.3s; }
+  .reader-eq span:nth-child(4) { animation-delay: 0.45s; }
+
+  .reader-captions {
+    position: relative;
+    flex: 1;
+    min-height: 80px;
+  }
+
+  .reader-caption {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(6px);
+    animation: pat-reader-caption 9s ease-in-out infinite;
+  }
+
+  .reader-caption-2 { animation-delay: 2.25s; }
+  .reader-caption-3 { animation-delay: 4.5s; }
+  .reader-caption-4 { animation-delay: 6.75s; }
+
+  .reader-caption-tag {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #6E96B3;
+    margin-bottom: 0.3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .reader-caption-text {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #CFE4F4;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* ===================== PIPELINE ===================== */
+  .pat-pipeline {
+    padding: 2rem 1rem;
+  }
+
+  .pipeline-track {
+    position: relative;
+    height: 8px;
+    background: #E3E9EF;
+    border-radius: 5px;
+    margin: 0 8px 1.5rem;
+  }
+
+  .pipeline-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #4C8AC5, var(--pat-blue));
+    transform-origin: left center;
+    animation: pat-pipe-fill 9s linear infinite;
+  }
+
+  .pipeline-steps {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+
+  .pipeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .pipeline-step span {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--pat-green);
+    color: #fff;
+    font-size: 1rem;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: pat-check-pop 9s ease-in-out infinite;
+  }
+
+  .pipeline-step small {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #647888;
+    text-align: center;
+    line-height: 1.25;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: manual;
+  }
+
+  .step-2 span { animation-delay: 0.35s; }
+  .step-3 span { animation-delay: 0.7s; }
+  .step-4 span { animation-delay: 1.05s; }
+  .step-5 span { animation-delay: 1.4s; }
+
+  .pipeline-done {
+    text-align: center;
+    margin-top: 1.5rem;
+    animation: pat-done-tick 9s ease-in-out infinite;
+  }
+
+  .pipeline-done span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #EAF7F0;
+    color: #1F7A52;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.6rem 1.1rem;
+    border-radius: 100px;
+  }
+
+  /* ===================== VALIDATION ===================== */
+  .pat-validation {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .validation-card {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .validation-stamp {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    background: var(--pat-green);
+    color: #fff;
+    padding: 0.9rem 1.4rem;
+    border-radius: 14px;
+    box-shadow: 0 14px 30px rgba(46, 158, 107, 0.3);
+  }
+
+  .validation-check {
+    font-size: 1.5rem;
+  }
+
+  .validation-stamp strong {
+    display: block;
+    font-size: 1.3rem;
+    line-height: 1.1;
+  }
+
+  .validation-stamp small {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.9;
+  }
+
+  .validation-standards {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #647888;
+  }
+
+  .validation-report {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #F7FAFC;
+    border: 1px solid rgba(36, 121, 190, 0.12);
+    border-radius: 10px;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #16334A;
+  }
+
+  /* ===================== KEYFRAMES ===================== */
+  @keyframes pat-scan {
+    0%, 22% { top: -10%; opacity: 0; }
+    29% { opacity: 1; }
+    48% { top: 102%; opacity: 1; }
+    54% { opacity: 0; }
+    100% { top: 102%; opacity: 0; }
+  }
+
+  @keyframes pat-raw-fade {
+    0%, 30% { opacity: 1; }
+    42% { opacity: 0; }
+    86% { opacity: 0; }
+    96%, 100% { opacity: 1; }
+  }
+
+  @keyframes pat-tagged-fade {
+    0%, 38% { opacity: 0; transform: translateY(8px); }
+    50% { opacity: 1; transform: translateY(0); }
+    85% { opacity: 1; transform: translateY(0); }
+    94%, 100% { opacity: 0; transform: translateY(8px); }
+  }
+
+  @keyframes pat-badge-pop {
+    0%, 53% { opacity: 0; transform: scale(1.5) rotate(-7deg); }
+    61% { opacity: 1; transform: scale(0.9) rotate(-7deg); }
+    66% { transform: scale(1.05) rotate(-7deg); }
+    71%, 85% { opacity: 1; transform: scale(1) rotate(-7deg); }
+    93%, 100% { opacity: 0; transform: scale(0.95) rotate(-7deg); }
+  }
+
+  @keyframes pat-glow-pulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.96); }
+    50% { opacity: 0.65; transform: scale(1.04); }
+  }
+
+  @keyframes pat-float-y {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes pat-sr-ring {
+    0%, 17%  { top: 5%; }
+    22%, 39% { top: 29%; }
+    44%, 61% { top: 52%; }
+    66%, 85% { top: 72%; }
+    90%, 100% { top: 5%; }
+  }
+
+  @keyframes pat-eq {
+    0%, 100% { transform: scaleY(0.25); }
+    50% { transform: scaleY(1); }
+  }
+
+  @keyframes pat-reader-caption {
+    0%, 4% { opacity: 0; transform: translateY(8px); }
+    9%, 22% { opacity: 1; transform: translateY(0); }
+    27%, 100% { opacity: 0; transform: translateY(-8px); }
+  }
+
+  @keyframes pat-pipe-fill {
+    0% { opacity: 0; transform: scaleX(0.02); }
+    10%, 74% { opacity: 1; }
+    82%, 100% { opacity: 0; transform: scaleX(1); }
+  }
+
+  @keyframes pat-check-pop {
+    0%, 10% { opacity: 0; transform: scale(0.5); }
+    18%, 82% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.85); }
+  }
+
+  @keyframes pat-done-tick {
+    0%, 78% { opacity: 0; transform: translateY(6px); }
+    86%, 96% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pat-anim *,
+    .pat-anim *::before,
+    .pat-anim *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tr-stage {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 420 / 520;
+    }
+
+    .tr-floater {
+      width: 80%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .reader-card {
+      flex-direction: column;
+    }
+
+    .reader-output {
+      width: 100%;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .reader-eq {
+      flex-shrink: 0;
+    }
+
+    .reader-captions {
+      flex: 1;
+      min-height: 60px;
+    }
+
+    .reader-doc-inner {
+      min-height: 180px;
+    }
+
+    .reader-caption-text {
+      font-size: 0.85rem;
+    }
+  }
+</style>

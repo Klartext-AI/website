@@ -54,7 +54,7 @@ const content = {
       {
         name: "Terre des Hommes Deutschland e. V.",
         url: "https://www.tdh.de/",
-        logo: `${BASE}references/terre-des-hommes-ge.svg`
+        logo: `${BASE}references/TerreDesHommes.png`
       },
       {
         name: "FFG",
@@ -80,6 +80,16 @@ const content = {
         name: "Ingram Micro",
         url: "https://www.ingrammicro.com/",
         logo: `${BASE}references/ingram.png`
+      },
+      {
+        name: "Investitionsbank Sachsen-Anhalt",
+        url: "https://www.ib-sachsen-anhalt.de/",
+        logo: `${BASE}references/IB_SA.png`
+      },
+      {
+        name: "Fraunhofer Austria",
+        url: "https://www.fraunhofer.at/",
+        logo: `${BASE}references/fraunhofer.png`
       }
     ]
   },
@@ -130,7 +140,7 @@ const content = {
       {
         name: "Terre des Hommes Deutschland e. V.",
         url: "https://www.tdh.de/en",
-        logo: `${BASE}references/terre-des-hommes-ge.svg`
+        logo: `${BASE}references/TerreDesHommes.png`
       },
       {
         name: "FFG",
@@ -156,6 +166,16 @@ const content = {
         name: "Ingram Micro",
         url: "https://www.ingrammicro.com/",
         logo: `${BASE}references/ingram.png`
+      },
+      {
+        name: "Investitionsbank Sachsen-Anhalt",
+        url: "https://www.ib-sachsen-anhalt.de/",
+        logo: `${BASE}references/IB_SA.png`
+      },
+      {
+        name: "Fraunhofer Austria",
+        url: "https://www.fraunhofer.at/",
+        logo: `${BASE}references/fraunhofer.png`
       }
     ]
   }
@@ -349,18 +369,6 @@ const ffgCaption = lang === 'de' ? 'Förderpartner' : 'Funding partner';
     object-fit: contain;
     filter: grayscale(0%) opacity(0.8);
     transition: all 0.4s ease;
-  }
-
-  /* Make the white Terre des Hommes SVG visible on the light background
-     by inverting its colors and adding a subtle drop shadow. This targets
-     the specific filename placed in public/references. */
-  .reference-logo[src*="terre-des-hommes-ge.svg"] {
-    filter: invert(1);
-  }
-
-  .reference-item:hover .reference-logo[src*="terre-des-hommes-ge.svg"] {
-    filter: invert(1);
-    transform: scale(1.05);
   }
 
   .reference-item:hover .reference-logo {

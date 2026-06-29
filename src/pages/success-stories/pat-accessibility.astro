@@ -1,89 +1,908 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import SuccessStoryDetail from '../../components/SuccessStoryDetail.astro';
 import FinalCTA from '../../components/FinalCTA.astro';
 import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import PdfAccessibilityAnimation from '../../components/PdfAccessibilityAnimation.astro';
 
 const title = 'PDF Accessibility Transformation | Klartext AI';
 const description =
-  'Vollautomatische Umwandlung bestehender PDF-Dokumente in barrierefreie PDF/UA-Formate – modular, skalierbar, mit Human-in-the-Loop und geprüfter Konformität.';
+  'Bestehende PDF-Dokumente in geprüfte, barrierefreie PDF/UA-Formate transformieren – skalierbar, europäisch und mit optionalem Human-in-the-Loop.';
 
-const challenge = `
-<p>Barrierefreie Dokumente sind kein „Nice-to-have“ mehr: Mit dem <strong>Barrierefreiheitsgesetz (BaFG)</strong> entsteht eine klare Pflicht – und damit ein massiver Bedarf, bestehende Dokumentbestände schnell und verlässlich barrierefrei bereitzustellen.</p>
-
-<p>Gleichzeitig ist der Status quo ernüchternd: Nur ein sehr kleiner Anteil von PDFs ist heute tatsächlich barrierefrei. In Österreich profitieren <strong>1,3 Mio.+ Menschen</strong> direkt von zugänglichen Inhalten – und viele weitere indirekt durch bessere Nutzbarkeit für alle.</p>
-
-<p><strong>Das Problem:</strong></p>
-<ul>
-  <li>Manuelle Nachbearbeitung ist <strong>teuer, komplex</strong> und <strong>nicht skalierbar</strong></li>
-  <li>PDF/UA erfordert viele präzise Schritte – Fehler führen zu <strong>nicht-konformen</strong> Dokumenten</li>
-  <li>Große Bestände und laufende Updates machen „händische“ Prozesse schnell zum Bottleneck</li>
-</ul>
-`;
-
-const solution = `
-<p>PAT (PDF Accessibility Transformation) ist ein <strong>KI-Framework</strong> zur vollautomatischen Umwandlung bestehender PDFs in <strong>barrierefreie PDF/UA</strong>-Formate – mit modularer Pipeline, optionalem <strong>Human-in-the-Loop</strong> und vollständiger <strong>Validierung</strong>.</p>
-
-<p><strong>Der Ansatz im Detail:</strong></p>
-<ul>
-  <li><strong>End-to-End PDF/UA-Pipeline:</strong> Automatisiert alle relevanten Schritte der PDF/UA-Transformation (u. a. Strukturbaum, Tags, Lesereihenfolge, Alternativtexte, Metadaten, Tabellen/Listen, Überschriftenhierarchie)</li>
-  <li><strong>LLM + NLP + Regelwerk:</strong> Semantische Präzision durch Kombination aus Sprachmodellen, klassischer NLP und deterministischen Regeln</li>
-  <li><strong>Human-in-the-Loop:</strong> Optionale Review-Schleifen für Sonderfälle, sensible Inhalte und Qualitätsfreigaben</li>
-  <li><strong>Skalierbare Batch-Transformation:</strong> Verarbeitung großer PDF-Bestände mit konsistentem Qualitätsniveau</li>
-  <li><strong>Vollständige PDF/UA-Validierung:</strong> Inklusive Qualitätsreports, Prüfprotokollen und nachvollziehbaren Findings</li>
-</ul>
-
-<p>Was PAT besonders macht: Es ist nicht nur „Accessibility-Assistenz“, sondern eine <strong>vollständige PDF/UA-Transformation</strong> als Standardlösung – modular, überprüfbar und produktionsnah.</p>
-`;
-
-const results = [
-  'Automatisierte Transformation großer PDF-Bestände in PDF/UA – skalierbar statt manuell',
-  'Human-in-the-Loop für Sonderfälle & sensible Inhalte – Kontrolle bleibt bei Fachpersonen',
-  'Vollständige PDF/UA-Validierung inkl. Qualitätsreports – klare Nachvollziehbarkeit',
-  'Mehr Inklusion: digitaler Zugang für Menschen mit Einschränkungen und bessere Usability für alle',
-  'Nachhaltigkeit & Effizienz: ressourcenschonend durch Automatisierung, wirtschaftlich durch Skalierung'
-];
-
-const fullContent = `
-<h3>Warum jetzt: Pflicht & Bedarf durch BaFG</h3>
-<p>Mit dem Barrierefreiheitsgesetz (BaFG) steigt die Erwartung an digitale Zugänglichkeit deutlich. Organisationen müssen nicht nur neue Dokumente barrierefrei erstellen, sondern vor allem <strong>bestehende Bestände</strong> in vertretbarer Zeit und mit verlässlicher Qualität transformieren.</p>
-
-<h3>Innovationsgehalt</h3>
-<p>PAT adressiert die Kernhürde der PDF/UA-Umsetzung: die Kombination aus <strong>technischer Korrektheit</strong> und <strong>semantischer Präzision</strong>.</p>
-<ul>
-  <li><strong>Automatisierung der PDF/UA-Schritte:</strong> Durchgängige Pipeline statt einzelner Tools</li>
-  <li><strong>Semantik mit System:</strong> LLM + NLP + Regelwerk für robuste Strukturen, Labels und Lesereihenfolgen</li>
-  <li><strong>Prüfbarkeit als Prinzip:</strong> Validierung & Reports als integraler Bestandteil – nicht nachträglich „drübergestülpt“</li>
-</ul>
-
-<h3>Wirkung & Nutzen</h3>
-<ul>
-  <li><strong>Inklusion:</strong> Barrierefreie Dokumente schaffen digitalen Zugang für alle – direkt profitieren 1,3 Mio.+ Menschen in Österreich</li>
-  <li><strong>Effizienz:</strong> Automatisierung reduziert manuelle Aufwände und macht Skalierung überhaupt erst möglich</li>
-  <li><strong>Nachhaltigkeit:</strong> Weniger manuelle Nachbearbeitung, weniger Rework, weniger Ressourcenverbrauch</li>
-</ul>
-
-
-`;
-
-const highlights = [
-  { icon: "shield" as const, label: "PDF/UA-konform", description: "Vollautomatische Transformation nach aktuellem Barrierefreiheitsstandard" },
-  { icon: "users" as const, label: "Human-in-the-Loop", description: "Sonderfälle und sensible Inhalte bleiben unter menschlicher Kontrolle" }
-];
+const BASE = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
-  <SuccessStoryDetail
-    title="PDF Accessibility Transformation"
-    client="Verwaltungsorganisation"
-    category="Document Accessibility"
-    challenge={challenge}
-    solution={solution}
-    results={results}
-    highlights={highlights}
-    fullContent={fullContent}
-    lang="de"
-  />
+  <main class="product-detail">
+    <div class="container">
+      <a href={`${BASE}success-stories`} class="back-link">← Zurück zu Erfolgsgeschichten</a>
+
+      <article class="content fade-in">
+        <header class="hero">
+          <span class="badge">Klartext PAT</span>
+          <h1 class="headline">Von ungetaggten PDFs zu geprüftem PDF/UA – mit einer Pipeline</h1>
+        </header>
+
+        <!-- Highlights -->
+        <div class="story-highlights-custom">
+          <div class="highlight-item-custom">
+            <div class="highlight-icon-custom">
+              <Icon name="shield" size={22} />
+            </div>
+            <div class="highlight-text-custom">
+              <span class="highlight-label-custom">PDF/UA + WCAG</span>
+              <span class="highlight-desc-custom">Transformation mit Validierung und Qualitätsreport</span>
+            </div>
+          </div>
+          <div class="highlight-item-custom">
+            <div class="highlight-icon-custom">
+              <Icon name="route" size={22} />
+            </div>
+            <div class="highlight-text-custom">
+              <span class="highlight-label-custom">Ein Durchlauf</span>
+              <span class="highlight-desc-custom">Upload, Struktur, Tags, Lesereihenfolge und Alt-Texte in einer Pipeline</span>
+            </div>
+          </div>
+          <div class="highlight-item-custom">
+            <div class="highlight-icon-custom">
+              <Icon name="lock" size={22} />
+            </div>
+            <div class="highlight-text-custom">
+              <span class="highlight-label-custom">Europäisch &amp; DSGVO</span>
+              <span class="highlight-desc-custom">Für Organisationen mit hohen Anforderungen an Datenschutz und Nachvollziehbarkeit</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why not just Acrobat? -->
+        <div class="why-section">
+          <p class="why-intro">Kein Einzeltool – eine durchgängige Pipeline für genau diesen Anwendungsfall.</p>
+          <div class="why-points">
+            <div class="why-point">
+              <span class="why-num">01</span>
+              <div>
+                <strong>Pipeline statt Einzeltools.</strong>
+                Von Struktur über Tags bis zum geprüften PDF/UA – statt manueller Arbeit in Acrobat.
+              </div>
+            </div>
+            <div class="why-point">
+              <span class="why-num">02</span>
+              <div>
+                <strong>Sichtbar statt Blackbox.</strong>
+                Screen-Reader-Vorschau direkt im Browser – kein externes Prüf-Tool nötig.
+              </div>
+            </div>
+            <div class="why-point">
+              <span class="why-num">03</span>
+              <div>
+                <strong>Der Mensch behält die Kontrolle.</strong>
+                Human-in-the-Loop für Sonderfälle und sensible Inhalte – mit vollständigem Qualitätsreport.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FLOW: Steps -->
+        <section class="flow">
+
+          <!-- STEP 01: File Upload -->
+          <div class="step-zigzag step-zigzag-left">
+            <div class="step-zigzag-content">
+              <div class="step-top">
+                <span class="step-number">01</span>
+                <div class="step-text">
+                  <div class="step-title">File Upload</div>
+                  <div class="step-caption">Beliebiges PDF hochladen – gescannt oder digital. Die Pipeline übernimmt den Rest.</div>
+                </div>
+              </div>
+              <ul class="feature-bullets">
+                <li><strong>OCR für gescannte PDFs</strong> – Scans und Bild-PDFs erkannt, umgewandelt und transformiert.</li>
+                <li><strong>Standard PDF/UA Pipeline</strong> – Struktur, Tags, Lesereihenfolge, Alt-Texte und Validierung in einem Durchlauf.</li>
+              </ul>
+            </div>
+
+            <div class="step-zigzag-media">
+              <div class="media-card media-card-video">
+                <video
+                  muted
+                  playsinline
+                  preload="metadata"
+                  class="media-video hover-play"
+                  loop
+                >
+                  <source src="/pat_product_files/pat_start_cap.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 02: Scanner Animation -->
+          <div class="step-zigzag step-zigzag-right">
+            <div class="step-zigzag-media">
+              <PdfAccessibilityAnimation scene="transform" lang="de" />
+            </div>
+
+            <div class="step-zigzag-content">
+              <div class="step-top">
+                <span class="step-number">02</span>
+                <div class="step-text">
+                  <div class="step-title">Rohes PDF wird automatisch strukturiert</div>
+                  <div class="step-caption">Struktur, Tags und Lesereihenfolge entstehen automatisch – inklusive Alternativtexten für Grafiken und Tabellen.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 03: Screen-Reader Preview -->
+          <div class="step-zigzag step-zigzag-left">
+            <div class="step-zigzag-content">
+              <div class="step-top">
+                <span class="step-number">03</span>
+                <div class="step-text">
+                  <div class="step-title">Screen-Reader-Vorschau direkt im Browser</div>
+                  <div class="step-caption">Hören und sehen, was assistive Technologie ausgibt – Fokus, Reihenfolge und Alt-Texte werden direkt prüfbar.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-zigzag-media">
+              <PdfAccessibilityAnimation scene="reader" lang="de" />
+            </div>
+          </div>
+
+          <!-- STEP 04: Every step traceable -->
+          <div class="step-results">
+            <div class="step-top">
+              <span class="step-number">04</span>
+              <div class="step-text">
+                <div class="step-title">Jeder Schritt ist nachvollziehbar</div>
+                <div class="step-caption">
+                  Vom Upload bis zur Validierung – sichtbar statt Blackbox.
+                </div>
+              </div>
+            </div>
+
+            <div class="result-cards">
+              <div class="result-card-pat">
+                <div class="result-card-pat-title">Automatisierte Pipeline</div>
+                <PdfAccessibilityAnimation scene="pipeline" lang="de" />
+                <div class="result-card-pat-text">Fünf Schritte vom Upload bis zum geprüften Dokument – ohne Einzeltools.</div>
+              </div>
+
+              <div class="result-card-pat">
+                <div class="result-card-pat-title">Geprüfter Report</div>
+                <PdfAccessibilityAnimation scene="validation" lang="de" />
+                <div class="result-card-pat-text">PDF/UA-Konformität wird dokumentiert und ist jederzeit nachvollziehbar.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CLOSING -->
+          <div class="closing-card">
+            <div class="closing-badge">Pflicht seit dem Barrierefreiheitsgesetz</div>
+
+            <h2 class="closing-title">Zugänglich. Geprüft. Skalierbar.</h2>
+
+            <p class="closing-subtitle">
+              Statt händischer Nachbearbeitung automatisieren wir genau die Schritte, die sich nachvollziehbar
+              automatisieren lassen – für PDF-Bestände jeder Größe.
+            </p>
+          </div>
+
+          <!-- STORY DETAILS SECTION -->
+          <div class="story-section">
+
+            <div class="story-block">
+              <h2 class="story-block-title">Hintergrundgeschichte</h2>
+              <div class="story-block-content">
+                <p>Barrierefreie Dokumente sind keine Kür mehr – sie sind Pflicht. Mit dem <strong>Barrierefreiheitsgesetz (BaFG)</strong> entsteht klarer Handlungsbedarf: In Österreich profitieren <strong>1,3 Mio.+ Menschen</strong> direkt von zugänglichen Inhalten. Manuelle Nachbearbeitung ist teuer und skaliert nicht.</p>
+              </div>
+            </div>
+
+            <div class="story-block">
+              <h2 class="story-block-title">Die Ergebnisse</h2>
+              <div class="results-list">
+                <div class="result-item-check">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  <p>Vom Upload bis zum validierten PDF/UA in einem durchgängigen, automatisierten Prozess</p>
+                </div>
+                <div class="result-item-check">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  <p>PDF/UA, WCAG &amp; EN 301 549 mit vollständigem Qualitätsreport und Prüfprotokoll</p>
+                </div>
+                <div class="result-item-check">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                  <p>Screen-Reader-Vorschau und Human-in-the-Loop für sensible Inhalte – Kontrolle bleibt bei Fachpersonen</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+      </article>
+    </div>
+  </main>
+
   <FinalCTA lang="de" />
   <Footer lang="de" />
 </BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const allVideos = document.querySelectorAll('.media-video');
+
+    allVideos.forEach((v) => {
+      v.loop = true;
+      v.muted = true;
+      v.playsInline = true;
+
+      const startTime = parseFloat(v.dataset.startTime) || 0;
+
+      v.addEventListener('loadeddata', () => {
+        try { v.currentTime = startTime || 0.001; } catch (_) {}
+      }, { once: true });
+
+      v.addEventListener('loadedmetadata', () => { v.load(); }, { once: true });
+    });
+
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        const startTime = parseFloat(video.dataset.startTime) || 0;
+        if (entry.isIntersecting) {
+          video.currentTime = startTime;
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '0px' });
+
+    allVideos.forEach((video) => { videoObserver.observe(video); });
+  });
+</script>
+
+<style>
+  .product-detail {
+    padding: var(--space-2xl) 0;
+    background: transparent;
+  }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-blue);
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: var(--space-xl);
+    transition: all 0.3s ease;
+  }
+
+  .back-link:hover {
+    transform: translateX(-4px);
+    color: var(--color-blue-accent);
+  }
+
+  .hero {
+    text-align: center;
+    margin: var(--space-lg) 0 var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .badge {
+    display: inline-block;
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.65rem 1.7rem;
+    background: rgba(36, 121, 190, 0.1);
+    border-radius: 8px;
+    font-size: 1.3rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .headline {
+    font-size: var(--font-size-h2);
+    font-weight: 300;
+    margin: var(--space-md) 0;
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .flow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    margin: var(--space-2xl) 0;
+  }
+
+  .step-zigzag {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .step-zigzag-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .step-zigzag-media {
+    display: flex;
+    justify-content: center;
+  }
+
+  .step-zigzag-right .step-zigzag-media {
+    order: -1;
+  }
+
+  .step-top {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--color-blue);
+    background: rgba(36, 121, 190, 0.1);
+    border: 1px solid rgba(36, 121, 190, 0.2);
+    flex: 0 0 auto;
+  }
+
+  .step-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-top: 0;
+  }
+
+  .step-caption {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+  }
+
+  /* Feature mini cards */
+  .feature-bullets {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-md) 0 0 calc(40px + var(--space-md));
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .feature-bullets li {
+    padding-left: 1.1rem;
+    position: relative;
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .feature-bullets li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--color-blue);
+    font-weight: 600;
+  }
+
+  .feature-bullets strong {
+    color: var(--color-text-dark);
+    font-weight: 600;
+  }
+
+  .media-card {
+    border-radius: 1rem;
+    max-width: 520px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.15);
+    line-height: 0;
+    width: 100%;
+    margin-top: var(--space-md);
+    transition: var(--transition-smooth);
+    backdrop-filter: blur(8px);
+  }
+
+  .media-card:hover {
+    box-shadow: 0 12px 32px rgba(36, 121, 190, 0.2);
+  }
+
+  .media-card-lg {
+    max-width: 560px;
+  }
+
+  .media-card-video {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .media-card-video .media-video {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+  }
+
+
+
+  .media-video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .step-results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .result-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .result-card-pat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.12);
+    backdrop-filter: blur(8px);
+    transition: var(--transition-smooth);
+  }
+
+  .result-card-pat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(36, 121, 190, 0.18);
+  }
+
+  .result-card-pat-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+  }
+
+  .result-card-pat-text {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .closing-card {
+    padding: var(--space-lg);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.12);
+    backdrop-filter: blur(8px);
+    text-align: center;
+  }
+
+  .closing-badge {
+    display: inline-block;
+    font-weight: 600;
+    color: var(--color-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 1rem;
+    background: rgba(36, 121, 190, 0.1);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .closing-title {
+    margin: var(--space-md) 0;
+    font-size: var(--font-size-h2);
+    font-weight: 400;
+    color: var(--color-blue);
+    line-height: 1.2;
+  }
+
+  .closing-subtitle {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--color-text-body);
+    line-height: 1.7;
+    max-width: 80ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .story-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .story-highlights-custom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    border-radius: 1rem;
+  }
+
+  .highlight-item-custom {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .highlight-icon-custom {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(36, 121, 190, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-blue);
+  }
+
+  .highlight-text-custom {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .highlight-label-custom {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    line-height: 1.3;
+  }
+
+  .highlight-desc-custom {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .why-section {
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-md);
+    border-left: 3px solid var(--color-blue);
+    background: rgba(36, 121, 190, 0.03);
+    border-radius: 0 0.75rem 0.75rem 0;
+  }
+
+  .why-intro {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--color-blue);
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.01em;
+  }
+
+  .why-points {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .why-point {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--color-text-body);
+  }
+
+  .why-num {
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-blue);
+    letter-spacing: 0.08em;
+    margin-top: 0.3rem;
+    opacity: 0.6;
+  }
+
+  .why-point strong {
+    color: var(--color-text-dark);
+    font-weight: 600;
+  }
+
+  .story-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .story-block-title {
+    font-size: var(--font-size-h3);
+    font-weight: 400;
+    color: var(--color-blue);
+    position: relative;
+    padding-bottom: var(--space-sm);
+  }
+
+  .story-block-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--color-blue);
+  }
+
+  .story-block-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--color-text-body);
+  }
+
+  .results-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .result-item-check {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(36, 121, 190, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .result-item-check:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.15);
+  }
+
+  .result-item-check svg {
+    flex-shrink: 0;
+    color: var(--color-blue);
+    margin-top: 2px;
+  }
+
+  .result-item-check p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    margin: 0;
+  }
+
+  @media (max-width: 820px) {
+    .headline {
+      font-size: var(--font-size-h2);
+    }
+
+    .result-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .closing-title {
+      font-size: var(--font-size-h3);
+    }
+
+    .step-zigzag {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .step-zigzag-right .step-zigzag-media {
+      order: 1;
+    }
+
+    .step-zigzag-right .step-zigzag-content {
+      order: 0;
+    }
+
+    .step-zigzag-content {
+      text-align: center;
+    }
+
+    .step-zigzag-content .step-top {
+      justify-content: center;
+    }
+
+    .feature-bullets {
+      margin-left: 0;
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .product-detail {
+      padding: var(--space-lg) 0;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .headline {
+      font-size: 2rem;
+      line-height: 1.3;
+    }
+
+    .hero {
+      margin: var(--space-md) 0;
+      padding-bottom: var(--space-md);
+    }
+
+    .why-section {
+      margin-bottom: var(--space-xl);
+      padding: var(--space-md) var(--space-sm);
+    }
+
+    .why-intro {
+      font-size: 1.1rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .why-point {
+      gap: var(--space-sm);
+      font-size: 1rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      font-size: 0.7rem;
+    }
+
+    .step-title {
+      font-size: 1rem;
+    }
+
+    .step-caption {
+      font-size: 0.875rem;
+    }
+
+    .step-top {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--space-sm);
+    }
+
+    .flow {
+      gap: var(--space-xl);
+      margin: var(--space-lg) 0;
+    }
+
+    .media-card,
+    .media-card-lg {
+      max-width: 100%;
+      border-radius: 0.75rem;
+    }
+
+    .result-cards {
+      gap: var(--space-lg);
+    }
+
+    .closing-card {
+      padding: var(--space-md);
+    }
+
+    .closing-badge {
+      font-size: 0.75rem;
+    }
+
+    .closing-title {
+      font-size: 1.25rem;
+    }
+
+    .closing-subtitle {
+      font-size: 0.95rem;
+    }
+
+    .story-section {
+      gap: var(--space-lg);
+    }
+
+    .story-highlights-custom {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+    }
+
+    .story-block-title {
+      font-size: 1.25rem;
+      text-align: center;
+    }
+
+    .story-block-title::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .story-block-content {
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .results-list {
+      grid-template-columns: 1fr;
+    }
+
+    .result-item-check {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .result-item-check svg {
+      margin-top: 0;
+      margin-bottom: var(--space-xs);
+    }
+
+    .result-item-check p {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .headline {
+      font-size: 1.75rem;
+    }
+
+    .step-title {
+      font-size: 0.95rem;
+    }
+
+    .step-caption {
+      font-size: 0.825rem;
+    }
+
+    .closing-title {
+      font-size: 1.1rem;
+    }
+  }
+</style>
