@@ -7,6 +7,11 @@ interface Props {
   robots?: string;
   ogType?: string;
   autoLangRedirect?: boolean;
+  /**
+   * Share-card override, relative to the site base (e.g. 'blog/my-post-card.png').
+   * Must be a 1200x630 PNG — those dimensions are declared in the meta tags.
+   */
+  ogImage?: string;
 }
 
 const {
@@ -16,7 +21,8 @@ const {
   alwaysShowNav = false,
   robots = 'index, follow, max-image-preview:large',
   ogType = 'website',
-  autoLangRedirect = false
+  autoLangRedirect = false,
+  ogImage
 } = Astro.props;
 
 import '@fontsource/inter/latin.css';
@@ -49,6 +55,14 @@ const enPath = isEN ? relPath : (relPath === '/' ? '/en/' : `/en${relPath}`);
 const deHref = new URL(`${BASE.replace(/\/$/, '')}${dePath}`, SITE).toString();
 const enHref = new URL(`${BASE.replace(/\/$/, '')}${enPath}`, SITE).toString();
 const locale = lang === 'en' ? 'en_US' : 'de_DE';
+
+// Social share card (1200x630). Generated from docs/brand/klartext-og.html via
+// docs/brand/generate-og.sh; see that file before editing the artwork.
+// One card serves both languages — its copy is English brand copy throughout
+// (the positioning line is English on the German site too), so the alt text
+// transcribing it is English regardless of `lang`.
+const OG_IMAGE_ALT = 'Klartext AI — Klar mit KI. We don’t build chatbots. Your partner for tailored AI solutions that deliver tangible results.';
+const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString();
 ---
 
 <!DOCTYPE html>
@@ -81,12 +95,16 @@ const locale = lang === 'en' ? 'en_US' : 'de_DE';
   <meta property="og:site_name" content="Klartext AI">
   <meta property="og:url" content={canonicalHref}>
   <meta property="og:locale" content={locale}>
-  <meta property="og:image" content={`${new URL(`${BASE}LOGO_transparent.png`, SITE)}`}>
-  <meta property="og:image:alt" content="Klartext AI logo">
+  <meta property="og:image" content={ogImageUrl}>
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content={OG_IMAGE_ALT}>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
-  <meta name="twitter:image" content={`${new URL(`${BASE}LOGO_transparent.png`, SITE)}`}>
+  <meta name="twitter:image" content={ogImageUrl}>
+  <meta name="twitter:image:alt" content={OG_IMAGE_ALT}>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href={`${BASE}favicon.ico`}>
