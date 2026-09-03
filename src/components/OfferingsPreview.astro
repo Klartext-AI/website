@@ -13,6 +13,7 @@ const content = {
     sectionTitle: "Was wir anbieten",
     subtitle: "Maßgeschneiderte Lösungen für Deine KI-Transformation",
     viewAllOfferings: "Alle Leistungen ansehen",
+    learnMore: "Mehr erfahren",
     offerings: [
       {
         id: "custom-projects",
@@ -30,10 +31,10 @@ const content = {
       },
       {
         id: "pdf-accessibility",
-        title: "PDF/UA Accessibility",
+        title: "doclarity – PDF/UA Accessibility",
         icon: "📄",
-        description: "Vollautomatische Umwandlung von PDFs in barrierefreie PDF/UA-Dokumente",
-        highlights: ["Automatisierte Transformation", "Human-in-the-Loop", "Geprüfte PDF/UA-Konformität"]
+        description: "KI-gestützte Umwandlung von PDFs in barrierefreie PDF/UA-Dokumente",
+        highlights: ["KI-gestützte Transformation", "Human-in-the-Loop-Review", "Geprüfte PDF/UA-Konformität"]
       },
       {
         id: "inspirational-talks",
@@ -48,6 +49,7 @@ const content = {
     sectionTitle: "What We Offer",
     subtitle: "Tailored solutions for your AI transformation",
     viewAllOfferings: "View all services",
+    learnMore: "Learn more",
     offerings: [
       {
         id: "custom-projects",
@@ -65,10 +67,10 @@ const content = {
       },
       {
         id: "pdf-accessibility",
-        title: "PDF/UA Accessibility",
+        title: "doclarity – PDF/UA Accessibility",
         icon: "📄",
-        description: "Fully automated conversion of PDFs into accessible PDF/UA documents",
-        highlights: ["Automated transformation", "Human-in-the-loop", "Verified PDF/UA compliance"]
+        description: "AI-assisted conversion of PDFs into accessible PDF/UA documents",
+        highlights: ["AI-assisted transformation", "Human-in-the-loop review", "Verified PDF/UA compliance"]
       },
       {
         id: "inspirational-talks",
@@ -89,6 +91,14 @@ const offeringIcons = {
   'pdf-accessibility': 'route',
   'inspirational-talks': 'bulb'
 } as const;
+
+const offeringLogos: Record<string, string> = {
+  'pdf-accessibility': `${BASE}doclarity_product_files/doclarity-logo.svg`
+};
+
+const linkMap: Record<string, string> = {
+  'pdf-accessibility': lang === 'en' ? `${BASE}en/success-stories/doclarity` : `${BASE}success-stories/doclarity`,
+};
 ---
 
 <section class="offerings-preview section">
@@ -99,10 +109,30 @@ const offeringIcons = {
     </div>
 
     <div class="offerings-grid">
-      {text.offerings.map((offering, index) => (
-        <article class="offering-preview-card glass-card fade-in" style={`animation-delay: ${index * 0.1}s`}>
+      {text.offerings.map((offering, index) => {
+        const isLinked = offering.id in linkMap;
+        const href = linkMap[offering.id];
+        const Tag = isLinked ? 'a' : 'article';
+        return (
+        <Tag
+          class:list={['offering-preview-card', 'glass-card', 'fade-in', { 'offering-preview-card--linked': isLinked }]}
+          style={`animation-delay: ${index * 0.1}s`}
+          {...(isLinked ? { href } : {})}
+        >
           <div class="offering-icon-large">
-            <Icon name={offeringIcons[offering.id]} size={36} />
+            {offeringLogos[offering.id] ? (
+              <img
+                src={offeringLogos[offering.id]}
+                alt=""
+                class="offering-brand-logo"
+                width="126"
+                height="32"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <Icon name={offeringIcons[offering.id]} size={36} />
+            )}
           </div>
           <h3 class="offering-preview-title">{offering.title}</h3>
           <p class="offering-preview-description">{offering.description}</p>
@@ -117,8 +147,18 @@ const offeringIcons = {
               </li>
             ))}
           </ul>
-        </article>
-      ))}
+
+          {isLinked && (
+            <span class="offering-preview-link">
+              {text.learnMore}
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 12l4-4-4-4"/>
+              </svg>
+            </span>
+          )}
+        </Tag>
+        );
+      })}
     </div>
 
     <div class="offerings-cta text-center fade-in">
@@ -168,12 +208,47 @@ const offeringIcons = {
     background: rgba(255, 255, 255, 0.75) !important;
   }
 
+  .offering-preview-card--linked {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .offering-preview-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-blue);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: gap 0.3s ease;
+    margin-top: var(--space-sm);
+  }
+
+  .offering-preview-card--linked:hover .offering-preview-link {
+    gap: 0.75rem;
+  }
+
+  .offering-preview-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .offering-preview-card--linked:hover .offering-preview-link svg {
+    transform: translateX(4px);
+  }
+
   .offering-icon-large {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     color: var(--color-blue);
     margin-bottom: var(--space-sm);
+  }
+
+  .offering-brand-logo {
+    display: block;
+    width: 126px;
+    height: auto;
   }
 
   .offering-preview-title {

@@ -40,13 +40,13 @@ const content = {
       },
       {
         id: "pdf-accessibility",
-        title: "PDF/UA Accessibility Transformation",
+        title: "doclarity – PDF/UA Accessibility Transformation",
         category: "Produkt",
         icon: "📄",
-        description: "Vollautomatische Umwandlung bestehender PDF-Dokumente in barrierefreie PDF/UA-Formate – mit modularer Pipeline, Human-in-the-Loop und geprüfter Konformität.",
+        description: "KI-gestützte Umwandlung bestehender PDF-Dokumente in barrierefreie PDF/UA-Formate – mit modularer Pipeline, festem Human-in-the-Loop-Review und geprüfter Konformität.",
         highlights: [
-          "Automatisierte Transformation großer PDF-Bestände in PDF/UA",
-          "Human-in-the-Loop für Sonderfälle & sensible Inhalte",
+          "KI-gestützte Transformation großer PDF-Bestände in PDF/UA",
+          "Human-in-the-Loop-Review als fester Teil des Prozesses",
           "Vollständige PDF/UA-Validierung inkl. Qualitätsreports"
         ]
       },
@@ -131,13 +131,13 @@ const content = {
       },
       {
         id: "pdf-accessibility",
-        title: "PDF/UA Accessibility Transformation",
+        title: "doclarity – PDF/UA Accessibility Transformation",
         category: "Product",
         icon: "📄",
-        description: "Fully automated transformation of existing PDFs into accessible PDF/UA documents – with a modular pipeline, human-in-the-loop review and robust compliance checks.",
+        description: "AI-assisted transformation of existing PDFs into accessible PDF/UA documents – with a modular pipeline, built-in human-in-the-loop review and robust compliance checks.",
         highlights: [
-          "Automated conversion of large PDF archives to PDF/UA",
-          "Human-in-the-loop handling for edge cases & sensitive content",
+          "AI-assisted conversion of large PDF archives to PDF/UA",
+          "Human-in-the-loop review as a fixed part of the process",
           "Full PDF/UA validation including quality reports"
         ]
       },
@@ -205,9 +205,14 @@ const offeringIcons = {
   'hackathons': 'users'
 } as const;
 
+// Products carry their own brand mark instead of a generic line icon
+const offeringLogos: Record<string, string> = {
+  'pdf-accessibility': `${BASE}doclarity_product_files/doclarity-logo.svg`
+};
+
 const linkMap: Record<string, string> = {
   'custom-projects': lang === 'en' ? `${BASE}en/success-stories` : `${BASE}success-stories`,
-  'pdf-accessibility': lang === 'en' ? `${BASE}en/success-stories/pat-accessibility` : `${BASE}success-stories/pat-accessibility`,
+  'pdf-accessibility': lang === 'en' ? `${BASE}en/success-stories/doclarity` : `${BASE}success-stories/doclarity`,
 };
 
 ---
@@ -232,7 +237,19 @@ const linkMap: Record<string, string> = {
             >
               <div class="offering-header">
                 <div class="offering-icon">
-                  <Icon name={offeringIcons[offering.id]} size={32} />
+                  {offeringLogos[offering.id] ? (
+                    <img
+                      src={offeringLogos[offering.id]}
+                      alt=""
+                      class="offering-logo"
+                      width="126"
+                      height="32"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <Icon name={offeringIcons[offering.id]} size={32} />
+                  )}
                 </div>
                 <span class="offering-category">{offering.category}</span>
               </div>
@@ -340,6 +357,14 @@ const linkMap: Record<string, string> = {
     align-items: center;
     justify-content: center;
     color: var(--color-blue);
+  }
+
+  /* Product logos keep their own brand colours rather than inheriting the icon blue */
+  .offering-logo {
+    display: block;
+    width: 126px;
+    height: auto;
+    object-fit: contain;
   }
 
   .offering-category {

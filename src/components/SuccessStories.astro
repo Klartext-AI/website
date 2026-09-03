@@ -10,7 +10,7 @@ const BASE = import.meta.env.BASE_URL;
 
 const storyUrls: Record<string, string> = {
   'data-extraction-rfu': 'data-extraction-banking',
-  'pat-accessibility': 'pat-accessibility',
+  'doclarity': 'doclarity',
   'quote-automation': 'quote-automation'
 };
 
@@ -38,15 +38,15 @@ const content = {
         excerpt: "Automatisierte Extraktion quantitativer und qualitativer Informationen aus 500+ seitigen Dokumenten."
       },
       {
-        id: "pat-accessibility",
-        title: "PDF Accessibility Transformation",
+        id: "doclarity",
+        title: "PDF Accessibility Transformation mit doclarity",
         client: "Verwaltungsorganisation",
         category: "Document Accessibility",
         facts: [
           { icon: "shield", text: "PDF/UA + WCAG validiert" },
           { icon: "route", text: "Vom Upload bis zum Report" }
         ],
-        excerpt: "Vollautomatische Umwandlung bestehender PDFs in geprüfte PDF/UA-Formate."
+        excerpt: "KI-gestützte Umwandlung bestehender PDFs in geprüfte PDF/UA-Formate – mit Human-in-the-Loop-Review."
       },
       {
         id: "quote-automation",
@@ -84,15 +84,15 @@ const content = {
         excerpt: "Automated extraction of quantitative and qualitative information from 500+ page documents."
       },
       {
-        id: "pat-accessibility",
-        title: "PDF Accessibility Transformation",
+        id: "doclarity",
+        title: "PDF Accessibility Transformation with doclarity",
         client: "Public Sector Organization",
         category: "Document Accessibility",
         facts: [
           { icon: "shield", text: "PDF/UA + WCAG validated" },
           { icon: "route", text: "Upload to quality report" }
         ],
-        excerpt: "Fully automated transformation of existing PDFs into validated PDF/UA formats."
+        excerpt: "AI-assisted transformation of existing PDFs into validated PDF/UA formats – with human-in-the-loop review."
       },
       {
         id: "quote-automation",
@@ -134,6 +134,17 @@ const text = content[lang];
               <article class="story-card glass-card" style={`animation-delay: ${index * 0.15}s`}>
                 <div class="story-meta">
                   <span class="story-category">{story.category}</span>
+                  {story.id === 'doclarity' && (
+                    <img
+                      src={`${BASE}doclarity_product_files/doclarity-logo.svg`}
+                      alt=""
+                      class="story-brand-logo"
+                      width="106"
+                      height="27"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
                 </div>
 
                 <h3 class="story-title">{story.title}</h3>
@@ -240,7 +251,16 @@ const text = content[lang];
   .story-meta {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
     margin-bottom: var(--space-sm);
+  }
+
+  .story-brand-logo {
+    display: block;
+    width: 106px;
+    height: auto;
+    flex-shrink: 0;
   }
 
   .story-category {

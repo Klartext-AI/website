@@ -14,7 +14,7 @@ const storyUrls: Record<string, string> = {
   'compliance-assistant': 'compliance-assistant',
   'quote-automation': 'quote-automation',
   'training-platform': 'training-platform',
-  'pat-accessibility': 'pat-accessibility'
+  'doclarity': 'doclarity'
 };
 
 const content = {
@@ -36,16 +36,16 @@ const content = {
         fullExcerpt: "Ein führender Bankendienstleister stand vor der Herausforderung, dass Analysten zahlreiche Informationen aus umfangreichen Dokumenten extrahieren mussten. Unsere AI-Lösung übernimmt die Extraktion und liefert die Werte direkt in die eigenen Systeme. Da es sich um einen sensiblen Anwendungsbereich handelt, können Menschen alle Extraktionen zeiteffizient verifizieren, indem sie direkte Referenz-Locations und Begründungen erhalten."
       },
       {
-        id: "pat-accessibility",
-        title: "PDF Accessibility Transformation",
+        id: "doclarity",
+        title: "PDF Accessibility Transformation mit doclarity",
         client: "Verwaltungsorganisation",
         facts: [
           { icon: "shield", text: "PDF/UA + WCAG validiert" },
           { icon: "route", text: "Vom Upload bis zum Report" }
         ],
         category: "Document Accessibility",
-        excerpt: "Vollautomatische Umwandlung bestehender PDFs in geprüfte PDF/UA-Formate – mit Screen-Reader-Vorschau und Qualitätsreport.",
-        fullExcerpt: "Die Lösung transformiert große PDF-Bestände vollautomatisch in validierte PDF/UA-Dokumente. Eine modulare Pipeline kombiniert LLM + NLP + Regelwerk für Struktur, Tags, Lesereihenfolge und Alternativtexte. Screen-Reader-Vorschau und Human-in-the-Loop machen Qualität nachvollziehbar und kontrollierbar."
+        excerpt: "KI-gestützte Umwandlung bestehender PDFs in geprüfte PDF/UA-Formate – mit Screen-Reader-Vorschau, Human-in-the-Loop-Review und Qualitätsreport.",
+        fullExcerpt: "Die Lösung transformiert große PDF-Bestände KI-gestützt in validierte PDF/UA-Dokumente. Eine modulare Pipeline kombiniert LLM + NLP + Regelwerk für Struktur, Tags, Lesereihenfolge und Alternativtexte. Screen-Reader-Vorschau und Human-in-the-Loop-Review machen Qualität nachvollziehbar und kontrollierbar – die fachliche Prüfung und Freigabe bleibt beim Menschen."
       },
       {
         id: "compliance-assistant",
@@ -103,16 +103,16 @@ const content = {
         fullExcerpt: "A leading banking services provider faced the challenge of analysts having to extract numerous pieces of information from extensive documents. Our AI solution takes over the extraction and delivers values directly into their own systems. Since this is a sensitive application area, humans can efficiently verify all extractions by receiving direct reference locations and justifications."
       },
       {
-        id: "pat-accessibility",
-        title: "PDF Accessibility Transformation",
+        id: "doclarity",
+        title: "PDF Accessibility Transformation with doclarity",
         client: "Public Sector Organization",
         facts: [
           { icon: "shield", text: "PDF/UA + WCAG validated" },
           { icon: "route", text: "Upload to quality report" }
         ],
         category: "Document Accessibility",
-        excerpt: "Fully automated transformation of existing PDFs into validated PDF/UA formats – with screen-reader preview and quality reports.",
-        fullExcerpt: "The solution transforms large PDF repositories into validated PDF/UA documents automatically. A modular pipeline combines LLMs, NLP, and rule-based logic for structure, tags, reading order, and alternative text. Screen-reader preview and human-in-the-loop review make quality traceable and controllable."
+        excerpt: "AI-assisted transformation of existing PDFs into validated PDF/UA formats – with screen-reader preview, human-in-the-loop review and quality reports.",
+        fullExcerpt: "The solution transforms large PDF repositories into validated PDF/UA documents with AI assistance. A modular pipeline combines LLMs, NLP, and rule-based logic for structure, tags, reading order, and alternative text. Screen-reader preview and human-in-the-loop review make quality traceable and controllable – the final check and sign-off stays with people."
       },
       {
         id: "compliance-assistant",
@@ -173,6 +173,17 @@ const text = content[lang];
         >
           <div class="story-meta">
             <span class="story-category">{story.category}</span>
+            {story.id === 'doclarity' && (
+              <img
+                src={`${BASE}doclarity_product_files/doclarity-logo.svg`}
+                alt=""
+                class="story-brand-logo"
+                width="118"
+                height="30"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
           </div>
 
           <h2 class="story-title">{story.title}</h2>
@@ -266,7 +277,15 @@ const text = content[lang];
     display: flex;
     gap: var(--space-sm);
     align-items: center;
+    justify-content: space-between;
     margin-bottom: var(--space-md);
+  }
+
+  .story-brand-logo {
+    display: block;
+    width: 118px;
+    height: auto;
+    flex-shrink: 0;
   }
 
   .story-category {

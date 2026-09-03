@@ -14,8 +14,8 @@ const content = {
     heading: 'Jahresbericht 2024',
     altText: 'Alt-Text ✓',
     tableLabel: 'Tabelle',
-    steps: ['Struktur', 'Tags', 'Lese­reihenfolge', 'Alt-Texte', 'Report'],
-    pipelineDone: 'PDF/UA-konform · Report erstellt',
+    steps: ['Struktur', 'Tags', 'Lese­reihenfolge', 'Review', 'Validierung'],
+    pipelineDone: 'Geprüft und validiert · bereit zum Export',
     readerLabels: [
       { tag: 'Überschrift · Ebene 1', text: '„Jahresbericht 2024"' },
       { tag: 'Absatz', text: '„Fließtext, zwei Sätze"' },
@@ -23,8 +23,8 @@ const content = {
       { tag: 'Tabelle', text: '„2 Spalten, 2 Zeilen"' }
     ],
     validationTitle: 'PDF/UA',
-    validationSub: 'konform',
-    validationStandards: 'WCAG 2.x · EN 301 549',
+    validationSub: 'geprüft',
+    validationStandards: 'WCAG 2.x · EN 301 549 · veraPDF',
     report: 'pruefbericht.pdf'
   },
   en: {
@@ -34,8 +34,8 @@ const content = {
     heading: 'Annual Report 2024',
     altText: 'Alt text ✓',
     tableLabel: 'Table',
-    steps: ['Structure', 'Tags', 'Reading order', 'Alt text', 'Report'],
-    pipelineDone: 'PDF/UA compliant · report generated',
+    steps: ['Structure', 'Tags', 'Reading order', 'Review', 'Validation'],
+    pipelineDone: 'Reviewed and validated · ready for export',
     readerLabels: [
       { tag: 'Heading · level 1', text: '"Annual Report 2024"' },
       { tag: 'Paragraph', text: '"Body text, two sentences"' },
@@ -43,8 +43,8 @@ const content = {
       { tag: 'Table', text: '"2 columns, 2 rows"' }
     ],
     validationTitle: 'PDF/UA',
-    validationSub: 'validated',
-    validationStandards: 'WCAG 2.x · EN 301 549',
+    validationSub: 'verified',
+    validationStandards: 'WCAG 2.x · EN 301 549 · veraPDF',
     report: 'validation_report.pdf'
   }
 };
@@ -53,7 +53,7 @@ const text = content[lang];
 ---
 
 {scene === 'transform' && (
-  <div class="pat-anim pat-transform" aria-hidden="true">
+  <div class="dl-anim dl-transform" aria-hidden="true">
     <div class="tr-stage">
       <div class="tr-glow"></div>
       <div class="tr-floater">
@@ -122,7 +122,7 @@ const text = content[lang];
 )}
 
 {scene === 'reader' && (
-  <div class="pat-anim pat-reader" aria-hidden="true">
+  <div class="dl-anim dl-reader" aria-hidden="true">
     <div class="reader-card">
       <div class="reader-doc-wrap">
         <div class="reader-doc-inner">
@@ -155,7 +155,7 @@ const text = content[lang];
 )}
 
 {scene === 'pipeline' && (
-  <div class="pat-anim pat-pipeline" aria-hidden="true">
+  <div class="dl-anim dl-pipeline" aria-hidden="true">
     <div class="pipeline-track"><span class="pipeline-fill"></span></div>
     <div class="pipeline-steps">
       {text.steps.map((step, index) => (
@@ -170,7 +170,7 @@ const text = content[lang];
 )}
 
 {scene === 'validation' && (
-  <div class="pat-anim pat-validation" aria-hidden="true">
+  <div class="dl-anim dl-validation" aria-hidden="true">
     <div class="validation-card">
       <div class="validation-stamp">
         <span class="validation-check">✓</span>
@@ -189,14 +189,14 @@ const text = content[lang];
 )}
 
 <style>
-  .pat-anim {
-    --pat-blue: #2479BE;
-    --pat-green: #2E9E6B;
+  .dl-anim {
+    --dl-blue: #2479BE;
+    --dl-green: #2E9E6B;
     width: 100%;
   }
 
   /* ===================== TRANSFORM ===================== */
-  .pat-transform {
+  .dl-transform {
     padding: 1.5rem;
     display: flex;
     justify-content: center;
@@ -220,7 +220,7 @@ const text = content[lang];
     border-radius: 50%;
     background: radial-gradient(circle, #2479BE, transparent 68%);
     filter: blur(24px);
-    animation: pat-glow-pulse 6s ease-in-out infinite;
+    animation: dl-glow-pulse 6s ease-in-out infinite;
     pointer-events: none;
   }
 
@@ -229,7 +229,7 @@ const text = content[lang];
     z-index: 1;
     width: 340px;
     max-width: 100%;
-    animation: pat-float-y 6s ease-in-out infinite;
+    animation: dl-float-y 6s ease-in-out infinite;
   }
 
   .tr-card {
@@ -253,7 +253,7 @@ const text = content[lang];
     pointer-events: none;
     background: linear-gradient(180deg, transparent, rgba(36, 121, 190, 0.22) 45%, rgba(36, 121, 190, 0.45) 50%, rgba(36, 121, 190, 0.22) 55%, transparent);
     box-shadow: 0 0 20px rgba(36, 121, 190, 0.35);
-    animation: pat-scan 9s linear infinite;
+    animation: dl-scan 9s linear infinite;
   }
 
   .tr-raw {
@@ -263,7 +263,7 @@ const text = content[lang];
     display: flex;
     flex-direction: column;
     gap: 14px;
-    animation: pat-raw-fade 9s infinite;
+    animation: dl-raw-fade 9s infinite;
   }
 
   .tr-rh {
@@ -318,7 +318,7 @@ const text = content[lang];
     display: flex;
     flex-direction: column;
     gap: 16px;
-    animation: pat-tagged-fade 9s infinite;
+    animation: dl-tagged-fade 9s infinite;
   }
 
   .tr-tag {
@@ -428,7 +428,7 @@ const text = content[lang];
     padding: 10px 14px;
     border-radius: 12px;
     box-shadow: 0 10px 24px rgba(46, 158, 107, 0.4);
-    animation: pat-badge-pop 9s infinite;
+    animation: dl-badge-pop 9s infinite;
   }
 
   .tr-badge-icon { font-size: 17px; }
@@ -446,7 +446,7 @@ const text = content[lang];
   }
 
   /* ===================== READER ===================== */
-  .pat-reader {
+  .dl-reader {
     padding: 1.5rem;
   }
 
@@ -531,7 +531,7 @@ const text = content[lang];
     border-radius: 8px;
     background: rgba(79, 163, 227, 0.12);
     box-shadow: 0 0 16px rgba(79, 163, 227, 0.4);
-    animation: pat-sr-ring 9s ease-in-out infinite;
+    animation: dl-sr-ring 9s ease-in-out infinite;
   }
 
   .reader-output {
@@ -557,7 +557,7 @@ const text = content[lang];
     background: #4FA3E3;
     border-radius: 2px;
     transform-origin: center;
-    animation: pat-eq 0.9s ease-in-out infinite;
+    animation: dl-eq 0.9s ease-in-out infinite;
   }
 
   .reader-eq span:nth-child(2) { animation-delay: 0.15s; }
@@ -575,7 +575,7 @@ const text = content[lang];
     inset: 0;
     opacity: 0;
     transform: translateY(6px);
-    animation: pat-reader-caption 9s ease-in-out infinite;
+    animation: dl-reader-caption 9s ease-in-out infinite;
   }
 
   .reader-caption-2 { animation-delay: 2.25s; }
@@ -606,7 +606,7 @@ const text = content[lang];
   }
 
   /* ===================== PIPELINE ===================== */
-  .pat-pipeline {
+  .dl-pipeline {
     padding: 2rem 1rem;
   }
 
@@ -624,9 +624,9 @@ const text = content[lang];
     left: 0;
     height: 100%;
     border-radius: inherit;
-    background: linear-gradient(90deg, #4C8AC5, var(--pat-blue));
+    background: linear-gradient(90deg, #4C8AC5, var(--dl-blue));
     transform-origin: left center;
-    animation: pat-pipe-fill 9s linear infinite;
+    animation: dl-pipe-fill 9s linear infinite;
   }
 
   .pipeline-steps {
@@ -649,23 +649,20 @@ const text = content[lang];
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: var(--pat-green);
+    background: var(--dl-green);
     color: #fff;
     font-size: 1rem;
     opacity: 0;
     transform: scale(0.5);
-    animation: pat-check-pop 9s ease-in-out infinite;
+    animation: dl-check-pop 9s ease-in-out infinite;
   }
 
   .pipeline-step small {
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     font-weight: 600;
     color: #647888;
     text-align: center;
     line-height: 1.25;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    hyphens: manual;
   }
 
   .step-2 span { animation-delay: 0.35s; }
@@ -676,7 +673,7 @@ const text = content[lang];
   .pipeline-done {
     text-align: center;
     margin-top: 1.5rem;
-    animation: pat-done-tick 9s ease-in-out infinite;
+    animation: dl-done-tick 9s ease-in-out infinite;
   }
 
   .pipeline-done span {
@@ -692,7 +689,7 @@ const text = content[lang];
   }
 
   /* ===================== VALIDATION ===================== */
-  .pat-validation {
+  .dl-validation {
     padding: 2rem;
     display: flex;
     justify-content: center;
@@ -712,7 +709,7 @@ const text = content[lang];
     display: flex;
     align-items: center;
     gap: 0.9rem;
-    background: var(--pat-green);
+    background: var(--dl-green);
     color: #fff;
     padding: 0.9rem 1.4rem;
     border-radius: 14px;
@@ -755,7 +752,7 @@ const text = content[lang];
   }
 
   /* ===================== KEYFRAMES ===================== */
-  @keyframes pat-scan {
+  @keyframes dl-scan {
     0%, 22% { top: -10%; opacity: 0; }
     29% { opacity: 1; }
     48% { top: 102%; opacity: 1; }
@@ -763,21 +760,21 @@ const text = content[lang];
     100% { top: 102%; opacity: 0; }
   }
 
-  @keyframes pat-raw-fade {
+  @keyframes dl-raw-fade {
     0%, 30% { opacity: 1; }
     42% { opacity: 0; }
     86% { opacity: 0; }
     96%, 100% { opacity: 1; }
   }
 
-  @keyframes pat-tagged-fade {
+  @keyframes dl-tagged-fade {
     0%, 38% { opacity: 0; transform: translateY(8px); }
     50% { opacity: 1; transform: translateY(0); }
     85% { opacity: 1; transform: translateY(0); }
     94%, 100% { opacity: 0; transform: translateY(8px); }
   }
 
-  @keyframes pat-badge-pop {
+  @keyframes dl-badge-pop {
     0%, 53% { opacity: 0; transform: scale(1.5) rotate(-7deg); }
     61% { opacity: 1; transform: scale(0.9) rotate(-7deg); }
     66% { transform: scale(1.05) rotate(-7deg); }
@@ -785,17 +782,17 @@ const text = content[lang];
     93%, 100% { opacity: 0; transform: scale(0.95) rotate(-7deg); }
   }
 
-  @keyframes pat-glow-pulse {
+  @keyframes dl-glow-pulse {
     0%, 100% { opacity: 0.3; transform: scale(0.96); }
     50% { opacity: 0.65; transform: scale(1.04); }
   }
 
-  @keyframes pat-float-y {
+  @keyframes dl-float-y {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
   }
 
-  @keyframes pat-sr-ring {
+  @keyframes dl-sr-ring {
     0%, 17%  { top: 5%; }
     22%, 39% { top: 29%; }
     44%, 61% { top: 52%; }
@@ -803,39 +800,39 @@ const text = content[lang];
     90%, 100% { top: 5%; }
   }
 
-  @keyframes pat-eq {
+  @keyframes dl-eq {
     0%, 100% { transform: scaleY(0.25); }
     50% { transform: scaleY(1); }
   }
 
-  @keyframes pat-reader-caption {
+  @keyframes dl-reader-caption {
     0%, 4% { opacity: 0; transform: translateY(8px); }
     9%, 22% { opacity: 1; transform: translateY(0); }
     27%, 100% { opacity: 0; transform: translateY(-8px); }
   }
 
-  @keyframes pat-pipe-fill {
+  @keyframes dl-pipe-fill {
     0% { opacity: 0; transform: scaleX(0.02); }
     10%, 74% { opacity: 1; }
     82%, 100% { opacity: 0; transform: scaleX(1); }
   }
 
-  @keyframes pat-check-pop {
+  @keyframes dl-check-pop {
     0%, 10% { opacity: 0; transform: scale(0.5); }
     18%, 82% { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(0.85); }
   }
 
-  @keyframes pat-done-tick {
+  @keyframes dl-done-tick {
     0%, 78% { opacity: 0; transform: translateY(6px); }
     86%, 96% { opacity: 1; transform: translateY(0); }
     100% { opacity: 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pat-anim *,
-    .pat-anim *::before,
-    .pat-anim *::after {
+    .dl-anim *,
+    .dl-anim *::before,
+    .dl-anim *::after {
       animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;

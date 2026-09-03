@@ -1,26 +1,34 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import FinalCTA from '../../components/FinalCTA.astro';
-import Footer from '../../components/Footer.astro';
-import Icon from '../../components/Icon.astro';
-import PdfAccessibilityAnimation from '../../components/PdfAccessibilityAnimation.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+import Icon from '../../../components/Icon.astro';
+import PdfAccessibilityAnimation from '../../../components/PdfAccessibilityAnimation.astro';
 
-const title = 'PDF Accessibility Transformation | Klartext AI';
+const title = 'doclarity – PDF Accessibility Transformation | Klartext AI';
 const description =
-  'Bestehende PDF-Dokumente in geprüfte, barrierefreie PDF/UA-Formate transformieren – skalierbar, europäisch und mit optionalem Human-in-the-Loop.';
+  'Transform existing PDF documents into validated, accessible PDF/UA formats with AI assistance – scalable, European, and with human-in-the-loop review.';
 
 const BASE = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
   <main class="product-detail">
     <div class="container">
-      <a href={`${BASE}success-stories`} class="back-link">← Zurück zu Erfolgsgeschichten</a>
+      <a href={`${BASE}en/success-stories`} class="back-link">← Back to Success Stories</a>
 
       <article class="content fade-in">
         <header class="hero">
-          <span class="badge">Klartext PAT</span>
-          <h1 class="headline">Von ungetaggten PDFs zu geprüftem PDF/UA – mit einer Pipeline</h1>
+          <a href="https://doclarity.eu/" target="_blank" rel="noopener noreferrer" class="brand-lockup">
+            <img src={`${BASE}doclarity_product_files/doclarity-logo.svg`} alt="doclarity" class="brand-wordmark" />
+          </a>
+          <p class="brand-caption">A product of Klartext AI</p>
+          <h1 class="headline">From untagged PDFs to validated PDF/UA – AI‑assisted, not fully automated</h1>
+          <p class="hero-lead">
+            The AI handles the laborious structural work – tags, reading order and alt-text suggestions.
+            Expert review and sign-off stay with your specialists. We don't promise full automation, but a
+            transparent path to validated PDF/UA conformance.
+          </p>
         </header>
 
         <!-- Highlights -->
@@ -31,7 +39,7 @@ const BASE = import.meta.env.BASE_URL;
             </div>
             <div class="highlight-text-custom">
               <span class="highlight-label-custom">PDF/UA + WCAG</span>
-              <span class="highlight-desc-custom">Transformation mit Validierung und Qualitätsreport</span>
+              <span class="highlight-desc-custom">Transformation with validation and quality reports</span>
             </div>
           </div>
           <div class="highlight-item-custom">
@@ -39,8 +47,8 @@ const BASE = import.meta.env.BASE_URL;
               <Icon name="route" size={22} />
             </div>
             <div class="highlight-text-custom">
-              <span class="highlight-label-custom">Ein Durchlauf</span>
-              <span class="highlight-desc-custom">Upload, Struktur, Tags, Lesereihenfolge und Alt-Texte in einer Pipeline</span>
+              <span class="highlight-label-custom">One workflow</span>
+              <span class="highlight-desc-custom">Upload, structure, tags, reading order, and alt text in one pipeline</span>
             </div>
           </div>
           <div class="highlight-item-custom">
@@ -48,35 +56,36 @@ const BASE = import.meta.env.BASE_URL;
               <Icon name="lock" size={22} />
             </div>
             <div class="highlight-text-custom">
-              <span class="highlight-label-custom">Europäisch &amp; DSGVO</span>
-              <span class="highlight-desc-custom">Für Organisationen mit hohen Anforderungen an Datenschutz und Nachvollziehbarkeit</span>
+              <span class="highlight-label-custom">European &amp; GDPR</span>
+              <span class="highlight-desc-custom">For organizations with high requirements around privacy and traceability</span>
             </div>
           </div>
         </div>
 
         <!-- Why not just Acrobat? -->
         <div class="why-section">
-          <p class="why-intro">Kein Einzeltool – eine durchgängige Pipeline für genau diesen Anwendungsfall.</p>
+          <p class="why-intro">Not a single tool – a continuous pipeline built for exactly this use case.</p>
           <div class="why-points">
             <div class="why-point">
               <span class="why-num">01</span>
               <div>
-                <strong>Pipeline statt Einzeltools.</strong>
-                Von Struktur über Tags bis zum geprüften PDF/UA – statt manueller Arbeit in Acrobat.
+                <strong>Pipeline-driven, not piecemeal.</strong>
+                From structure to tags to validated PDF/UA – instead of manual work in Acrobat.
               </div>
             </div>
             <div class="why-point">
               <span class="why-num">02</span>
               <div>
-                <strong>Sichtbar statt Blackbox.</strong>
-                Screen-Reader-Vorschau direkt im Browser – kein externes Prüf-Tool nötig.
+                <strong>No black box.</strong>
+                The accessible document structure can be reviewed and understood directly in the browser.
               </div>
             </div>
             <div class="why-point">
               <span class="why-num">03</span>
               <div>
-                <strong>Der Mensch behält die Kontrolle.</strong>
-                Human-in-the-Loop für Sonderfälle und sensible Inhalte – mit vollständigem Qualitätsreport.
+                <strong>Humans stay in control.</strong>
+                Accessibility cannot be fully automated. Human-in-the-loop review is a fixed part of the
+                process – with a complete quality report.
               </div>
             </div>
           </div>
@@ -92,12 +101,12 @@ const BASE = import.meta.env.BASE_URL;
                 <span class="step-number">01</span>
                 <div class="step-text">
                   <div class="step-title">File Upload</div>
-                  <div class="step-caption">Beliebiges PDF hochladen – gescannt oder digital. Die Pipeline übernimmt den Rest.</div>
+                  <div class="step-caption">Upload any PDF – scanned or digital. The pipeline handles the pre-structuring, the result is then reviewed by people and adjusted as needed.</div>
                 </div>
               </div>
               <ul class="feature-bullets">
-                <li><strong>OCR für gescannte PDFs</strong> – Scans und Bild-PDFs erkannt, umgewandelt und transformiert.</li>
-                <li><strong>Standard PDF/UA Pipeline</strong> – Struktur, Tags, Lesereihenfolge, Alt-Texte und Validierung in einem Durchlauf.</li>
+                <li><strong>OCR for scanned PDFs</strong> – Scans and image PDFs recognized, converted, and prepared with AI assistance.</li>
+                <li><strong>Standard PDF/UA Pipeline</strong> – Structure, tags, reading order, and alt text are prepared with AI assistance and presented for expert review in one pass.</li>
               </ul>
             </div>
 
@@ -110,7 +119,7 @@ const BASE = import.meta.env.BASE_URL;
                   class="media-video hover-play"
                   loop
                 >
-                  <source src="/pat_product_files/pat_start_cap.mp4" type="video/mp4" />
+                  <source src={`${BASE}doclarity_product_files/doclarity_start_cap.mp4`} type="video/mp4" />
                 </video>
               </div>
             </div>
@@ -119,34 +128,34 @@ const BASE = import.meta.env.BASE_URL;
           <!-- STEP 02: Scanner Animation -->
           <div class="step-zigzag step-zigzag-right">
             <div class="step-zigzag-media">
-              <PdfAccessibilityAnimation scene="transform" lang="de" />
+              <PdfAccessibilityAnimation scene="transform" lang="en" />
             </div>
 
             <div class="step-zigzag-content">
               <div class="step-top">
                 <span class="step-number">02</span>
                 <div class="step-text">
-                  <div class="step-title">Rohes PDF wird automatisch strukturiert</div>
-                  <div class="step-caption">Struktur, Tags und Lesereihenfolge entstehen automatisch – inklusive Alternativtexten für Grafiken und Tabellen.</div>
+                  <div class="step-title">PDFs are structured with AI assistance</div>
+                  <div class="step-caption">Structure, tags, reading order, and alternative text are proposed with AI assistance – they are then reviewed and adjusted by people as needed.</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- STEP 03: Screen-Reader Preview -->
+          <!-- STEP 03: Screen-reader Preview -->
           <div class="step-zigzag step-zigzag-left">
             <div class="step-zigzag-content">
               <div class="step-top">
                 <span class="step-number">03</span>
                 <div class="step-text">
-                  <div class="step-title">Screen-Reader-Vorschau direkt im Browser</div>
-                  <div class="step-caption">Hören und sehen, was assistive Technologie ausgibt – Fokus, Reihenfolge und Alt-Texte werden direkt prüfbar.</div>
+                  <div class="step-title">Review the accessible document structure</div>
+                  <div class="step-caption">Check reading order, headings, and alternative text directly in the browser and refine them as needed.</div>
                 </div>
               </div>
             </div>
 
             <div class="step-zigzag-media">
-              <PdfAccessibilityAnimation scene="reader" lang="de" />
+              <PdfAccessibilityAnimation scene="reader" lang="en" />
             </div>
           </div>
 
@@ -155,70 +164,77 @@ const BASE = import.meta.env.BASE_URL;
             <div class="step-top">
               <span class="step-number">04</span>
               <div class="step-text">
-                <div class="step-title">Jeder Schritt ist nachvollziehbar</div>
+                <div class="step-title">Every step is traceable</div>
                 <div class="step-caption">
-                  Vom Upload bis zur Validierung – sichtbar statt Blackbox.
+                  From AI-assisted remediation to validation — every step remains transparent and reviewable.
                 </div>
               </div>
             </div>
 
             <div class="result-cards">
-              <div class="result-card-pat">
-                <div class="result-card-pat-title">Automatisierte Pipeline</div>
-                <PdfAccessibilityAnimation scene="pipeline" lang="de" />
-                <div class="result-card-pat-text">Fünf Schritte vom Upload bis zum geprüften Dokument – ohne Einzeltools.</div>
+              <div class="result-card-doclarity">
+                <div class="result-card-doclarity-title">AI-assisted workflow</div>
+                <PdfAccessibilityAnimation scene="pipeline" lang="en" />
+                <div class="result-card-doclarity-text">One workflow from upload to validation — with review and refinement before export.</div>
               </div>
 
-              <div class="result-card-pat">
-                <div class="result-card-pat-title">Geprüfter Report</div>
-                <PdfAccessibilityAnimation scene="validation" lang="de" />
-                <div class="result-card-pat-text">PDF/UA-Konformität wird dokumentiert und ist jederzeit nachvollziehbar.</div>
+              <div class="result-card-doclarity">
+                <div class="result-card-doclarity-title">Validated report</div>
+                <PdfAccessibilityAnimation scene="validation" lang="en" />
+                <div class="result-card-doclarity-text">Validation results remain transparent, documented and easy to review.</div>
               </div>
             </div>
           </div>
 
           <!-- CLOSING -->
           <div class="closing-card">
-            <div class="closing-badge">Pflicht seit dem Barrierefreiheitsgesetz</div>
+            <div class="closing-badge">Mandatory under the Accessibility Act</div>
 
-            <h2 class="closing-title">Zugänglich. Geprüft. Skalierbar.</h2>
+            <h2 class="closing-title">Accessible. Validated. Scalable.</h2>
 
             <p class="closing-subtitle">
-              Statt händischer Nachbearbeitung automatisieren wir genau die Schritte, die sich nachvollziehbar
-              automatisieren lassen – für PDF-Bestände jeder Größe.
+              Instead of manual rework, we automate exactly the steps that can be automated transparently –
+              for PDF repositories of any size. People handle the rest: real accessibility does not come
+              at the push of a button.
             </p>
+
+            <div class="closing-cta-buttons">
+              <a href="https://doclarity.eu/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-with-logo">
+                 <img src={`${BASE}doclarity_product_files/doclarity-logo.svg`} alt="doclarity" class="btn-doclarity-logo" /> ↗
+              </a>
+            </div>
           </div>
 
           <!-- STORY DETAILS SECTION -->
           <div class="story-section">
 
             <div class="story-block">
-              <h2 class="story-block-title">Hintergrundgeschichte</h2>
+              <h2 class="story-block-title">Background</h2>
               <div class="story-block-content">
-                <p>Barrierefreie Dokumente sind keine Kür mehr – sie sind Pflicht. Mit dem <strong>Barrierefreiheitsgesetz (BaFG)</strong> entsteht klarer Handlungsbedarf: In Österreich profitieren <strong>1,3 Mio.+ Menschen</strong> direkt von zugänglichen Inhalten. Manuelle Nachbearbeitung ist teuer und skaliert nicht.</p>
+                <p>Accessible documents are now legally required across Europe under the Accessibility Act (BaFG). Yet most PDFs today still aren't compliant – and in Austria alone, <strong>1.3M+ people</strong> depend on accessible content. Manual remediation is expensive and doesn't scale.</p>
               </div>
             </div>
 
             <div class="story-block">
-              <h2 class="story-block-title">Die Ergebnisse</h2>
+              <h2 class="story-block-title">The results</h2>
               <div class="results-list">
                 <div class="result-item-check">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p>Vom Upload bis zum validierten PDF/UA in einem durchgängigen, automatisierten Prozess</p>
+                  <p>From upload to validated PDF/UA – AI-assisted processing with expert review to follow</p>
                 </div>
                 <div class="result-item-check">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p>PDF/UA, WCAG &amp; EN 301 549 mit vollständigem Qualitätsreport und Prüfprotokoll</p>
+                  <p>PDF/UA, WCAG &amp; EN 301 549 compliance with full quality report and audit log</p>
                 </div>
                 <div class="result-item-check">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p>Screen-Reader-Vorschau und Human-in-the-Loop für sensible Inhalte – Kontrolle bleibt bei Fachpersonen</p>
+                  <p>Screen-reader compatibility checked, human-in-the-loop review as a fixed step – control and sign-off stay with domain experts</p>
                 </div>
               </div>
             </div>
@@ -226,12 +242,27 @@ const BASE = import.meta.env.BASE_URL;
           </div>
 
         </section>
+
+        <!-- CREDITS -->
+        <div class="credits-bar">
+          <div class="credit-item">
+            <span class="credit-label">A product of</span>
+            <img src={`${BASE}LOGO_transparent_without_sublime.png`} alt="Klartext AI" class="credit-logo credit-logo-klartext" />
+          </div>
+          <div class="credits-divider" aria-hidden="true"></div>
+          <div class="credit-item">
+            <span class="credit-label">Built with</span>
+            <a href="https://ai-at.eu/" target="_blank" rel="noopener noreferrer" class="credit-logo-link">
+              <img src={`${BASE}doclarity_product_files/Logo_AI_Klein.png`} alt="AI Factory Austria" class="credit-logo credit-logo-aifactory" />
+            </a>
+          </div>
+        </div>
       </article>
     </div>
   </main>
 
-  <FinalCTA lang="de" />
-  <Footer lang="de" />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
 </BaseLayout>
 
 <script is:inline>
@@ -275,12 +306,6 @@ const BASE = import.meta.env.BASE_URL;
     background: transparent;
   }
 
-  .container {
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-
   .back-link {
     display: inline-flex;
     align-items: center;
@@ -303,17 +328,31 @@ const BASE = import.meta.env.BASE_URL;
     border-bottom: 1px solid rgba(36, 121, 190, 0.1);
   }
 
-  .badge {
-    display: inline-block;
-    font-weight: 600;
-    color: var(--color-blue);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 0.65rem 1.7rem;
-    background: rgba(36, 121, 190, 0.1);
-    border-radius: 8px;
-    font-size: 1.3rem;
-    margin-bottom: var(--space-md);
+  .brand-lockup {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.9rem 2.2rem;
+    background: rgba(36, 121, 190, 0.06);
+    border-radius: 100px;
+    margin-bottom: 0.6rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .brand-lockup:hover {
+    background: rgba(36, 121, 190, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .brand-wordmark {
+    display: block;
+    height: 38px;
+    width: auto;
+  }
+
+  .brand-caption {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-md);
   }
 
   .headline {
@@ -323,6 +362,17 @@ const BASE = import.meta.env.BASE_URL;
     color: var(--color-text-dark);
     letter-spacing: -0.02em;
     line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  .hero-lead {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--color-text-body);
+    max-width: 62ch;
+    margin: 0 auto var(--space-md);
+    text-wrap: pretty;
   }
 
   .flow {
@@ -451,8 +501,6 @@ const BASE = import.meta.env.BASE_URL;
     height: auto;
   }
 
-
-
   .media-video {
     width: 100%;
     height: auto;
@@ -471,7 +519,7 @@ const BASE = import.meta.env.BASE_URL;
     gap: var(--space-md);
   }
 
-  .result-card-pat {
+  .result-card-doclarity {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
@@ -484,21 +532,106 @@ const BASE = import.meta.env.BASE_URL;
     transition: var(--transition-smooth);
   }
 
-  .result-card-pat:hover {
+  .result-card-doclarity:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 32px rgba(36, 121, 190, 0.18);
   }
 
-  .result-card-pat-title {
+  .result-card-doclarity-title {
     font-size: 1rem;
     font-weight: 700;
     color: var(--color-text-dark);
   }
 
-  .result-card-pat-text {
+  .result-card-doclarity-text {
     font-size: 0.9rem;
     color: var(--color-text-muted);
     line-height: 1.5;
+  }
+
+  .closing-cta-buttons {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-lg);
+  }
+
+  .btn-with-logo {
+    gap: 0.5rem;
+  }
+
+  .btn-doclarity-logo {
+    display: inline-block;
+    height: 16px;
+    width: auto;
+    vertical-align: middle;
+    transition: filter 0.3s ease;
+  }
+
+  .btn-secondary:hover .btn-doclarity-logo {
+    filter: brightness(0) invert(1);
+  }
+
+  .credits-bar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--space-xl);
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .credit-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .credit-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .credit-logo-link {
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+
+  .credit-logo-link:hover {
+    opacity: 0.75;
+  }
+
+  .credit-logo {
+    display: block;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+  }
+
+  .credit-item:hover .credit-logo {
+    opacity: 1;
+  }
+
+  .credit-logo-klartext {
+    height: 44px;
+    width: auto;
+  }
+
+  .credit-logo-aifactory {
+    height: 66px;
+    width: auto;
+  }
+
+  .credits-divider {
+    align-self: center;
+    width: 1px;
+    height: 40px;
+    background: rgba(36, 121, 190, 0.15);
   }
 
   .closing-card {
@@ -757,10 +890,6 @@ const BASE = import.meta.env.BASE_URL;
       padding: var(--space-lg) 0;
     }
 
-    .container {
-      padding: 0 1rem;
-    }
-
     .headline {
       font-size: 2rem;
       line-height: 1.3;
@@ -784,11 +913,6 @@ const BASE = import.meta.env.BASE_URL;
     .why-point {
       gap: var(--space-sm);
       font-size: 1rem;
-    }
-
-    .badge {
-      font-size: 0.75rem;
-      padding: 0.3rem 0.75rem;
     }
 
     .step-number {
@@ -841,6 +965,27 @@ const BASE = import.meta.env.BASE_URL;
 
     .closing-subtitle {
       font-size: 0.95rem;
+    }
+
+    .closing-cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .brand-wordmark {
+      height: 28px;
+    }
+
+    .credits-bar {
+      flex-direction: column;
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+      padding-top: var(--space-lg);
+    }
+
+    .credits-divider {
+      width: 40px;
+      height: 1px;
     }
 
     .story-section {
