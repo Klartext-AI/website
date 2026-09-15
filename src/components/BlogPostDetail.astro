@@ -35,7 +35,7 @@ const canonicalHref = Astro.url?.href ?? new URL(BASE, SITE).toString();
 
 <section class="blog-post-detail section">
   <div class="container">
-    <a href={lang === 'en' ? `${BASE}en/blog` : `${BASE}blog`} class="back-link">
+    <a href={lang === 'en' ? `${BASE}blog` : `${BASE}de/blog`} class="back-link">
       {text.backToBlog}
     </a>
 

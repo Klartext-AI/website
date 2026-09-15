@@ -4,22 +4,22 @@ import FinalCTA from '../../components/FinalCTA.astro';
 import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
 
-const title = 'KPI-Extraktion aus Jahresberichten | Klartext AI';
+const title = 'KPI Extraction from Annual Reports | Klartext AI';
 const description =
-  'Wie ein Bankendienstleister die KPI-Extraktion aus hunderten Seiten von 4 Tagen auf 15 Minuten reduziert – mit Human-in-the-Loop für höchste Präzision.';
+  'How a banking service provider reduces KPI extraction from 100+ page documents from 4 days to 15 minutes – with human-in-the-loop for maximum precision.';
 
 const BASE = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
   <main class="product-detail">
     <div class="container">
-      <a href={`${BASE}success-stories`} class="back-link">← Zurück zu Erfolgsgeschichten</a>
+      <a href={`${BASE}success-stories`} class="back-link">← Back to Success Stories</a>
 
       <article class="content fade-in">
         <header class="hero">
-          <span class="badge">Klartext Extract</span>
-          <h1 class="headline">Von &gt;1.000 Seiten zu geprüften Antworten – in Minuten</h1>
+          <img src={`${BASE}kpi_extraction_product_files/klartext-extract-logo.svg`} alt="Klartext Extract" class="brand-wordmark" width="3114" height="532" />
+          <h1 class="headline">From &gt;1,000 pages to verified answers in minutes</h1>
         </header>
 
         <!-- Highlights -->
@@ -29,8 +29,8 @@ const BASE = import.meta.env.BASE_URL;
               <Icon name="evaluation" size={22} />
             </div>
             <div class="highlight-text-custom">
-              <span class="highlight-label-custom">Mehr als nur Kennzahlen</span>
-              <span class="highlight-desc-custom">Werte, Texte &amp; komplexe Antworten – inkl. Konfliktauflösung</span>
+              <span class="highlight-label-custom">More than just KPIs</span>
+              <span class="highlight-desc-custom">Values, text &amp; complex answers – incl. conflict resolution</span>
             </div>
           </div>
           <div class="highlight-item-custom">
@@ -38,8 +38,8 @@ const BASE = import.meta.env.BASE_URL;
               <Icon name="lock" size={22} />
             </div>
             <div class="highlight-text-custom">
-              <span class="highlight-label-custom">Direkter Quellenverweis</span>
-              <span class="highlight-desc-custom">Markierung der exakten Fundstelle – Verifikation in Sekunden</span>
+              <span class="highlight-label-custom">Direct source reference</span>
+              <span class="highlight-desc-custom">Points to the exact location – verification in seconds</span>
             </div>
           </div>
           <div class="highlight-item-custom">
@@ -47,35 +47,35 @@ const BASE = import.meta.env.BASE_URL;
               <Icon name="users" size={22} />
             </div>
             <div class="highlight-text-custom">
-              <span class="highlight-label-custom">&gt;97 % Genauigkeit im Maßstab</span>
-              <span class="highlight-desc-custom">1.000+ Seiten, mehrere Dokumente – preiseffizient</span>
+              <span class="highlight-label-custom">&gt;97% accuracy at scale</span>
+              <span class="highlight-desc-custom">1,000+ pages, multiple documents – cost-efficient</span>
             </div>
           </div>
         </div>
 
         <!-- Why not just ChatGPT? -->
         <div class="why-section">
-          <p class="why-intro">Kein generischer Chatbot – ein Werkzeug für genau Deinen Anwendungsfall.</p>
+          <p class="why-intro">Not a generic chatbot – a tool built for exactly your use case.</p>
           <div class="why-points">
             <div class="why-point">
               <span class="why-num">01</span>
               <div>
-                <strong>Auf Deinen Use Case zugeschnitten.</strong>
-                Fachwissen, Felder &amp; Fragen – exakt auf Deine Aufgabe abgestimmt.
+                <strong>Tailored to your use case.</strong>
+                Domain knowledge, fields &amp; questions – matched precisely to your task.
               </div>
             </div>
             <div class="why-point">
               <span class="why-num">02</span>
               <div>
-                <strong>Konfliktauflösung statt Blackbox.</strong>
-                Widersprüche automatisch erkannt, markiert oder an den Menschen eskaliert.
+                <strong>Conflict resolution instead of a black box.</strong>
+                Conflicts detected automatically, flagged or escalated to a human.
               </div>
             </div>
             <div class="why-point">
               <span class="why-num">03</span>
               <div>
-                <strong>Der Mensch entscheidet.</strong>
-                KI schlägt vor und belegt die Quelle – der Mensch verifiziert und urteilt.
+                <strong>The human decides.</strong>
+                AI proposes and cites the source – the human verifies and judges.
               </div>
             </div>
           </div>
@@ -89,8 +89,8 @@ const BASE = import.meta.env.BASE_URL;
               <div class="step-top">
                 <span class="step-number">01</span>
                 <div class="step-text">
-                  <div class="step-title">Bis zu 10 Reports mit hunderten Seiten hochladen</div>
-                  <div class="step-caption">Drag & drop, alle Reports in einem Rutsch.</div>
+                  <div class="step-title">Upload up to 10 reports with hundreds of pages each</div>
+                  <div class="step-caption">Drag & drop, all reports at once.</div>
                 </div>
               </div>
             </div>
@@ -123,8 +123,8 @@ const BASE = import.meta.env.BASE_URL;
               <div class="step-top">
                 <span class="step-number">02</span>
                 <div class="step-text">
-                  <div class="step-title">Start drücken und loslegen</div>
-                  <div class="step-caption">Extraktion von KPIs innerhalb von Minuten mit Referenz zur Stelle in der PDF.</div>
+                  <div class="step-title">Press Start and Go</div>
+                  <div class="step-caption">Extraction of KPIs within minutes and reference to location in the PDF.</div>
                 </div>
               </div>
             </div>
@@ -135,9 +135,9 @@ const BASE = import.meta.env.BASE_URL;
             <div class="step-top">
               <span class="step-number">03</span>
               <div class="step-text">
-                <div class="step-title">Ergebnisse prüfen</div>
+                <div class="step-title">Check out results</div>
                 <div class="step-caption">
-                  Auf einen Blick: was gefunden wurde – und was nicht. Damit Du sofort nacharbeiten kannst.
+                  At a glance: what was found – and what wasn't. So you can follow up immediately.
                 </div>
               </div>
             </div>
@@ -151,13 +151,13 @@ const BASE = import.meta.env.BASE_URL;
                 <div class="result-body">
                   <div class="result-title">KPIs found</div>
                   <div class="result-text">
-                    Extrahierte Werte sind strukturiert verfügbar und sofort als Ecxcel exportierbar.
+                    Extracted values are available in structured format and immediately exportable to Excel.
                   </div>
                 </div>
 
                 <div class="result-metric">
                   <div class="metric-value">—</div>
-                  <div class="metric-label">Treffer</div>
+                  <div class="metric-label">Hits</div>
                 </div>
               </div>
 
@@ -169,13 +169,13 @@ const BASE = import.meta.env.BASE_URL;
                 <div class="result-body">
                   <div class="result-title">KPIs not found</div>
                   <div class="result-text">
-                    Fehlende KPIs werden transparent markiert.
+                    Missing KPIs are transparently marked.
                   </div>
                 </div>
 
                 <div class="result-metric">
                   <div class="metric-value">—</div>
-                  <div class="metric-label">Lücken</div>
+                  <div class="metric-label">Gaps</div>
                 </div>
               </div>
             </div>
@@ -186,8 +186,8 @@ const BASE = import.meta.env.BASE_URL;
             <div class="step-top">
               <span class="step-number">04</span>
               <div class="step-text">
-                <div class="step-title">KPIs filtern und sortieren</div>
-                <div class="step-caption">Filter nach diversen Kriterien, beispielsweise um Werte mit niedriger Extraktionsgenauigkeit zu überprüfen.</div>
+                <div class="step-title">Filter and Sort KPIs</div>
+                <div class="step-caption">Filter according to various criteria, for example to check values with low extraction confidence.</div>
               </div>
             </div>
 
@@ -205,9 +205,9 @@ const BASE = import.meta.env.BASE_URL;
               <div class="step-top">
                 <span class="step-number">05</span>
                 <div class="step-text">
-                  <div class="step-title">Nach gewünschten KPIs suchen</div>
+                  <div class="step-title">Search for Desired KPIs</div>
                   <div class="step-caption">
-                    Direkt prüfen, ob ein KPI vorhanden ist.
+                    Directly check if a KPI is present.
                   </div>
                 </div>
               </div>
@@ -224,10 +224,10 @@ const BASE = import.meta.env.BASE_URL;
               <div class="step-top">
                 <span class="step-number">06</span>
                 <div class="step-text">
-                  <div class="step-title">KI-Erklärung zur Herkunft der Werte</div>
+                  <div class="step-title">AI Explanation of Value Origins</div>
                   <div class="step-caption">
-                    Zu jedem KPI ist nachvollziehbar erklärt, woher der Wert stammt –  
-                    und bei Bedarf auch, wie er berechnet wurde.
+                    For each KPI, it's transparently explained where the value comes from –
+                    and if necessary, how it was calculated.
                   </div>
                 </div>
               </div>
@@ -242,13 +242,13 @@ const BASE = import.meta.env.BASE_URL;
 
           <!-- CLOSING -->
           <div class="closing-card">
-            <div class="closing-badge">Mehr Klartext. Weniger Fleißarbeit.</div>
+            <div class="closing-badge">More Clarity. Less Busy Work.</div>
 
-            <h2 class="closing-title">Viele weitere Features warten auf Dich.</h2>
+            <h2 class="closing-title">Many more features await you.</h2>
 
             <p class="closing-subtitle">
-              Statt hunderte Arbeitsstunden in manuelle Analyse zu stecken, automatisieren wir genau die Schritte,
-              die sich sauber und nachvollziehbar automatisieren lassen.
+              Instead of investing hundreds of work hours in manual analysis, we automate exactly the steps
+              that can be cleanly and traceably automated.
             </p>
           </div>
 
@@ -257,77 +257,77 @@ const BASE = import.meta.env.BASE_URL;
 
             <!-- Challenge -->
             <div class="story-block">
-              <h2 class="story-block-title">Hintergrundgeschichte</h2>
+              <h2 class="story-block-title">Background Story</h2>
               <div class="story-block-content">
-                <p>Eine Ratingagentur stand vor einer massiven Herausforderung: Analyst:innen mussten täglich durch Dokumente mit über 500 Seiten kämpfen, um quantitative und qualitative Informationen für Risikobewertungen zu extrahieren. Jedes Detail zählte, jeder Fehler konnte kostspielig werden.</p>
-                <p>Der manuelle Prozess band nicht nur erhebliche Ressourcen, sondern wurde auch zunehmend zum Engpass für geschäftskritische Entscheidungen. Die zentrale Frage war nicht, ob Automatisierung möglich ist, sondern wie sie in einem so sensiblen Bereich funktionieren kann, wo Fehler keine Option sind.</p>
+                <p>A rating agency faced a massive challenge: analysts had to fight their way through documents with over 500 pages daily to extract quantitative and qualitative information for risk assessments. Every detail counted, every error could be costly.</p>
+                <p>The manual process not only tied up significant resources, but also increasingly became a bottleneck for business-critical decisions. The central question was not whether automation is possible, but how it can work in such a sensitive area where errors are not an option.</p>
               </div>
             </div>
 
             <!-- Solution -->
             <div class="story-block">
-              <h2 class="story-block-title">Unsere Lösung</h2>
+              <h2 class="story-block-title">Our Solution</h2>
               <div class="story-block-content">
-                <p>Bei Klartext AI wissen wir: Im Finanzwesen reicht "die KI sagt" nicht aus. Deshalb haben wir eine Lösung entwickelt, die nicht nur extrahiert, sondern auch erklärt.</p>
+                <p>At Klartext AI we know: In finance, "the AI says" is not enough. That's why we developed a solution that not only extracts, but also explains.</p>
                 <ul class="solution-list">
-                  <li><strong>Automatisierte Extraktion</strong> quantitativer und qualitativer Daten aus komplexen Dokumenten</li>
-                  <li><strong>Intelligente Verifikation:</strong> Jede Extraktion wird mit direkter Referenz-Location im Originaldokument versehen</li>
-                  <li><strong>Begründungs-Engine:</strong> Die KI liefert nicht nur Werte, sondern auch die Argumentation dahinter</li>
-                  <li><strong>Nahtlose Integration:</strong> Direkte Einspeisung in bestehende Systeme ohne Medienbruch</li>
-                  <li><strong>Human-in-the-Loop:</strong> Analysten können jede Extraktion zeiteffizient verifizieren</li>
+                  <li><strong>Automated extraction</strong> of quantitative and qualitative data from complex documents</li>
+                  <li><strong>Intelligent verification:</strong> Each extraction is provided with a direct reference location in the original document</li>
+                  <li><strong>Reasoning engine:</strong> The AI delivers not only values, but also the reasoning behind them</li>
+                  <li><strong>Seamless integration:</strong> Direct feeding into existing systems without media disruption</li>
+                  <li><strong>Human-in-the-loop:</strong> Analysts can verify each extraction time-efficiently</li>
                 </ul>
-                <p>Was uns unterscheidet: Wir haben nicht einfach ein generisches LLM auf das Problem losgelassen. Stattdessen haben wir Domain-Driven Design angewandt und die Lösung auf die spezifischen Anforderungen des Bankensektors zugeschnitten – inklusive regulatorischer Compliance und Audit-Trails.</p>
+                <p>What distinguishes us: We didn't just unleash a generic LLM on the problem. Instead, we applied Domain-Driven Design and tailored the solution to the specific requirements of the banking sector – including regulatory compliance and audit trails.</p>
               </div>
             </div>
 
             <!-- Results -->
             <div class="story-block">
-              <h2 class="story-block-title">Die Ergebnisse</h2>
+              <h2 class="story-block-title">The Results</h2>
               <div class="results-list">
                 <div class="result-item-check">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p>Statt 4 Tagen manuelle Extraktion – jetzt in 15 Minuten erledigt, für Human-in-the-Loop optimiert</p>
+                  <p>Instead of 4 days of manual extraction – now done in 15 minutes, optimized for human-in-the-loop</p>
                 </div>
                 <div class="result-item-check">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p>Vollständige Nachvollziehbarkeit: jede Extraktion mit direkter Referenz zur Stelle im Dokument</p>
+                  <p>Full traceability: every extraction with direct reference to the location in the document</p>
                 </div>
                 <div class="result-item-check">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p>Höhere Qualität durch Konsistenz – keine übersehenen Details mehr</p>
+                  <p>Higher quality through consistency – no more overlooked details</p>
                 </div>
                 <div class="result-item-check">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p>Skalierbarkeit ohne Mehraufwand – Volumen kann problemlos steigen</p>
+                  <p>Scalability without additional effort – volume can increase without problems</p>
                 </div>
                 <div class="result-item-check">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p>Vollständige Nachvollziehbarkeit – jede Extraktion mit Quellenangabe</p>
+                  <p>Complete traceability – every extraction with source reference</p>
                 </div>
               </div>
             </div>
 
             <!-- Learnings -->
             <div class="story-block">
-              <h2 class="story-block-title">Was wir gelernt haben</h2>
+              <h2 class="story-block-title">What We Learned</h2>
               <div class="story-block-content">
-                <p>Erfolgreiche KI-Implementierung im Finanzsektor benötigt drei Dinge:</p>
+                <p>Successful AI implementation in the financial sector requires three things:</p>
                 <ol class="learnings-list">
-                  <li><strong>Vertrauen durch Transparenz:</strong> Jede KI-Entscheidung muss nachvollziehbar sein</li>
-                  <li><strong>Domain-Expertise:</strong> Generische Lösungen funktionieren nicht in regulierten Branchen</li>
-                  <li><strong>Evaluation-Driven Development:</strong> Systematische Messungen von Anfang an, nicht als Nachgedanke</li>
+                  <li><strong>Trust through transparency:</strong> Every AI decision must be traceable</li>
+                  <li><strong>Domain expertise:</strong> Generic solutions don't work in regulated industries</li>
+                  <li><strong>Evaluation-Driven Development:</strong> Systematic measurements from the start, not as an afterthought</li>
                 </ol>
-                <p>Die Lösung läuft heute produktiv und hat die Art und Weise verändert, wie unser Kunde mit Dokumenten arbeitet. Nicht weil die KI perfekt ist – sondern weil sie transparent, verlässlich und auf echte Geschäftsprozesse zugeschnitten ist.</p>
+                <p>The solution is running in production today and has changed the way our client works with documents. Not because the AI is perfect – but because it is transparent, reliable, and tailored to real business processes.</p>
               </div>
             </div>
           </div>
@@ -337,8 +337,8 @@ const BASE = import.meta.env.BASE_URL;
     </div>
   </main>
 
-  <FinalCTA lang="de" />
-  <Footer lang="de" />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
 </BaseLayout>
 
 <script is:inline>
@@ -456,17 +456,11 @@ const BASE = import.meta.env.BASE_URL;
     border-bottom: 1px solid rgba(36, 121, 190, 0.1);
   }
 
-  .badge {
-    display: inline-block;
-    font-weight: 600;
-    color: var(--color-blue);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 0.65rem 1.7rem;
-    background: rgba(36, 121, 190, 0.1);
-    border-radius: 8px;
-    font-size: 1.3rem;
-    margin-bottom: var(--space-md);
+  .brand-wordmark {
+    display: block;
+    height: 52px;
+    width: auto;
+    margin: 0 auto var(--space-md);
   }
 
   .headline {
@@ -783,7 +777,7 @@ const BASE = import.meta.env.BASE_URL;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-md);
-    padding: var(--space-lg);
+    padding: var(--space-md);
     margin-bottom: var(--space-2xl);
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(18px) saturate(160%);
@@ -1093,9 +1087,8 @@ const BASE = import.meta.env.BASE_URL;
       font-size: 1rem;
     }
 
-    .badge {
-      font-size: 0.75rem;
-      padding: 0.3rem 0.75rem;
+    .brand-wordmark {
+      height: 40px;
     }
 
     /* Step number smaller on mobile */

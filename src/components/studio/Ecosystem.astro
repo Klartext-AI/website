@@ -1,0 +1,32 @@
+---
+interface Props { lang: 'de' | 'en'; full?: boolean }
+const { lang, full = false } = Astro.props;
+const Heading = full ? 'h1' : 'h2';
+const de = lang === 'de';
+const base = import.meta.env.BASE_URL;
+const root = `${base}${de ? 'de/' : ''}`;
+---
+<section class="studio-section ecosystem-section" id="ecosystem">
+  <Heading>{de ? 'Wir haben nicht einfach einen Job.' : 'We don’t just have a job.'}<br /><span class="blue">{de ? 'Wir haben eine Mission.' : 'We have a mission.'}</span></Heading>
+  {full
+    ? <p class="lead">{de ? 'Menschen, die mit Klartext AI affiliiert sind, wollen Innovation aus & für Europa treiben. Unterstützte Tätigkeiten dieser Personen umfassen:' : 'People affiliated with Klartext AI want to drive innovation from & for Europe. Activities these people support include:'}</p>
+    : <p class="lead">{de ? 'Fortschritt entsteht gemeinsam. Wir verbinden Menschen aus Forschung, Wirtschaft und Gesellschaft, um KI in Österreich und Europa voranzubringen.' : 'Progress takes more than one company. We connect researchers, founders, engineers, and institutions to move AI forward in Austria and Europe.'}</p>}
+  {full ? <>
+
+    <div class="studio-stats ecosystem-stats">{(de ? [['30+','Events veranstaltet und unterstützt'],['3.500+','Teilnehmende bei unseren Events'],['300+','Teilnehmende beim letzten Hackathon'],['11+','Länder beim letzten Hackathon']] : [['30+','Events hosted and supported'],['3,500+','People at our events'],['300+','Participants at our last hackathon'],['11+','Countries at our last hackathon']]).map(([number,label]) => <div><strong>{number}</strong><span>{label}</span></div>)}</div>
+    <div class="ecosystem-people">
+      <article class="affiliation">
+        <img class="affiliation-portrait" src={`${base}team/optimized/ruben.webp`} alt="Ruben Hetfleisch" width="480" height="600" loading="lazy" />
+        <div><h2>Ruben Hetfleisch</h2><p class="affiliation-role">{de ? 'Vorstand · AI Austria' : 'Board member · AI Austria'}</p>
+        <p>{de ? 'Gründer der GenAI Community Austria. Österreichs Vertreter im European AI Forum.' : 'Founder of GenAI Community Austria. Austria’s representative in the European AI Forum.'}</p>
+        <a class="affiliation-link" href="https://aiaustria.com/"><img src={`${base}references/ai-austria.png`} alt="AI Austria" width="110" height="48" loading="lazy" /><span aria-hidden="true">↗</span></a></div>
+      </article>
+      <article class="affiliation">
+        <img class="affiliation-portrait" src={`${base}team/optimized/felix.webp`} alt="Felix Krause" width="480" height="600" loading="lazy" />
+        <div><h2>Felix Krause</h2><p class="affiliation-role">{de ? 'Vorstand · AI Impact Mission' : 'Board member · AI Impact Mission'}</p>
+        <p>{de ? 'Ein europäisches Tech-Netzwerk. Gemeinsam KI entwickeln, bei Hackathons und darüber hinaus.' : 'A European tech network. Building AI together, at hackathons and beyond.'}</p>
+        <a class="affiliation-link" href="https://ai-mission.eu/"><img src={`${base}references/AIM-logo-white-cropped-small.png`} alt="AI Impact Mission" width="110" height="48" loading="lazy" /><span aria-hidden="true">↗</span></a></div>
+      </article>
+    </div>
+  </> : <a class="line-link" href={`${root}ecosystem/`}>{de ? 'Unser Ecosystem' : 'Meet our ecosystem'} <span aria-hidden="true">↗</span></a>}
+</section>

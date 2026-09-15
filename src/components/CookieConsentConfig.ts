@@ -38,7 +38,7 @@ export const createConfig = (lang: 'de' | 'en', onConsentChange: () => void): Co
           acceptAllBtn: 'Analytics-Cookies akzeptieren',
           acceptNecessaryBtn: 'Analytics-Cookies ablehnen',
           showPreferencesBtn: 'Einstellungen verwalten',
-          footer: '<a href="https://klartext-ai.com/datenschutz/">Datenschutz</a><br><a href="https://klartext-ai.com/agb/">AGBs</a>'
+          footer: '<a href="https://klartext-ai.com/de/datenschutz/">Datenschutz</a><br><a href="https://klartext-ai.com/de/agb/">AGBs</a>'
         },
         preferencesModal: {
           title: 'Cookie-Einstellungen',
@@ -49,21 +49,21 @@ export const createConfig = (lang: 'de' | 'en', onConsentChange: () => void): Co
           sections: [
             {
               title: 'Cookie-Nutzung',
-              description: 'Wir verwenden Cookies, um Ihre Präferenzen zu speichern und die Website-Nutzung zu analysieren.'
+              description: 'Wir verwenden Cookies, um Deine Präferenzen zu speichern und die Website-Nutzung zu analysieren.'
             },
             {
               title: 'Notwendige Cookies <span class="pm__badge">Immer aktiv</span>',
-              description: 'Diese Cookies sind für die Grundfunktionen der Website erforderlich. Sie speichern Ihre Cookie-Einstellungen, damit wir sie beim nächsten Besuch erinnern können.',
+              description: 'Diese Cookies sind für die Grundfunktionen der Website erforderlich. Sie speichern Deine Cookie-Einstellungen, damit wir sie beim nächsten Besuch erinnern können.',
               linkedCategory: 'necessary'
             },
             {
               title: 'Analytics-Cookies',
-              description: 'Wir verwenden Google Analytics, um Website-Besuche zu messen und die Nutzererfahrung zu verbessern. Diese Cookies werden nur mit Ihrer Zustimmung gesetzt.',
+              description: 'Wir verwenden Google Analytics, um Website-Besuche zu messen und die Nutzererfahrung zu verbessern. Diese Cookies werden nur mit Deiner Zustimmung gesetzt.',
               linkedCategory: 'analytics'
             },
             {
               title: 'Weitere Informationen',
-              description: 'Bei Fragen zu unserer Cookie-Richtlinie kontaktieren Sie uns bitte unter <a href="mailto:office@klartext-ai.com">office@klartext-ai.com</a>.'
+              description: 'Bei Fragen zu unserer Cookie-Richtlinie kontaktiere uns bitte unter <a href="mailto:office@klartext-ai.com">office@klartext-ai.com</a>.'
             }
           ]
         }
@@ -75,7 +75,7 @@ export const createConfig = (lang: 'de' | 'en', onConsentChange: () => void): Co
           acceptAllBtn: 'Accept analytics cookies',
           acceptNecessaryBtn: 'Reject analytics cookies',
           showPreferencesBtn: 'Manage preferences',
-          footer: '<a href="https://klartext-ai.com/en/datenschutz/">Privacy Policy</a><br><a href="https://klartext-ai.com/en/agb/">Terms</a>'
+          footer: '<a href="https://klartext-ai.com/datenschutz/">Privacy Policy</a><br><a href="https://klartext-ai.com/agb/">Terms</a>'
         },
         preferencesModal: {
           title: 'Cookie preferences',

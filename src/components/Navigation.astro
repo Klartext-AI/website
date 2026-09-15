@@ -1,556 +1,151 @@
 ---
-interface Props {
-  lang?: 'de' | 'en';
-  alwaysVisible?: boolean;
-}
-
-const { lang = 'de', alwaysVisible = false } = Astro.props;
-
-const content = {
-  de: {
-    home: "Home",
-    successStories: "Erfolgsgeschichten",
-    offerings: "Leistungen",
-    values: "Werte",
-    team: "Team",
-    careers: "Karriere",
-    blog: "Blog",
-    contact: "Kontakt",
-    language: "EN"
-  },
-  en: {
-    home: "Home",
-    successStories: "Success Stories",
-    offerings: "Services",
-    values: "Values",
-    team: "Team",
-    careers: "Careers",
-    blog: "Blog",
-    contact: "Contact",
-    language: "DE"
-  }
-};
-
-const text = content[lang];
-const BASE = import.meta.env.BASE_URL;
-
-// Generate alternate language URL based on current path
-const currentPath = Astro.url.pathname;
-const pathWithoutBase = currentPath.replace(BASE, '/');
-const normalizedPath = pathWithoutBase.replace(/^\/en(\/|$)/, '/');
-
-const isActive = (target: string) =>
-  normalizedPath === target || normalizedPath.startsWith(`${target}/`);
-
-// Most pages share the same slug across languages. The services page is the
-// exception (de: /leistungen, en: /services), so map between the two when
-// building the language-switch URLs. Compare on a slash-insensitive key so a
-// trailing slash on normalizedPath (e.g. "/leistungen/") still matches.
-const slugKey = normalizedPath !== '/' ? normalizedPath.replace(/\/$/, '') : '/';
-const deSlugOverrides: Record<string, string> = { '/services': '/leistungen' };
-const enSlugOverrides: Record<string, string> = { '/leistungen': '/services' };
-const deSlug = deSlugOverrides[slugKey] ?? normalizedPath;
-const enSlug = enSlugOverrides[slugKey] ?? normalizedPath;
-
-// Build both language URLs from the language-neutral path so the segmented
-// control can render DE and EN as siblings (current one highlighted).
-const deUrl = deSlug === '/' ? BASE : `${BASE}${deSlug.substring(1)}`;
-const enUrl = enSlug === '/' ? `${BASE}en` : `${BASE}en${enSlug}`;
-
-// The whole control is a single toggle: clicking anywhere switches to the
-// other language. So it links to the alternate of the current page.
-const toggleUrl = lang === 'de' ? enUrl : deUrl;
+import { getLanguagePaths } from '../utils/i18n';
+interface Props { lang?: 'de' | 'en'; alwaysVisible?: boolean }
+const { lang = 'de' } = Astro.props;
+const de = lang === 'de';
+const base = import.meta.env.BASE_URL;
+const root = `${base}${de ? 'de/' : ''}`;
+const paths = getLanguagePaths(Astro.url.pathname, base);
+const links = [[de ? 'Das Studio' : 'The Studio','team'],['Research','research'],['Solutions', de ? 'leistungen' : 'services'],['Ventures','ventures'],['Ecosystem','ecosystem']];
 ---
-
-<nav class="navigation" id="main-nav" data-always-visible={alwaysVisible ? 'true' : 'false'}>
-  <div class="nav-container">
-    <a href={lang === 'de' ? BASE : `${BASE}en`} class="nav-logo-link">
-      <img
-        src={`${BASE}LOGO_transparent_without_sublime.png`}
-        alt="Klartext AI"
-        class="nav-logo"
-        width="120"
-        height="auto"
-      />
+<header class="studio-nav">
+  <a class="studio-skip" href="#page-content">{de ? 'Zum Inhalt' : 'Skip to content'}</a>
+  <div class="studio-nav-inner">
+    <a class="studio-brand" href={root}>
+      <img src={`${base}ventures/klartext.svg`} alt="Klartext AI" width="120" height="38" />
+      <img class="studio-brand-mono" src={`${base}ventures/klartext.svg`} alt="" width="120" height="38" aria-hidden="true" />
     </a>
-
-    <div class="nav-right">
-      <div class="nav-menu" id="nav-menu" role="navigation" aria-label={lang === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
-        <a
-          href={lang === 'de' ? `${BASE}success-stories` : `${BASE}en/success-stories`}
-          class={`nav-link ${isActive('/success-stories') ? 'nav-link-active' : ''}`}
-        >
-          {text.successStories}
-        </a>
-        <a
-          href={lang === 'de' ? `${BASE}leistungen` : `${BASE}en/services`}
-          class={`nav-link ${isActive(lang === 'de' ? '/leistungen' : '/services') ? 'nav-link-active' : ''}`}
-        >
-          {text.offerings}
-        </a>
-        <a
-          href={lang === 'de' ? `${BASE}values` : `${BASE}en/values`}
-          class={`nav-link ${isActive(lang === 'de' ? '/werte' : '/values') ? 'nav-link-active' : ''}`}
-        >
-          {text.values}
-        </a>
-        <a
-          href={lang === 'de' ? `${BASE}team` : `${BASE}en/team`}
-          class={`nav-link ${isActive('/team') ? 'nav-link-active' : ''}`}
-        >
-          {text.team}
-        </a>
-        <a
-          href={lang === 'de' ? `${BASE}karriere` : `${BASE}en/karriere`}
-          class={`nav-link ${isActive('/karriere') ? 'nav-link-active' : ''}`}
-        >
-          {text.careers}
-        </a>
-        <a
-          href={lang === 'de' ? `${BASE}blog` : `${BASE}en/blog`}
-          class={`nav-link ${isActive('/blog') ? 'nav-link-active' : ''}`}
-        >
-          {text.blog}
-        </a>
-        <!--<a href={lang === 'de' ? `${BASE}#contact` : `${BASE}en#contact`} class="nav-link nav-link-cta">{text.contact}</a>-->
-        <a href=`mailto:office@klartext-ai.com` class="nav-link nav-link-cta">{text.contact}</a>
+    <nav class="studio-desktop-nav" aria-label={de ? 'Hauptnavigation' : 'Main navigation'}>
+      {links.map(([label,slug]) => <a href={`${root}${slug}/`} aria-current={Astro.url.pathname.replace(/\/$/, '') === `${root}${slug}` ? 'page' : undefined}>{label}</a>)}
+    </nav>
+    <div class="studio-nav-actions">
+      <div class="studio-language" role="group" aria-label={de ? 'Sprache' : 'Language'}>
+        <a data-language-choice="en" href={paths.en} hreflang="en" lang="en" aria-current={de ? undefined : 'true'} aria-label="English">EN</a>
+        <a data-language-choice="de" href={paths.de} hreflang="de" lang="de" aria-current={de ? 'true' : undefined} aria-label="Deutsch">DE</a>
       </div>
-
-      <a
-        href={toggleUrl}
-        class="lang-switch"
-        id="lang-switch"
-        data-lang={lang}
-        hreflang={lang === 'de' ? 'en' : 'de'}
-        aria-label={lang === 'de' ? 'Switch to English' : 'Zur deutschen Version wechseln'}
-      >
-        <span class={`lang-option ${lang === 'de' ? 'lang-option-active' : ''}`} data-lang="de">DE</span>
-        <span class={`lang-option ${lang === 'en' ? 'lang-option-active' : ''}`} data-lang="en">EN</span>
-      </a>
-
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu" id="nav-toggle">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </button>
+      <a class="studio-nav-cta" href="mailto:office@klartext-ai.com">{de ? 'Kontakt' : 'Contact'} <span aria-hidden="true">↗</span></a>
+      <button class="studio-menu-toggle" type="button" aria-expanded="false" aria-controls="studio-mobile-nav">{de ? 'Menü' : 'Menu'} <span class="menu-icon" aria-hidden="true"></span></button>
     </div>
   </div>
-</nav>
-
+  <nav class="studio-mobile-nav" id="studio-mobile-nav" aria-label={de ? 'Mobile Navigation' : 'Mobile navigation'} hidden>
+    <div class="studio-mobile-nav-inner">
+      {links.map(([label,slug]) => <a href={`${root}${slug}/`}>{label} <span aria-hidden="true">↗</span></a>)}
+      <a href="mailto:office@klartext-ai.com">{de ? 'Kontakt' : 'Contact'} <span aria-hidden="true">↗</span></a>
+    </div>
+  </nav>
+</header>
+<noscript><style>
+  @media(max-width:1120px) {
+    .studio-nav { position: relative !important; }
+    .studio-menu-toggle { display: none !important; }
+    .studio-mobile-nav[hidden] { display: grid !important; grid-template-rows: 1fr !important; opacity: 1 !important; }
+    .studio-mobile-nav[hidden] .studio-mobile-nav-inner { padding-block: 8px 24px !important; }
+  }
+</style></noscript>
 <style>
-  .navigation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding-top: env(safe-area-inset-top, 0);
-    z-index: 1000;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
-    transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateY(-100%);
-    pointer-events: none;
-  }
-
-  .navigation.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  .navigation.scrolled {
-    box-shadow: 0 2px 20px rgba(36, 121, 190, 0.1);
-  }
-
-  .nav-container {
-    max-width: 1480px;
-    margin: 0 auto;
-    padding: 0.75rem var(--space-md);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .nav-logo-link {
-    display: flex;
-    align-items: center;
-    transition: transform 0.3s ease;
-  }
-
-  .nav-logo-link:hover {
-    transform: scale(1.05);
-  }
-
-  .nav-logo {
-    max-width: 120px;
-    height: auto;
-    filter: drop-shadow(0 2px 8px rgba(36, 121, 190, 0.1));
-  }
-
-  .nav-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-  }
-
-  .nav-toggle span {
-    width: 25px;
-    height: 2px;
-    background: var(--color-blue);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-
-  .nav-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
-  }
-
-  .nav-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .nav-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-  }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-  }
-
-  .nav-menu {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-  }
-
-  .nav-link {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--color-text-body);
-    transition: color 0.3s ease;
-    position: relative;
-    padding: 0.5rem 0;
-  }
-
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--color-blue);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-
-  .nav-link:hover {
-    color: var(--color-blue);
-  }
-
-  .nav-link:hover::after {
-    transform: scaleX(1);
-  }
-
-  .nav-link.nav-link-active {
-    color: var(--color-blue);
-  }
-
-  .nav-link.nav-link-active::after {
-    transform: scaleX(1);
-  }
-
-  .nav-link-cta {
-    padding: 0.5rem 1.5rem;
-    background: var(--color-blue);
-    color: white;
-    border-radius: 1rem;
-    transition: all 0.3s ease;
-  }
-
-  .nav-link-cta::after {
-    display: none;
-  }
-
-  .nav-link-cta:hover {
-    background: rgba(36, 121, 190, 0.95);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
-  }
-
-  /* Segmented language switch: one toggle showing DE | EN, current highlighted.
-     The whole pill is a single link — clicking anywhere switches language. */
-  .lang-switch {
-    display: inline-flex;
-    align-items: stretch;
-    gap: 2px;
-    padding: 2px;
-    border-radius: 999px;
-    border: 1px solid rgba(36, 121, 190, 0.25);
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(12px) saturate(160%);
-    -webkit-backdrop-filter: blur(12px) saturate(160%);
-    box-shadow: 0 2px 10px -6px rgba(36, 121, 190, 0.25);
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .lang-switch:hover {
-    border-color: rgba(36, 121, 190, 0.5);
-    box-shadow: 0 4px 14px -6px rgba(36, 121, 190, 0.4);
-  }
-
-  .lang-option {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    color: var(--color-text-muted);
-    padding: 0.45rem 0.85rem;
-    border-radius: 999px;
-    line-height: 1;
-    transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .lang-option-active {
-    color: #fff;
-    background: var(--color-blue);
-    box-shadow: 0 2px 8px -2px rgba(36, 121, 190, 0.5);
-  }
-
-  /* Browser-language nudge (no banner): a calm, persistent tint on the other
-     language so the hint survives until the nav scrolls into view, plus a short
-     pulse for motion-enabled users to catch the eye. Cleared on interaction. */
-  .lang-option.lang-suggest {
-    color: var(--color-blue);
-    background: rgba(36, 121, 190, 0.1);
-    box-shadow: 0 0 0 1px rgba(36, 121, 190, 0.3);
-    animation: langPulse 1.6s ease-in-out 3;
-  }
-
-  @keyframes langPulse {
-    0%, 100% {
-      box-shadow: 0 0 0 1px rgba(36, 121, 190, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 0 5px rgba(36, 121, 190, 0.18);
+  .studio-nav { position: fixed; inset: 0 0 auto; z-index: 100; background: var(--color-paper); border-bottom: 1px solid var(--color-line); }
+  /* A fixed blur on a narrow surface; scrolling supplies the changing texture. */
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .studio-nav {
+      background: color-mix(in srgb, var(--color-paper) 72%, transparent);
+      -webkit-backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur);
+      box-shadow: inset 0 -1px var(--glass-border), 0 8px 28px -24px var(--color-blue);
     }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .lang-option.lang-suggest {
-      animation: none;
-    }
+  .studio-nav-inner { max-width: 1440px; margin: auto; min-height: 64px; padding: 8px clamp(20px,4vw,65px); position: relative; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+  .studio-brand { position: relative; display: flex; flex-shrink: 0; }
+  .studio-brand img { width: 108px; height: 36px; object-fit: contain; }
+  .studio-brand-mono { position: absolute; inset: 0; filter: grayscale(1); opacity: var(--site-logo-mono-opacity, var(--site-logo-mono-target, 0)); transition: opacity 650ms ease-in-out; }
+  .studio-desktop-nav,.studio-nav-actions { display: flex; align-items: center; gap: 26px; }
+  .studio-nav a { color: var(--color-text-dark); font-size: 16px; }
+  .studio-desktop-nav { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+  .studio-desktop-nav a { position: relative; padding-block: 12px; transition: color .3s cubic-bezier(.16,1,.3,1); }
+  .studio-nav a:hover,.studio-nav a[aria-current] { color: var(--color-blue); }
+  /* The rule wipes in from the left on hover and retreats to the right on leave. */
+  .studio-desktop-nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 6px; height: 1.5px; background: var(--color-blue); transform: scaleX(0); transform-origin: right; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .studio-desktop-nav a:hover::after,.studio-desktop-nav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+  /* The language toggle and the CTA share one height so they read as a pair. */
+  .studio-nav-actions { --nav-control-h: 36px; gap: 10px; margin-left: auto; }
+  .studio-language { display: flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--color-line); border-radius: 30px; }
+  .studio-nav .studio-language a { display: grid; place-items: center; min-width: 36px; min-height: calc(var(--nav-control-h) - 8px); border-radius: 30px; font-size: 13px; font-weight: 500; color: var(--color-text-muted); }
+  .studio-nav .studio-language a[aria-current] { background: var(--color-blue-soft); color: var(--color-blue); }
+  .studio-nav .studio-nav-cta { padding: 0 14px; min-height: var(--nav-control-h); border-radius: 30px; background: var(--color-blue); color: var(--color-paper); display: flex; gap: 8px; align-items: center; font-size: 15px; }
+  .studio-nav .studio-nav-cta:hover { color: var(--color-paper); }
+  .studio-menu-toggle { display: none; }
+  /* Two bars crossed into a plus; a 135° turn lands it on a close cross. */
+  .menu-icon { position: relative; width: 15px; height: 15px; flex: none; transition: transform .34s cubic-bezier(.22,1,.36,1); }
+  .menu-icon::before,.menu-icon::after { content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 1.5px; border-radius: 2px; background: currentColor; }
+  .menu-icon::after { rotate: 90deg; }
+  .studio-menu-toggle[aria-expanded="true"] { color: var(--color-blue); }
+  .studio-menu-toggle[aria-expanded="true"] .menu-icon { transform: rotate(135deg); }
+  /* The panel unrolls via grid rows, so the nav's own height animates with it. */
+  .studio-mobile-nav[hidden] { display: none; }
+  .studio-mobile-nav { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .34s cubic-bezier(.22,1,.36,1), opacity .24s ease; }
+  .studio-mobile-nav.is-open { grid-template-rows: 1fr; opacity: 1; }
+  .studio-mobile-nav-inner { min-height: 0; max-height: calc(100svh - 64px); overflow-x: hidden; overflow-y: auto; padding: 0 24px; transition: padding-block .34s cubic-bezier(.22,1,.36,1); }
+  .studio-mobile-nav.is-open .studio-mobile-nav-inner { padding-block: 8px 24px; }
+  .studio-mobile-nav a { display: flex; justify-content: space-between; font-size: 22px; padding: 15px 0; border-bottom: 1px solid var(--color-line); }
+  .studio-skip { position: absolute; top: -100px; left: 20px; padding: 12px; background: var(--color-paper); }
+  .studio-skip:focus { top: 10px; z-index: 2; }
+  @media(max-width:1120px) { .studio-desktop-nav { display: none; } .studio-menu-toggle { display: flex; gap: 12px; align-items: center; min-height: 44px; padding: 8px; border: 0; background: transparent; color: var(--color-text-dark); font: inherit; font-size: 16px; cursor: pointer; } }
+  /* A compact bar on phones, so the opening keeps as much of the screen as possible. */
+  @media(max-width:600px) {
+    .studio-nav-inner { gap: 8px; min-height: 56px; padding-block: 6px; }
+    .studio-brand img { width: 84px; height: auto; }
+    .studio-nav-actions { --nav-control-h: 36px; gap: 4px; }
+    .studio-nav .studio-language a { min-width: 34px; font-size: 13px; }
+    .studio-menu-toggle { gap: 10px; font-size: 15px; }
+    .studio-mobile-nav-inner { max-height: calc(100svh - 56px); }
   }
-
-  /* Desktop: grow the toggle so its height matches the Contact CTA
-     (0.95rem text * 1.6 line-height + 0.5rem*2 padding ≈ 40px). */
-  @media (min-width: 769px) {
-    .lang-option {
-      padding: 0.67rem 0.95rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .nav-container {
-      padding: 0.75rem 1.5rem;
-    }
-
-    .nav-logo {
-      max-width: 100px;
-    }
-
-    .nav-toggle {
-      display: flex;
-      margin-right: -4px;
-    }
-
-    .nav-menu {
-      position: fixed;
-      top: 60px;
-      left: 0;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px) saturate(180%);
-      flex-direction: column;
-      padding: var(--space-md);
-      gap: var(--space-sm);
-      box-shadow: 0 8px 24px rgba(36, 121, 190, 0.15);
-      transform: translateX(-100%);
-      visibility: hidden;
-      transition: transform 0.3s ease, visibility 0.3s ease;
-    }
-
-    .nav-menu.active {
-      transform: translateX(0);
-      visibility: visible;
-    }
-
-    .nav-link {
-      width: 100%;
-      text-align: center;
-      padding: 0.75rem;
-    }
-
-    .nav-link-cta {
-      margin-top: var(--space-sm);
-    }
-
-    /* Keep the language switch beside the hamburger, outside the menu */
-    .nav-right {
-      gap: 0.6rem;
-    }
-  }
+  @media(max-width:450px) { .studio-nav-cta { display: none !important; } }
+  /* Translucent is fine over the page, but the open panel needs to stand on its own. */
+  .studio-nav:has(.studio-mobile-nav:not([hidden])) { background: var(--color-paper); box-shadow: 0 22px 40px -30px rgba(36,121,190,.55); }
+  @media (prefers-reduced-transparency: reduce) { .studio-nav { background: var(--color-paper); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+  @media(prefers-reduced-motion:reduce) { .menu-icon,.studio-mobile-nav,.studio-mobile-nav-inner,.studio-brand-mono,.studio-desktop-nav a,.studio-desktop-nav a::after { transition: none; } }
 </style>
-
 <script>
-  const runOnReady = (callback: () => void) => {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', callback, { once: true });
-    } else {
-      callback();
+  const toggle = document.querySelector<HTMLButtonElement>('.studio-menu-toggle');
+  const menu = document.querySelector<HTMLElement>('.studio-mobile-nav');
+  const OPEN_DURATION = 340;
+  let hideTimer: number | undefined;
+
+  // `hidden` can't transition, so it is dropped before opening and only restored
+  // once the closing animation has run.
+  function setMenu(open: boolean) {
+    if (!toggle || !menu) return;
+    clearTimeout(hideTimer);
+    toggle.setAttribute('aria-expanded', String(open));
+    const instant = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (open) {
+      menu.hidden = false;
+      if (instant) menu.classList.add('is-open');
+      else requestAnimationFrame(() => requestAnimationFrame(() => menu.classList.add('is-open')));
+      return;
     }
-  };
+    menu.classList.remove('is-open');
+    if (instant) { menu.hidden = true; return; }
+    hideTimer = window.setTimeout(() => {
+      if (toggle.getAttribute('aria-expanded') !== 'true') menu.hidden = true;
+    }, OPEN_DURATION);
+  }
 
-  // Smooth scroll for anchor links
-  runOnReady(() => {
-    const navLinks = document.querySelectorAll('.nav-link[href*="#"]');
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    const nav = document.getElementById('main-nav');
-
-    // Smooth scroll
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href && href.includes('#')) {
-          // Extract the hash from the href
-          const hash = href.substring(href.indexOf('#'));
-          const target = document.querySelector(hash);
-
-          // Only prevent default and smooth scroll if target exists on current page
-          if (target) {
-            e.preventDefault();
-            const offset = 80; // Account for fixed nav height
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-            window.scrollTo({
-              top: targetPosition,
-              behavior: 'smooth'
-            });
-
-            // Close mobile menu
-            if (navMenu) {
-              navMenu.classList.remove('active');
-            }
-            if (navToggle) {
-              navToggle.classList.remove('active');
-            }
-          }
-          // If target doesn't exist, let browser navigate normally to the homepage with anchor
-        }
-      });
-    });
-
-    // Mobile menu toggle
-    if (navToggle && navMenu) {
-      navToggle.addEventListener('click', () => {
-        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        navToggle.setAttribute('aria-expanded', String(!isExpanded));
-      });
-    }
-
-    // Browser-language nudge: if the visitor's preferred language differs from
-    // the page language, gently pulse the other option in the switch (no banner).
-    const langSwitch = document.getElementById('lang-switch');
-    if (langSwitch) {
-      const NUDGE_KEY = 'kt-lang-nudge-seen';
-      let alreadySeen = false;
-      try {
-        alreadySeen = localStorage.getItem(NUDGE_KEY) === '1';
-      } catch (e) {
-        alreadySeen = false;
-      }
-
-      if (!alreadySeen) {
-        const pageLang = langSwitch.dataset.lang === 'en' ? 'en' : 'de';
-        const browserLangs = (navigator.languages && navigator.languages.length)
-          ? navigator.languages
-          : [navigator.language || ''];
-        const prefersGerman = browserLangs.some(l => l.toLowerCase().startsWith('de'));
-
-        // German page + non-German visitor -> suggest EN.
-        // English page + German visitor -> suggest DE.
-        let suggest = null;
-        if (pageLang === 'de' && !prefersGerman) suggest = 'en';
-        else if (pageLang === 'en' && prefersGerman) suggest = 'de';
-
-        if (suggest) {
-          const target = langSwitch.querySelector(`.lang-option[data-lang="${suggest}"]`);
-          if (target) {
-            target.classList.add('lang-suggest');
-            // Show the nudge only once per visitor.
-            try {
-              localStorage.setItem(NUDGE_KEY, '1');
-            } catch (e) { /* ignore */ }
-          }
-        }
-      }
-
-      // Record the manual language choice (and stop nudging) the moment they
-      // engage with the switch. The destination language is the opposite of the
-      // current page. The root auto-redirect reads this and won't override it.
-      langSwitch.addEventListener('click', () => {
-        const current = langSwitch.dataset.lang === 'en' ? 'en' : 'de';
-        const chosen = current === 'de' ? 'en' : 'de';
-        try {
-          localStorage.setItem(NUDGE_KEY, '1');
-          localStorage.setItem('kt-lang-choice', chosen);
-        } catch (e) { /* ignore */ }
-      });
-    }
-
-    // Show navigation on scroll and add scrolled class
-    let hasShownNav = false;
-    let isScrolled = false;
-
-    // Check if navigation should always be visible
-    if (nav && nav.dataset.alwaysVisible === 'true') {
-      nav.classList.add('visible');
-      hasShownNav = true;
-    }
-
-    window.addEventListener('scroll', () => {
-      if (nav) {
-        const scrollY = window.scrollY;
-
-        // Show navigation when user scrolls down
-        if (scrollY > 100 && !hasShownNav) {
-          nav.classList.add('visible');
-          hasShownNav = true;
-        }
-
-        // Guard redundant DOM mutations on the scrolled class
-        if (scrollY > 50 && !isScrolled) {
-          nav.classList.add('scrolled');
-          isScrolled = true;
-        } else if (scrollY <= 50 && isScrolled) {
-          nav.classList.remove('scrolled');
-          isScrolled = false;
-        }
-      }
-    }, { passive: true });
+  function closeMenu(restoreFocus = false) {
+    if (!toggle || !menu || toggle.getAttribute('aria-expanded') !== 'true') return;
+    setMenu(false);
+    if (restoreFocus) toggle.focus();
+  }
+  toggle?.addEventListener('click', () => {
+    setMenu(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') closeMenu(true);
+  });
+  document.addEventListener('click', event => {
+    if (event.target instanceof Node && !document.querySelector('.studio-nav')?.contains(event.target)) closeMenu();
+  });
+  matchMedia('(min-width:1121px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
+  document.querySelectorAll<HTMLAnchorElement>('[data-language-choice]').forEach(link => {
+    link.addEventListener('click', () => { try { localStorage.setItem('kt-lang-choice', link.dataset.languageChoice!); } catch {} });
   });
 </script>

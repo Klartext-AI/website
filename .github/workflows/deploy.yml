@@ -27,7 +27,6 @@ jobs:
         uses: withastro/action@v5
         env:
           # Expose public env vars to Astro/Vite at build time
-          PUBLIC_COOKIEBOT_ID: ${{ secrets.PUBLIC_COOKIEBOT_ID }}
           PUBLIC_GA4_ID: ${{ secrets.PUBLIC_GA4_ID }}
 #        with:
 #          path: . # The root location of your Astro project inside the repository. (optional)

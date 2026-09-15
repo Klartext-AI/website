@@ -1,0 +1,145 @@
+---
+import { teamProfiles } from './team-profiles';
+interface Props { lang: 'de' | 'en' }
+const { lang } = Astro.props;
+const de = lang === 'de';
+const founders = ['Daniel Toth', 'Ruben Hetfleisch', 'Felix Krause'].map(name => teamProfiles[lang].find(person => person.name === name)!);
+const facts: Record<string, Record<'de' | 'en', string[]>> = {
+  'Daniel Toth': {
+    de: ['Dipl.-Ing., TU Wien', '8+ Jahre Projektleitung, u. a. bei Fraunhofer Austria'],
+    en: ['Dipl.-Ing., TU Wien', '8+ years leading projects, incl. at Fraunhofer Austria'],
+  },
+  'Ruben Hetfleisch': {
+    de: ['Ingenieur, TU Darmstadt, KI bei Fraunhofer Austria', 'Vorstand AI Austria, Gründer der GenAI Community'],
+    en: ['Engineer, TU Darmstadt, AI at Fraunhofer Austria', 'AI Austria board, founder of the GenAI Community'],
+  },
+  'Felix Krause': {
+    de: ['Volkswirtschaft, Data Science & Software Engineering', 'Vorstand bei AIM, europäisches KI-Netzwerk'],
+    en: ['Economics, data science & software engineering', 'Board member of AIM, a European AI network'],
+  },
+};
+---
+<figure class="founder-photo">
+  <div class="founder-frame">
+    <img src={`${import.meta.env.BASE_URL}team/founder-team.jpg`} width="1600" height="2133" loading="lazy" alt={de ? 'Die drei Klartext-AI-Gründer mit Bürohund Bruno auf dem Sofa. Von links: Daniel Toth, Ruben Hetfleisch, Felix Krause.' : 'The three Klartext AI founders with office dog Bruno on the sofa. From left: Daniel Toth, Ruben Hetfleisch, Felix Krause.'} />
+    <div class="founder-image-targets" hidden>
+      {founders.map((person, index) => <button type="button" class="founder-image-target" aria-controls={`founder-${lang}-${index}`} aria-expanded="false" aria-label={`${de ? 'Details zu' : 'About'} ${person.name}`}><span aria-hidden="true">↗</span></button>)}
+    </div>
+  </div>
+  <figcaption class="founder-index">
+    <span class="founder-track" aria-hidden="true"></span>
+    {founders.map((person, index) => <details class="founder" name={`founders-${lang}`}>
+      <summary data-details-label={`${de ? 'Details zu' : 'About'} ${person.name}`} data-link-label={`${person.name} ${de ? 'auf LinkedIn (neuer Tab)' : 'on LinkedIn (new tab)'}`}>
+        <span class="founder-label"><span class="founder-name">{person.name}</span><span class="founder-role" title={person.role}>{['COO', 'CEO', 'CTO'][index]}</span></span>
+        <span class="founder-arrow" aria-hidden="true">↗</span>
+      </summary>
+      <div class="founder-caption" id={`founder-${lang}-${index}`}>
+        <ul>{facts[person.name][lang].map(fact => <li>{fact}</li>)}</ul>
+        <a href={person.linkedin!} target="_blank" rel="noopener noreferrer" aria-label={`${person.name} ${de ? 'auf LinkedIn (neuer Tab)' : 'on LinkedIn (new tab)'}`}>LinkedIn <span aria-hidden="true">↗</span></a>
+      </div>
+    </details>)}
+  </figcaption>
+</figure>
+
+<style>
+  .founder-photo { min-width: 0; margin: 0; }
+  .founder-frame { position: relative; overflow: hidden; border-radius: 16px; }
+  .founder-frame img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: center 70%; }
+  .founder-image-targets:not([hidden]) { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .founder-image-target { position: relative; padding: 0; border: 0; background: transparent; color: var(--color-blue); cursor: pointer; }
+  .founder-image-target span { position: absolute; bottom: 16px; left: calc(50% - 18px); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--color-paper); font-size: 20px; opacity: 0; transform: translateY(5px); transition: opacity 180ms ease-out, transform 180ms ease-out; }
+  .founder-image-target:hover span, .founder-image-target:focus-visible span { opacity: 1; transform: translateY(0); }
+  .founder-image-target:focus-visible { outline: 2px solid var(--color-blue); outline-offset: -5px; }
+  .founder-index { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 18px; padding-bottom: 126px; border-top: 1px solid var(--color-line); }
+  .founder-track { position: absolute; top: -1px; left: 0; width: calc(100% / 3); height: 2px; background: var(--color-blue); transform-origin: left; transition: transform 200ms ease-out, opacity 160ms ease-out; opacity: 0; pointer-events: none; }
+  .founder-index:has(.founder[open]) .founder-track { opacity: 1; }
+  .founder-index:has(.founder:nth-of-type(2)[open]) .founder-track { transform: translateX(100%); }
+  .founder-index:has(.founder:nth-of-type(3)[open]) .founder-track { transform: translateX(200%); }
+  .founder summary { display: flex; position: relative; align-items: flex-start; justify-content: center; text-align: center; min-height: 76px; padding: 18px 12px 12px; cursor: pointer; list-style: none; -webkit-tap-highlight-color: transparent; }
+  .founder summary::-webkit-details-marker { display: none; }
+  .founder-label { display: flex; flex-direction: column; gap: 3px; }
+  .founder-name { font-size: 16px; line-height: 1.4; font-weight: 500; color: var(--color-text-dark); text-wrap: balance; }
+  .founder-role { font-size: 14px; color: var(--color-text-muted); }
+  .founder-arrow { position: absolute; right: 4px; top: 19px; color: var(--color-blue); font-size: 16px; opacity: 0; transform: translate(-3px, 3px); transition: transform 180ms ease-out, opacity 180ms ease-out; }
+  .founder[open] .founder-arrow, .founder summary:hover .founder-arrow, .founder summary:focus-visible .founder-arrow { opacity: 1; transform: translate(0, 0); }
+  .founder[open] .founder-name { color: var(--color-blue); }
+  .founder-caption { position: absolute; top: 94px; left: 0; right: 0; display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 20px; animation: founder-reveal 200ms ease-out; }
+  .founder-caption ul { margin: 0; padding: 0 0 0 14px; border-left: 1px solid var(--color-line); list-style: none; }
+  .founder-caption li { color: var(--color-text-muted); font-size: 14px; line-height: 1.65; text-wrap: pretty; }
+  .founder-caption li + li { margin-top: 3px; }
+  .founder-caption a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: -8px; color: var(--color-blue); font-size: 14px; white-space: nowrap; }
+  .founder-caption a span { transition: transform 180ms ease-out; }
+  .founder-caption a:hover span { transform: translate(2px, -2px); }
+  .founder-caption a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .founder summary:focus-visible, .founder-caption a:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 4px; border-radius: 2px; }
+  @keyframes founder-reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 480px) {
+    .founder-index { padding-bottom: 155px; }
+    .founder summary { padding-inline: 5px; }
+    .founder-name { font-size: 15px; }
+    .founder-arrow { display: none; }
+    .founder-caption { top: 102px; grid-template-columns: 1fr; gap: 8px; }
+    .founder-caption a { justify-self: start; margin-top: 0; margin-left: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .founder-caption { animation: none; }
+    .founder-track, .founder-arrow, .founder-caption a span, .founder-image-target span { transition: none; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.founder-photo').forEach(photo => {
+    const founders = [...photo.querySelectorAll<HTMLDetailsElement>('.founder')];
+    const targets = [...photo.querySelectorAll<HTMLButtonElement>('.founder-image-target')];
+    let selected: HTMLDetailsElement | null = null;
+    photo.querySelector<HTMLElement>('.founder-image-targets')!.hidden = false;
+
+    const update = () => founders.forEach((founder, index) => {
+      const summary = founder.querySelector('summary')!;
+      const label = selected === founder ? summary.dataset.linkLabel! : summary.dataset.detailsLabel!;
+      summary.setAttribute('aria-label', label);
+      targets[index].setAttribute('aria-label', label);
+      targets[index].setAttribute('aria-expanded', String(founder.open));
+    });
+    const show = (active: HTMLDetailsElement | null) => {
+      founders.forEach(founder => { founder.open = founder === active; });
+      update();
+    };
+    let hovered: HTMLDetailsElement | null = null;
+    const activate = (founder: HTMLDetailsElement) => {
+      if (selected === founder && founder.open) {
+        founder.querySelector<HTMLAnchorElement>('.founder-caption a')!.click();
+        return;
+      }
+      selected = founder;
+      show(founder);
+    };
+    founders.forEach((founder, index) => {
+      const summary = founder.querySelector('summary')!;
+      [summary, targets[index]].forEach(control => {
+        control.addEventListener('click', event => {
+          event.preventDefault();
+          activate(founder);
+        });
+        control.addEventListener('pointerenter', event => {
+          if (event.pointerType !== 'mouse') return;
+          hovered = founder;
+          // Do not hide a biography link while it has keyboard focus.
+          if (!photo.querySelector('.founder-caption:focus-within')) show(founder);
+        });
+        control.addEventListener('focus', () => {
+          if (control.matches(':focus-visible')) show(founder);
+        });
+      });
+    });
+    photo.addEventListener('pointerleave', () => {
+      hovered = null;
+      const focused = photo.querySelector(':focus-visible');
+      if (!focused && !photo.querySelector('.founder-caption:focus-within')) show(selected);
+    });
+    photo.addEventListener('focusout', event => {
+      if (!photo.contains(event.relatedTarget as Node | null)) show(hovered ?? selected);
+    });
+    update();
+  });
+</script>

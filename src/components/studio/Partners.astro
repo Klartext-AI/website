@@ -1,0 +1,46 @@
+---
+interface Props { lang: 'de' | 'en' }
+const { lang } = Astro.props;
+const de = lang === 'de';
+const base = import.meta.env.BASE_URL;
+type Partner = { name: string; url: string; file: string; caption?: string };
+// Ordered by rank, eight per group so each fills its 4 × 2 grid. Still missing logo: Rahofer (client).
+const clients: Partner[] = [
+  { name: 'PwC', url: 'https://www.pwc.at/de.html', file: 'PwC_Company_Logo.svg.png' },
+  { name: 'Austria Wirtschaftsservice', url: de ? 'https://www.aws.at/' : 'https://www.aws.at/en/', file: 'austria-wirtschaftsservice.webp' },
+  { name: 'Terre des Hommes Deutschland e. V.', url: de ? 'https://www.tdh.de/' : 'https://www.tdh.de/en', file: 'TerreDesHommes.png' },
+  { name: 'Investitionsbank Sachsen-Anhalt', url: 'https://www.ib-sachsen-anhalt.de/', file: 'IB_SA.png' },
+  { name: 'Mad Nice', url: 'https://madnice.at/', file: 'madnice.webp' },
+  { name: 'RFU', url: de ? 'https://www.rfu.at/' : 'https://www.rfu.at/en/', file: 'rfu-research-logo.png' },
+  { name: 'Spielplatz-Service Ing. Kastenhofer GmbH', url: 'https://www.spielplatzservice.at/', file: 'spielplatz-service.webp' },
+  { name: 'Codara', url: 'https://codara.com/', file: 'codara.svg' },
+];
+const partners: Partner[] = [
+  { name: 'Fraunhofer Austria', url: 'https://www.fraunhofer.at/', file: 'fraunhofer.png' },
+  { name: 'NVIDIA Inception Program', url: de ? 'https://www.nvidia.com/de-de/startups/' : 'https://www.nvidia.com/en-us/startups/', file: 'nvidia-inception-program.webp' },
+  { name: 'Hilfsgemeinschaft', url: 'https://www.hilfsgemeinschaft.at/', file: 'hilfsgemeinschaft.svg' },
+  { name: 'FFG', url: 'https://www.ffg.at/', file: 'FFG_Logo_DE_CMYK.png', caption: de ? 'Förderpartner' : 'Funding partner' },
+  { name: 'Wirtschaftsagentur Wien', url: de ? 'https://wirtschaftsagentur.at/' : 'https://viennabusinessagency.at/', file: 'wirtschaftsagentur-wien.webp' },
+  { name: 'Know-Center Graz', url: de ? 'https://www.know-center.at/' : 'https://www.know-center.at/en/', file: 'know-center.png' },
+  { name: 'Fraunhofer IPA', url: de ? 'https://www.ipa.fraunhofer.de/de.html' : 'https://www.ipa.fraunhofer.de/en.html', file: 'fraunhofer-ipa.svg' },
+  { name: de ? 'Universität Stuttgart' : 'University of Stuttgart', url: de ? 'https://www.uni-stuttgart.de/' : 'https://www.uni-stuttgart.de/en/', file: de ? 'uni-stuttgart.svg' : 'uni-stuttgart-en.svg' },
+];
+const groups = [
+  { id: 'clients', title: de ? 'Kunden' : 'Clients', items: clients },
+  { id: 'partners', title: de ? 'Partner' : 'Partners', items: partners },
+];
+const visit = (name: string) => de ? `${name} besuchen` : `Visit ${name}`;
+---
+<div class="relationship-groups">
+{groups.map(group => <section class="partners" aria-labelledby={group.id}>
+  <h3 class="relationship-label" id={group.id}>{group.title}</h3>
+  <ul class="partner-grid">
+    {group.items.map(partner => <li>
+      <a href={partner.url} target="_blank" rel="noopener noreferrer" aria-label={partner.caption ? `${visit(partner.name)} · ${partner.caption}` : visit(partner.name)}>
+        <img src={`${base}references/${partner.file}`} alt={partner.name} width="150" height="58" loading="lazy" decoding="async" />
+        {partner.caption && <span class="partner-caption">{partner.caption}</span>}
+      </a>
+    </li>)}
+  </ul>
+</section>)}
+</div>

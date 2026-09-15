@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../Footer.astro';
+import Assurance from './Assurance.astro';
+import Solutions from './Solutions.astro';
+import Research from './Research.astro';
+import Ventures from './Ventures.astro';
+import People from './People.astro';
+import Ecosystem from './Ecosystem.astro';
+import Opening from './Opening.astro';
+import Pillars from './Pillars.astro';
+import Partners from './Partners.astro';
+import LinkedInFeed from '../LinkedInFeed.astro';
+import '../../styles/studio.css';
+interface Props { lang: 'de' | 'en'; page?: 'home' | 'solutions' | 'ventures' | 'research' | 'ecosystem' | 'studio' }
+const { lang, page = 'home' } = Astro.props;
+const de = lang === 'de';
+// `titles` stays a plain string for <title>; the h1 renders it in two parts so the
+// second half can take the blue accent, like every other section heading.
+const solutionsHeading = de ? ['KI, die', 'Verantwortung trägt.'] : ['AI that takes', 'responsibility.'];
+const titles = de ? {home:'We build what’s next.',solutions:'KI, die Verantwortung trägt.',ventures:'Unsere These. In die Praxis gebracht.',research:'Von Forschung zu Wirkung.',ecosystem:'Fortschritt entsteht gemeinsam.',studio:'Das Klartext Studio.'} : {home:'We build what’s next.',solutions:'AI that takes responsibility.',ventures:'Our thesis. Shipped.',research:'From research to real impact.',ecosystem:'Progress is a team effort.',studio:'The Klartext studio.'};
+// The third venture is in stealth, so it is left out of the ventures description — put its
+// name back once we can talk about it (see src/components/studio/Ventures.astro).
+const descriptions = de ? {home:'Wegweisende KI-Lösungen für Unternehmen. Neue KI-Ventures für die Welt. Entwickelt in Wien.',solutions:'Wir entwickeln und integrieren verlässliche KI-Systeme für anspruchsvolle Geschäftsprozesse.',ventures:'doclarity und Klartext Extract: KI-Ventures von Klartext AI.',research:'Forschung zu überprüfbarer Autonomie, Evaluation und verlässlichen KI-Systemen.',ecosystem:'Unser Engagement für das KI-Ecosystem in Österreich und Europa mit AI Austria und AI Impact Mission.',studio:'Lern die Menschen hinter Klartext AI kennen. Forschung und Engineering aus Wien.'} : {home:'Cutting-edge AI solutions for companies. New AI ventures for the world. Built in Vienna.',solutions:'We build and integrate accountable AI systems for demanding business processes.',ventures:'doclarity and Klartext Extract: AI ventures built by Klartext AI.',research:'Research into verifiable autonomy, evaluation, and reliable AI systems.',ecosystem:'Supporting the AI ecosystem in Austria and Europe with AI Austria and AI Impact Mission.',studio:'Meet the people behind Klartext AI. Research and engineering from Vienna.'};
+---
+<BaseLayout title={`${titles[page]} | Klartext AI`} description={descriptions[page]} lang={lang} alwaysShowNav={true}>
+  <main id="main-content" class="studio-site" data-page={page} tabindex="-1">
+    {page === 'home' ? <>
+      <Opening lang={lang}/>
+      <section class="studio-section home-facts" id="what-we-build" aria-label={de ? 'Klartext in Zahlen' : 'Klartext in numbers'}>
+        <dl class="studio-stats">
+          <div><dt>{de ? 'Gegründet' : 'Founded'}</dt><dd>2025</dd></div>
+          <div><dt>{de ? 'Ohne externes Kapital' : 'No external capital'}</dt><dd class="fact-word">Bootstrapped</dd></div>
+          <div><dt>{de ? 'Expert:innen' : 'Experts'}</dt><dd data-count="10">10+</dd></div>
+          <div><dt>{de ? 'Kunden' : 'Clients'}</dt><dd data-count="20">20+</dd></div>
+          <div><dt>Ventures</dt><dd data-count="3">3+</dd></div>
+        </dl>
+      </section>
+      <section class="studio-section home-relationships conviction">
+        <h2>{de ? 'Gemeinsam bringen wir' : 'Together, we put'}<br /><span class="blue">{de ? 'KI in die Praxis.' : 'AI into practice.'}</span></h2>
+        <Partners lang={lang}/>
+      </section>
+      <Assurance lang={lang}/><Pillars lang={lang}/><Ventures lang={lang}/>
+      <People lang={lang}/><Ecosystem lang={lang}/>
+
+    </> : <>
+      {page === 'solutions' && <header class="studio-page-heading"><h1>{solutionsHeading[0]}<br /><span class="blue">{solutionsHeading[1]}</span></h1><p class="lead">{de ? 'Beeindruckende KI kann jeder zeigen. Wir machen sie verlässlich.' : 'Anyone can make AI impressive. We make it accountable.'}</p></header>}
+      {page === 'solutions' && <><Solutions lang={lang} full/><Assurance lang={lang}/></>}
+      {page === 'ventures' && <Ventures lang={lang} full/>}
+      {page === 'research' && <Research lang={lang} full/>}
+      {page === 'ecosystem' && <Ecosystem lang={lang} full/>}
+      {page === 'studio' && <><People lang={lang} full/><Solutions lang={lang}/></>}
+    </>}
+    {page === 'home' && <LinkedInFeed lang={lang}/>}
+    <section class="studio-section studio-contact" id="contact"><h2>{de ? 'Ein Problem, das es' : 'A problem'}<br /><span class="blue">{de ? 'wert ist, zu lösen?' : 'worth solving?'}</span></h2><a class="studio-button" href="mailto:office@klartext-ai.com">{de ? 'Sprechen wir darüber' : 'Let’s talk'} <span aria-hidden="true">↗</span></a></section>
+  </main>
+  <Footer lang={lang}/>
+</BaseLayout>
+
+<script>
+  // Reveal each fact once, including individually visible rows on mobile.
+  // Keep the real values in the HTML for assistive technology and without JS.
+  const facts = document.querySelectorAll<HTMLElement>('.home-facts .studio-stats > div');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // Chapter headings enter once, after reaching the reading area. Prepare the
+  // animation before observing so a later trigger doesn't flash visible text.
+  // Body copy and cards stay still; without JS all content is visible.
+  // Page titles are excluded: they are on screen before this deferred script runs, so
+  // hiding them here flashed the text. They animate in CSS instead (see studio.css).
+  if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+    const headings = document.querySelectorAll<HTMLElement>(
+      '.studio-section > h2, .studio-section > .split-heading > h2, .people-intro > h2'
+    );
+    const active = new Map<Element, Animation>();
+    const seen = new WeakSet<Element>();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const animation = active.get(entry.target);
+        if (!animation) return;
+        if (!entry.isIntersecting) {
+          // Fast scrolls may skip the trigger zone entirely. Reveal those headings
+          // too, and finish running entrances when they leave the reading area.
+          if (seen.has(entry.target) || entry.boundingClientRect.bottom < 0) animation.cancel();
+          return;
+        }
+        if (seen.has(entry.target)) return;
+        seen.add(entry.target);
+        (entry.target as HTMLElement).style.willChange = 'transform, opacity';
+        animation.play();
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
+    headings.forEach(heading => {
+      const animation = heading.animate([
+        { opacity: 0, transform: 'translateY(40px)' },
+        { opacity: 1, transform: 'translateY(0)' },
+      ], { duration: 1150, easing: 'cubic-bezier(.25,.1,.25,1)', fill: 'both' });
+      animation.pause();
+      active.set(heading, animation);
+      const cleanup = () => {
+        heading.style.removeProperty('will-change');
+        active.delete(heading);
+        observer.unobserve(heading);
+      };
+      animation.onfinish = () => { cleanup(); animation.cancel(); };
+      animation.oncancel = cleanup;
+      observer.observe(heading);
+    });
+    reducedMotion.addEventListener('change', () => {
+      if (!reducedMotion.matches) return;
+      observer.disconnect();
+      active.forEach(animation => animation.cancel());
+    });
+  }
+
+  if (facts.length && !reducedMotion.matches && 'IntersectionObserver' in window) {
+    const revealed = new WeakSet<Element>();
+    const running = new Map<Element, Animation[]>();
+    const counters = new Map<Element, () => void>();
+
+    function countUp(fact: Element, delay: number): Promise<void> {
+      const value = fact.querySelector<HTMLElement>('[data-count]');
+      if (!value) return Promise.resolve();
+
+      const finalText = value.textContent || '';
+      const target = Number(value.dataset.count);
+      const formatCount = (count: number) => `${String(count).padStart(String(target).length, '\u2007')}+`;
+      // The original text reserves the final width and remains accessible.
+      const original = document.createElement('span');
+      original.className = 'fact-count-layer';
+      original.textContent = finalText;
+      original.style.opacity = '0';
+      const display = document.createElement('span');
+      display.className = 'fact-count-layer';
+      display.setAttribute('aria-hidden', 'true');
+      display.style.cssText = 'position: absolute; inset: 0;';
+      display.textContent = formatCount(0);
+      value.style.position = 'relative';
+      value.replaceChildren(original, display);
+
+      return new Promise((resolve) => {
+        let frame = 0;
+        const start = performance.now() + delay;
+        const finish = () => {
+          cancelAnimationFrame(frame);
+          value.textContent = finalText;
+          value.style.removeProperty('position');
+          counters.delete(fact);
+          resolve();
+        };
+        counters.set(fact, finish);
+        const tick = (now: number) => {
+          const progress = Math.min(1, Math.max(0, (now - start) / 900));
+          // Equal time per integer keeps small totals from stalling before the last step.
+          const count = Math.floor(target * progress);
+          const nextText = formatCount(count);
+          if (display.textContent !== nextText) display.textContent = nextText;
+          if (progress === 1) finish();
+          else frame = requestAnimationFrame(tick);
+        };
+        frame = requestAnimationFrame(tick);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      let stagger = 0;
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          running.get(entry.target)?.forEach((animation) => animation.cancel());
+          counters.get(entry.target)?.();
+          return;
+        }
+        if (revealed.has(entry.target)) return;
+        revealed.add(entry.target);
+
+        const delay = stagger++ * 90;
+        const counterFinished = countUp(entry.target, delay);
+        const animations = Array.from(entry.target.querySelectorAll<HTMLElement>('dd, dt')).map((part) => {
+          const isValue = part.tagName === 'DD';
+          part.style.willChange = 'transform, opacity';
+          const animation = part.animate([
+            { opacity: 0, transform: `translateY(${isValue ? 20 : 10}px)` },
+            { opacity: 1, transform: 'translateY(0)' },
+          ], {
+            duration: isValue ? 800 : 650,
+            delay: delay + (isValue ? 0 : 120),
+            easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+            fill: 'backwards',
+          });
+          const cleanup = () => { part.style.removeProperty('will-change'); };
+          animation.onfinish = cleanup;
+          animation.oncancel = cleanup;
+          return animation;
+        });
+        running.set(entry.target, animations);
+        void Promise.allSettled([...animations.map((animation) => animation.finished), counterFinished]).then(() => {
+          running.delete(entry.target);
+          observer.unobserve(entry.target);
+        });
+      });
+    }, { threshold: 0.25 });
+
+    facts.forEach((fact) => observer.observe(fact));
+    reducedMotion.addEventListener('change', () => {
+      if (!reducedMotion.matches) return;
+      observer.disconnect();
+      running.forEach((animations) => animations.forEach((animation) => animation.cancel()));
+      counters.forEach((finish) => finish());
+    });
+  }
+</script>

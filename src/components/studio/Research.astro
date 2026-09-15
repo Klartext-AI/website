@@ -1,0 +1,128 @@
+---
+interface Props { lang: 'de' | 'en'; full?: boolean }
+const { lang, full = false } = Astro.props;
+const Heading = full ? 'h1' : 'h2';
+const de = lang === 'de';
+const root = `${import.meta.env.BASE_URL}${de ? 'de/' : ''}`;
+const stages = de ? ['Forschung', 'Technologie', 'Produkte', 'Ventures'] : ['Research', 'Technology', 'Products', 'Ventures'];
+// Research partners first, then funders.
+const researchPartners: { name: string; url: string; file: string; variant?: string }[] = [
+  { name: 'Fraunhofer Austria', url: 'https://www.fraunhofer.at/', file: 'fraunhofer.png' },
+  { name: 'Fraunhofer IPA', url: de ? 'https://www.ipa.fraunhofer.de/de.html' : 'https://www.ipa.fraunhofer.de/en.html', file: 'fraunhofer-ipa.svg' },
+  { name: de ? 'Universität Stuttgart' : 'University of Stuttgart', url: de ? 'https://www.uni-stuttgart.de/' : 'https://www.uni-stuttgart.de/en/', file: de ? 'uni-stuttgart.svg' : 'uni-stuttgart-en.svg' },
+  { name: 'Know Center', url: de ? 'https://www.know-center.at/' : 'https://www.know-center.at/en/', file: 'know-center.png' },
+  { name: 'Wirtschaftsagentur Wien', url: de ? 'https://wirtschaftsagentur.at/' : 'https://viennabusinessagency.at/', file: 'wirtschaftsagentur-wien.webp', variant: 'partner-mark' },
+  { name: 'FFG', url: 'https://www.ffg.at/', file: 'FFG_Logo_DE_CMYK.png' },
+];
+// Funded research projects on the full page. The label above each row carries the
+// partners and funders, the way the reference-project rows carry their category.
+// PAT is the research behind doclarity, so its row leads to the ventures page.
+const projects: { title: string; partners: string; copy: string; href?: string }[] = de ? [
+  { title: 'PAT. Kernschritte der PDF-Barrierefreiheit, automatisiert.', partners: 'Mit Know-Center Graz · Gefördert von der FFG', copy: 'Automatisierung der Kernschritte bei der Überführung nicht barrierefreier PDFs in barrierefreie PDFs. Die Grundlage von doclarity.', href: `${root}ventures/` },
+  { title: 'IncluDoc. PDF/UA-Barrierefreiheit, europaweit skalierbar.', partners: 'Gefördert von der Wirtschaftsagentur Wien', copy: 'Wir entwickeln die Technologie hinter PDF/UA-Barrierefreiheit weiter – inklusive europäischer Skalierbarkeit.' },
+  { title: 'MANAGER. Ein Agent für die Kreislaufwirtschaft.', partners: 'Mit Fraunhofer IPA, Universität Stuttgart und IFM · Eureka, EU-gefördert', copy: 'Ein KI-Agent, der Unternehmen im Elektronikbereich dabei unterstützt, Produkte und Prozesse kreislauffähiger zu gestalten.' },
+] : [
+  { title: 'PAT. The core steps of PDF accessibility, automated.', partners: 'With Know-Center Graz · Funded by FFG', copy: 'Automating the core steps of turning non-accessible PDFs into accessible PDFs. The foundation of doclarity.', href: `${root}ventures/` },
+  { title: 'IncluDoc. PDF/UA accessibility, built to scale across Europe.', partners: 'Funded by the Vienna Business Agency', copy: 'We advance the technology behind PDF/UA accessibility, including scalability across Europe.' },
+  { title: 'MANAGER. An agent for the circular economy.', partners: 'With Fraunhofer IPA, University of Stuttgart and IFM · Eureka, EU-funded', copy: 'An AI agent that helps companies in the electronics sector make their products and processes more circular.' },
+];
+---
+<section class="studio-section research" id="research">
+  <Heading>{de ? 'Forschung ist unser' : 'Research is our'}<br /><span class="blue">{de ? 'entscheidender Vorsprung.' : 'unfair advantage.'}</span></Heading>
+  <div class="research-copy"><p class="lead">{de ? 'Wir nutzen nicht nur, was die Forschung möglich macht. Wir arbeiten daran.' : 'We don’t just use what’s happening at the frontier. We work on it.'}</p><p>{de ? 'Zuverlässigkeit ist eine Forschungsfrage. Deshalb erforschen wir überprüfbare Autonomie, Evaluation und Kalibrierung. Daraus wird Technologie. Dann Produkte. Dann Unternehmen.' : 'Reliability is a research problem. That’s why we study verifiable autonomy, evaluation, and calibration. The work becomes technology. Then products. Then companies.'}</p></div>
+  <ol class="research-flow" data-research-flow>{stages.map((stage, i) => <li style={`--stage-delay: ${i * 450}ms; --stage-start: ${i * 28}%; --stage-end: ${i * 28 + 16}%; --link-end: ${(i + 1) * 28}%;`}>
+    {i === 0 && <svg class="flow-symbol" aria-hidden="true" viewBox="0 0 88 88" focusable="false"><circle class="symbol-fill research-field" cx="44" cy="44" r="30.5"/><circle cx="44" cy="44" r="43.5"/><circle cx="44" cy="44" r="30.5"/><circle cx="44" cy="44" r="17.5"/><circle class="symbol-fill research-core" cx="44" cy="44" r="5"/></svg>}
+    {i === 1 && <svg class="flow-symbol" aria-hidden="true" viewBox="0 0 88 88" focusable="false"><circle cx="44" cy="44" r="34"/><rect class="symbol-fill technology-field" x="20" y="20" width="48" height="48"/><rect x="20" y="20" width="48" height="48"/><path class="technology-axis technology-axis-y" d="M41 .5H47V87.5H41Z"/><path class="technology-axis technology-axis-x" d="M.5 41H87.5V47H.5Z"/><rect class="symbol-fill technology-core" x="40" y="40" width="8" height="8"/></svg>}
+    {i === 2 && <svg class="flow-symbol" aria-hidden="true" viewBox="0 0 88 88" focusable="false"><rect x="0.5" y="0.5" width="34" height="34"/><rect class="symbol-fill product-cell" x="0.5" y="0.5" width="34" height="34" style="--tile-opacity:0.22;--tile-delay:0ms"/><rect x="53.5" y="0.5" width="34" height="34"/><rect class="symbol-fill product-cell" x="53.5" y="0.5" width="34" height="34" style="--tile-opacity:0.42;--tile-delay:55ms"/><rect x="0.5" y="53.5" width="34" height="34"/><rect class="symbol-fill product-cell" x="0.5" y="53.5" width="34" height="34" style="--tile-opacity:0.65;--tile-delay:110ms"/><rect x="53.5" y="53.5" width="34" height="34"/><rect class="symbol-fill product-cell" x="53.5" y="53.5" width="34" height="34" style="--tile-opacity:1;--tile-delay:165ms"/></svg>}
+    {i === 3 && <svg class="flow-symbol" aria-hidden="true" viewBox="0 0 88 88" focusable="false"><polygon class="symbol-fill venture-plane" points="44,18 70,44 44,70 18,44"/><polygon points="44,1 87,44 44,87 1,44"/><polygon points="44,18 70,44 44,70 18,44"/><polygon class="symbol-fill venture-core" points="44,34 54,44 44,54 34,44"/></svg>}
+    <span>{stage}</span>{i < stages.length - 1 && <span class="research-connector" aria-hidden="true"><span /></span>}
+  </li>)}</ol>
+  {full ? <>
+    <div class="studio-stats"><div><strong>€150k+</strong><span>{de ? 'Forschungsvolumen im ersten Jahr' : 'Research volume, year one'}</span></div><div><strong>5+</strong><span>{de ? 'Forschungspartner' : 'Research partners'}</span></div><div><strong>15+</strong><span>{de ? 'Wissenschaftliche Publikationen' : 'Scientific publications'}</span></div></div>
+    <div class="partner-strip">{researchPartners.map(partner => <a href={partner.url} target="_blank" rel="noopener noreferrer" aria-label={de ? `${partner.name} besuchen` : `Visit ${partner.name}`}><img class={partner.variant} src={`${import.meta.env.BASE_URL}references/${partner.file}`} alt={partner.name} loading="lazy" width="160" height="60" /></a>)}</div>
+    <div class="project-list research-projects">
+      <h2>{de ? 'Unsere Forschungsprojekte.' : 'Our research projects.'}</h2>
+      {projects.map(project => project.href
+        ? <a class="project-row" href={project.href}><span class="kicker">{project.partners}</span><h3>{project.title}</h3><p>{project.copy}</p><span class="project-arrow" aria-hidden="true">↗</span></a>
+        : <article class="project-row"><span class="kicker">{project.partners}</span><h3>{project.title}</h3><p>{project.copy}</p></article>
+      )}
+    </div>
+  </> : <div class="section-end"><a class="line-link" href={`${root}research/`}>{de ? 'Unsere Forschung' : 'Explore research'} <span aria-hidden="true">↗</span></a></div>}
+</section>
+
+<style>
+  /* The project list follows the page's whitespace rhythm (see studio.css, research page). */
+  .research-projects { margin-top: var(--research-space, 110px); }
+  .flow-symbol { color: var(--color-blue); }
+  .flow-symbol > * { vector-effect: non-scaling-stroke; }
+  .flow-symbol .symbol-fill { fill: currentColor; stroke: none; }
+  .symbol-fill, .technology-axis { transform-box: fill-box; transform-origin: center; }
+  .research-field { opacity: .17; }
+  .technology-field { opacity: .15; }
+  .technology-axis { fill: currentColor; fill-opacity: .13; }
+  .product-cell { opacity: var(--tile-opacity); }
+  .venture-plane { opacity: .2; }
+  .research-flow li:not(:last-child)::after { content: none; }
+  .research-connector { position: absolute; top: 45px; left: calc(50% + 62px); width: calc(100% - 124px); height: 1px; background: var(--color-line); }
+  .research-connector > span { display: block; height: 100%; background: var(--color-blue); transform-origin: left; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .flow-ready .symbol-fill, .flow-ready .technology-axis {
+      animation: research-activate 400ms cubic-bezier(.16, 1, .3, 1) both paused;
+      animation-delay: var(--stage-delay);
+    }
+    .flow-ready .research-core { animation-name: research-core; }
+    .flow-ready .technology-axis-x { animation-name: research-axis-x; }
+    .flow-ready .technology-axis-y { animation-name: research-axis-y; }
+    .flow-ready .product-cell { animation-delay: calc(var(--stage-delay) + var(--tile-delay)); }
+    .flow-ready .venture-plane { animation-name: research-plane; }
+    .flow-ready .research-connector > span {
+      animation: research-connect 450ms linear both paused;
+      animation-delay: var(--stage-delay);
+    }
+    .flow-visible .symbol-fill, .flow-visible .technology-axis, .flow-visible .research-connector > span { animation-play-state: running; }
+
+    @supports (animation-timeline: view()) {
+      .research-flow { view-timeline: --research-flow block; view-timeline-inset: 62% 10%; }
+      .research-flow .symbol-fill, .research-flow .technology-axis, .research-flow .research-connector > span {
+        animation-duration: 1ms;
+        animation-delay: 0s;
+        animation-timeline: --research-flow;
+        animation-range: entry var(--stage-start) entry var(--stage-end);
+        animation-play-state: running;
+      }
+      .research-flow .research-connector > span { animation-range: entry var(--stage-start) entry var(--link-end); }
+      .research-flow .product-cell { animation-range: entry calc(var(--stage-start) + var(--tile-step)) entry calc(var(--stage-end) + var(--tile-step)); }
+      .product-cell:nth-of-type(2) { --tile-step: 0%; }
+      .product-cell:nth-of-type(4) { --tile-step: 2%; }
+      .product-cell:nth-of-type(6) { --tile-step: 4%; }
+      .product-cell:nth-of-type(8) { --tile-step: 6%; }
+    }
+    @keyframes research-activate { from { opacity: 0; transform: scale(.18); } }
+    @keyframes research-core { from { transform: scale(.5); } }
+    @keyframes research-axis-x { from { transform: translateX(-5px); } }
+    @keyframes research-axis-y { from { transform: translateY(-5px); } }
+    @keyframes research-plane { from { opacity: 0; transform: rotate(-12deg) scale(.65); } }
+    @keyframes research-connect { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  }
+  @media (max-width: 600px) {
+    .research-connector { top: 26px; left: calc(50% + 30px); width: calc(100% - 60px); }
+  }
+</style>
+
+<script>
+  const flows = document.querySelectorAll<HTMLOListElement>('[data-research-flow]');
+  // Native view timelines keep the original scroll progression without a scroll handler.
+  // Other browsers play the same sequence on entry and pause it while off-screen.
+  if (CSS.supports('animation-timeline: view()')) {
+    flows.forEach(flow => flow.classList.add('flow-ready'));
+  } else if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.target.classList.toggle('flow-visible', entry.isIntersecting));
+    }, { threshold: .5 });
+    flows.forEach(flow => {
+      flow.classList.add('flow-ready');
+      observer.observe(flow);
+    });
+  }
+</script>

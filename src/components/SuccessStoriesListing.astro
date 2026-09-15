@@ -167,7 +167,7 @@ const text = content[lang];
     <div class="stories-grid">
       {text.stories.map((story, index) => (
         <a
-          href={lang === 'en' ? `${BASE}en/success-stories/${storyUrls[story.id]}` : `${BASE}success-stories/${storyUrls[story.id]}`}
+          href={lang === 'en' ? `${BASE}success-stories/${storyUrls[story.id]}` : `${BASE}de/success-stories/${storyUrls[story.id]}`}
           class="story-card glass-card fade-in"
           style={`animation-delay: ${index * 0.1}s`}
         >
@@ -180,6 +180,17 @@ const text = content[lang];
                 class="story-brand-logo"
                 width="118"
                 height="30"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
+            {story.id === 'data-extraction-rfu' && (
+              <img
+                src={`${BASE}kpi_extraction_product_files/klartext-extract-logo.svg`}
+                alt=""
+                class="story-brand-logo story-brand-logo-wide"
+                width="152"
+                height="26"
                 loading="lazy"
                 decoding="async"
               />
@@ -286,6 +297,10 @@ const text = content[lang];
     width: 118px;
     height: auto;
     flex-shrink: 0;
+  }
+
+  .story-brand-logo-wide {
+    width: 152px;
   }
 
   .story-category {

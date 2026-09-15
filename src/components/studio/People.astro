@@ -1,0 +1,66 @@
+---
+import { teamProfiles } from './team-profiles';
+import FounderPhoto from './FounderPhoto.astro';
+import StudioSpace from './StudioSpace.astro';
+interface Props { lang: 'de' | 'en'; full?: boolean }
+type PortraitAttrs = Record<string, string>;
+const { lang, full = false } = Astro.props;
+const Heading = full ? 'h1' : 'h2';
+const de = lang === 'de';
+const base = import.meta.env.BASE_URL;
+const root = `${base}${de ? 'de/' : ''}`;
+const people = [
+  ['Ruben Hetfleisch','CEO','ruben','jpeg'], ['Daniel Toth','COO','daniel','jpg'], ['Felix Krause','CTO','felix','jpg'],
+  ['Anna Poledna','Business Development','anna','jpg'],
+  ['Benjamin Raumauf','Full-Stack Developer','benjamin','jpg'], ['Hrvoje Ljubić','Full-Stack Developer','hrvoje','jpg'],
+  ['Francesca Ricter','Software Developer','francesca','jpeg'], ['Kenan Isakovic','Full-Stack Developer','kenan','jpg'],
+  ['David Janisch','Full-Stack Developer','david','jpg'], ['Otto Winter','','otto',''], ['Bruno','Chief Happiness Officer','bruno','jpg']
+];
+---
+<section class={`studio-section people-section ${full ? 'people-full' : ''}`} id="studio">
+  <div class="people-intro"><Heading>{de ? 'Aus Wien.' : 'Built in Vienna.'}<br /><span class="blue">{de ? 'Für das, was kommt.' : 'For what’s next.'}</span></Heading>{full && <p class="lead">{de ? '2025 gegründet. Bootstrapped. Ein Team aus Forschung und Engineering, das KI in die Praxis bringt.' : 'Founded in 2025. Bootstrapped. Researchers and engineers building AI that holds up.'}</p>}
+    <a class="line-link" href={`${root}${full ? 'karriere' : 'team'}/`}>{full ? (de ? 'Teil des Teams werden' : 'Join our team') : (de ? 'Das Studio kennenlernen' : 'Meet the studio')} <span aria-hidden="true">↗</span></a>
+  </div>
+  {full && <StudioSpace lang={lang} />}
+  {full && <div class="studio-stats"><div><strong>10+</strong><span>{de ? 'Menschen aus Forschung und Engineering' : 'Researchers and engineers'}</span></div><div><strong>20+</strong><span>{de ? 'Kunden aus Wirtschaft und öffentlichem Sektor' : 'Clients across industry and the public sector'}</span></div><div><strong>3</strong><span>{de ? 'Ventures aus unserem Studio' : 'Ventures from our studio'}</span></div></div>}
+  {full && <h2 class="builders-heading">{de ? 'Die Menschen dahinter.' : 'The builders.'}</h2>}
+  {!full && <FounderPhoto lang={lang} />}
+  {full && <div class="people-grid">{people.map(([name,role,file]) => {
+    const profile = teamProfiles[lang].find(member => member.name === name)!;
+    const instagram = profile.linkedin?.includes('instagram.com');
+    const dialogId = `person-${lang}-${file}`;
+    // New team members can be listed before their photo and bio are ready.
+    const hasBio = profile.fullBio.length > 0;
+    const Portrait = hasBio ? 'button' : 'div';
+    const portraitAttrs: PortraitAttrs = hasBio ? { type: 'button', 'aria-label': `${de ? 'Biografie lesen' : 'Read biography'}: ${name}`, 'aria-haspopup': 'dialog', 'aria-controls': dialogId } : {};
+    return <article class="person">
+    <div class="portrait-wrap">
+    <Portrait class="portrait" {...portraitAttrs}>
+      {profile.image
+        ? <img src={`${base}team/optimized/${file}.webp`} alt={name} width="480" height="600" loading="lazy" />
+        : <span class="portrait-initials" aria-hidden="true">{name.split(' ').map(part => part[0]).join('')}</span>}
+      {profile.hoverImage && <img class="portrait-fun" src={`${base}team/optimized/${file}-fun.webp`} alt="" width="480" height="600" loading="lazy" />}
+    </Portrait>
+    {profile.summary.length > 0 && <span class="portrait-facts" aria-hidden="true">{profile.summary.map(fact => <span>{fact.replace(/<[^>]*>/g, '')}</span>)}</span>}
+    {profile.linkedin && <a class="portrait-social" href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${name} ${de ? 'auf' : 'on'} ${instagram ? 'Instagram' : 'LinkedIn'}`}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        {instagram ? <><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1" fill="currentColor" stroke="none"/></> : <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></>}
+      </svg>
+    </a>}
+    </div><h3>{name}</h3>{role && <p>{role}</p>}
+    {hasBio && <dialog class="person-dialog" id={dialogId} aria-labelledby={`${dialogId}-title`}>
+      <form method="dialog"><button class="person-close" autofocus>{de ? 'Schließen' : 'Close'} <span aria-hidden="true">×</span></button></form>
+      <h2 id={`${dialogId}-title`}>{name}</h2><p class="person-role">{role}</p>
+      <ul>{profile.summary.map(fact => <li set:html={fact}/>)}</ul>
+      {profile.fullBio.map(paragraph => <p set:html={paragraph}/>)}
+    </dialog>}
+  </article>})}</div>}
+</section>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('button.portrait').forEach(button => {
+    button.addEventListener('click', () => {
+      const dialog = document.getElementById(button.getAttribute('aria-controls')!);
+      if (dialog instanceof HTMLDialogElement) dialog.showModal();
+    });
+  });
+</script>

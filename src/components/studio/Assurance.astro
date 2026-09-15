@@ -1,0 +1,191 @@
+---
+interface Props { lang: 'de' | 'en' }
+const { lang } = Astro.props;
+const de = lang === 'de';
+const layers = de ? [
+  ['Klare Grenzen', 'Validierte Eingaben, feste Regeln und klar definierte Ausgaben.'],
+  ['Nachvollziehbarkeit', 'Jede Entscheidung mit Quelle, Version und Begründung.'],
+  ['Gezielte Übergabe', 'Menschen übernehmen, wenn Unsicherheit oder Tragweite es verlangen.'],
+  ['Laufende Evaluation', 'Qualität wird kontinuierlich geprüft. Auch nach dem Go-live.']
+] : [
+  ['Deterministic edges', 'Validated inputs, explicit rules, and clearly defined outputs.'],
+  ['Traceability', 'Every decision with a source, version, and reason.'],
+  ['Calibrated handoff', 'People take over when uncertainty or consequences demand it.'],
+  ['Continuous evaluation', 'Quality that keeps being tested. Including after release.']
+];
+// One tone per plate, top (level 0) to bottom: pale sky down to night blue, so the stack reads
+// as layers settling onto a foundation. The darkest face stop doubles as the plate's side.
+const plateTones = [
+  { face: ['--color-blue-soft', '--color-blue-sky', '--color-blue-accent'], edge: '--color-bg-white-warm' },
+  { face: ['--color-blue-sky', '--color-blue-accent', '--color-blue'], edge: '--color-blue-soft' },
+  { face: ['--color-blue-accent', '--color-blue', '--color-blue-petrol'], edge: '--color-blue-sky' },
+  { face: ['--color-blue-muted', '--color-blue-petrol', '--color-blue-night'], edge: '--color-blue-muted' }
+];
+---
+<section class="studio-section assurance" id="assurance">
+  <h2>{de ? 'Agentische Systeme für Prozesse,' : 'Agentic systems for processes'}<br />{de ? 'in denen Fehler' : 'where being wrong'}<br /><span class="blue">{de ? 'keine Option sind.' : 'is not an option.'}</span></h2>
+  <div class="assurance-grid">
+    <svg class="assurance-connection" aria-hidden="true"><path /></svg>
+    <svg class="assurance-sculpture" viewBox="0 0 640 590" aria-hidden="true">
+      <defs>{plateTones.map(({ face }, level) => <linearGradient id={`plate-${level}`} x1="0" y1="0" x2="1" y2="1"><stop stop-color={`var(${face[0]})`}/><stop offset=".5" stop-color={`var(${face[1]})`}/><stop offset="1" stop-color={`var(${face[2]})`}/></linearGradient>)}</defs>
+      {[3,2,1,0].map(level => <g transform={`translate(0 ${level * 68})`}><g class="plate">
+        <path fill={`var(${plateTones[level].face[2]})`} d="M64 180 320 330 576 180V196L320 346 64 196Z"/>
+        <path fill={`url(#plate-${level})`} fill-rule="evenodd" d="M320 32 576 180 320 330 64 180ZM320 94 470 181 320 268 170 181Z"/>
+        <path stroke={`var(${plateTones[level].edge})`} fill="none" d="M64 180 320 330 576 180M170 181 320 94 470 181"/>
+      </g><path class="plate-hit" data-level={level} fill-rule="evenodd" d="M320 32 576 180V196L320 346 64 196V180ZM320 94 470 181 320 268 170 181Z"/></g>)}
+    </svg>
+    <div class="assurance-layers">{layers.map(([title, text], i) => <details>
+      <summary><span class="index">0{i+1}</span><span>{title}</span><span class="detail-plus" aria-hidden="true">+</span></summary>
+      <p>{text}</p>
+    </details>)}</div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+    document.querySelectorAll<HTMLElement>('.assurance-layers').forEach((layers) => {
+      const details = Array.from(layers.querySelectorAll<HTMLDetailsElement>('details'));
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const animations = new Map<HTMLDetailsElement, Animation>();
+      const grid = layers.closest<HTMLElement>('.assurance-grid')!;
+      const connection = grid.querySelector<SVGSVGElement>('.assurance-connection')!;
+      const path = connection.querySelector('path')!;
+      const plates = Array.from(grid.querySelectorAll<SVGGElement>('.plate')).reverse();
+      let activeRow: HTMLDetailsElement | null = null;
+      let frame = 0;
+
+      const drawConnection = () => {
+        if (!activeRow) return;
+        const matrix = plates[details.indexOf(activeRow)].getScreenCTM();
+        if (!matrix) return;
+        const point = new DOMPoint(576, 180).matrixTransform(matrix);
+        const bounds = grid.getBoundingClientRect();
+        const summary = activeRow.querySelector('summary')!.getBoundingClientRect();
+        const x = point.x - bounds.left;
+        const y = point.y - bounds.top;
+        const endX = summary.left - bounds.left - 12;
+        const endY = summary.top - bounds.top + summary.height / 2;
+        const elbow = x + (endX - x) / 2;
+        path.setAttribute('d', `M${x} ${y} H${elbow} L${endX - 16} ${endY} H${endX}`);
+      };
+
+      const showConnection = (item: HTMLDetailsElement) => {
+        activeRow = item;
+        cancelAnimationFrame(frame);
+        drawConnection();
+        connection.classList.add('is-active');
+        const until = performance.now() + 420;
+        const followMotion = () => {
+          drawConnection();
+          if (performance.now() < until) frame = requestAnimationFrame(followMotion);
+        };
+        frame = requestAnimationFrame(followMotion);
+      };
+      new ResizeObserver(drawConnection).observe(grid);
+
+      const setExpanded = (item: HTMLDetailsElement, expanded: boolean) => {
+        if ((item.dataset.expanded === 'true') === expanded) return;
+        const startHeight = item.getBoundingClientRect().height;
+        animations.get(item)?.cancel();
+        animations.delete(item);
+        item.dataset.expanded = String(expanded);
+        item.open = expanded;
+        const endHeight = item.getBoundingClientRect().height;
+        if (reducedMotion.matches) return;
+        // Keep closing content rendered until its container has finished shrinking.
+        item.open = true;
+        const animation = item.animate(
+          [{ height: `${startHeight}px` }, { height: `${endHeight}px` }],
+          { duration: 380, easing: 'ease-in-out' },
+        );
+        animations.set(item, animation);
+        animation.onfinish = () => {
+          item.open = expanded;
+          animations.delete(item);
+        };
+      };
+
+      // The plate highlight is hover-driven in CSS, which touch never reaches, so the
+      // active row is mirrored onto an attribute the stylesheet can match either way.
+      const markActive = (active: HTMLDetailsElement | null) => {
+        details.forEach((item) => item.toggleAttribute('data-active', item === active));
+      };
+
+      const clearActive = () => {
+        activeRow = null;
+        cancelAnimationFrame(frame);
+        connection.classList.remove('is-active');
+        markActive(null);
+      };
+
+      const activate = (active: HTMLDetailsElement) => {
+        if (!hoverQuery.matches) return;
+        details.forEach((item) => {
+          setExpanded(item, item === active);
+        });
+        markActive(active);
+        showConnection(active);
+      };
+
+      // A tap opens one row at a time and closes whichever was open; tapping the open
+      // row collapses it. The connecting line stays out of it — it is hidden on touch.
+      const toggleByTap = (item: HTMLDetailsElement) => {
+        const opening = item.dataset.expanded !== 'true';
+        details.forEach((other) => setExpanded(other, other === item && opening));
+        markActive(opening ? item : null);
+      };
+
+      const collapseAll = () => {
+        clearActive();
+        details.forEach((item) => setExpanded(item, false));
+      };
+
+      layers.addEventListener('pointerleave', (event) => {
+        if (event.pointerType === 'mouse' && hoverQuery.matches) collapseAll();
+      });
+
+      // Pointing at a plate opens its row too. The hit areas sit outside the lifting
+      // plates, so a raised plate never slides out from under the pointer.
+      const sculpture = grid.querySelector<SVGSVGElement>('.assurance-sculpture')!;
+      const plateHit = (target: EventTarget | null) =>
+        target instanceof Element ? target.closest<SVGElement>('.plate-hit') : null;
+
+      sculpture.addEventListener('pointerover', (event) => {
+        const hit = plateHit(event.target);
+        if (hit && event.pointerType === 'mouse') activate(details[Number(hit.dataset.level)]);
+      });
+      sculpture.addEventListener('pointerout', (event) => {
+        if (event.pointerType === 'mouse' && hoverQuery.matches && !plateHit(event.relatedTarget)) collapseAll();
+      });
+
+      layers.addEventListener('focusout', (event) => {
+        if (!(event.relatedTarget instanceof Node && layers.contains(event.relatedTarget)) && !layers.matches(':hover')) {
+          clearActive();
+        }
+      });
+
+      details.forEach((item) => {
+        item.dataset.expanded = String(item.open);
+        item.addEventListener('pointerenter', (event) => {
+          if (event.pointerType === 'mouse') activate(item);
+        });
+        item.addEventListener('focusin', () => {
+          if (item.querySelector('summary')?.matches(':focus-visible')) activate(item);
+        });
+
+        item.querySelector('summary')?.addEventListener('click', (event) => {
+          const tapped = !hoverQuery.matches || (event instanceof PointerEvent && event.pointerType === 'touch');
+          // Opening is driven here in both cases, so the height animation stays in charge.
+          event.preventDefault();
+          if (tapped) toggleByTap(item);
+          else activate(item);
+        });
+        item.addEventListener('toggle', () => {
+          if (!animations.has(item)) item.dataset.expanded = String(item.open);
+        });
+      });
+    });
+  })();
+</script>

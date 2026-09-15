@@ -23,6 +23,15 @@ const content = {
         date: "2026-03-16"
       },
       {
+        id: "mit-genai-divide",
+        title: "Die GenAI-Kluft: Warum 95% der KI-Projekte scheitern",
+        excerpt: "MITs State of AI in Business Report 2025 zeigt: Die meisten GenAI-Initiativen liefern keine messbare Geschäftswirkung.",
+        fullExcerpt: "Der MIT-Report „The GenAI Divide“ bringt es auf den Punkt: Trotz massiver Investitionen (30-40 Milliarden US-Dollar) erreichen 95% der GenAI-Projekte keine messbare P&L-Wirkung. Das Problem ist nicht die Technologie, sondern wie Organisationen sie einsetzen. Wir zeigen, was die 5% erfolgreichen Projekte anders machen.",
+        category: "Philosophie",
+        readTime: "7 min",
+        date: "2025-01-20"
+      },
+      {
         id: "evaluation-key-to-ai",
         title: "Warum Evaluation der Schlüssel zu erfolgreicher AI ist",
         excerpt: "Die meisten AI-Projekte scheitern nicht an der Technologie, sondern an fehlender systematischer Evaluierung. Wir zeigen, warum kontinuierliche Messung und Validierung entscheidend für den Erfolg sind.",
@@ -110,6 +119,15 @@ const content = {
         category: "Technical",
         readTime: "4 min",
         date: "2026-03-16"
+      },
+      {
+        id: "mit-genai-divide",
+        title: "The GenAI Divide: Why 95% of AI Projects Fail",
+        excerpt: "MIT's State of AI in Business Report 2025 shows: Most GenAI initiatives deliver no measurable business impact.",
+        fullExcerpt: "The MIT report \"The GenAI Divide\" puts it plainly: Despite massive investments (30-40 billion USD), 95% of GenAI projects achieve no measurable P&L impact. The problem isn't the technology but how organizations deploy it. We show what the 5% successful projects do differently.",
+        category: "Philosophy",
+        readTime: "7 min",
+        date: "2025-01-20"
       },
       {
         id: "evaluation-key-to-ai",
@@ -208,7 +226,7 @@ const text = content[lang];
           <h2 class="post-title">{post.title}</h2>
           <p class="post-excerpt">{post.excerpt}</p>
 
-          <a href={lang === 'en' ? `${BASE}en/blog/${post.id}` : `${BASE}blog/${post.id}`} class="post-link">
+          <a href={lang === 'en' ? `${BASE}blog/${post.id}` : `${BASE}de/blog/${post.id}`} class="post-link">
             {text.readMore}
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M6 12l4-4-4-4"/>

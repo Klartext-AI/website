@@ -1,0 +1,112 @@
+---
+interface Props { lang: 'de' | 'en'; full?: boolean }
+const { lang, full = false } = Astro.props;
+const de = lang === 'de';
+const base = import.meta.env.BASE_URL;
+const root = `${base}${de ? 'de/' : ''}`;
+const steps = de ? [['Entdecken','Wir finden den Prozess, in dem Fehler teuer sind. Und entscheiden, wo KI einen Unterschied macht.','KI-Strategie · Use Cases · Architektur'],['Entwickeln','Agentische Systeme mit festen Regeln. Versioniert, geprüft und reproduzierbar.','Agentic AI · Machine Learning · Knowledge Graphs'],['Integrieren','In Deine Daten, Deine Systeme und Deine Abläufe. Mit klaren Übergaben an Menschen.','APIs · Audit Trails · Evaluation · Monitoring']] : [['Discover','We find the process where being wrong is expensive. And decide where AI can make a difference.','AI strategy · Use cases · Architecture'],['Build','Agentic systems with deterministic edges. Versioned, tested, and reproducible.','Agentic AI · Machine learning · Knowledge graphs'],['Integrate','Into your data, your systems, and your workflows. With clear handoffs to people.','APIs · Audit trails · Evaluation · Monitoring']];
+---
+<section class="studio-section" id="solutions">
+  {full ? <>
+    <div class="process-grid">{steps.map(([title,copy,tags], i) => <article><p class="kicker step-index">0{i+1}</p><h2>{title}</h2><p>{copy}</p><p class="process-tags">{tags}</p></article>)}</div>
+    <div class="project-list"><h2>{de ? 'Aus der Praxis.' : 'Reference projects.'}</h2>{(de ? [
+      ['data-extraction-banking','Geschäftsberichte werden zu Antworten.','Banking · KPI-Extraktion','100+ Seiten in Minuten analysiert. Jeder KPI mit Quelle.'],
+      ['doclarity','Dokumente werden zugänglich.','Öffentlicher Sektor · Barrierefreiheit','KI erleichtert die Aufbereitung. Fachpersonen prüfen und geben frei, unterstützt durch PDF/UA-Validierung.'],
+      ['quote-automation','Anfragen werden zu Angeboten.','Industrie · Automatisierung','Über 1.000 Anfragen pro Woche automatisch klassifiziert.']
+    ] : [
+      ['data-extraction-banking','From annual reports to answers.','Banking · KPI extraction','100+ pages analysed in minutes. A source for every KPI.'],
+      ['doclarity','Documents everyone can access.','Public sector · Accessibility','AI speeds up preparation. Experts review and approve, supported by PDF/UA validation.'],
+      ['quote-automation','From requests to quotes.','Industry · Automation','Over 1,000 requests per week automatically classified.']
+    ]).map(([slug,title,category,copy]) => <a class="project-row" href={`${root}success-stories/${slug}/`}><span class="kicker">{category}</span><h3>{title}</h3><p>{copy}</p><span class="project-arrow" aria-hidden="true">↗</span></a>)}<article class="project-row"><span class="kicker">{de ? 'Öffentliche Förderung · Evaluation' : 'Public funding · Evaluation'}</span><h3>{de ? 'Anträge werden nachvollziehbar vorgeprüft.' : 'Applications assessed with evidence.'}</h3><p>{de ? 'Kriterienbasierte Vorprüfung von Förderanträgen. Mit einer Begründung zu jeder Empfehlung.' : 'Criteria-based pre-assessment of funding applications. With reasoning attached to every recommendation.'}</p></article></div>
+  </> : <>
+    <h2>{de ? 'Zwei Wege,' : 'Two ways'}<br /><span class="blue">{de ? 'mit KI zu bauen.' : 'to build with AI.'}</span></h2>
+    <div class="two-paths build-paths">
+      <article>
+        <div class="path-identity">
+          <svg class="path-symbol" viewBox="0 0 120 104" aria-hidden="true" focusable="false">
+            <path class="path-guide" d="M4 52H116M60 4V100" />
+            <path d="M28 28H60V52H92V76" />
+            <rect class="path-symbol-fill" x="12" y="12" width="32" height="32" rx="5" />
+            <rect class="path-symbol-fill" x="76" y="60" width="32" height="32" rx="5" />
+            <rect class="path-symbol-core" x="44" y="36" width="32" height="32" rx="5" />
+            <path class="path-symbol-knockout" d="M53 52H67M60 45V59" />
+          </svg>
+          <p class="kicker">{de ? 'KI für Dein Unternehmen' : 'AI for your business'}</p>
+        </div>
+        <h3>{de ? 'Dein Problem.' : 'Your problem.'}<br />{de ? 'Unser Engineering.' : 'Our engineering.'}</h3>
+        <p>{de ? 'Von der ersten Entscheidung bis zum produktiven System.' : 'From the first decision to a system in production.'}</p>
+        <ol class="path-flow" role="list" aria-label={de ? 'Der Weg zur KI-Lösung' : 'The path to an AI solution'}>
+          {(de ? ['Entdecken', 'Entwickeln', 'Integrieren'] : ['Discover', 'Build', 'Integrate']).map((step, i) => <li><span class="path-step-number" aria-hidden="true">0{i + 1}</span>{step}</li>)}
+        </ol>
+        <a class="line-link" href={`${root}${de ? 'leistungen' : 'services'}/`}>{de ? 'KI-Lösungen entdecken' : 'Explore AI solutions'} <span aria-hidden="true">↗</span></a>
+      </article>
+      <article>
+        <div class="path-identity">
+          <svg class="path-symbol" viewBox="0 0 120 104" aria-hidden="true" focusable="false">
+            <path class="path-guide" d="M8 96L104 0M4 52H116" />
+            <path class="path-symbol-fill" d="M48 44H30L16 64L42 62M68 64V82L48 96L50 70" />
+            <path class="path-symbol-fill" d="M40 56C52 28 76 12 104 12C104 40 88 64 60 76Z" />
+            <circle class="path-symbol-core" cx="78" cy="38" r="10" />
+            <path d="M40 72L24 88M30 70L20 80M42 82L32 92" />
+          </svg>
+          <p class="kicker">{de ? 'Neue KI-Unternehmen' : 'New AI companies'}</p>
+        </div>
+        <h3>{de ? 'Unsere These.' : 'Our thesis.'}<br />{de ? 'Als Ventures gebaut.' : 'Shipped as ventures.'}</h3>
+        <p>{de ? 'Wir machen aus vielversprechender Forschung eigenständige KI-Unternehmen.' : 'We turn promising research into independent AI companies.'}</p>
+        <ol class="path-flow" role="list" aria-label={de ? 'Der Weg zum Venture' : 'The path to a venture'}>
+          {(de ? ['Validieren', 'Entwickeln', 'Skalieren'] : ['Validate', 'Build', 'Scale']).map((step, i) => <li><span class="path-step-number" aria-hidden="true">0{i + 1}</span>{step}</li>)}
+        </ol>
+        <a class="line-link" href={`${root}ventures/`}>{de ? 'Unsere Ventures' : 'Our ventures'} <span aria-hidden="true">↗</span></a>
+      </article>
+    </div>
+  </>}
+</section>
+
+<style>
+  .build-paths .path-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 0;
+    margin: auto 0 32px;
+    padding: 32px 0 0;
+    font-size: 18px;
+  }
+  .path-flow li {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    white-space: nowrap;
+    text-align: left;
+  }
+  .path-flow li:last-child { flex: 0; }
+  .path-flow li::before { content: none; }
+  .path-flow li::after { content: none; }
+  .path-flow li:not(:last-child)::after {
+    content: '';
+    position: static;
+    flex: none;
+    width: 24px;
+    height: 7px;
+    margin: 0 22px 0 16px;
+    border: 0;
+    border-radius: 0;
+    background: var(--color-blue);
+    opacity: .45;
+    clip-path: polygon(0 calc(50% - .5px), calc(100% - 4px) calc(50% - .5px), calc(100% - 7px) 0, calc(100% - 5px) 0, 100% 50%, calc(100% - 5px) 100%, calc(100% - 7px) 100%, calc(100% - 4px) calc(50% + .5px), 0 calc(50% + .5px));
+  }
+  .path-step-number {
+    color: var(--color-blue);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+  .path-step-number::after { content: '·'; margin-left: 6px; color: var(--color-text-muted); opacity: .55; }
+  @media (min-width: 601px) and (max-width: 700px) {
+    .build-paths { grid-template-columns: 1fr; gap: 35px; }
+    .build-paths > article { padding: 28px 0 0; border-left: 0; }
+  }
+  @media (max-width: 600px) {
+    .build-paths .path-flow { margin-bottom: 28px; padding-top: 32px; }
+  }
+</style>

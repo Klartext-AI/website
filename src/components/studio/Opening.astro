@@ -1,0 +1,125 @@
+---
+interface Props { lang?: 'de' | 'en' }
+const { lang = 'de' } = Astro.props;
+const de = lang === 'de';
+const root = `${import.meta.env.BASE_URL}${de ? 'de/' : ''}`;
+const pillars = [
+  { name: 'Research', description: de ? 'Forschung für verlässliche KI.' : 'Research for reliable AI.', href: `${root}research/` },
+  { name: 'Solutions', description: de ? 'Deine Prozesse. Unsere KI-Lösungen.' : 'Your workflows. Our AI solutions.', href: `${root}${de ? 'leistungen' : 'services'}/` },
+  { name: 'Ventures', description: de ? 'Eigene Ideen. Eigene Unternehmen.' : 'Our ideas. Our companies.', href: `${root}ventures/` },
+];
+---
+
+<section class="opening" aria-labelledby="opening-title">
+  <div class="opening-content">
+    <div class="opening-brand opening-reveal">
+      <img src={`${import.meta.env.BASE_URL}ventures/klartext.svg`} alt="Klartext AI" width="120" height="38" fetchpriority="high" />
+    </div>
+    <h1 id="opening-title" class="opening-title" lang="en"><span class="opening-line"><span class="opening-line-text">We build</span></span><span class="opening-line"><span class="opening-line-text blue">what’s next.</span></span></h1>
+    <p class="opening-subtitle opening-reveal" lang="en">
+      <span>Cutting-edge AI solutions for companies.</span>
+      <span>New AI ventures for the world.</span>
+    </p>
+  </div>
+
+  <nav class="opening-pillars" aria-label={de ? 'Unsere drei Bereiche' : 'Our three pillars'}>
+    {pillars.map((pillar, index) => (
+      <a class:list={["opening-pillar opening-reveal", { "pillar-core": pillar.name === "Solutions" }]} href={pillar.href} style={`--reveal-delay: ${1.85 + index * 0.2}s`}>
+        <span class="pillar-heading"><span lang="en">{pillar.name}</span><span class="pillar-arrow" aria-hidden="true">↗</span></span>
+        <span class="pillar-description">{pillar.description}</span>
+      </a>
+    ))}
+  </nav>
+</section>
+
+<style>
+  /* Cover the navbar's reserved space so the opening wash reaches the top edge. */
+  :global(body:has(.opening)) { padding-top: 0; }
+  .opening {
+    position: relative;
+    isolation: isolate;
+    /* svh is the viewport with the browser's URL bar shown, so the opening never runs
+       under it on phones; dvh would resize the hero mid-scroll as the bar collapses. */
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Small bottom padding keeps the pillars close to the lower edge of the first screen;
+       the 24px floor leaves room for the hover description that overlays it on desktop. */
+    padding: calc(60px + clamp(64px, 9svh, 110px)) var(--studio-gutter) clamp(24px, 3svh, 32px);
+    overflow: clip;
+  }
+  /* A single, slow wash of light. The gradient itself is never repainted. */
+  .opening::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 15% 10%, var(--color-blue-soft), transparent 65%);
+    opacity: .25;
+    animation: opening-light 3.5s ease-out both;
+  }
+  .opening-content { text-align: center; margin-block: auto; padding-bottom: clamp(24px, calc(7svh - 24px), 56px); }
+  .opening-brand { --reveal-delay: .2s; margin-bottom: clamp(44px, 6svh, 64px); }
+  /* The fluid sizes only reach their caps around 1700px, so laptop screens run ~12% smaller. */
+  .opening-brand img { display: block; width: clamp(160px, 12vw, 200px); height: auto; margin-inline: auto; }
+  .opening .opening-title { font-size: clamp(60px, 6.9vw, 116px); line-height: 1.02; font-weight: 350; }
+  .opening-line { display: block; overflow: clip; padding-block: .08em; margin-block: -.08em; }
+  .opening-line-text { display: block; animation: opening-line-in 1550ms cubic-bezier(.22,1,.36,1) .5s both; }
+  .opening-line:nth-child(2) .opening-line-text { animation-delay: .8s; }
+  .opening-line-text.blue { color: var(--color-blue); }
+  @keyframes opening-line-in { from { transform: translateY(110%); } to { transform: translateY(0); } }
+  .opening .opening-subtitle { --reveal-delay: 1.3s; margin-top: clamp(32px, 2.6vw, 44px); font-size: clamp(17px, 1.3vw, 22px); line-height: 1.6; color: var(--color-text-body); }
+  .opening-subtitle span { display: block; text-wrap: pretty; }
+  .opening-pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; width: min(100%, 1000px); }
+  .opening-pillar { display: block; border-top: 1px solid var(--color-line); padding-block: 20px; color: var(--color-text-dark); transition: color .2s ease-out; }
+  .pillar-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: clamp(24px, 1.8vw, 30px); font-weight: 400; }
+  .pillar-arrow { color: var(--color-blue); font-size: clamp(20px, 1.45vw, 24px); transition: transform .2s ease-out; }
+  .pillar-description { display: block; margin-top: 8px; font-size: 14px; color: var(--color-text-muted); text-wrap: pretty; }
+  .opening-pillar:hover, .opening-pillar:focus-visible { color: var(--color-blue); }
+  .opening-pillar:hover .pillar-arrow { transform: translate(2px, -2px); }
+  .pillar-core { border-top: 2px solid var(--color-blue); color: var(--color-blue); }
+  .pillar-core .pillar-heading { font-weight: 550; }
+  @media (hover: hover) and (pointer: fine) {
+    .pillar-description { opacity: 0; transition: opacity .2s ease-out; }
+    .opening-pillar:hover .pillar-description, .opening-pillar:focus-visible .pillar-description { opacity: 1; }
+  }
+  @media (hover: hover) and (pointer: fine) and (min-width: 601px) {
+    /* The description only shows on hover, so it overlays the padding below the heading
+       instead of reserving its own row. The headings sit that much closer to the edge. */
+    .opening-pillar { position: relative; padding-bottom: 8px; }
+    .pillar-description { position: absolute; top: 100%; left: 0; right: 0; margin-top: 0; }
+  }
+  /* Content is real HTML; no scripts or character-by-character layout changes. */
+  .opening-reveal { animation: opening-arrive 1250ms cubic-bezier(.22,1,.36,1) var(--reveal-delay) both; }
+  .opening-reveal:focus-visible { animation: none; }
+  @keyframes opening-arrive { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes opening-light { from { opacity: .85; } to { opacity: .25; } }
+  /* Navigation is available immediately; only its surface fades in briefly. */
+  :global(body:has(.opening) .studio-nav) { animation: opening-navigation 400ms ease-out both; }
+  :global(body:has(.opening) .studio-nav:focus-within) { animation: none; }
+  @keyframes opening-navigation { from { opacity: 0; } to { opacity: 1; } }
+  @media (max-width: 600px) {
+    /* Every vertical measure scales with the visible height, so the whole opening,
+       pillars included, fits the first screen whether or not the URL bar is showing. */
+    .opening { padding-top: calc(56px + clamp(16px, 4svh, 40px)); padding-bottom: clamp(12px, 3svh, 24px); }
+    .opening-content { padding-bottom: clamp(20px, 6svh, 72px); }
+    .opening-brand { margin-bottom: clamp(20px, 4.5svh, 40px); }
+    .opening-brand img { width: min(168px, 24svh); }
+    .opening .opening-title { font-size: clamp(42px, min(14vw, 8.2svh), 72px); }
+    .opening .opening-subtitle { font-size: 16px; margin-top: clamp(20px, 4.5svh, 36px); }
+    .opening-pillars { grid-template-columns: 1fr; gap: 0; }
+    .opening-pillar { padding-block: clamp(6px, 1.4svh, 10px); }
+    .pillar-heading { font-size: 20px; line-height: 1.3; }
+    .pillar-arrow { font-size: 20px; }
+    .pillar-description { margin-top: 2px; font-size: 13px; line-height: 1.45; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .opening-reveal, .opening-line-text, .opening::before, :global(body:has(.opening) .studio-nav) { animation: none; }
+    .pillar-arrow { transition: none; }
+    .opening-pillar:hover .pillar-arrow { transform: none; }
+  }
+</style>

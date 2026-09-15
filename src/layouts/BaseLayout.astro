@@ -16,8 +16,8 @@ interface Props {
 
 const {
   title,
-  description = 'Klartext AI - Wir bauen keine Chatbots. Wir verwandeln KI in ROI.',
-  lang = 'de',
+  description = "Klartext AI - We don't build chatbots. We turn AI into ROI.",
+  lang = 'en',
   alwaysShowNav = false,
   robots = 'index, follow, max-image-preview:large',
   ogType = 'website',
@@ -27,8 +27,14 @@ const {
 
 import '@fontsource/inter/latin.css';
 import '../styles/global.css';
+// The hero headline renders at weight 350, which CSS font matching resolves to the
+// 300 face; 400 carries nav and body copy. Without a preload both are only discovered
+// after the stylesheet parses, which delays the largest contentful paint.
+import interLatin300 from '@fontsource/inter/files/inter-latin-300-normal.woff2?url';
+import interLatin400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 import Navigation from '../components/Navigation.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import { getLanguagePaths } from '../utils/i18n';
 const BASE = import.meta.env.BASE_URL;
 const SITE = Astro.site?.toString() ?? 'https://klartext-ai.github.io';
 
@@ -43,17 +49,9 @@ if (isProd && !GA4_ID) {
 const url = Astro.url;
 // Determine canonical and language alternates
 const canonicalHref = url?.href ?? SITE;
-const pathname = url?.pathname ?? '/';
-// Remove base from pathname to compute locale alternates reliably
-const basePrefix = BASE?.endsWith('/') ? BASE : `${BASE}/`;
-const relPath = pathname.startsWith(basePrefix)
-  ? pathname.slice(basePrefix.length - 1) // keep leading '/'
-  : pathname;
-const isEN = relPath.startsWith('/en/');
-const dePath = isEN ? relPath.replace(/^\/en\//, '/') : relPath;
-const enPath = isEN ? relPath : (relPath === '/' ? '/en/' : `/en${relPath}`);
-const deHref = new URL(`${BASE.replace(/\/$/, '')}${dePath}`, SITE).toString();
-const enHref = new URL(`${BASE.replace(/\/$/, '')}${enPath}`, SITE).toString();
+const languagePaths = getLanguagePaths(url?.pathname ?? '/', BASE);
+const deHref = new URL(languagePaths.de, SITE).toString();
+const enHref = new URL(languagePaths.en, SITE).toString();
 const locale = lang === 'en' ? 'en_US' : 'de_DE';
 
 // Social share card (1200x630). Generated from docs/brand/klartext-og.html via
@@ -61,7 +59,7 @@ const locale = lang === 'en' ? 'en_US' : 'de_DE';
 // One card serves both languages — its copy is English brand copy throughout
 // (the positioning line is English on the German site too), so the alt text
 // transcribing it is English regardless of `lang`.
-const OG_IMAGE_ALT = 'Klartext AI — Klar mit KI. We don’t build chatbots. Your partner for tailored AI solutions that deliver tangible results.';
+const OG_IMAGE_ALT = 'Klartext AI — We build what’s next. Cutting-edge AI solutions for companies. New AI ventures for the world. Industry · Research · Ventures.';
 const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString();
 ---
 
@@ -73,16 +71,17 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
     <script is:inline set:html={`(function(){try{
       var KEY='kt-lang-choice';
       var stored=null;try{stored=localStorage.getItem(KEY);}catch(e){}
-      if(stored){if(stored==='en'){window.location.replace('${BASE}en/');}return;}
+      if(stored){if(stored==='de'){window.location.replace('${BASE}de/');}return;}
       var ua=navigator.userAgent||'';
       if(/bot|crawl|spider|slurp|bingpreview|googlebot|facebookexternalhit|embedly|quora|pinterest|whatsapp|telegram|applebot|duckduckbot|baiduspider|yandex/i.test(ua))return;
       var langs=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];
       var prefersGerman=langs.some(function(l){return l.toLowerCase().indexOf('de')===0;});
-      if(prefersGerman)return;
-      window.location.replace('${BASE}en/');
+      if(prefersGerman)window.location.replace('${BASE}de/');
     }catch(e){}})();`} />
   )}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preload" href={interLatin300} as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href={interLatin400} as="font" type="font/woff2" crossorigin>
   <meta name="description" content={description}>
   <meta name="generator" content={Astro.generator}>
   <meta name="robots" content={robots}>
@@ -112,7 +111,7 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
   <link rel="canonical" href={canonicalHref}>
   <link rel="alternate" hreflang="de" href={deHref}>
   <link rel="alternate" hreflang="en" href={enHref}>
-  <link rel="alternate" hreflang="x-default" href={deHref}>
+  <link rel="alternate" hreflang="x-default" href={enHref}>
 
   <title>{title}</title>
 
@@ -300,6 +299,16 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
         'description': lang === 'en'
           ? 'Klartext AI builds custom AI solutions for document processing, process automation, and agentic systems — with measurable ROI and a focus on domain expertise.'
           : 'Klartext AI entwickelt individuelle KI-Lösungen für Dokumentenverarbeitung, Prozessautomatisierung und agentische Systeme – mit messbarem ROI und Fokus auf fachlicher Exzellenz.',
+        'foundingDate': '2025',
+        // Must stay in sync with the address in Footer.astro and the Impressum.
+        'address': {
+          '@type': 'PostalAddress',
+          'streetAddress': 'Lerchenfelder Straße 74/2/7',
+          'postalCode': '1080',
+          'addressLocality': lang === 'en' ? 'Vienna' : 'Wien',
+          'addressRegion': lang === 'en' ? 'Vienna' : 'Wien',
+          'addressCountry': 'AT'
+        },
         'sameAs': [
           'https://www.linkedin.com/company/klartext-ai/'
         ],
@@ -332,11 +341,28 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
   })}></script>
 
 
+  <!-- Preserve the outgoing page's background for the first frame. The new
+       page then transitions from that value to its own background state. -->
+  <script is:inline>
+    (() => {
+      try {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const key = 'klartext-background-mode';
+        const previous = sessionStorage.getItem(key);
+        const current = location.pathname.replace(/\/+$/, '').endsWith('/ecosystem') ? 'plain' : 'gradient';
+        if (previous && previous !== current) {
+          document.documentElement.style.setProperty('--site-background-opacity', previous === 'plain' ? '0' : '1');
+          document.documentElement.style.setProperty('--site-logo-mono-opacity', previous === 'plain' ? '1' : '0');
+        }
+      } catch {}
+    })();
+  </script>
 </head>
 <body>
+  <div class="site-background" aria-hidden="true"></div>
   <Navigation lang={lang} alwaysVisible={alwaysShowNav} />
   {isProd && GA4_ID && <CookieConsent lang={lang} gaId={GA4_ID} />}
-  <slot />
+  <div id="page-content" tabindex="-1"><slot /></div>
 
   <!-- Scroll Animation Script -->
   <script>
@@ -396,6 +422,32 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
         // Fallback for browsers without IntersectionObserver
         fadeElements.forEach(el => el.classList.add('visible'));
       }
+    });
+  </script>
+
+  <script>
+    const backgroundModeKey = 'klartext-background-mode';
+    const isEcosystemPath = (pathname: string) => pathname.replace(/\/+$/, '').endsWith('/ecosystem');
+    const currentBackgroundMode = () => isEcosystemPath(location.pathname) ? 'plain' : 'gradient';
+
+    addEventListener('pageshow', () => {
+      const currentMode = currentBackgroundMode();
+      let previousMode: string | null = null;
+      try {
+        previousMode = sessionStorage.getItem(backgroundModeKey);
+        sessionStorage.setItem(backgroundModeKey, currentMode);
+      } catch {}
+
+      if (!previousMode || previousMode === currentMode || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.style.removeProperty('--site-background-opacity');
+        document.documentElement.style.removeProperty('--site-logo-mono-opacity');
+        return;
+      }
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        document.documentElement.style.removeProperty('--site-background-opacity');
+        document.documentElement.style.removeProperty('--site-logo-mono-opacity');
+      }));
     });
   </script>
 </body>

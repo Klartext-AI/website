@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../../components/BlogPostDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const BASE = import.meta.env.BASE_URL;
+const title = 'Domain-Driven Design in der Praxis: KPI-Extraktion im Bankensektor | Klartext AI Blog';
+const description = 'Wie wir durch tiefes Domänenverständnis 80% Automatisierung bei der KPI-Extraktion aus Jahresberichten erreicht haben.';
+
+const fullContent = `
+<p style="margin-bottom: 1.2rem; font-size: 1.05rem;">
+    Wer die technische Umsetzung, Architektur und konkrete Produktdetails zu unserem KPI Extraction Tool sehen möchte:
+  </p>
+<div style="text-align:center; margin: 2.5rem 0;">
+  <a href="/de/success-stories/data-extraction-banking" class="btn btn-primary btn-large">
+    Zur Success Story: KPI-Extraktion im Bankensektor
+  </a>
+</div>
+
+<p>Dieses Produkt ist nämlich eine ideale Fallstudie für Domain-Driven Design in der Praxis. </p>
+
+<p>Es gibt zwei Wege, KI-Systeme zu bauen: Man nimmt eine generische Lösung und versucht, sie anzupassen. Oder man beginnt mit der Domäne – und baut die Technologie darum herum.</p>
+
+<p>Wir wählen konsequent den zweiten Weg.</p>
+
+<h4>Der Irrtum des „Generic Hammer“</h4>
+
+<p>Viele KI-Projekte starten mit dem Toolset: „Wir nehmen ein LLM, bauen ein bisschen RAG dazu – fertig.“  
+Das Problem: Diese Systeme verstehen weder Geschäftsprozesse noch implizite Regeln. Sie kennen keine kritischen Validierungen. Sie unterscheiden nicht zwischen relevanten und irrelevanten Sonderfällen.</p>
+
+<p>Das Resultat sind Lösungen, die in 80% der Fälle funktionieren – aber genau die 20% nicht abdecken, die im Alltag teuer werden.</p>
+
+<h4>Was Domain-Driven Design wirklich bedeutet</h4>
+
+<p>Domain-Driven Design (DDD) ist keine Technik. Es ist eine Denkweise.  
+Nicht die Technologie steht im Zentrum, sondern das Geschäftsproblem.</p>
+
+<p><strong>Konkret heißt das:</strong></p>
+
+<p><strong>1. Mit dem Geschäft beginnen – nicht mit dem Modell</strong><br/>
+Bevor Architekturentscheidungen getroffen werden, wird der Prozess verstanden. Welche Entscheidungen werden getroffen? Wo entstehen Risiken? Was sind die echten Engpässe?</p>
+
+<p><strong>2. Die Sprache der Domäne ernst nehmen</strong><br/>
+Begriffe wie „EBIT“, „Leverage Ratio“ oder „Working Capital“ sind keine Textfragmente. Sie sind definierte Geschäftskonzepte mit Regeln, Abhängigkeiten und Kontext.</p>
+
+<p><strong>3. Geschäftslogik explizit machen</strong><br/>
+Expert:innen arbeiten oft mit implizitem Wissen. Erfolgreiche KI-Systeme machen diese Logik explizit – als überprüfbare Regeln.</p>
+
+<p><strong>4. Human-in-the-Loop bewusst designen</strong><br/>
+Automatisierung ersetzt nicht Expertise. Sie strukturiert sie. Jede Extraktion ist nachvollziehbar, referenziert und überprüfbar.</p>
+
+<h4>Praxisbeispiel: 500+ Seiten Reports, 80% Automatisierung</h4>
+
+<p>Im Bankenumfeld müssen regelmäßig umfangreiche Jahresberichte analysiert werden – oft mehrere hundert Seiten pro Dokument.  
+Quantitative und qualitative KPIs werden manuell extrahiert, geprüft und in Systeme übertragen.</p>
+
+<p>Die naive Lösung wäre: Dokumente in ein LLM werfen und Ergebnisse akzeptieren.</p>
+
+<p>Die reale Herausforderung ist komplexer:</p>
+
+<ul>
+  <li>Welche KPIs sind wirklich relevant?</li>
+  <li>Wie werden widersprüchliche Angaben bewertet?</li>
+  <li>Welche Validierungen sind regulatorisch notwendig?</li>
+  <li>Wie wird Transparenz und Auditierbarkeit sichergestellt?</li>
+</ul>
+
+<p>Erst durch eine strukturierte Domänenanalyse wurde klar, welche Logik tatsächlich automatisiert werden kann – und welche kontrolliert bleiben muss.</p>
+
+<p><strong>Das Ergebnis:</strong>  
+80% Zeitersparnis, Break-even nach 1,5 Monaten, höhere Konsistenz durch standardisierte Validierung.</p>
+
+<h4>Warum generische KI-Lösungen in regulierten Branchen scheitern</h4>
+
+<ul>
+  <li><strong>Fehlende Domänenlogik:</strong> Modelle erkennen Begriffe, aber nicht deren Bedeutung.</li>
+  <li><strong>Keine Geschäftsregeln:</strong> Cross-Checks fehlen.</li>
+  <li><strong>Unzureichender Kontext:</strong> Prognosen und Ist-Werte werden vermischt.</li>
+  <li><strong>Kein strukturiertes Fehlerhandling:</strong> Sonderfälle bleiben unklar.</li>
+</ul>
+
+<p>Mehr Daten lösen dieses Problem nicht.  
+Bessere Modelle lösen es auch nicht.  
+Nur ein tieferes Verständnis der Domäne löst es.</p>
+
+<h4>Die unbequeme Wahrheit</h4>
+
+<p>Domänenwissen aufzubauen dauert.  
+Es erfordert Gespräche mit Expert:innen, Prozessanalyse und Iteration.  
+Es bedeutet, nicht sofort zu implementieren.</p>
+
+<p>Aber genau das unterscheidet kurzfristige Demos von produktiven Systemen.</p>
+
+<h4>Von Technologie-Denken zu Problem-Denken</h4>
+
+<p>Die entscheidende Frage lautet nicht: „Welches Modell verwenden wir?“  
+Sondern: <strong>„Verstehen wir das Problem vollständig?“</strong></p>
+
+<p>Technologie ist ein Werkzeug.  
+Domänenverständnis ist die Architektur.</p>
+
+<p><strong>Domain-Driven Design ist für uns kein Buzzword – sondern die Grundlage, auf der skalierbare, nachvollziehbare und wirtschaftlich sinnvolle KI-Systeme entstehen.</strong></p>
+
+<p style="margin-bottom: 1.2rem; font-size: 1.05rem;">
+    Wer die technische Umsetzung, Architektur und konkrete Produktdetails zu unserem KPI Extraction Tool sehen möchte:
+  </p>
+<div style="text-align:center; margin: 2.5rem 0;">
+  <a href="/de/success-stories/data-extraction-banking" class="btn btn-primary btn-large">
+    Zur Success Story: KPI-Extraktion im Bankensektor
+  </a>
+</div>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true} ogType="article">
+  <BlogPostDetail
+    title="Domain-Driven Design in der Praxis: KPI-Extraktion im Bankensektor"
+    excerpt="Wie wir durch tiefes Domänenverständnis 80% Automatisierung erreicht haben."
+    fullExcerpt="Unser KPI Extraction Tool ist ein perfektes Beispiel dafür, wie Domain-Driven Design in der Praxis funktioniert. Anstatt mit einer vorgefertigten Lösung zu starten, haben wir uns intensiv mit den Geschäftsprozessen unseres Kunden aus dem Bankendienstleistungssektor auseinandergesetzt. Das Ergebnis: Eine KI-Lösung, die nicht nur funktioniert, sondern die Sprache der Domäne spricht und 80% der manuellen Arbeit automatisiert – mit einem Break-even von nur 1,5 Monaten."
+    fullContent={fullContent}
+    category="Case Study"
+    readTime="8 min"
+    date="2025-01-10"
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

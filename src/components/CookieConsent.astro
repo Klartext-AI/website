@@ -24,7 +24,9 @@ import * as CookieConsent from 'vanilla-cookieconsent';
   }
 
   const container = document.getElementById('cc-container');
-  if (!container) throw new Error('Cookie consent container not found');
+  // Astro bundles this script even when the component is conditionally omitted.
+  // Preview and builds without an analytics ID must remain inert.
+  if (container) {
   
   const lang = container.dataset.lang as 'de' | 'en';
   const gaId = container.dataset.gaId!;
@@ -115,4 +117,5 @@ import * as CookieConsent from 'vanilla-cookieconsent';
   });
 
   observer.observe(document.body, { childList: true, subtree: true });
+  }
 </script>

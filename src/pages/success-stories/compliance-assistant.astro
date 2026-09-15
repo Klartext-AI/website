@@ -4,84 +4,84 @@ import SuccessStoryDetail from '../../components/SuccessStoryDetail.astro';
 import FinalCTA from '../../components/FinalCTA.astro';
 import Footer from '../../components/Footer.astro';
 
-const title = 'KI-Assistent für Compliance & Wissensmanagement | Klartext AI';
-const description = 'Wie ein ATX-Unternehmen mit AI-gestütztem Compliance-Assistenten 50+ Richtlinien intelligent zugänglich macht und Mitarbeiter:innen schnell verlässliche Antworten mit Quellenangaben erhalten.';
+const title = 'AI Assistant for Compliance & Knowledge Management | Klartext AI';
+const description = 'How an ATX company makes 50+ compliance guidelines intelligently accessible with AI – employees get reliable answers with source citations.';
 
 const challenge = `
-<p>In großen Organisationen ist Compliance-Wissen oft in hunderten von Dokumenten verstreut. Ein führendes ATX-Unternehmen mit über 50 Compliance-Richtlinien, internen Handbüchern und Prozessdokumenten stand vor dieser Herausforderung.</p>
+<p>In large organizations, compliance knowledge is often scattered across hundreds of documents. A leading ATX company with over 50 compliance guidelines, internal manuals, and process documents faced this challenge.</p>
 
-<p><strong>Das Problem:</strong></p>
+<p><strong>The Problem:</strong></p>
 <ul>
-  <li>Mitarbeiter:innen hatten bei spezifischen Fragen zu Prozessen oder Produkten keinen Überblick über relevante Richtlinien</li>
-  <li>Interne Compliance-Expert:innen hatten keine Kapazität, jede Anfrage mit der nötigen Sensibilität zu beantworten</li>
-  <li>Die Suche in Dokumenten kostete Zeit und führte oft zu unsicheren Ergebnissen</li>
-  <li>Wissen veraltete oder wurde inkonsistent angewendet</li>
+  <li>Employees had no overview of relevant guidelines when facing specific questions about processes or products</li>
+  <li>Internal compliance experts lacked capacity to answer every inquiry with necessary sensitivity</li>
+  <li>Searching through documents was time-consuming and often led to uncertain results</li>
+  <li>Knowledge became outdated or was applied inconsistently</li>
 </ul>
 
-<p>Das Resultat: Langsame Entscheidungen, Unsicherheit bei Mitarbeiter:innen, Überlastung der Expert:innen.</p>
+<p>The result: Slow decisions, employee uncertainty, expert overload.</p>
 `;
 
 const solution = `
-<p>Einen "Chatbot über Dokumente" zu bauen, ist einfach. Einen Assistenten zu entwickeln, der wirklich versteht und verlässliche Antworten gibt, ist eine andere Herausforderung. Hier kommt Domain-Driven Design ins Spiel.</p>
+<p>Building a "chatbot over documents" is easy. Developing an assistant that truly understands and gives reliable answers is a different challenge. This is where Domain-Driven Design comes into play.</p>
 
-<p><strong>Der Ansatz im Detail:</strong></p>
+<p><strong>The Approach in Detail:</strong></p>
 <ul>
-  <li><strong>Integration von 50+ Richtlinien und Dokumenten:</strong> Vollständige Erfassung des organisatorischen Wissens</li>
-  <li><strong>Knowledge Graph Integration:</strong> Verknüpfung mit Unternehmens-Metadaten für kontextuelle Intelligenz</li>
-  <li><strong>Intelligente Retrieval-Methodik:</strong> Nicht nur Keyword-Suche, sondern semantisches Verständnis von Zusammenhängen</li>
-  <li><strong>Quellenangaben mit Kontext:</strong> Jede Antwort kommt mit präziser Referenz aus den Originaldokumenten</li>
-  <li><strong>Komplexe Fragestellungen:</strong> System kann mehrstufige, vernetzte Anfragen verarbeiten</li>
+  <li><strong>Integration of 50+ guidelines and documents:</strong> Complete capture of organizational knowledge</li>
+  <li><strong>Knowledge Graph integration:</strong> Connection with company metadata for contextual intelligence</li>
+  <li><strong>Intelligent retrieval methodology:</strong> Not just keyword search, but semantic understanding of relationships</li>
+  <li><strong>Source citations with context:</strong> Every answer comes with precise reference from original documents</li>
+  <li><strong>Complex inquiries:</strong> System can process multi-stage, interconnected queries</li>
 </ul>
 
-<p>Was diese Lösung von generischen RAG-Systemen unterscheidet: Die Integration von Unternehmens-Metadaten (Knowledge Graph) ermöglicht kontextbewusstes Retrieval. Die KI weiß nicht nur, was in den Dokumenten steht, sondern auch, wie verschiedene Informationen zusammenhängen.</p>
+<p>What distinguishes this solution from generic RAG systems: The integration of company metadata (Knowledge Graph) enables context-aware retrieval. The AI doesn't just know what's in the documents, but also how different information relates.</p>
 `;
 
 const results = [
-  "Entlastung der Compliance-Teams für strategische Themen",
-  "Konsistente Compliance-Anwendung über alle Abteilungen",
-  "Nachvollziehbarkeit für Audits durch vollständige Quellenangaben"
+  "Relief for compliance teams to focus on strategic topics",
+  "Consistent compliance application across all departments",
+  "Traceability for audits through complete source citations"
 ];
 
 const fullContent = `
-<h3>Knowledge Management neu gedacht</h3>
+<h3>Knowledge Management Reimagined</h3>
 
-<p><strong>Nicht Search, sondern Understanding:</strong> Die Lösung sucht nicht nur nach Keywords, sondern versteht die Intention hinter Fragen und kann komplexe Zusammenhänge erklären.</p>
+<p><strong>Not search, but understanding:</strong> The solution doesn't just search for keywords but understands the intention behind questions and can explain complex relationships.</p>
 
-<p><strong>Kontext ist König:</strong> Durch die Integration eines Knowledge Graphs weiß das System, welche Informationen in welchem Kontext relevant sind – je nach Abteilung, Produkt oder Prozess.</p>
+<p><strong>Context is king:</strong> Through Knowledge Graph integration, the system knows which information is relevant in which context – depending on department, product, or process.</p>
 
-<p><strong>Vertrauen durch Transparenz:</strong> Mitarbeiter:innen bekommen nicht nur Antworten, sondern auch die Begründung und die genaue Stelle in den Dokumenten. Das schafft Vertrauen.</p>
+<p><strong>Trust through transparency:</strong> Employees don't just get answers but also the reasoning and the exact location in the documents. This creates trust.</p>
 
-<h3>Was wir gelernt haben</h3>
+<h3>What We Learned</h3>
 
 <ol>
-  <li><strong>Retrieval ist die halbe Miete:</strong> Die Qualität der Antworten hängt maßgeblich davon ab, ob die richtigen Informationen gefunden werden. Einfache Vektorsuche reicht nicht.</li>
-  <li><strong>Metadaten sind Gold wert:</strong> Die Integration von Unternehmens-Kontext (Struktur, Prozesse, Produkte) macht den Unterschied zwischen "funktioniert" und "funktioniert exzellent".</li>
-  <li><strong>Expert:innen bleiben wichtig:</strong> Die KI ersetzt keine Compliance-Expert:innen – sie gibt ihnen die Freiheit, dort zu wirken, wo ihre Expertise wirklich zählt.</li>
-  <li><strong>Evaluation von Anfang an:</strong> Wir haben von Tag 1 an gemessen, wie gut das System antwortet. Das war essentiell für die schnelle Verbesserung.</li>
+  <li><strong>Retrieval is half the battle:</strong> Answer quality depends significantly on whether the right information is found. Simple vector search isn't enough.</li>
+  <li><strong>Metadata is gold:</strong> Integrating company context (structure, processes, products) makes the difference between "works" and "works excellently".</li>
+  <li><strong>Experts remain important:</strong> The AI doesn't replace compliance experts – it gives them freedom to work where their expertise truly counts.</li>
+  <li><strong>Evaluation from the start:</strong> We measured how well the system answers from day 1. This was essential for rapid improvement.</li>
 </ol>
 
-<p>Diese Lösung ist ein Paradebeispiel für Evaluation-Driven und Domain-Driven Development. Nicht "schnell einen Chatbot bauen", sondern systematisch eine Lösung entwickeln, die echte Geschäftsprobleme löst.</p>
+<p>This solution is a prime example of Evaluation-Driven and Domain-Driven Development. Not "quickly build a chatbot," but systematically develop a solution that solves real business problems.</p>
 `;
 
 const highlights = [
-  { icon: "domain" as const, label: "Knowledge Graph", description: "50+ Richtlinien und Dokumente intelligent verknüpft und kontextuell durchsuchbar" },
-  { icon: "evaluation" as const, label: "Antworten mit Quellenangabe", description: "Jede KI-Antwort referenziert die genaue Stelle im Originaldokument" },
-  { icon: "shield" as const, label: "Semantisches Retrieval", description: "Nicht nur Keyword-Suche – die KI versteht Zusammenhänge und Kontext" }
+  { icon: "domain" as const, label: "Knowledge Graph", description: "50+ guidelines and documents intelligently linked and contextually searchable" },
+  { icon: "evaluation" as const, label: "Answers with source citations", description: "Every AI answer references the exact location in the original document" },
+  { icon: "shield" as const, label: "Semantic retrieval", description: "Not just keyword search – the AI understands relationships and context" }
 ];
 ---
 
-<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true}>
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
   <SuccessStoryDetail
-    title="KI-Assistent für Compliance & Wissensmanagement"
-    client="ATX-Unternehmen"
+    title="AI Assistant for Compliance & Knowledge Management"
+    client="ATX Company"
     category="Knowledge Management"
     challenge={challenge}
     solution={solution}
     results={results}
     highlights={highlights}
     fullContent={fullContent}
-    lang="de"
+    lang="en"
   />
-  <FinalCTA lang="de" />
-  <Footer lang="de" />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
 </BaseLayout>

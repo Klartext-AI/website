@@ -7,12 +7,10 @@ const { lang = 'de' } = Astro.props;
 
 const content = {
   de: {
-    title: "Folgen Sie uns auf LinkedIn",
-    subtitle: "Bleiben Sie auf dem Laufenden mit unseren neuesten Insights, Projekten und Thought Leadership"
+    title: "Folg uns auf LinkedIn"
   },
   en: {
-    title: "Follow us on LinkedIn",
-    subtitle: "Stay updated with our latest insights, projects and thought leadership"
+    title: "Follow us on LinkedIn"
   }
 };
 
@@ -23,7 +21,6 @@ const text = content[lang];
   <div class="container">
     <div class="linkedin-feed-header section-header text-center">
       <h2>{text.title}</h2>
-      <p class="section-subtitle">{text.subtitle}</p>
     </div>
 
     <!-- Elfsight LinkedIn Feed | Klartext AI LinkedIn Feed -->
@@ -37,11 +34,6 @@ const text = content[lang];
 <style>
   .linkedin-feed-section {
     padding: 60px 0;
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      rgba(36, 121, 190, 0.02) 100%
-    );
     position: relative;
   }
 
@@ -55,13 +47,6 @@ const text = content[lang];
     text-align: center;
   }
 
-  .linkedin-feed-header .section-subtitle {
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-  }
-
   .linkedin-feed-wrapper {
     max-width: 1100px;
     margin: 0 auto;
@@ -72,10 +57,6 @@ const text = content[lang];
     .linkedin-feed-section {
       padding: var(--space-xl) 0;
     }
-
-    .linkedin-feed-header .section-subtitle {
-      font-size: 1.25rem;
-    }
   }
 
   @media (max-width: 640px) {
@@ -85,10 +66,6 @@ const text = content[lang];
 
     .container {
       padding: 0 var(--space-md);
-    }
-
-    .linkedin-feed-header .section-subtitle {
-      font-size: 1.25rem;
     }
   }
 </style>

@@ -125,8 +125,8 @@ const text = content[lang];
           const storySlug = storyUrls[story.id];
           const storyHref = storySlug
             ? (lang === "en"
-              ? `${BASE}en/success-stories/${storySlug}`
-              : `${BASE}success-stories/${storySlug}`)
+              ? `${BASE}success-stories/${storySlug}`
+              : `${BASE}de/success-stories/${storySlug}`)
             : null;
 
           return (
@@ -141,6 +141,17 @@ const text = content[lang];
                       class="story-brand-logo"
                       width="106"
                       height="27"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  {story.id === 'data-extraction-rfu' && (
+                    <img
+                      src={`${BASE}kpi_extraction_product_files/klartext-extract-logo.svg`}
+                      alt=""
+                      class="story-brand-logo story-brand-logo-wide"
+                      width="136"
+                      height="23"
                       loading="lazy"
                       decoding="async"
                     />
@@ -177,7 +188,7 @@ const text = content[lang];
         })}
 
         <a
-          href={lang === "de" ? `${BASE}leistungen` : `${BASE}en/services`}
+          href={lang === "de" ? `${BASE}de/leistungen` : `${BASE}services`}
           class="story-card-link cta-card-link"
         >
           <article class="story-card cta-card" style="animation-delay: 0.6s">
@@ -192,7 +203,7 @@ const text = content[lang];
     </div>
 
     <div class="stories-cta text-center fade-in">
-      <a href={lang === "de" ? `${BASE}success-stories` : `${BASE}en/success-stories`} class="btn btn-secondary">
+      <a href={lang === "de" ? `${BASE}de/success-stories` : `${BASE}success-stories`} class="btn btn-secondary">
         {text.viewAllStories}
       </a>
     </div>
@@ -261,6 +272,10 @@ const text = content[lang];
     width: 106px;
     height: auto;
     flex-shrink: 0;
+  }
+
+  .story-brand-logo-wide {
+    width: 136px;
   }
 
   .story-category {
