@@ -95,12 +95,15 @@ const pillars = [
   }
   /* Content is real HTML; no scripts or character-by-character layout changes. */
   .opening-reveal { animation: opening-arrive 1250ms cubic-bezier(.22,1,.36,1) var(--reveal-delay) both; }
-  .opening-reveal:focus-visible { animation: none; }
+  /* Focus shows the element at once. !important outranks the running animation; switching the
+     animation off instead would restart it, and blank the element, when focus moves on. */
+  .opening-reveal:focus-visible { opacity: 1 !important; transform: none !important; }
   @keyframes opening-arrive { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes opening-light { from { opacity: .85; } to { opacity: .25; } }
-  /* Navigation is available immediately; only its surface fades in briefly. */
-  :global(body:has(.opening) .studio-nav) { animation: opening-navigation 400ms ease-out both; }
-  :global(body:has(.opening) .studio-nav:focus-within) { animation: none; }
+  /* On arrival the navigation follows the headline in, alongside the subtitle. Coming from
+     another page of the site it is already on screen, so it stays (see BaseLayout). */
+  :global(html:not(.nav-settled) body:has(.opening) .studio-nav) { animation: opening-navigation 1.2s ease-out 1.3s both; }
+  :global(body:has(.opening) .studio-nav:focus-within) { opacity: 1 !important; }
   @keyframes opening-navigation { from { opacity: 0; } to { opacity: 1; } }
   @media (max-width: 600px) {
     /* Every vertical measure scales with the visible height, so the whole opening,
@@ -118,8 +121,26 @@ const pillars = [
     .pillar-description { margin-top: 2px; font-size: 13px; line-height: 1.45; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .opening-reveal, .opening-line-text, .opening::before, :global(body:has(.opening) .studio-nav) { animation: none; }
+    .opening-reveal, .opening-line-text, .opening::before, :global(html:not(.nav-settled) body:has(.opening) .studio-nav) { animation: none; }
     .pillar-arrow { transition: none; }
     .opening-pillar:hover .pillar-arrow { transform: none; }
   }
 </style>
+
+<script>
+  const opening = document.querySelector<HTMLElement>('.opening');
+  const openingNav = document.querySelector<HTMLElement>('.studio-nav');
+
+  // A single scroll signal accelerates the existing timelines from wherever
+  // they currently are. Nothing is restarted and no scroll position is read.
+  addEventListener('scroll', () => {
+    const animations = [
+      ...(opening?.getAnimations({ subtree: true }) ?? []),
+      ...(openingNav?.getAnimations({ subtree: true }) ?? [])
+    ];
+    animations.forEach(animation => {
+      const name = (animation as CSSAnimation).animationName;
+      if (name?.startsWith('opening-')) animation.updatePlaybackRate(16);
+    });
+  }, { passive: true, once: true });
+</script>

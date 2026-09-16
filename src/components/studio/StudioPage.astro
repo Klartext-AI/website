@@ -125,17 +125,20 @@ const descriptions = de ? {home:'Wegweisende KI-Lösungen für Unternehmen. Neue
       const finalText = value.textContent || '';
       const target = Number(value.dataset.count);
       const formatCount = (count: number) => `${String(count).padStart(String(target).length, '\u2007')}+`;
-      // The original text reserves the final width and remains accessible.
+      // The original text reserves the final width and remains accessible. The counter uses
+      // tabular figures and hangs off the right edge of that box, so the last digit and the
+      // "+" hold still and the final, proportional text replaces it without a shift.
       const original = document.createElement('span');
       original.className = 'fact-count-layer';
       original.textContent = finalText;
       original.style.opacity = '0';
       const display = document.createElement('span');
-      display.className = 'fact-count-layer';
+      display.className = 'fact-count-layer fact-count-ticker';
       display.setAttribute('aria-hidden', 'true');
-      display.style.cssText = 'position: absolute; inset: 0;';
+      display.style.cssText = 'position: absolute; top: 0; right: 0;';
       display.textContent = formatCount(0);
       value.style.position = 'relative';
+      value.style.width = 'fit-content';
       value.replaceChildren(original, display);
 
       return new Promise((resolve) => {
@@ -145,6 +148,7 @@ const descriptions = de ? {home:'Wegweisende KI-Lösungen für Unternehmen. Neue
           cancelAnimationFrame(frame);
           value.textContent = finalText;
           value.style.removeProperty('position');
+          value.style.removeProperty('width');
           counters.delete(fact);
           resolve();
         };

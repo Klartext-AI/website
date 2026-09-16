@@ -346,13 +346,18 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
   <script is:inline>
     (() => {
       try {
-        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         const key = 'klartext-background-mode';
         const previous = sessionStorage.getItem(key);
+        // A page of the site was already on screen in this tab, and the navigation with it, so
+        // the home page keeps the bar in place instead of fading it in again (see Opening.astro).
+        // A reload still plays the full opening.
+        if (previous && performance.getEntriesByType('navigation')[0]?.type !== 'reload') {
+          document.documentElement.classList.add('nav-settled');
+        }
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         const current = location.pathname.replace(/\/+$/, '').endsWith('/ecosystem') ? 'plain' : 'gradient';
         if (previous && previous !== current) {
           document.documentElement.style.setProperty('--site-background-opacity', previous === 'plain' ? '0' : '1');
-          document.documentElement.style.setProperty('--site-logo-mono-opacity', previous === 'plain' ? '1' : '0');
         }
       } catch {}
     })();
@@ -440,13 +445,11 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
 
       if (!previousMode || previousMode === currentMode || matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.style.removeProperty('--site-background-opacity');
-        document.documentElement.style.removeProperty('--site-logo-mono-opacity');
         return;
       }
 
       requestAnimationFrame(() => requestAnimationFrame(() => {
         document.documentElement.style.removeProperty('--site-background-opacity');
-        document.documentElement.style.removeProperty('--site-logo-mono-opacity');
       }));
     });
   </script>

@@ -329,9 +329,12 @@ div.portrait { cursor: default; }
 /* The inherited body line-height (1.6) left ~25px of empty leading above the big numbers but
    only a few px below the labels, so the row sat low between its rules. A tight line-height
    fixes most of it; text-box trims the rest to cap height / baseline where supported. */
-.home-facts dd { order: -1; margin: 0; font-size: clamp(34px, 3.35vw, 56px); line-height: 1; font-weight: 350; color: var(--color-blue); }
+/* Proportional figures: a tabular "1" sits centred in a digit-wide slot, which set 10+ visibly
+   in from its label. Only the running counter needs tabular figures (see StudioPage). */
+.home-facts dd { order: -1; margin: 0; font-size: clamp(34px, 3.35vw, 56px); line-height: 1; font-weight: 350; font-variant-numeric: proportional-nums; color: var(--color-blue); }
 .home-facts :is(dd, dt) { text-box: trim-both cap alphabetic; }
-.home-facts dd .fact-count-layer { font: inherit; letter-spacing: inherit; font-variant-numeric: tabular-nums; max-width: none; white-space: pre; text-box: inherit; }
+.home-facts dd .fact-count-layer { font: inherit; letter-spacing: inherit; max-width: none; white-space: pre; text-box: inherit; }
+.home-facts dd .fact-count-ticker { font-variant-numeric: tabular-nums; }
 .studio-stats { font-variant-numeric: tabular-nums; }
 .home-relationships .relationship-groups { margin-top: clamp(85px, 8vw, 120px); }
 .relationship-groups { display: grid; gap: 40px; }
@@ -344,7 +347,7 @@ div.portrait { cursor: default; }
   .relationship-groups .partners { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .studio-site .relationship-label { padding-top: 0; }
 }
-body:has(.studio-site[data-page="ecosystem"]) { --site-background-target: 0; --site-logo-mono-target: 1; }
+body:has(.studio-site[data-page="ecosystem"]) { --site-background-target: 0; }
 .ecosystem-people { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-block: 80px; }
 .affiliation { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
 .affiliation-portrait { width: 100%; max-width: 300px; height: auto; aspect-ratio: 4/5; object-fit: cover; object-position: center 25%; border-radius: 8px; }
@@ -382,7 +385,7 @@ body:has(.studio-site[data-page="ecosystem"]) { --site-background-target: 0; --s
   .home-facts .studio-stats { grid-template-columns: 1fr; gap: 30px; }
   .home-facts .studio-stats>div { flex-direction: row-reverse; align-items: center; justify-content: space-between; gap: 24px; }
   .home-facts dt { max-width: 170px; }
-  .home-facts dd { min-width: 130px; }
+  .home-facts dd { min-width: 130px; text-align: right; }
   .relationship-groups { gap: 60px; }
   .ecosystem-people { grid-template-columns: 1fr; gap: 65px; margin-block: 55px; }
   .affiliation { grid-template-columns: minmax(0, 1fr); }

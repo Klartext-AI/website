@@ -13,7 +13,6 @@ const links = [[de ? 'Das Studio' : 'The Studio','team'],['Research','research']
   <div class="studio-nav-inner">
     <a class="studio-brand" href={root}>
       <img src={`${base}ventures/klartext.svg`} alt="Klartext AI" width="120" height="38" />
-      <img class="studio-brand-mono" src={`${base}ventures/klartext.svg`} alt="" width="120" height="38" aria-hidden="true" />
     </a>
     <nav class="studio-desktop-nav" aria-label={de ? 'Hauptnavigation' : 'Main navigation'}>
       {links.map(([label,slug]) => <a href={`${root}${slug}/`} aria-current={Astro.url.pathname.replace(/\/$/, '') === `${root}${slug}` ? 'page' : undefined}>{label}</a>)}
@@ -54,9 +53,8 @@ const links = [[de ? 'Das Studio' : 'The Studio','team'],['Research','research']
     }
   }
   .studio-nav-inner { max-width: 1440px; margin: auto; min-height: 64px; padding: 8px clamp(20px,4vw,65px); position: relative; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
-  .studio-brand { position: relative; display: flex; flex-shrink: 0; }
+  .studio-brand { display: flex; flex-shrink: 0; }
   .studio-brand img { width: 108px; height: 36px; object-fit: contain; }
-  .studio-brand-mono { position: absolute; inset: 0; filter: grayscale(1); opacity: var(--site-logo-mono-opacity, var(--site-logo-mono-target, 0)); transition: opacity 650ms ease-in-out; }
   .studio-desktop-nav,.studio-nav-actions { display: flex; align-items: center; gap: 26px; }
   .studio-nav a { color: var(--color-text-dark); font-size: 16px; }
   .studio-desktop-nav { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
@@ -102,7 +100,7 @@ const links = [[de ? 'Das Studio' : 'The Studio','team'],['Research','research']
   /* Translucent is fine over the page, but the open panel needs to stand on its own. */
   .studio-nav:has(.studio-mobile-nav:not([hidden])) { background: var(--color-paper); box-shadow: 0 22px 40px -30px rgba(36,121,190,.55); }
   @media (prefers-reduced-transparency: reduce) { .studio-nav { background: var(--color-paper); -webkit-backdrop-filter: none; backdrop-filter: none; } }
-  @media(prefers-reduced-motion:reduce) { .menu-icon,.studio-mobile-nav,.studio-mobile-nav-inner,.studio-brand-mono,.studio-desktop-nav a,.studio-desktop-nav a::after { transition: none; } }
+  @media(prefers-reduced-motion:reduce) { .menu-icon,.studio-mobile-nav,.studio-mobile-nav-inner,.studio-desktop-nav a,.studio-desktop-nav a::after { transition: none; } }
 </style>
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('.studio-menu-toggle');
