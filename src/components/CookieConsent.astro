@@ -76,14 +76,12 @@ import * as CookieConsent from 'vanilla-cookieconsent';
   CookieConsent.run(config);
 
   // --- Banner visibility control (show after scroll) ---
+  const SCROLL_THRESHOLD = 60;
   let hasShownBanner = false;
-
-  const hideBanner = () => {
-    const modal = document.querySelector('#cc-main .cm');
-    if (modal && !hasShownBanner && !CookieConsent.validConsent()) {
-      modal.classList.add('cc-hidden');
-    }
-  };
+  // Mirrored from the scroll handler. settleBanner() runs inside a MutationObserver
+  // callback, where reading window.scrollY would force a synchronous layout — and that
+  // callback fires for every DOM change the page makes.
+  let scrolledPast = window.scrollY > SCROLL_THRESHOLD;
 
   const showBanner = () => {
     const modal = document.querySelector('#cc-main .cm');
@@ -93,29 +91,42 @@ import * as CookieConsent from 'vanilla-cookieconsent';
     }
   };
 
-  // Wait for modal to be rendered, then hide it
-  setTimeout(hideBanner, 100);
+  // Place the banner as soon as the consent library has injected it: hidden until the
+  // visitor has scrolled a little way down, shown from then on. Reports whether there is
+  // anything left to wait for.
+  function settleBanner() {
+    if (hasShownBanner || CookieConsent.validConsent()) return true;
+    const modal = document.querySelector('#cc-main .cm');
+    if (!modal) return false;
+    if (scrolledPast) showBanner();
+    else modal.classList.add('cc-hidden');
+    return true;
+  }
 
-  // Show banner when scrolling past 60px
+  // The library may inject the banner synchronously or a tick later, so try now and only
+  // fall back to watching the DOM if it is not there yet. An observer over the whole body
+  // must not outlive its purpose: every mutation on the page pays for it.
+  const observer = new MutationObserver(() => {
+    if (settleBanner()) observer.disconnect();
+  });
+
+  if (!settleBanner()) {
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  // Show banner when scrolling past the threshold
   const handleScroll = () => {
-    if (window.scrollY > 60 && !hasShownBanner && !CookieConsent.validConsent()) {
-      showBanner();
+    if (window.scrollY <= SCROLL_THRESHOLD) return;
+    scrolledPast = true;
+    const consented = CookieConsent.validConsent();
+    if (!consented) showBanner();
+    // A fast scroll can get here before the banner exists; keep listening until it does.
+    if (consented || hasShownBanner) {
       window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
     }
   };
 
-  window.addEventListener('scroll', handleScroll);
-
-  // Observe for when the modal is added to DOM
-  const observer = new MutationObserver(() => {
-    const modal = document.querySelector('#cc-main .cm');
-    if (modal && !hasShownBanner && !CookieConsent.validConsent()) {
-      if (window.scrollY <= 60) {
-        modal.classList.add('cc-hidden');
-      }
-    }
-  });
-
-  observer.observe(document.body, { childList: true, subtree: true });
+  window.addEventListener('scroll', handleScroll, { passive: true });
   }
 </script>

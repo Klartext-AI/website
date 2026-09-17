@@ -21,3 +21,9 @@ pnpm-debug.log*
 # jetbrains setting folders
 .idea/
 .astro/
+
+# local pnpm store
+.pnpm-store/
+
+# claude code worktrees
+.claude/worktrees/

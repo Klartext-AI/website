@@ -142,7 +142,10 @@ p {
 a {
   color: var(--color-blue);
   text-decoration: none;
-  transition: var(--transition-fast);
+  /* Only colour is transitioned site-wide. `all` would make the style system test every
+     animatable property on every link for every style change; links that animate anything
+     else (.btn, .studio-button, .line-link, …) declare their own transition. */
+  transition: color 0.2s ease;
 }
 
 a:hover {

@@ -333,8 +333,8 @@ div.portrait { cursor: default; }
    in from its label. Only the running counter needs tabular figures (see StudioPage). */
 .home-facts dd { order: -1; margin: 0; font-size: clamp(34px, 3.35vw, 56px); line-height: 1; font-weight: 350; font-variant-numeric: proportional-nums; color: var(--color-blue); }
 .home-facts :is(dd, dt) { text-box: trim-both cap alphabetic; }
-.home-facts dd .fact-count-layer { font: inherit; letter-spacing: inherit; max-width: none; white-space: pre; text-box: inherit; }
-.home-facts dd .fact-count-ticker { font-variant-numeric: tabular-nums; }
+.studio-stats .fact-count-layer { font: inherit; letter-spacing: inherit; max-width: none; white-space: pre; text-box: inherit; }
+.studio-stats .fact-count-ticker { font-variant-numeric: tabular-nums; }
 .studio-stats { font-variant-numeric: tabular-nums; }
 .home-relationships .relationship-groups { margin-top: clamp(85px, 8vw, 120px); }
 .relationship-groups { display: grid; gap: 40px; }
@@ -348,6 +348,9 @@ div.portrait { cursor: default; }
   .studio-site .relationship-label { padding-top: 0; }
 }
 body:has(.studio-site[data-page="ecosystem"]) { --site-background-target: 0; }
+/* The page belongs to the ecosystem, not to us: the partner logos carry the colour here, so the
+   brand mark in the nav steps back to grey. The file is an <img>, so only a filter reaches it. */
+body:has(.studio-site[data-page="ecosystem"]) .studio-brand img { filter: grayscale(1); }
 .ecosystem-people { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-block: 80px; }
 .affiliation { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
 .affiliation-portrait { width: 100%; max-width: 300px; height: auto; aspect-ratio: 4/5; object-fit: cover; object-position: center 25%; border-radius: 8px; }
@@ -357,6 +360,13 @@ body:has(.studio-site[data-page="ecosystem"]) { --site-background-target: 0; }
 .affiliation-link { display: inline-flex; align-items: center; gap: 24px; margin-top: 28px; color: var(--color-text-dark); }
 .affiliation-link img { width: 110px; height: 48px; object-fit: contain; }
 .studio-site[data-page="ecosystem"] .studio-stats strong { color: var(--color-text-dark); }
+/* The ecosystem stats sit in the first viewport, so like the page title they arrive here, number
+   first, with the same motion as the home facts. StudioPage.astro counts the numbers up in step
+   and holds back stats that start below the fold until they scroll in. */
+.ecosystem-stats>div { --fact-delay: calc(300ms + var(--fact-index, 0) * 90ms); }
+.ecosystem-stats>div>* { --fact-rise: 20px; animation: studio-fact-arrive 800ms cubic-bezier(.22,1,.36,1) var(--fact-delay) backwards; }
+.ecosystem-stats>div>span { --fact-rise: 10px; animation-duration: 650ms; animation-delay: calc(var(--fact-delay) + 120ms); }
+@keyframes studio-fact-arrive { from { opacity: 0; transform: translateY(var(--fact-rise)); } }
 /* Research page: whitespace separates the blocks instead of rules, none are left in the content.
    Copy → flow → stats → partners → projects all sit one --research-space apart. */
 .studio-site[data-page="research"] { --research-space: clamp(110px, 14vw, 200px); }

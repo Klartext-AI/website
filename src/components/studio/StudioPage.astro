@@ -58,9 +58,6 @@ const descriptions = de ? {home:'Wegweisende KI-Lösungen für Unternehmen. Neue
 </BaseLayout>
 
 <script>
-  // Reveal each fact once, including individually visible rows on mobile.
-  // Keep the real values in the HTML for assistive technology and without JS.
-  const facts = document.querySelectorAll<HTMLElement>('.home-facts .studio-stats > div');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   // Chapter headings enter once, after reaching the reading area. Prepare the
@@ -113,58 +110,70 @@ const descriptions = de ? {home:'Wegweisende KI-Lösungen für Unternehmen. Neue
     });
   }
 
+  // Fact numbers count up as they arrive. The real values stay in the HTML for assistive
+  // technology and without JS.
+  const counters = new Map<Element, () => void>();
+
+  function countUp(fact: Element, delay: number): Promise<void> {
+    const value = fact.querySelector<HTMLElement>('[data-count]');
+    if (!value) return Promise.resolve();
+
+    const finalText = value.textContent || '';
+    const target = Number(value.dataset.count);
+    // Group thousands the way the final text does ("3,500+" in English, "3.500+" in German).
+    const separator = finalText.match(/\d(\D)\d{3}\b/)?.[1] ?? '';
+    const group = (count: number) => String(count).replace(/\B(?=(\d{3})+$)/g, separator);
+    const formatCount = (count: number) => `${group(count).padStart(group(target).length, '\u2007')}+`;
+    // The original text reserves the final width and remains accessible. The counter uses
+    // tabular figures and hangs off the right edge of that box, so the last digit and the
+    // "+" hold still and the final, proportional text replaces it without a shift.
+    const original = document.createElement('span');
+    original.className = 'fact-count-layer';
+    original.textContent = finalText;
+    original.style.opacity = '0';
+    const display = document.createElement('span');
+    display.className = 'fact-count-layer fact-count-ticker';
+    display.setAttribute('aria-hidden', 'true');
+    display.style.cssText = 'position: absolute; top: 0; right: 0;';
+    display.textContent = formatCount(0);
+    value.style.position = 'relative';
+    value.style.width = 'fit-content';
+    value.replaceChildren(original, display);
+
+    return new Promise((resolve) => {
+      let frame = 0;
+      const start = performance.now() + delay;
+      const finish = () => {
+        cancelAnimationFrame(frame);
+        value.textContent = finalText;
+        value.style.removeProperty('position');
+        value.style.removeProperty('width');
+        counters.delete(fact);
+        resolve();
+      };
+      counters.set(fact, finish);
+      const tick = (now: number) => {
+        const progress = Math.min(1, Math.max(0, (now - start) / 900));
+        // Equal time per integer keeps small totals from stalling before the last step.
+        const count = Math.floor(target * progress);
+        const nextText = formatCount(count);
+        if (display.textContent !== nextText) display.textContent = nextText;
+        if (progress === 1) finish();
+        else frame = requestAnimationFrame(tick);
+      };
+      frame = requestAnimationFrame(tick);
+    });
+  }
+
+  reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) counters.forEach((finish) => finish());
+  });
+
+  // Home: reveal each fact once, including individually visible rows on mobile.
+  const facts = document.querySelectorAll<HTMLElement>('.home-facts .studio-stats > div');
   if (facts.length && !reducedMotion.matches && 'IntersectionObserver' in window) {
     const revealed = new WeakSet<Element>();
     const running = new Map<Element, Animation[]>();
-    const counters = new Map<Element, () => void>();
-
-    function countUp(fact: Element, delay: number): Promise<void> {
-      const value = fact.querySelector<HTMLElement>('[data-count]');
-      if (!value) return Promise.resolve();
-
-      const finalText = value.textContent || '';
-      const target = Number(value.dataset.count);
-      const formatCount = (count: number) => `${String(count).padStart(String(target).length, '\u2007')}+`;
-      // The original text reserves the final width and remains accessible. The counter uses
-      // tabular figures and hangs off the right edge of that box, so the last digit and the
-      // "+" hold still and the final, proportional text replaces it without a shift.
-      const original = document.createElement('span');
-      original.className = 'fact-count-layer';
-      original.textContent = finalText;
-      original.style.opacity = '0';
-      const display = document.createElement('span');
-      display.className = 'fact-count-layer fact-count-ticker';
-      display.setAttribute('aria-hidden', 'true');
-      display.style.cssText = 'position: absolute; top: 0; right: 0;';
-      display.textContent = formatCount(0);
-      value.style.position = 'relative';
-      value.style.width = 'fit-content';
-      value.replaceChildren(original, display);
-
-      return new Promise((resolve) => {
-        let frame = 0;
-        const start = performance.now() + delay;
-        const finish = () => {
-          cancelAnimationFrame(frame);
-          value.textContent = finalText;
-          value.style.removeProperty('position');
-          value.style.removeProperty('width');
-          counters.delete(fact);
-          resolve();
-        };
-        counters.set(fact, finish);
-        const tick = (now: number) => {
-          const progress = Math.min(1, Math.max(0, (now - start) / 900));
-          // Equal time per integer keeps small totals from stalling before the last step.
-          const count = Math.floor(target * progress);
-          const nextText = formatCount(count);
-          if (display.textContent !== nextText) display.textContent = nextText;
-          if (progress === 1) finish();
-          else frame = requestAnimationFrame(tick);
-        };
-        frame = requestAnimationFrame(tick);
-      });
-    }
 
     const observer = new IntersectionObserver((entries) => {
       let stagger = 0;
@@ -209,7 +218,52 @@ const descriptions = de ? {home:'Wegweisende KI-Lösungen für Unternehmen. Neue
       if (!reducedMotion.matches) return;
       observer.disconnect();
       running.forEach((animations) => animations.forEach((animation) => animation.cancel()));
-      counters.forEach((finish) => finish());
+    });
+  }
+
+  // Ecosystem: the stats arrive in CSS (see studio.css). Count each number up while its entrance
+  // plays, and hold back stats that start below the fold until they scroll in.
+  const ecosystemFacts = document.querySelectorAll<HTMLElement>('.ecosystem-stats > div');
+  if (ecosystemFacts.length && !reducedMotion.matches && 'IntersectionObserver' in window) {
+    const entrance = (part: Element | null) => part?.getAnimations()[0];
+    const parts = (fact: Element) => Array.from(fact.children);
+
+    const count = (fact: Element) => {
+      const animation = entrance(fact.querySelector('[data-count]'));
+      if (!animation) return;
+      const { delay = 0 } = animation.effect?.getComputedTiming() ?? {};
+      const elapsed = Number(animation.currentTime) || 0;
+      // Only while the number is still hidden: a script that runs late leaves it as it is.
+      if (elapsed < delay) void countUp(fact, delay - elapsed);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      let stagger = 0;
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        const delay = stagger++ * 90;
+        parts(entry.target).forEach((part) => {
+          const animation = entrance(part);
+          animation?.effect?.updateTiming({ delay: delay + (part.tagName === 'STRONG' ? 0 : 120) });
+          animation?.play();
+        });
+        count(entry.target);
+      });
+    }, { threshold: 0.25 });
+
+    ecosystemFacts.forEach((fact) => {
+      if (fact.getBoundingClientRect().top < window.innerHeight) {
+        count(fact);
+        return;
+      }
+      parts(fact).forEach((part) => {
+        const animation = entrance(part);
+        if (!animation) return;
+        animation.pause();
+        animation.currentTime = 0;
+      });
+      observer.observe(fact);
     });
   }
 </script>

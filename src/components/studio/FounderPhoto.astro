@@ -21,7 +21,7 @@ const facts: Record<string, Record<'de' | 'en', string[]>> = {
 ---
 <figure class="founder-photo">
   <div class="founder-frame">
-    <img src={`${import.meta.env.BASE_URL}team/founder-team.jpg`} width="1600" height="2133" loading="lazy" alt={de ? 'Die drei Klartext-AI-Gründer mit Bürohund Bruno auf dem Sofa. Von links: Daniel Toth, Ruben Hetfleisch, Felix Krause.' : 'The three Klartext AI founders with office dog Bruno on the sofa. From left: Daniel Toth, Ruben Hetfleisch, Felix Krause.'} />
+    <img src={`${import.meta.env.BASE_URL}team/founder-team.webp`} width="1000" height="1000" loading="lazy" alt={de ? 'Die drei Klartext-AI-Gründer mit Bürohund Bruno auf dem Sofa. Von links: Daniel Toth, Ruben Hetfleisch, Felix Krause.' : 'The three Klartext AI founders with office dog Bruno on the sofa. From left: Daniel Toth, Ruben Hetfleisch, Felix Krause.'} />
     <div class="founder-image-targets" hidden>
       {founders.map((person, index) => <button type="button" class="founder-image-target" aria-controls={`founder-${lang}-${index}`} aria-expanded="false" aria-label={`${de ? 'Details zu' : 'About'} ${person.name}`}><span aria-hidden="true">↗</span></button>)}
     </div>
@@ -44,6 +44,9 @@ const facts: Record<string, Record<'de' | 'en', string[]>> = {
 <style>
   .founder-photo { min-width: 0; margin: 0; }
   .founder-frame { position: relative; overflow: hidden; border-radius: 16px; }
+  /* The file is pre-cropped to the square this box shows (the portrait original was 1600x2133
+     and a third of it was never on screen). cover/object-position are a no-op on a square
+     source and stay only so the framing survives swapping the photo for a taller one. */
   .founder-frame img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: center 70%; }
   .founder-image-targets:not([hidden]) { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .founder-image-target { position: relative; padding: 0; border: 0; background: transparent; color: var(--color-blue); cursor: pointer; }

@@ -25,7 +25,6 @@ const text = content[lang];
 
     <!-- Elfsight LinkedIn Feed | Klartext AI LinkedIn Feed -->
     <div class="linkedin-feed-wrapper">
-      <script is:inline src="https://elfsightcdn.com/platform.js" async></script>
       <div class="elfsight-app-36e53acd-d2f6-4674-8492-de8f56add979" data-elfsight-app-lazy></div>
     </div>
   </div>
@@ -69,3 +68,60 @@ const text = content[lang];
     }
   }
 </style>
+
+<script>
+  // The widget's own `data-elfsight-app-lazy` defers only its *render* — the loader still
+  // boots on page load and pulls ~1.1 MB of JavaScript, which is by far the heaviest thing
+  // on the landing page and blocks the main thread just after first paint. Hold the loader
+  // back until the feed is nearly in view; the feed itself is unchanged.
+  const PLATFORM = 'https://elfsightcdn.com/platform.js';
+  // platform.js asks the service origin for the widget's config, which points in turn at
+  // the static origin holding the ~360 KB (gzipped) widget bundle.
+  const ORIGINS = ['https://elfsightcdn.com', 'https://core.service.elfsight.com', 'https://universe-static.elfsightcdn.com'];
+  // The section, not the wrapper: the wrapper holds only the widget's empty mount point
+  // until the widget renders, and a zero-height target never intersects, so observing it
+  // would wait forever for the thing it is waiting to load.
+  const feed = document.querySelector('.linkedin-feed-section');
+
+  if (feed) {
+    // Opens the connections without fetching anything, so DNS and TLS are already done by
+    // the time the bundle is actually requested.
+    const warm = () => ORIGINS.forEach((href) => {
+      const link = document.createElement('link');
+      link.rel = 'preconnect';
+      // No crossorigin: these are fetched as plain scripts, and an anonymous CORS
+      // connection would not be reused for them.
+      link.href = href;
+      document.head.appendChild(link);
+    });
+
+    const load = () => {
+      if (document.querySelector(`script[src="${PLATFORM}"]`)) return;
+      const script = document.createElement('script');
+      script.src = PLATFORM;
+      script.async = true;
+      document.head.appendChild(script);
+    };
+
+    if ('IntersectionObserver' in window) {
+      const atDistance = (margin: number, run: () => void) => {
+        const observer = new IntersectionObserver((entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          observer.disconnect();
+          run();
+        }, { rootMargin: `${margin}px 0px` });
+        observer.observe(feed);
+      };
+      // Distances in screenfuls, so the lead time is the same on a phone and a monitor.
+      // The widget needs several seconds on mobile data — boot, fetch its config, pull and
+      // parse the bundle — so it starts roughly halfway down the page. That is still long
+      // past the opening and the counting stats, which is where the load has to stay clear.
+      const screens = (n: number) => Math.round(Math.max(window.innerHeight, 700) * n);
+      atDistance(screens(6), warm);
+      atDistance(screens(4), load);
+    } else {
+      warm();
+      load();
+    }
+  }
+</script>

@@ -13,7 +13,7 @@ const root = `${base}${de ? 'de/' : ''}`;
     : <p class="lead">{de ? 'Fortschritt entsteht gemeinsam. Wir verbinden Menschen aus Forschung, Wirtschaft und Gesellschaft, um KI in Österreich und Europa voranzubringen.' : 'Progress takes more than one company. We connect researchers, founders, engineers, and institutions to move AI forward in Austria and Europe.'}</p>}
   {full ? <>
 
-    <div class="studio-stats ecosystem-stats">{(de ? [['30+','Events veranstaltet und unterstützt'],['3.500+','Teilnehmende bei unseren Events'],['300+','Teilnehmende beim letzten Hackathon'],['11+','Länder beim letzten Hackathon']] : [['30+','Events hosted and supported'],['3,500+','People at our events'],['300+','Participants at our last hackathon'],['11+','Countries at our last hackathon']]).map(([number,label]) => <div><strong>{number}</strong><span>{label}</span></div>)}</div>
+    <div class="studio-stats ecosystem-stats">{(de ? [['30+','Events veranstaltet und unterstützt'],['3.500+','Teilnehmende bei unseren Events'],['300+','Teilnehmende beim letzten Hackathon'],['11+','Länder beim letzten Hackathon']] : [['30+','Events hosted and supported'],['3,500+','People at our events'],['300+','Participants at our last hackathon'],['11+','Countries at our last hackathon']]).map(([number,label],i) => <div style={`--fact-index:${i}`}><strong data-count={number.replace(/\D/g,'')}>{number}</strong><span>{label}</span></div>)}</div>
     <div class="ecosystem-people">
       <article class="affiliation">
         <img class="affiliation-portrait" src={`${base}team/optimized/ruben.webp`} alt="Ruben Hetfleisch" width="480" height="600" loading="lazy" />

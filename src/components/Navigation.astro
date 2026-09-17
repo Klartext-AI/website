@@ -6,7 +6,8 @@ const de = lang === 'de';
 const base = import.meta.env.BASE_URL;
 const root = `${base}${de ? 'de/' : ''}`;
 const paths = getLanguagePaths(Astro.url.pathname, base);
-const links = [[de ? 'Das Studio' : 'The Studio','team'],['Research','research'],['Solutions', de ? 'leistungen' : 'services'],['Ventures','ventures'],['Ecosystem','ecosystem']];
+// The nav labels stay English in both languages, like Research, Ventures and Ecosystem.
+const links = [['The Studio','team'],['Research','research'],['Solutions', de ? 'leistungen' : 'services'],['Ventures','ventures'],['Ecosystem','ecosystem']];
 ---
 <header class="studio-nav">
   <a class="studio-skip" href="#page-content">{de ? 'Zum Inhalt' : 'Skip to content'}</a>
@@ -97,8 +98,11 @@ const links = [[de ? 'Das Studio' : 'The Studio','team'],['Research','research']
     .studio-mobile-nav-inner { max-height: calc(100svh - 56px); }
   }
   @media(max-width:450px) { .studio-nav-cta { display: none !important; } }
-  /* Translucent is fine over the page, but the open panel needs to stand on its own. */
-  .studio-nav:has(.studio-mobile-nav:not([hidden])) { background: var(--color-paper); box-shadow: 0 22px 40px -30px rgba(36,121,190,.55); }
+  /* Translucent is fine over the page, but the open panel needs to stand on its own.
+     The background is opaque here, so the blur behind it is invisible — and dropping it
+     matters: the panel unrolls by animating grid rows, so every frame of that relayout
+     would otherwise re-capture and re-blur a backdrop of changing size. */
+  .studio-nav:has(.studio-mobile-nav:not([hidden])) { background: var(--color-paper); box-shadow: 0 22px 40px -30px rgba(36,121,190,.55); -webkit-backdrop-filter: none; backdrop-filter: none; }
   @media (prefers-reduced-transparency: reduce) { .studio-nav { background: var(--color-paper); -webkit-backdrop-filter: none; backdrop-filter: none; } }
   @media(prefers-reduced-motion:reduce) { .menu-icon,.studio-mobile-nav,.studio-mobile-nav-inner,.studio-desktop-nav a,.studio-desktop-nav a::after { transition: none; } }
 </style>
