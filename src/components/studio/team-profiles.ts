@@ -109,12 +109,19 @@ export const teamProfiles = {
   },
   {
     name: "Otto Winter",
-    role: "",
-    image: null,
+    role: "Full-Stack Developer",
+    image: `${BASE}team/otto.jpg`,
     hoverImage: null,
-    linkedin: null,
-    summary: [] as string[],
-    fullBio: [] as string[]
+    linkedin: "https://www.linkedin.com/in/otto-winter-03644517b/",
+    summary: [
+      "Bachelor Software Engineering, TU Wien",
+      "Zwei Praktika bei der Hilti Group: Software für Produkt-Prototypen, darunter Echtzeit-Bildverarbeitung und Steuerung einer Robotik-Plattform",
+      "Tutor für „Introduction to Security“ an der TU Wien"
+    ],
+    fullBio: [
+      "Meinen Bachelor in Software Engineering habe ich an der TU Wien gemacht (2019–2023). Während des Studiums war ich Tutor in der Lehrveranstaltung „Introduction to Security“: Ich habe Fragen von Studierenden beantwortet, Challenges getestet und Abgaben bewertet.",
+      "Bei der Hilti Group in Schaan, Liechtenstein, habe ich zwei Praktika absolviert, beide an Prototypen für zukünftige Produkte. 2018 habe ich den Software-Stack eines Prototyps umgesetzt und die Codebasis für schnelle, iterative Entwicklung geschrieben. 2019 habe ich im Zweierteam einen weiteren Prototyp entwickelt und dabei Echtzeit-Bildverarbeitung und Steuerung für eine Robotik-Plattform implementiert."
+    ]
   },
   {
     name: "Francesca Ricter",
@@ -294,12 +301,19 @@ export const teamProfiles = {
     },
     {
       name: "Otto Winter",
-      role: "",
-      image: null,
+      role: "Full-Stack Developer",
+      image: `${BASE}team/otto.jpg`,
       hoverImage: null,
-      linkedin: null,
-      summary: [] as string[],
-      fullBio: [] as string[]
+      linkedin: "https://www.linkedin.com/in/otto-winter-03644517b/",
+      summary: [
+        "Bachelor's in Software Engineering, TU Wien",
+        "Two internships at Hilti Group building software for product prototypes, including real-time vision and control for a robotics platform",
+        "Student tutor for Introduction to Security at TU Wien"
+      ],
+      fullBio: [
+        "I did my bachelor's in Software Engineering at TU Wien (2019–2023). During my studies I was a student tutor for the course Introduction to Security, answering student questions, testing the challenges, and grading submissions.",
+        "At Hilti Group in Schaan, Liechtenstein, I completed two internships, both on prototypes for future products. In 2018 I implemented the software stack of a prototype and wrote the code base for rapid, iterative development. In 2019 I worked in a team of two on another prototype, implementing real-time vision and control for a robotics platform."
+      ]
     },
     {
       name: "Francesca Ricter",
