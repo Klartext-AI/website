@@ -111,7 +111,7 @@ export const teamProfiles = {
     name: "Otto Winter",
     role: "Full-Stack Developer",
     image: `${BASE}team/otto.jpg`,
-    hoverImage: null,
+    hoverImage: `${BASE}team/otto-fun.jpg`,
     linkedin: "https://www.linkedin.com/in/otto-winter-03644517b/",
     summary: [
       "Bachelor Software Engineering, TU Wien",
@@ -303,7 +303,7 @@ export const teamProfiles = {
       name: "Otto Winter",
       role: "Full-Stack Developer",
       image: `${BASE}team/otto.jpg`,
-      hoverImage: null,
+      hoverImage: `${BASE}team/otto-fun.jpg`,
       linkedin: "https://www.linkedin.com/in/otto-winter-03644517b/",
       summary: [
         "Bachelor's in Software Engineering, TU Wien",
