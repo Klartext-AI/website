@@ -96,6 +96,8 @@ const links = [['The Studio','team'],['Research','research'],['Solutions', de ? 
     .studio-nav .studio-language a { min-width: 34px; font-size: 13px; }
     .studio-menu-toggle { gap: 10px; font-size: 15px; }
     .studio-mobile-nav-inner { max-height: calc(100svh - 56px); }
+    .studio-mobile-nav.is-open .studio-mobile-nav-inner { padding-block: 4px 16px; }
+    .studio-mobile-nav a { font-size: 19px; padding: 12px 0; }
   }
   @media(max-width:450px) { .studio-nav-cta { display: none !important; } }
   /* Translucent is fine over the page, but the open panel needs to stand on its own.
