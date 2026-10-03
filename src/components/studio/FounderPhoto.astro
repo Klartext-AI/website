@@ -109,19 +109,23 @@ const facts: Record<string, Record<'de' | 'en', string[]>> = {
       update();
     };
     let hovered: HTMLDetailsElement | null = null;
+    let pointerType = '';
     const activate = (founder: HTMLDetailsElement) => {
-      if (selected === founder && founder.open) {
-        founder.querySelector<HTMLAnchorElement>('.founder-caption a')!.click();
-        return;
-      }
+      // A mouse has already revealed the details on hover, so its first click goes straight to
+      // LinkedIn. Touch and keyboard still need one activation to reveal and a second to follow.
+      const follow = pointerType === 'mouse' || (selected === founder && founder.open);
       selected = founder;
       show(founder);
+      if (follow) founder.querySelector<HTMLAnchorElement>('.founder-caption a')!.click();
     };
     founders.forEach((founder, index) => {
       const summary = founder.querySelector('summary')!;
       [summary, targets[index]].forEach(control => {
+        control.addEventListener('pointerdown', event => { pointerType = event.pointerType; });
         control.addEventListener('click', event => {
           event.preventDefault();
+          // Keyboard activation fires click with detail 0 and no preceding pointerdown.
+          if (event.detail === 0) pointerType = '';
           activate(founder);
         });
         control.addEventListener('pointerenter', event => {
