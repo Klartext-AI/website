@@ -55,8 +55,8 @@ const BASE = import.meta.env.BASE_URL;
   }
 
   .hero {
-    min-height: 100vh; /* fallback */
-    min-height: 100dvh; /* fill visible viewport on mobile */
+    min-height: calc(100vh / var(--page-zoom)); /* fallback */
+    min-height: calc(100dvh / var(--page-zoom)); /* fill visible viewport on mobile */
     display: flex;
     flex-direction: column;
     align-items: center;

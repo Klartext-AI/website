@@ -22,19 +22,19 @@
 .studio-section { scroll-margin-top: 75px; }
 .studio-site:not([data-page="home"])>.studio-section:first-child { padding-top: 105px; }
 .studio-site .lead { font-size: clamp(18px, 1.45vw, 24px); line-height: 1.55; max-width: 620px; margin-top: 30px; }
-.studio-hero { padding-top: 90px; padding-bottom: 0; min-height: min(920px, calc(100svh - 60px)); text-align: center; display: flex; align-items: center; flex-direction: column; }
+.studio-hero { padding-top: 90px; padding-bottom: 0; min-height: min(920px, calc(100svh / var(--page-zoom) - 60px)); text-align: center; display: flex; align-items: center; flex-direction: column; }
 .chat-statement { width: min(800px, 100%); position: relative; padding: 45px 65px 60px; border: 1px solid var(--glass-border); border-radius: 28px; background: var(--glass-bg); box-shadow: var(--glass-shadow); text-align: left; }
 .chat-statement h1 { font-size: clamp(50px, 5.5vw, 92px); }
 .chat-dot { display: block; width: 7px; height: 7px; background: var(--color-blue); border-radius: 50%; margin-bottom: 22px; }
 .chat-send { position: absolute; right: 28px; bottom: 24px; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--color-blue); color: var(--color-paper); font-size: 24px; }
 .chat-send:hover { color: var(--color-paper); transform: translateY(3px); }
-.chat-caption { position: absolute; left: 65px; bottom: 25px; color: var(--color-text-muted); font-size: 12px; }
+.chat-caption { position: absolute; left: 65px; bottom: 25px; color: var(--color-text-muted); font-size: max(12px, var(--text-floor)); }
 .hero-answer { margin: 28px 0 22px; max-width: 540px; }
 .hero-answer p { font-size: clamp(22px, 1.8vw, 30px); letter-spacing: -.04em; margin-bottom: 8px; }
 .hero-answer>span { font-size: 16px; color: var(--color-text-muted); }
 .studio-button { display: inline-flex; align-items: center; justify-content: center; gap: 32px; border-radius: 999px; padding: 16px 28px; min-height: 54px; font-size: 17px; font-weight: 500; color: var(--color-paper); background: var(--color-blue); transition: transform .2s; }
 .studio-button:hover { color: var(--color-paper); transform: translateY(-2px); }
-.hero-bottom { margin-top: auto; padding-top: 45px; padding-bottom: 24px; width: 100%; display: flex; justify-content: space-between; font-size: 11px; letter-spacing: .015em; color: var(--color-text-muted); border-bottom: 1px solid var(--color-line); }
+.hero-bottom { margin-top: auto; padding-top: 45px; padding-bottom: 24px; width: 100%; display: flex; justify-content: space-between; font-size: max(11px, var(--text-floor)); letter-spacing: .015em; color: var(--color-text-muted); border-bottom: 1px solid var(--color-line); }
 .hero-bottom a { color: inherit; min-height: 30px; }
 .line-link { display: inline-flex; align-items: center; gap: 35px; padding-block: 14px; min-height: 48px; font-size: 17px; font-weight: 500; color: var(--color-text-dark); border-bottom: 1px solid var(--color-line); }
 .line-link>span { font-size: clamp(22px, 1.55vw, 26px); transition: transform .2s; }
@@ -50,7 +50,7 @@
 .partner-grid a { position: relative; display: flex; justify-content: center; }
 .partner-grid img { display: block; width: 100%; height: 58px; object-fit: contain; mix-blend-mode: multiply; transition: transform .35s ease; }
 .partner-grid a:hover img,.partner-grid a:focus-visible img { transform: scale(1.06); }
-.partner-caption { position: absolute; left: 0; right: 0; top: calc(100% + 6px); font-size: 12px; letter-spacing: .04em; text-align: center; color: var(--color-text-muted); white-space: nowrap; }
+.partner-caption { position: absolute; left: 0; right: 0; top: calc(100% + 6px); font-size: max(12px, var(--text-floor)); letter-spacing: .04em; text-align: center; color: var(--color-text-muted); white-space: nowrap; }
 .assurance-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 70px; margin-top: 55px; }
 .assurance-sculpture { width: 100%; height: auto; transform: rotate(-8deg); }
 .assurance-connection { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; opacity: 0; transition: opacity .38s ease-in-out; }
@@ -127,7 +127,7 @@ details[open] .detail-plus { transform: rotate(45deg); }
 /* The bottom margin is spacing only (sticky cards release against the stack's content box),
    so a trailing link can sit close. :where keeps it low enough for the mobile reset to win. */
 .venture-stack:where(:has(+ .section-end)) { margin-bottom: 40px; }
-.venture-card { display: grid; grid-template-columns: 1.12fr 1fr; position: sticky; top: 170px; min-height: calc(100svh - 340px); background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 20px; overflow: hidden; box-shadow: 0 12px 40px -30px var(--color-blue); }
+.venture-card { display: grid; grid-template-columns: 1.12fr 1fr; position: sticky; top: 170px; min-height: calc(100svh / var(--page-zoom) - 340px); background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 20px; overflow: hidden; box-shadow: 0 12px 40px -30px var(--color-blue); }
 .venture-art { position: relative; padding: 30px; min-height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; overflow: hidden; }
 .venture-art>.kicker { position: absolute; top: 30px; left: 30px; font-size: 13px; }
 .doclarity .venture-art { background: var(--gradient-doclarity); }
@@ -176,7 +176,7 @@ div.portrait { cursor: default; }
 @media (hover: hover) and (pointer: fine) {
   .portrait-wrap:hover .portrait-fun, .portrait-wrap:hover .portrait-facts { opacity: 1; transform: none; }
 }
-.person-dialog { width: min(680px, calc(100% - 32px)); max-height: calc(100dvh - 48px); margin: auto; padding: clamp(24px, 5vw, 48px); border: 1px solid var(--color-line); border-radius: 16px; background: var(--color-paper); color: var(--color-text-dark); }
+.person-dialog { width: min(680px, calc(100% - 32px)); max-height: calc(100dvh / var(--page-zoom) - 48px); margin: auto; padding: clamp(24px, 5vw, 48px); border: 1px solid var(--color-line); border-radius: 16px; background: var(--color-paper); color: var(--color-text-dark); }
 .person-dialog::backdrop { background: rgb(0 0 0 / .45); }
 .person-dialog form { display: flex; justify-content: flex-end; margin-bottom: 24px; }
 .person-close { padding: 8px 12px; border: 1px solid var(--color-line); border-radius: 6px; background: var(--color-paper); color: var(--color-text-dark); cursor: pointer; }
@@ -185,7 +185,7 @@ div.portrait { cursor: default; }
 .person-dialog li + li { margin-top: 8px; }
 .person-dialog a { color: var(--color-blue); text-decoration: underline; }
 .person h3 { font-size: 15px; letter-spacing: -.02em; margin-top: 14px; font-weight: 500; }
-.person p { font-size: 12px; color: var(--color-text-muted); margin-top: 4px; }
+.person p { font-size: max(12px, var(--text-floor)); color: var(--color-text-muted); margin-top: 4px; }
 .people-full .people-intro { max-width: 700px; }
 .builders-heading { margin-top: 65px; }
 .people-full .people-grid { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 40px 24px; margin-top: 65px; }

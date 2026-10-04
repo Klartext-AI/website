@@ -55,6 +55,9 @@ const plateTones = [
       const plates = Array.from(grid.querySelectorAll<SVGGElement>('.plate')).reverse();
       let activeRow: HTMLDetailsElement | null = null;
       let frame = 0;
+      // Measurements come back in screen pixels, but lengths we set are scaled again by the
+      // page zoom (laptop scale in global.css), so they are divided by it first.
+      const zoom = () => (grid as HTMLElement & { currentCSSZoom?: number }).currentCSSZoom ?? 1;
 
       const drawConnection = () => {
         if (!activeRow) return;
@@ -63,10 +66,11 @@ const plateTones = [
         const point = new DOMPoint(576, 180).matrixTransform(matrix);
         const bounds = grid.getBoundingClientRect();
         const summary = activeRow.querySelector('summary')!.getBoundingClientRect();
-        const x = point.x - bounds.left;
-        const y = point.y - bounds.top;
-        const endX = summary.left - bounds.left - 12;
-        const endY = summary.top - bounds.top + summary.height / 2;
+        const z = zoom();
+        const x = (point.x - bounds.left) / z;
+        const y = (point.y - bounds.top) / z;
+        const endX = (summary.left - bounds.left) / z - 12;
+        const endY = (summary.top - bounds.top + summary.height / 2) / z;
         const elbow = x + (endX - x) / 2;
         path.setAttribute('d', `M${x} ${y} H${elbow} L${endX - 16} ${endY} H${endX}`);
       };
@@ -87,12 +91,12 @@ const plateTones = [
 
       const setExpanded = (item: HTMLDetailsElement, expanded: boolean) => {
         if ((item.dataset.expanded === 'true') === expanded) return;
-        const startHeight = item.getBoundingClientRect().height;
+        const startHeight = item.getBoundingClientRect().height / zoom();
         animations.get(item)?.cancel();
         animations.delete(item);
         item.dataset.expanded = String(expanded);
         item.open = expanded;
-        const endHeight = item.getBoundingClientRect().height;
+        const endHeight = item.getBoundingClientRect().height / zoom();
         if (reducedMotion.matches) return;
         // Keep closing content rendered until its container has finished shrinking.
         item.open = true;
