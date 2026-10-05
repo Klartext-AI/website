@@ -47,6 +47,9 @@ const people = [
         {instagram ? <><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1" fill="currentColor" stroke="none"/></> : <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></>}
       </svg>
     </a>}
+    {profile.website && <a class="portrait-social portrait-website" href={profile.website} target="_blank" rel="noopener noreferrer" aria-label={`${name}: ${de ? 'persönliche Website' : 'personal website'}`}>
+      <img src={`${base}team/rubenhetfleisch-icon.webp`} alt="" width="30" height="30" />
+    </a>}
     </div><h3>{name}</h3>{role && <p>{role}</p>}
     {hasBio && <dialog class="person-dialog" id={dialogId} aria-labelledby={`${dialogId}-title`}>
       <form method="dialog"><button class="person-close" autofocus>{de ? 'Schließen' : 'Close'} <span aria-hidden="true">×</span></button></form>

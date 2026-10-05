@@ -52,7 +52,9 @@ const descriptions = de ? {home:'Wegweisende KI-Lösungen für Unternehmen. Neue
       {page === 'studio' && <><People lang={lang} full/><Solutions lang={lang}/></>}
     </>}
     {page === 'home' && <LinkedInFeed lang={lang}/>}
-    <section class="studio-section studio-contact" id="contact"><h2>{de ? 'Ein Problem, das es' : 'A problem'}<br /><span class="blue">{de ? 'wert ist, zu lösen?' : 'worth solving?'}</span></h2><a class="studio-button" href="mailto:office@klartext-ai.com">{de ? 'Sprechen wir darüber' : 'Let’s talk'} <span aria-hidden="true">↗</span></a></section>
+    {page === 'ecosystem'
+      ? <section class="studio-section studio-contact" id="contact"><h2>{de ? 'Eine Initiative, die es' : 'An initiative'}<br /><span class="blue">{de ? 'wert ist, voranzutreiben?' : 'worth pushing?'}</span></h2><a class="studio-button" href="mailto:office@klartext-ai.com">{de ? 'Lass uns Europas Ecosystem stärken' : 'Let’s grow Europe’s ecosystem'} <span aria-hidden="true">↗</span></a></section>
+      : <section class="studio-section studio-contact" id="contact"><h2>{de ? 'Ein Problem, das es' : 'A problem'}<br /><span class="blue">{de ? 'wert ist, zu lösen?' : 'worth solving?'}</span></h2><a class="studio-button" href="mailto:office@klartext-ai.com">{de ? 'Sprechen wir darüber' : 'Let’s talk'} <span aria-hidden="true">↗</span></a></section>}
   </main>
   <Footer lang={lang}/>
 </BaseLayout>

@@ -1,0 +1,189 @@
+---
+// Shared layout for legal text pages such as the AGB.
+import type { LegalContent } from './legal';
+
+interface Props {
+  id: string;
+  content: LegalContent;
+}
+
+const { id, content } = Astro.props;
+---
+
+<section id={id} class="legal-page section">
+  <div class="container">
+    <div class="legal-content">
+      <h1 class="legal-title">{content.title}</h1>
+      <p class="legal-updated">{content.lastUpdated}</p>
+
+      {content.intro && content.intro.length > 0 && (
+        <div class="legal-intro legal-text">
+          {content.intro.map((paragraph) => (
+            <p set:html={paragraph} />
+          ))}
+        </div>
+      )}
+
+      {content.sections.map((section) => (
+        <div class="legal-section fade-in">
+          <h2 class="legal-heading">{section.heading}</h2>
+          <div class="legal-text">
+            {section.blocks.map((block) => {
+              if (block.type === 'paragraph') {
+                return <p set:html={block.text} />;
+              }
+
+              if (block.type === 'list') {
+                return block.ordered ? (
+                  <ol>
+                    {block.items.map((item) => (
+                      <li set:html={item} />
+                    ))}
+                  </ol>
+                ) : (
+                  <ul>
+                    {block.items.map((item) => (
+                      <li set:html={item} />
+                    ))}
+                  </ul>
+                );
+              }
+
+              return null;
+            })}
+          </div>
+        </div>
+      ))}
+
+      {content.appendix && (
+        <div id={content.appendix.id} class="legal-appendix">
+          <h2 class="legal-appendix-title">{content.appendix.title}</h2>
+          {content.appendix.intro?.map((paragraph) => (
+            <p class="legal-text" set:html={paragraph} />
+          ))}
+          {content.appendix.sections.map((section) => (
+            <div class="legal-section fade-in">
+              <h3 class="legal-heading">{section.heading}</h3>
+              <div class="legal-text">
+                {section.blocks.map((block) =>
+                  block.type === 'paragraph' ? <p set:html={block.text} /> : null
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .legal-page {
+    min-height: 80vh;
+    padding: var(--space-2xl) 0;
+    background: transparent;
+  }
+
+  .legal-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .legal-title {
+    font-size: var(--font-size-h1);
+    font-weight: 300;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .legal-updated {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+  }
+
+  .legal-intro {
+    margin-bottom: var(--space-xl);
+  }
+
+  .legal-section {
+    margin-bottom: var(--space-xl);
+  }
+
+  .legal-appendix {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid rgba(36, 121, 190, 0.2);
+  }
+
+  .legal-appendix-title {
+    font-size: var(--font-size-h2);
+    font-weight: 300;
+    color: var(--color-text-dark);
+    margin-bottom: var(--space-md);
+  }
+
+  .legal-heading {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-text-dark);
+    margin-bottom: var(--space-md);
+  }
+
+  .legal-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text-body);
+  }
+
+  .legal-text p {
+    margin-bottom: var(--space-md);
+  }
+
+  .legal-text :global(a) {
+    color: var(--color-blue);
+    text-decoration: underline;
+  }
+
+  .legal-text ul,
+  .legal-text ol {
+    padding-left: 1.5rem;
+    margin: var(--space-sm) 0 var(--space-md);
+    list-style-position: outside;
+  }
+
+  .legal-text ul {
+    list-style-type: disc;
+  }
+
+  .legal-text ol {
+    list-style-type: decimal;
+  }
+
+  .legal-text li {
+    margin-bottom: 0.5rem;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: var(--space-xl) 0;
+    }
+
+    .legal-title {
+      font-size: var(--font-size-h2);
+    }
+
+    .legal-heading {
+      font-size: 1.25rem;
+    }
+
+    .legal-text {
+      font-size: 0.95rem;
+    }
+  }
+</style>

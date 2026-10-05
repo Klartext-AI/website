@@ -27,6 +27,7 @@ export const teamProfiles = {
     image: `${BASE}team/ruben.jpg`,
     hoverImage: `${BASE}team/ruben-fun.jpeg`,
     linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
+    website: "https://rubenhetfleisch.com",
     summary: [
       "Ingenieurs-Studium TU Darmstadt (2022), KI-Expertise bei Fraunhofer Austria",
       `Vorstandsmitglied <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, Gründer der GenAI Community Österreichs`,
@@ -222,6 +223,7 @@ export const teamProfiles = {
     image: `${BASE}team/ruben.jpg`,
     hoverImage: `${BASE}team/ruben-fun.jpeg`,
     linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
+    website: "https://rubenhetfleisch.com",
     summary: [
       "Engineering degree TU Darmstadt (2022), AI expertise at Fraunhofer Austria",
       `Board member <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, founder of GenAI Community Austria`,
