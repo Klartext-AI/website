@@ -28,6 +28,7 @@ export const teamProfiles = {
     hoverImage: `${BASE}team/ruben-fun.jpeg`,
     linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
     website: "https://rubenhetfleisch.com",
+    websiteIcon: "team/rubenhetfleisch-icon.webp",
     summary: [
       "Ingenieurs-Studium TU Darmstadt (2022), KI-Expertise bei Fraunhofer Austria",
       `Vorstandsmitglied <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, Gründer der GenAI Community Österreichs`,
@@ -45,6 +46,8 @@ export const teamProfiles = {
     image: `${BASE}team/felix.jpg`,
     hoverImage: `${BASE}team/felix-fun.jpg`,
     linkedin: "https://www.linkedin.com/in/f-krause-ai/",
+    website: "https://www.f-krause.at/",
+    websiteIcon: "team/felixkrause-icon.webp",
     summary: [
       "Volkswirtschaft, Data Science und Software Engineering",
       "Entwickelt verständliche KI-Systeme, die Komplexität in Klarheit verwandeln",
@@ -224,6 +227,7 @@ export const teamProfiles = {
     hoverImage: `${BASE}team/ruben-fun.jpeg`,
     linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
     website: "https://rubenhetfleisch.com",
+    websiteIcon: "team/rubenhetfleisch-icon.webp",
     summary: [
       "Engineering degree TU Darmstadt (2022), AI expertise at Fraunhofer Austria",
       `Board member <a href="https://aiaustria.com/" target="_blank" rel="noopener noreferrer">AI Austria</a>, founder of GenAI Community Austria`,
@@ -241,6 +245,8 @@ export const teamProfiles = {
     image: `${BASE}team/felix.jpg`,
     hoverImage: `${BASE}team/felix-fun.jpg`,
     linkedin: "https://www.linkedin.com/in/f-krause-ai/",
+    website: "https://www.f-krause.at/",
+    websiteIcon: "team/felixkrause-icon.webp",
     summary: [
       "Economics, data science, and software engineering",
       "Builds understandable AI systems that turn complexity into clarity",

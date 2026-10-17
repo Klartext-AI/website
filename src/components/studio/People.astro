@@ -48,7 +48,7 @@ const people = [
       </svg>
     </a>}
     {profile.website && <a class="portrait-social portrait-website" href={profile.website} target="_blank" rel="noopener noreferrer" aria-label={`${name}: ${de ? 'persönliche Website' : 'personal website'}`}>
-      <img src={`${base}team/rubenhetfleisch-icon.webp`} alt="" width="30" height="30" />
+      <img src={`${base}${profile.websiteIcon}`} alt="" width="30" height="30" />
     </a>}
     </div><h3>{name}</h3>{role && <p>{role}</p>}
     {hasBio && <dialog class="person-dialog" id={dialogId} aria-labelledby={`${dialogId}-title`}>
