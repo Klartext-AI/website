@@ -152,7 +152,13 @@ details[open] .detail-plus { transform: rotate(45deg); }
 .venture-card:hover .venture-lines,.venture-card:focus-within .venture-lines { transform: translate(5px,-6px); }
 .venture-copy { padding: 70px 55px; display: flex; flex-direction: column; justify-content: center; align-items: start; }
 .venture-copy :is(h2,h3) { font-size: clamp(34px,3.1vw,52px); }
-.venture-origins h2 { font-size: clamp(28px,2.4vw,40px); }
+.venture-paths { margin-top: var(--contact-space, 110px); }
+.venture-origins>article { display: flex; flex-direction: column; align-items: start; }
+.venture-origins h3 { font-size: clamp(28px,2.4vw,40px); margin-bottom: 26px; }
+/* Punchy one-liners with a blue arrow instead of a bullet. */
+.venture-path-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.venture-path-points li { position: relative; padding-left: 26px; font-size: 19px; font-weight: 450; color: var(--color-text-dark); }
+.venture-path-points li::before { content: "→"; position: absolute; left: 0; color: var(--color-blue); }
 .venture-copy p { font-size: 20px; color: var(--color-text-muted); margin: 25px 0 30px; }
 .venture-copy .line-link { margin-top: 30px; font-size: 18px; }
 .venture-card a { scroll-margin-top: 180px; }

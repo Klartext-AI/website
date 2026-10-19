@@ -32,5 +32,20 @@ const ventures = [
     </div>
     <div class="venture-copy"><CardHeading>{v.title}</CardHeading><p>{v.copy}</p><a class="line-link" href={v.href}>{v.link} <span aria-hidden="true">↗</span></a></div>
   </article>)}</div>
-  {full ? <div class="two-paths venture-origins"><div><p class="kicker"><span class="step-index">01</span> · {de ? 'Forschung' : 'Research'}</p><h2>{de ? 'Fragen, auf die es noch keine Antwort gibt.' : 'Questions with no off-the-shelf answer.'}</h2></div><div><p class="kicker"><span class="step-index">02</span> · Co-creation</p><h2>{de ? 'Mit Kunden entwickelt. Für viele weitergedacht.' : 'Built with customers. Made to go further.'}</h2></div></div> : <div class="section-end"><a class="line-link" href={`${root}ventures/`}>{de ? 'Unsere Ventures' : 'Explore our ventures'} <span aria-hidden="true">↗</span></a></div>}
+  {full ? <div class="venture-paths">
+    <h2>{de ? 'Zwei Wege zum Venture' : 'Two ways to build'}<br /><span class="blue">{de ? 'mit uns.' : 'a venture with us.'}</span></h2>
+    <div class="two-paths venture-origins">
+      {(de ? [
+        { kicker: 'Start mit Forschung', title: 'Deine Forschung. Unsere Venture-Engine.', points: ['KI-Partner für dein Konsortium.', 'Förderung? Wir beantragen mit.', 'Vom Paper zum Produkt.'] },
+        { kicker: 'Start mit einem Problem', title: 'Dein Problem. Unser gemeinsamer Upside.', points: ['Teures Problem. Noch kein Produkt.', 'Startup-Tempo. Profi-Standard.', 'Beteiligung statt nur Rechnung.'] },
+      ] : [
+        { kicker: 'Start from research', title: 'Your research. Our venture engine.', points: ['AI partner for your consortium.', 'Funding? We co-apply.', 'From paper to product.'] },
+        { kicker: 'Start from a problem', title: 'Your problem. Our joint upside.', points: ['Costly problem. No product yet.', 'Startup speed. Pro standards.', 'Shared upside, not just an invoice.'] },
+      ]).map((path, i) => <article>
+        <p class="kicker"><span class="step-index">0{i + 1}</span> · {path.kicker}</p>
+        <h3>{path.title}</h3>
+        <ul class="venture-path-points">{path.points.map(point => <li>{point}</li>)}</ul>
+      </article>)}
+    </div>
+  </div> : <div class="section-end"><a class="line-link" href={`${root}ventures/`}>{de ? 'Unsere Ventures' : 'Explore our ventures'} <span aria-hidden="true">↗</span></a></div>}
 </section>
