@@ -109,10 +109,15 @@ body {
 }
 
 /* Radial background. Keeping it on its own layer lets ecosystem navigation
-   fade the artwork without repainting the page content. */
+   fade the artwork without repainting the page content.
+   Sized to the large viewport rather than pinned with bottom: 0: mobile browsers resize fixed
+   layers only after their toolbar has finished collapsing, so a bottom-pinned layer trailed the
+   scroll and left a strip of bare page below it. */
 .site-background {
   position: fixed;
-  inset: 0;
+  inset: 0 0 auto;
+  height: calc(100vh / var(--page-zoom));
+  height: calc(100lvh / var(--page-zoom));
   background: var(--gradient-radial);
   z-index: -1;
   pointer-events: none;

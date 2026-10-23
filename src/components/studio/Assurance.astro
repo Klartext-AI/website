@@ -163,6 +163,22 @@ const plateTones = [
       sculpture.addEventListener('pointerout', (event) => {
         if (event.pointerType === 'mouse' && hoverQuery.matches && !plateHit(event.relatedTarget)) collapseAll();
       });
+      // Tapping a plate works like tapping its row. On phones the list sits below the
+      // sculpture, so an opened row that ends past the screen is scrolled up into view.
+      sculpture.addEventListener('click', (event) => {
+        const hit = plateHit(event.target);
+        const tapped = !hoverQuery.matches || (event instanceof PointerEvent && event.pointerType === 'touch');
+        if (!hit || !tapped) return;
+        const item = details[Number(hit.dataset.level)];
+        toggleByTap(item);
+        if (item.dataset.expanded !== 'true') return;
+        const reveal = () => {
+          if (item.getBoundingClientRect().bottom > window.innerHeight) item.scrollIntoView({ block: 'nearest' });
+        };
+        const animation = animations.get(item);
+        if (animation) animation.finished.then(reveal, () => {});
+        else reveal();
+      });
 
       layers.addEventListener('focusout', (event) => {
         if (!(event.relatedTarget instanceof Node && layers.contains(event.relatedTarget)) && !layers.matches(':hover')) {
