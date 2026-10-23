@@ -5,26 +5,27 @@ const de = lang === 'de';
 const base = import.meta.env.BASE_URL;
 // scale enlarges logos whose artwork reads small at the shared 58px height.
 type Partner = { name: string; url: string; file: string; scale?: number };
-// Ordered by rank, eight per group so each fills its 4 × 2 grid. Still missing logo: Rahofer (client).
+// Eight per group so each fills its 4 × 2 grid. Wide wordmarks alternate with compact logos so
+// no two wide ones share a row on mobile (2 columns) or sit side by side on desktop (4 columns). Still missing logo: Rahofer (client).
 const clients: Partner[] = [
   { name: 'PwC', url: 'https://www.pwc.at/de.html', file: 'PwC_Company_Logo.svg.png' },
-  { name: 'Austria Wirtschaftsservice', url: de ? 'https://www.aws.at/' : 'https://www.aws.at/en/', file: 'austria-wirtschaftsservice.webp' },
   { name: 'Terre des Hommes Deutschland e. V.', url: de ? 'https://www.tdh.de/' : 'https://www.tdh.de/en', file: 'TerreDesHommes.png' },
+  { name: 'Austria Wirtschaftsservice', url: de ? 'https://www.aws.at/' : 'https://www.aws.at/en/', file: 'austria-wirtschaftsservice.webp' },
+  { name: 'KSV1870', url: 'https://www.ksv.at/', file: 'ksv1870.svg', scale: 1.2 },
   { name: 'Investitionsbank Sachsen-Anhalt', url: 'https://www.ib-sachsen-anhalt.de/', file: 'IB_SA.png', scale: 1.25 },
   { name: 'Mad Nice', url: 'https://madnice.at/', file: 'madnice.webp' },
-  { name: 'RFU', url: de ? 'https://www.rfu.at/' : 'https://www.rfu.at/en/', file: 'rfu-research-logo.png', scale: 1.2 },
   { name: 'Spielplatz-Service Ing. Kastenhofer GmbH', url: 'https://www.spielplatzservice.at/', file: 'spielplatz-service.webp' },
-  { name: 'KSV1870', url: 'https://www.ksv.at/', file: 'ksv1870.svg', scale: 1.2 },
+  { name: 'RFU', url: de ? 'https://www.rfu.at/' : 'https://www.rfu.at/en/', file: 'rfu-research-logo.png', scale: 1.2 },
 ];
 const partners: Partner[] = [
   { name: 'Fraunhofer Austria', url: 'https://www.fraunhofer.at/', file: 'fraunhofer-austria.png' },
   { name: 'NVIDIA Inception Program', url: de ? 'https://www.nvidia.com/de-de/startups/' : 'https://www.nvidia.com/en-us/startups/', file: 'nvidia-inception-program.webp', scale: 1.1 },
-  { name: 'Hilfsgemeinschaft', url: 'https://www.hilfsgemeinschaft.at/', file: 'hilfsgemeinschaft.svg' },
   { name: 'FFG', url: 'https://www.ffg.at/', file: 'FFG_Logo_DE_CMYK.png' },
+  { name: 'Hilfsgemeinschaft', url: 'https://www.hilfsgemeinschaft.at/', file: 'hilfsgemeinschaft.svg' },
+  { name: de ? 'Universität Stuttgart' : 'University of Stuttgart', url: de ? 'https://www.uni-stuttgart.de/' : 'https://www.uni-stuttgart.de/en/', file: de ? 'uni-stuttgart.svg' : 'uni-stuttgart-en.svg', scale: 1.15 },
   { name: 'Wirtschaftsagentur Wien', url: de ? 'https://wirtschaftsagentur.at/' : 'https://viennabusinessagency.at/', file: 'wirtschaftsagentur-wien.webp' },
   { name: 'Know-Center Graz', url: de ? 'https://www.know-center.at/' : 'https://www.know-center.at/en/', file: 'know-center.png' },
   { name: 'Fraunhofer IPA', url: de ? 'https://www.ipa.fraunhofer.de/de.html' : 'https://www.ipa.fraunhofer.de/en.html', file: 'fraunhofer-ipa.svg' },
-  { name: de ? 'Universität Stuttgart' : 'University of Stuttgart', url: de ? 'https://www.uni-stuttgart.de/' : 'https://www.uni-stuttgart.de/en/', file: de ? 'uni-stuttgart.svg' : 'uni-stuttgart-en.svg', scale: 1.15 },
 ];
 const groups = [
   { id: 'clients', title: de ? 'Kunden' : 'Clients', items: clients },
