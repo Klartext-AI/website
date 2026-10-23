@@ -1,0 +1,67 @@
+# Klartext AI
+
+> Klartext AI is an AI company from Vienna, Austria. It develops custom AI solutions for business-critical processes (agentic systems, document processing, data extraction and process automation) and builds its own AI products: doclarity and Klartext Extract.
+
+Klartext AI FlexCo was founded in Vienna in 2025 by Ruben Hetfleisch (CEO), Daniel Toth (COO) and Felix Krause (CTO), and is bootstrapped. A team of 10+ engineers and researchers works for 20+ clients in banking and finance, the public sector, manufacturing and listed companies, in German and English, across Austria, Germany and the EU. The website is available in English (root) and German (/de/).
+
+## Founders
+
+- Ruben Hetfleisch, CEO: engineering degree from TU Darmstadt, AI expertise from Fraunhofer Austria. Board member of AI Austria and founder of Austria's GenAI Community. https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/ · https://rubenhetfleisch.com
+- Daniel Toth, COO: Diplom-Ingenieur from TU Wien, 8+ years in research, industry and complex project leadership. https://www.linkedin.com/in/daniel-toth-381b0b214/
+- Felix Krause, CTO: economics, data science and software engineering; builds understandable AI systems. Board member of AI Impact Mission (AIM), a European tech network of AI enthusiasts. https://www.linkedin.com/in/f-krause-ai/ · https://www.f-krause.at/
+
+## What Klartext AI does
+
+- Custom AI development: from the first use case to a system in production, in three steps. Discover (AI strategy, use cases, architecture), Build (agentic AI, machine learning, knowledge graphs; versioned, tested, reproducible), Integrate (APIs, audit trails, evaluation, monitoring).
+- Agentic systems for processes where being wrong is not an option, built on four layers: deterministic edges (validated inputs, explicit rules, defined outputs), traceability (every decision with a source, version and reason), calibrated handoff to people (human-in-the-loop) and continuous evaluation, including after release.
+- European by design: data hosted in Austria and Germany, GDPR and the EU AI Act built in.
+- "We don't build chatbots." Klartext AI builds traceable, auditable AI systems rather than generic chat interfaces.
+
+## Reference projects
+
+- KPI extraction from annual reports (banking): 100+ page reports analysed in minutes instead of four days, with a source for every KPI. https://klartext-ai.com/success-stories/data-extraction-banking/
+- PDF accessibility (public sector): AI prepares accessible PDF/UA documents, experts review and approve. https://klartext-ai.com/success-stories/doclarity/
+- Quote automation (manufacturing): over 1,000 requests per week classified automatically. https://klartext-ai.com/success-stories/quote-automation/
+- Compliance assistant (ATX company): answers from 50+ compliance guidelines with source citations. https://klartext-ai.com/success-stories/compliance-assistant/
+- AI tutoring platform (ATX company): adaptive, gamified onboarding and training. https://klartext-ai.com/success-stories/training-platform/
+- Funding applications (public funding): criteria-based pre-assessment with reasoning attached to every recommendation.
+
+Clients include PwC, KSV1870, Austria Wirtschaftsservice (aws), Investitionsbank Sachsen-Anhalt and Terre des Hommes Deutschland. Research and funding partners include Fraunhofer Austria, Fraunhofer IPA, Know-Center Graz, the FFG, the Vienna Business Agency and the NVIDIA Inception Program.
+
+## Products (built by Klartext AI)
+
+- [doclarity](https://doclarity.eu/): AI-assisted PDF accessibility software. Tags headings, tables, alt text and reading order, fixes contrast to WCAG, and validates the result with veraPDF against PDF/UA-1 and PDF/UA-2. A person reviews and approves. Hosted in Europe, on Austrian infrastructure or on-premises. Not affiliated with doclarity.ai. Details: https://doclarity.eu/llms.txt
+- [Klartext Extract](https://extract.klartext-ai.com/): Financial Spreading and data extraction from annual reports, contracts, prospectuses and other PDFs of 1,000+ pages. Every value links to its source and has a confidence level. In production at a European rating agency. EU-local. Details: https://extract.klartext-ai.com/llms.txt
+- A third venture in the finance sector is in stealth, built with one of Europe's largest business universities.
+
+## Pages
+
+- [Home](https://klartext-ai.com/) ([Deutsch](https://klartext-ai.com/de/)): What Klartext AI builds, clients, partners, ventures, team and FAQ.
+- [Services](https://klartext-ai.com/services/) ([Deutsch](https://klartext-ai.com/de/leistungen/)): How projects work and reference projects.
+- [Ventures](https://klartext-ai.com/ventures/) ([Deutsch](https://klartext-ai.com/de/ventures/)): doclarity, Klartext Extract, how to build a venture with Klartext AI, and FAQ.
+- [Success stories](https://klartext-ai.com/success-stories/) ([Deutsch](https://klartext-ai.com/de/success-stories/))
+- [Research](https://klartext-ai.com/research/) ([Deutsch](https://klartext-ai.com/de/research/)): Verifiable autonomy, evaluation and reliable AI systems.
+- [Ecosystem](https://klartext-ai.com/ecosystem/) ([Deutsch](https://klartext-ai.com/de/ecosystem/)): AI Austria and AI Impact Mission.
+- [Team](https://klartext-ai.com/team/) ([Deutsch](https://klartext-ai.com/de/team/))
+- [Values](https://klartext-ai.com/values/) ([Deutsch](https://klartext-ai.com/de/values/))
+- [Careers](https://klartext-ai.com/karriere/) ([Deutsch](https://klartext-ai.com/de/karriere/))
+
+## Blog
+
+- [The GenAI Divide: Why 95% of AI Projects Fail](https://klartext-ai.com/blog/mit-genai-divide/)
+- [Why Evaluation is the Key to Successful AI](https://klartext-ai.com/blog/evaluation-key-to-ai/)
+- [Explainable AI: Why Trust Comes from Understanding](https://klartext-ai.com/blog/explainable-ai/)
+- [Domain-Driven Design in Practice: KPI Extraction in Banking](https://klartext-ai.com/blog/domain-driven-design-rfu/)
+- [European AI Sovereignty: Why Location Matters](https://klartext-ai.com/blog/european-ai-sovereignty/)
+- [Privacy by Design: More than Just Compliance](https://klartext-ai.com/blog/privacy-by-design/)
+- [Cybersecurity in the Era of AI](https://klartext-ai.com/blog/cybersecurity/)
+- [End-to-End Ownership: From Idea to Deployment](https://klartext-ai.com/blog/end-to-end-ownership/)
+- [Agile AI Development: Small Cycles, Big Impact](https://klartext-ai.com/blog/agile-ai-development/)
+- [Why We're Breaking Up with Big Tech](https://klartext-ai.com/blog/digital-sovereignty-teams/)
+
+## Contact
+
+- Email: office@klartext-ai.com
+- Phone: +43 660 81010 67
+- Address: Klartext AI FlexCo, Lerchenfelder Straße 74/2/7, 1080 Vienna, Austria
+- LinkedIn: https://www.linkedin.com/company/klartext-ai/

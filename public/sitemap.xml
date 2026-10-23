@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Alias for crawlers that only look at /sitemap.xml. @astrojs/sitemap writes the real index to
+     /sitemap-index.xml (referenced in robots.txt); add sitemap-1.xml here if the build ever splits. -->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap><loc>https://klartext-ai.com/sitemap-0.xml</loc></sitemap>
+</sitemapindex>

@@ -11,19 +11,24 @@ import Opening from './Opening.astro';
 import Pillars from './Pillars.astro';
 import Partners from './Partners.astro';
 import LinkedInFeed from '../LinkedInFeed.astro';
+import Faq from './Faq.astro';
+import { productSchema } from '../../utils/structured-data';
 import '../../styles/studio.css';
 interface Props { lang: 'de' | 'en'; page?: 'home' | 'solutions' | 'ventures' | 'research' | 'ecosystem' | 'studio' }
 const { lang, page = 'home' } = Astro.props;
 const de = lang === 'de';
-// `titles` stays a plain string for <title>; the h1 renders it in two parts so the
-// second half can take the blue accent, like every other section heading.
+// The solutions h1 renders in two parts so the second half can take the blue accent, like
+// every other section heading.
 const solutionsHeading = de ? ['KI, die', 'Verantwortung trägt.'] : ['AI that takes', 'responsibility.'];
-const titles = de ? {home:'We build what’s next.',solutions:'KI, die Verantwortung trägt.',ventures:'Unsere These. In die Praxis gebracht.',research:'Von Forschung zu Wirkung.',ecosystem:'Fortschritt entsteht gemeinsam.',studio:'Das Klartext Studio.'} : {home:'We build what’s next.',solutions:'AI that takes responsibility.',ventures:'Our thesis. Shipped.',research:'From research to real impact.',ecosystem:'Progress is a team effort.',studio:'The Klartext studio.'};
+// <title> names what we build in plain words for search engines and AI assistants; the
+// slogans stay on the page as the visible headings.
+const titles = de ? {home:'KI-Entwicklung & agentische Systeme aus Wien',solutions:'KI-Leistungen: Agentische Systeme & Dokumentenverarbeitung',ventures:'KI-Produkte: doclarity & Klartext Extract',research:'KI-Forschung: Evaluation & überprüfbare Autonomie',ecosystem:'KI-Ecosystem: AI Austria & AI Impact Mission',studio:'Team: KI-Engineering & Forschung aus Wien'} : {home:'Custom AI Development & Agentic Systems in Vienna',solutions:'AI Services: Agentic Systems & Document Processing',ventures:'AI Products: doclarity & Klartext Extract',research:'AI Research: Evaluation & Verifiable Autonomy',ecosystem:'AI Ecosystem: AI Austria & AI Impact Mission',studio:'Team: AI Engineering & Research from Vienna'};
 // The third venture is in stealth, so it is left out of the ventures description — put its
 // name back once we can talk about it (see src/components/studio/Ventures.astro).
-const descriptions = de ? {home:'Wegweisende KI-Lösungen für Unternehmen. Neue KI-Ventures für die Welt. Entwickelt in Wien.',solutions:'Wir entwickeln und integrieren verlässliche KI-Systeme für anspruchsvolle Geschäftsprozesse.',ventures:'doclarity und Klartext Extract: KI-Ventures von Klartext AI.',research:'Forschung zu überprüfbarer Autonomie, Evaluation und verlässlichen KI-Systemen.',ecosystem:'Unser Engagement für das KI-Ecosystem in Österreich und Europa mit AI Austria und AI Impact Mission.',studio:'Lern die Menschen hinter Klartext AI kennen. Forschung und Engineering aus Wien.'} : {home:'Cutting-edge AI solutions for companies. New AI ventures for the world. Built in Vienna.',solutions:'We build and integrate accountable AI systems for demanding business processes.',ventures:'doclarity and Klartext Extract: AI ventures built by Klartext AI.',research:'Research into verifiable autonomy, evaluation, and reliable AI systems.',ecosystem:'Supporting the AI ecosystem in Austria and Europe with AI Austria and AI Impact Mission.',studio:'Meet the people behind Klartext AI. Research and engineering from Vienna.'};
+const descriptions = de ? {home:'Individuelle KI für geschäftskritische Prozesse: agentische Systeme, Dokumentenverarbeitung und Automatisierung, nachvollziehbar und in Europa gehostet. Aus Wien, von den Machern von doclarity und Klartext Extract.',solutions:'Wir entwickeln und integrieren verlässliche KI-Systeme für anspruchsvolle Geschäftsprozesse: KPI-Extraktion aus Geschäftsberichten, barrierefreie PDFs, Angebotsautomatisierung und Compliance-Assistenten.',ventures:'doclarity macht PDFs barrierefrei (PDF/UA, WCAG). Klartext Extract macht aus Geschäftsberichten und Verträgen strukturierte Daten mit Quelle. KI-Produkte von Klartext AI.',research:'Forschung zu überprüfbarer Autonomie, Evaluation und verlässlichen KI-Systemen.',ecosystem:'Unser Engagement für das KI-Ecosystem in Österreich und Europa mit AI Austria und AI Impact Mission.',studio:'Lern die Menschen hinter Klartext AI kennen. Forschung und Engineering aus Wien.'} : {home:'Custom AI for business-critical processes: agentic systems, document processing and automation, traceable and hosted in Europe. From Vienna, the makers of doclarity and Klartext Extract.',solutions:'We build and integrate accountable AI systems for demanding business processes: KPI extraction from annual reports, accessible PDFs, quote automation and compliance assistants.',ventures:'doclarity makes PDFs accessible (PDF/UA, WCAG). Klartext Extract turns annual reports and contracts into structured data with sources. AI products built by Klartext AI.',research:'Research into verifiable autonomy, evaluation, and reliable AI systems.',ecosystem:'Supporting the AI ecosystem in Austria and Europe with AI Austria and AI Impact Mission.',studio:'Meet the people behind Klartext AI. Research and engineering from Vienna.'};
+const structuredData = page === 'ventures' ? [productSchema('doclarity'), productSchema('extract')] : [];
 ---
-<BaseLayout title={`${titles[page]} | Klartext AI`} description={descriptions[page]} lang={lang} alwaysShowNav={true}>
+<BaseLayout title={`${titles[page]} | Klartext AI`} description={descriptions[page]} lang={lang} alwaysShowNav={true} structuredData={structuredData}>
   <main id="main-content" class="studio-site" data-page={page} tabindex="-1">
     {page === 'home' ? <>
       <Opening lang={lang}/>
@@ -55,6 +60,7 @@ const descriptions = de ? {home:'Wegweisende KI-Lösungen für Unternehmen. Neue
     {page === 'ecosystem'
       ? <section class="studio-section studio-contact" id="contact"><h2>{de ? 'Eine Initiative, die es' : 'An initiative'}<br /><span class="blue">{de ? 'wert ist, voranzutreiben?' : 'worth pushing?'}</span></h2><a class="studio-button" href="mailto:office@klartext-ai.com">{de ? 'Lass uns Europas Ecosystem stärken' : 'Let’s grow Europe’s ecosystem'} <span aria-hidden="true">↗</span></a></section>
       : <section class="studio-section studio-contact" id="contact"><h2>{de ? 'Ein Problem, das es' : 'A problem'}<br /><span class="blue">{de ? 'wert ist, zu lösen?' : 'worth solving?'}</span></h2><a class="studio-button" href="mailto:office@klartext-ai.com">{de ? 'Sprechen wir darüber' : 'Let’s talk'} <span aria-hidden="true">↗</span></a></section>}
+    {(page === 'home' || page === 'ventures') && <Faq lang={lang} page={page}/>}
   </main>
   <Footer lang={lang}/>
 </BaseLayout>

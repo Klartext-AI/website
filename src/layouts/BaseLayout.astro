@@ -12,6 +12,8 @@ interface Props {
    * Must be a 1200x630 PNG — those dimensions are declared in the meta tags.
    */
   ogImage?: string;
+  /** Extra JSON-LD nodes for this page, appended to the shared @graph (see src/utils/structured-data.ts). */
+  structuredData?: Record<string, unknown>[];
 }
 
 const {
@@ -22,7 +24,8 @@ const {
   robots = 'index, follow, max-image-preview:large',
   ogType = 'website',
   autoLangRedirect = false,
-  ogImage
+  ogImage,
+  structuredData = []
 } = Astro.props;
 
 import '@fontsource/inter/latin.css';
@@ -35,6 +38,7 @@ import interLatin400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?
 import Navigation from '../components/Navigation.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import { getLanguagePaths } from '../utils/i18n';
+import { DOCLARITY_ID, EXTRACT_ID, ORGANIZATION_ID, founderSchema } from '../utils/structured-data';
 const BASE = import.meta.env.BASE_URL;
 const SITE = Astro.site?.toString() ?? 'https://klartext-ai.github.io';
 
@@ -291,8 +295,9 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
     '@graph': [
       {
         '@type': 'Organization',
-        '@id': new URL('/#organization', SITE).toString(),
+        '@id': ORGANIZATION_ID,
         'name': 'Klartext AI',
+        'legalName': 'Klartext AI FlexCo',
         'alternateName': 'Klartext',
         'url': SITE,
         'logo': new URL(`${BASE}LOGO_transparent.png`, SITE).toString(),
@@ -300,6 +305,14 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
           ? 'Klartext AI builds custom AI solutions for document processing, process automation, and agentic systems — with measurable ROI and a focus on domain expertise.'
           : 'Klartext AI entwickelt individuelle KI-Lösungen für Dokumentenverarbeitung, Prozessautomatisierung und agentische Systeme – mit messbarem ROI und Fokus auf fachlicher Exzellenz.',
         'foundingDate': '2025',
+        'foundingLocation': { '@type': 'Place', 'name': lang === 'en' ? 'Vienna, Austria' : 'Wien, Österreich' },
+        'founder': founderSchema(lang),
+        'vatID': 'ATU81693669',
+        'knowsAbout': lang === 'en'
+          ? ['Custom AI development', 'Agentic AI', 'Document processing', 'Data extraction from PDFs', 'PDF accessibility (PDF/UA, WCAG)', 'Process automation', 'Human-in-the-loop AI', 'AI evaluation', 'Explainable and auditable AI', 'EU AI Act']
+          : ['Individuelle KI-Entwicklung', 'Agentische KI', 'Dokumentenverarbeitung', 'Datenextraktion aus PDFs', 'Barrierefreie PDFs (PDF/UA, WCAG)', 'Prozessautomatisierung', 'Human-in-the-Loop', 'KI-Evaluation', 'Erklärbare und nachvollziehbare KI', 'EU AI Act'],
+        // The products are described in full on /ventures and the matching success stories.
+        'makesOffer': [DOCLARITY_ID, EXTRACT_ID].map((id) => ({ '@type': 'Offer', 'itemOffered': { '@id': id } })),
         // Must stay in sync with the address in Footer.astro and the Impressum.
         'address': {
           '@type': 'PostalAddress',
@@ -310,7 +323,8 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
           'addressCountry': 'AT'
         },
         'sameAs': [
-          'https://www.linkedin.com/company/klartext-ai/'
+          'https://www.linkedin.com/company/klartext-ai/',
+          'https://github.com/Klartext-AI'
         ],
         'contactPoint': [{
           '@type': 'ContactPoint',
@@ -327,7 +341,7 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
         'name': 'Klartext AI',
         'url': SITE,
         'inLanguage': lang,
-        'publisher': { '@id': new URL('/#organization', SITE).toString() }
+        'publisher': { '@id': ORGANIZATION_ID }
       },
       {
         '@type': 'WebPage',
@@ -336,7 +350,8 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
         'description': description,
         'inLanguage': lang,
         'isPartOf': { '@id': new URL('/#website', SITE).toString() }
-      }
+      },
+      ...structuredData
     ]
   })}></script>
 

@@ -42,7 +42,7 @@ export const teamProfiles = {
   },
   {
     name: "Felix Krause",
-    role: "Technischer Geschäftsführer",
+    role: "CTO",
     image: `${BASE}team/felix.jpg`,
     hoverImage: `${BASE}team/felix-fun.jpg`,
     linkedin: "https://www.linkedin.com/in/f-krause-ai/",

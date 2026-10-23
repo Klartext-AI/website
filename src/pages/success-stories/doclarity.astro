@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { productSchema } from '../../utils/structured-data';
 import FinalCTA from '../../components/FinalCTA.astro';
 import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
@@ -12,7 +13,7 @@ const description =
 const BASE = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true}>
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true} structuredData={[productSchema('doclarity')]}>
   <main class="product-detail">
     <div class="container">
       <a href={`${BASE}success-stories`} class="back-link">← Back to Success Stories</a>

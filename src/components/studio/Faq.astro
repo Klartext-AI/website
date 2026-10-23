@@ -1,0 +1,49 @@
+---
+import { faqItems } from './faq-content';
+interface Props { lang: 'de' | 'en'; page: 'home' | 'ventures' }
+const { lang, page } = Astro.props;
+const de = lang === 'de';
+const base = import.meta.env.BASE_URL;
+const root = `${base}${de ? 'de/' : ''}`;
+const items = faqItems(page, lang);
+const href = (link: string) => /^(https?|mailto|tel):/.test(link) ? link : `${root}${link}`;
+// Answers write inline links as [label](href). Splitting on the pattern yields
+// [text, label, href, text, label, href, ..., text]; JSON-LD gets the same links as <a> tags,
+// which it accepts in an answer's text.
+const LINK = /\[([^\]]+)\]\(([^)]+)\)/;
+const parts = (answer: string): { text: string; href?: string }[] => {
+  const pieces = answer.split(LINK);
+  return pieces.flatMap((piece, i) => {
+    if (i % 3 === 0) return piece ? [{ text: piece }] : [];
+    if (i % 3 === 1) return [{ text: piece, href: href(pieces[i + 1]) }];
+    return [];
+  });
+};
+const absolute = (link: string) => new URL(href(link), Astro.site ?? Astro.url).toString();
+// Answers sit in native <details>, so they are part of the HTML for crawlers and assistive
+// technology while the page keeps its quiet look. The same text goes out as FAQPage JSON-LD.
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': new URL('#faq', Astro.url).toString(),
+  'inLanguage': lang,
+  'mainEntity': items.map(({ q, a }) => ({ '@type': 'Question', 'name': q, 'acceptedAnswer': { '@type': 'Answer', 'text': a.replace(new RegExp(LINK, 'g'), (_, text, link) => `<a href="${absolute(link)}">${text}</a>`) } }))
+};
+// The answers carry <a> tags, so escape "<" or a "</script" in the copy would end the element.
+const schemaJson = JSON.stringify(schema).replace(/</g, '\\u003c');
+---
+<section class="studio-section faq" id="faq" aria-labelledby="faq-title">
+  <div class="faq-grid">
+    <h2 id="faq-title">{de ? 'Fragen?' : 'Questions?'}<br /><span class="blue">Klartext.</span></h2>
+    <div class="faq-list">
+      {items.map(item => <details>
+        <summary><span>{item.q}</span><span class="detail-plus" aria-hidden="true">+</span></summary>
+        <div class="faq-answer">
+          <p>{parts(item.a).map(part => part.href ? <a href={part.href}>{part.text}</a> : part.text)}</p>
+          {item.link && <a class="faq-link" href={href(item.link.href)}>{item.link.label} <span aria-hidden="true">↗</span></a>}
+        </div>
+      </details>)}
+    </div>
+  </div>
+  <script is:inline type="application/ld+json" set:html={schemaJson}></script>
+</section>
