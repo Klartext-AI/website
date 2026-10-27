@@ -130,7 +130,7 @@ export const teamProfiles = {
   {
     name: "Francesca Ricter",
     role: "Software Developer",
-    image: `${BASE}team/francesca.png`,
+    image: `${BASE}team/francesca.jpg`,
     hoverImage: `${BASE}team/francesca-fun.jpeg`,
     linkedin: "https://www.linkedin.com/in/francescaricter/",
     summary: [
@@ -326,7 +326,7 @@ export const teamProfiles = {
     {
       name: "Francesca Ricter",
       role: "Software Developer",
-      image: `${BASE}team/francesca.png`,
+      image: `${BASE}team/francesca.jpg`,
       hoverImage: `${BASE}team/francesca-fun.jpeg`,
       linkedin: "https://www.linkedin.com/in/francescaricter/",
       summary: [
