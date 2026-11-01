@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../../components/BlogPostDetail.astro';
+import FinalCTA from '../../../components/FinalCTA.astro';
+import Footer from '../../../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+const title = 'Wo kleine Teams hingehören: Warum der öffentliche Sektor junge Builder braucht | Klartext AI Blog';
+const description = 'Öffentliche Institutionen bergen enormes ungenutztes Potenzial für KI. Warum kleine, schnelle Teams ihren Weg hinein finden müssen – und warum das ein Weg zu europäischer digitaler Souveränität ist.';
+
+const fullContent = `
+<p>Im Herzen des modernen Staates liegt ein stilles Paradox. Er ist eine der größten Wissensorganisationen Europas – und zugleich eine der am wenigsten von moderner Technologie unterstützten.</p>
+
+<p>Jeden Tag lesen, prüfen, klassifizieren und beantworten Menschen in Ministerien, Gemeinden, Krankenhäusern und Behörden einen endlosen Strom an Dokumenten. Anträge, Bescheide, Berichte, Rechnungen. Das liegt nicht an fehlendem Willen. Die meisten Menschen im öffentlichen Dienst wollen gute Arbeit leisten. Sie werden von Systemen gebremst, die über Jahrzehnte gewachsen sind und nie neu gedacht wurden.</p>
+
+<p>Wir sehen darin kein Versagen, sondern eine Einladung.</p>
+
+<h4>Verwaltung ist der Ort, an dem KI Sinn ergibt</h4>
+
+<p>Die öffentliche Debatte über KI ist oft laut: Agenten, die Jobs ersetzen, Modelle, die Romane schreiben, Maschinen, die denken. Der wirklich bedeutsame Fortschritt ist viel leiser.</p>
+
+<p>Er passiert, wenn eine Sachbearbeiterin keine Daten mehr aus einem eingescannten Formular abtippen muss. Wenn ein neuer Kollege die richtige Richtlinie in Sekunden statt in Stunden findet. Wenn ein öffentliches Dokument für alle Bürger:innen zugänglich ist – nicht nur für die meisten.</p>
+
+<p>Das ist nicht spektakulär. Es ist verantwortungsvoll. Und genau hier verdient sich KI aus unserer Sicht ihren Platz: indem sie Menschen Zeit zurückgibt für die Entscheidungen, die einen Menschen brauchen.</p>
+
+<h4>Der Dschungel zwischen Problem und Lösung</h4>
+
+<p>Wenn das Potenzial so offensichtlich ist – warum verändert sich so wenig?</p>
+
+<p>Öffentliche Vergabe hat gute Gründe. Steuergeld verdient Transparenz und fairen Wettbewerb. In der Praxis führt der Weg zu einem öffentlichen Auftrag aber durch einen Dschungel aus Portalen, Formaten, Fristen und Kategorien. Große Konzerne haben ganze Abteilungen dafür. Ein Team aus fünf Ingenieur:innen hat das nicht.</p>
+
+<p>Das Ergebnis ist eine stille Verzerrung. Aufträge gehen oft nicht an das Team mit der besten Lösung, sondern an jenes, das den Vergabeprozess am besten kennt. Institutionen bekommen das Vertraute – nicht das Mögliche.</p>
+
+<h4>Ein Shoutout: Polytender</h4>
+
+<p style="text-align:center;margin:2rem 0;"><a href="https://polytender.com/en" target="_blank" rel="noopener noreferrer"><img src="${base}blog/polytender-logo.svg" alt="Polytender Logo" width="260" height="60" style="display:inline-block;width:260px;max-width:70%;height:auto;background:none;box-shadow:none;" /></a></p>
+
+<p>Umso mehr freuen wir uns über Werkzeuge, die diese Hürde senken. <a href="https://polytender.com/en" target="_blank" rel="noopener noreferrer"><strong>Polytender</strong></a> macht es bemerkenswert einfach, relevante öffentliche Ausschreibungen zu finden – ohne sich durch dutzende Portale zu kämpfen. Für kleine Teams verändert das die Rechnung: weniger Zeit mit Suchen, mehr Zeit für die richtige Antwort.</p>
+
+<h4>Warum junge Teams in große Institutionen gehören</h4>
+
+<p>Wir glauben nicht, dass kleine Teams besser sind als große Organisationen. Wir glauben, dass sie anders sind – und dass genau dieser Unterschied das ist, was öffentliche Institutionen jetzt brauchen.</p>
+
+<p>Junge Teams bewegen sich in Wochen, nicht in Budgetzyklen. Sie arbeiten täglich mit den neuesten Modellen und Methoden. Sie übernehmen Verantwortung vom ersten Prototyp bis in den Betrieb, ohne lange Übergabeketten. Und sie starten beim Problem, nicht beim Produktkatalog.</p>
+
+<p>Der Austausch geht in beide Richtungen. Öffentliche Institutionen bringen, was Startups oft fehlt: echte Probleme in echtem Maßstab, langfristige Partnerschaften und Arbeit, die für die Gesellschaft zählt. Gemeinsam sind beide Seiten stärker als jede für sich.</p>
+
+<h4>Vergabe ist eine Souveränitätsentscheidung</h4>
+
+<p>Jeder Euro, den eine öffentliche Institution für Technologie ausgibt, ist auch eine Entscheidung darüber, von wem Europa abhängt.</p>
+
+<p>Fließt dieses Geld zu wenigen Plattformen außerhalb Europas, wachsen Abhängigkeiten still mit: bei Daten, bei Lizenzen, bei Wissen, das den Kontinent verlässt. Fließt es zu europäischen Teams, wächst etwas anderes. Kompetenz bleibt im Land. Daten bleiben unter europäischem Recht. Ein Ökosystem bekommt die Chance zu reifen.</p>
+
+<p>Viele der heute globalen Technologieunternehmen sind mit öffentlichen Aufträgen groß geworden. Europa hat denselben Hebel. Es muss ihn nur nutzen.</p>
+
+<p><strong>Digitale Souveränität entsteht nicht in Strategiepapieren. Sie entsteht, wenn europäische Teams echte Systeme für echte Institutionen bauen.</strong></p>
+
+<h4>Was wir glauben</h4>
+
+<p>Wir glauben, dass die Verwaltung der Zukunft nicht von der Stange gekauft wird. Sie wird gemeinsam gebaut – von etablierten Institutionen, die sich trauen, mit neuen Partnern zu arbeiten, und von jungen Teams, die bereit sind, sich auf die Komplexität des öffentlichen Sektors einzulassen.</p>
+
+<p>An öffentliche Institutionen: Gestaltet Ausschreibungen so, dass Innovation eine Chance hat. Kleinere Lose, Pilotphasen und funktionale statt technische Anforderungen.</p>
+
+<p>An Gründer:innen und Engineers: Der öffentliche Sektor ist kein Minenfeld. Er ist einer der sinnvollsten Orte für eure Arbeit. Und der Weg hinein war nie einfacher.</p>
+
+<p>Dafür stehen wir bei Klartext AI: Klarheit statt Komplexität, Verantwortung statt Übergaben und Technologie, die den Menschen dient, die der Öffentlichkeit dienen.</p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="de" alwaysShowNav={true} ogType="article">
+  <BlogPostDetail
+    title="Wo kleine Teams hingehören: Warum der öffentliche Sektor junge Builder braucht"
+    excerpt="Öffentliche Institutionen bergen eines der größten ungenutzten KI-Potenziale Europas – wenn junge Teams ihren Weg hinein finden."
+    fullExcerpt="Öffentliche Institutionen bergen eines der größten ungenutzten KI-Potenziale Europas. Wir glauben: Kleine, schnelle Teams müssen ihren Weg hinein finden. Das ist nicht nur gutes Geschäft. So baut Europa seine eigene digitale Zukunft."
+    fullContent={fullContent}
+    category="Philosophie"
+    readTime="5 min"
+    date="2026-10-28"
+    lang="de"
+  />
+  <FinalCTA lang="de" />
+  <Footer lang="de" />
+</BaseLayout>

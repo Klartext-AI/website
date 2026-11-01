@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostDetail from '../../components/BlogPostDetail.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+const title = 'Where Small Teams Belong: Why the Public Sector Needs Young Builders | Klartext AI Blog';
+const description = 'Public institutions hold huge untapped potential for AI. Why small, fast teams have to find their way in – and why that is a path to European digital sovereignty.';
+
+const fullContent = `
+<p>There is a quiet paradox at the heart of the modern state. It is one of the largest knowledge organisations in Europe, and still one of the least supported by modern technology.</p>
+
+<p>Every day, people in ministries, municipalities, hospitals and public agencies read, check, classify and answer an endless stream of documents. Applications, permits, reports, invoices. None of this is a lack of will. Most people in public service want to do good work. They are held back by systems that grew over decades and were never rethought.</p>
+
+<p>We see this not as a failure, but as an invitation.</p>
+
+<h4>Administration is where AI makes sense</h4>
+
+<p>The public debate about AI is often loud: agents that replace jobs, models that write novels, machines that think. The most meaningful progress is much quieter.</p>
+
+<p>It happens when a caseworker no longer has to copy data from a scanned form. When a new colleague finds the right regulation in seconds instead of hours. When a public document is accessible to every citizen, not just to most of them.</p>
+
+<p>This is not spectacular. It is responsible. And it is exactly where we believe AI earns its place: giving people time back for the decisions that need a human.</p>
+
+<h4>The jungle between problem and solution</h4>
+
+<p>If the potential is so obvious, why does so little change?</p>
+
+<p>Public procurement exists for good reasons. Taxpayer money deserves transparency and fair competition. In practice, though, the path to a public contract runs through a jungle of portals, formats, deadlines and categories. Large corporations have departments to navigate it. A team of five engineers does not.</p>
+
+<p>The result is a quiet distortion. Contracts often go not to the team with the best solution, but to the one that knows the tender process best. Institutions get what is familiar, not what is possible.</p>
+
+<h4>A shoutout: Polytender</h4>
+
+<p style="text-align:center;margin:2rem 0;"><a href="https://polytender.com/en" target="_blank" rel="noopener noreferrer"><img src="${base}blog/polytender-logo.svg" alt="Polytender logo" width="260" height="60" style="display:inline-block;width:260px;max-width:70%;height:auto;background:none;box-shadow:none;" /></a></p>
+
+<p>That is why we are glad to see tools that lower this barrier. <a href="https://polytender.com/en" target="_blank" rel="noopener noreferrer"><strong>Polytender</strong></a> makes finding relevant public tenders remarkably simple. You no longer have to search dozens of portals. For small teams, this changes the equation: less time searching, more time building the right answer.</p>
+
+<h4>Why young teams belong inside large institutions</h4>
+
+<p>We do not believe small teams are better than large organisations. We believe they are different, and that the difference is exactly what public institutions need right now.</p>
+
+<p>Young teams move in weeks, not budget cycles. They work with the newest models and methods every day. They take ownership from the first prototype to production, without long chains of handovers. And they start from the problem, not from a product catalogue.</p>
+
+<p>The exchange goes both ways. Public institutions bring what startups often lack: real problems at real scale, long-term partnerships, and work that matters to society. Together, both sides are better than either alone.</p>
+
+<h4>Procurement is a sovereignty decision</h4>
+
+<p>Every euro a public institution spends on technology is also a decision about who Europe depends on.</p>
+
+<p>When that money flows to a few platforms outside Europe, dependencies grow quietly: on data, on licences, on knowledge that leaves the continent. When it flows to European teams, something else grows. Expertise stays in the country. Data stays under European law. An ecosystem gets the chance to mature.</p>
+
+<p>Many of today's global technology companies grew up on public contracts. Europe has the same lever. It just has to use it.</p>
+
+<p><strong>Digital sovereignty is not written in strategy papers. It is built when European teams build real systems for real institutions.</strong></p>
+
+<h4>What we believe</h4>
+
+<p>We believe the administration of the future will not be bought off the shelf. It will be built together by established institutions that dare to work with new partners, and by young teams willing to take on the complexity of the public sector.</p>
+
+<p>To public institutions: design your tenders so that innovation has a chance. Smaller lots, pilot phases, and functional rather than technical requirements.</p>
+
+<p>To founders and engineers: the public sector is not a minefield. It is one of the most meaningful places to put your work. And finding the way in has never been easier.</p>
+
+<p>That is what we stand for at Klartext AI: clarity over complexity, ownership over handovers, and technology that serves the people who serve the public.</p>
+`;
+---
+
+<BaseLayout title={title} description={description} lang="en" alwaysShowNav={true} ogType="article">
+  <BlogPostDetail
+    title="Where Small Teams Belong: Why the Public Sector Needs Young Builders"
+    excerpt="Public institutions hold some of the biggest untapped potential for AI in Europe – if young teams find their way in."
+    fullExcerpt="Public institutions hold some of the biggest untapped potential for AI in Europe. We believe small, fast teams have to find their way in. It is not just good business. It is how Europe builds its own digital future."
+    fullContent={fullContent}
+    category="Philosophy"
+    readTime="5 min"
+    date="2026-10-28"
+    lang="en"
+  />
+  <FinalCTA lang="en" />
+  <Footer lang="en" />
+</BaseLayout>

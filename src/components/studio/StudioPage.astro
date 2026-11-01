@@ -8,6 +8,7 @@ import Ventures from './Ventures.astro';
 import People from './People.astro';
 import Ecosystem from './Ecosystem.astro';
 import Opening from './Opening.astro';
+import StudioHero from './StudioHero.astro';
 import Pillars from './Pillars.astro';
 import Partners from './Partners.astro';
 import LinkedInFeed from '../LinkedInFeed.astro';
@@ -54,7 +55,7 @@ const structuredData = page === 'ventures' ? [productSchema('doclarity'), produc
       {page === 'ventures' && <Ventures lang={lang} full/>}
       {page === 'research' && <Research lang={lang} full/>}
       {page === 'ecosystem' && <Ecosystem lang={lang} full/>}
-      {page === 'studio' && <><People lang={lang} full/><Solutions lang={lang}/></>}
+      {page === 'studio' && <><StudioHero lang={lang}/><People lang={lang} full/><Solutions lang={lang}/></>}
     </>}
     {page === 'home' && <LinkedInFeed lang={lang}/>}
     {page === 'ecosystem'

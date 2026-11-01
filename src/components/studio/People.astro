@@ -1,11 +1,9 @@
 ---
 import { teamProfiles } from './team-profiles';
 import FounderPhoto from './FounderPhoto.astro';
-import StudioSpace from './StudioSpace.astro';
 interface Props { lang: 'de' | 'en'; full?: boolean }
 type PortraitAttrs = Record<string, string>;
 const { lang, full = false } = Astro.props;
-const Heading = full ? 'h1' : 'h2';
 const de = lang === 'de';
 const base = import.meta.env.BASE_URL;
 const root = `${base}${de ? 'de/' : ''}`;
@@ -18,10 +16,9 @@ const people = [
 ];
 ---
 <section class={`studio-section people-section ${full ? 'people-full' : ''}`} id="studio">
-  <div class="people-intro"><Heading>{de ? 'Aus Wien.' : 'Built in Vienna.'}<br /><span class="blue">{de ? 'Für das, was kommt.' : 'For what’s next.'}</span></Heading>{full && <p class="lead">{de ? '2025 gegründet. Bootstrapped. Ein Team aus Forschung und Engineering, das KI in die Praxis bringt.' : 'Founded in 2025. Bootstrapped. Researchers and engineers building AI that holds up.'}</p>}
-    <a class="line-link" href={`${root}${full ? 'karriere' : 'team'}/`}>{full ? (de ? 'Teil des Teams werden' : 'Join our team') : (de ? 'Das Studio kennenlernen' : 'Meet the studio')} <span aria-hidden="true">↗</span></a>
-  </div>
-  {full && <StudioSpace lang={lang} />}
+  {!full && <div class="people-intro"><h2>{de ? 'Aus Wien.' : 'Built in Vienna.'}<br /><span class="blue">{de ? 'Für das, was kommt.' : 'For what’s next.'}</span></h2>
+    <a class="line-link" href={`${root}team/`}>{de ? 'Das Studio kennenlernen' : 'Meet the studio'} <span aria-hidden="true">↗</span></a>
+  </div>}
   {full && <div class="studio-stats"><div><strong>10+</strong><span>{de ? 'Menschen aus Forschung und Engineering' : 'Researchers and engineers'}</span></div><div><strong>20+</strong><span>{de ? 'Kunden aus Wirtschaft und öffentlichem Sektor' : 'Clients across industry and the public sector'}</span></div><div><strong>3</strong><span>{de ? 'Ventures aus unserem Studio' : 'Ventures from our studio'}</span></div></div>}
   {full && <h2 class="builders-heading">{de ? 'Die Menschen dahinter.' : 'The builders.'}</h2>}
   {!full && <FounderPhoto lang={lang} />}

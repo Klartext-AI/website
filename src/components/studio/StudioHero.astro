@@ -1,0 +1,107 @@
+---
+interface Props { lang: 'de' | 'en' }
+const { lang } = Astro.props;
+const de = lang === 'de';
+const base = import.meta.env.BASE_URL;
+const film = `${base}film/`;
+const root = `${base}${de ? 'de/' : ''}`;
+const label = de
+  ? 'Film aus dem Klartext-Studio in Wien: das Team bei der Arbeit, Kundengespräche und Bürohund Bruno.'
+  : 'Film from the Klartext studio in Vienna: the team at work, client conversations and office dog Bruno.';
+const pauseLabel = de ? 'Film pausieren' : 'Pause film';
+const playLabel = de ? 'Film abspielen' : 'Play film';
+---
+<section class="studio-hero-film" aria-labelledby="studio-hero-title">
+  <video muted loop playsinline preload="metadata" poster={`${film}klartext-studio-film-poster.webp`} width="2560" height="1440" aria-label={label}>
+    <source src={`${film}klartext-studio-film-720p.mp4`} media="(max-width: 700px)" type="video/mp4" />
+    <source src={`${film}klartext-studio-film-1440p.mp4`} media="(min-width: 1800px)" type="video/mp4" />
+    <source src={`${film}klartext-studio-film-1080p.mp4`} type="video/mp4" />
+  </video>
+  <div class="studio-hero-copy">
+    <h1 id="studio-hero-title">{de ? 'Aus Wien.' : 'Built in Vienna.'}<br /><span>{de ? 'Für das, was kommt.' : 'For what’s next.'}</span></h1>
+    <p>{de ? '2025 gegründet. Bootstrapped. Ein Team aus Forschung und Engineering, das KI in die Praxis bringt.' : 'Founded in 2025. Bootstrapped. Researchers and engineers building AI that holds up.'}</p>
+    <a href={`${root}karriere/`}>{de ? 'Teil des Teams werden' : 'Join our team'} <span aria-hidden="true">↗</span></a>
+  </div>
+  <button class="studio-hero-toggle" type="button" data-pause={pauseLabel} data-play={playLabel} aria-label={playLabel}>
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path class="icon-play" d="M3 1.5v11l9-5.5z" fill="currentColor"/><path class="icon-pause" d="M3 1.5h3v11H3zM8 1.5h3v11H8z" fill="currentColor"/></svg>
+  </button>
+</section>
+
+<style>
+  /* The film runs under the glass navigation, up to the top edge. */
+  :global(body:has(.studio-hero-film)) { padding-top: 0; }
+  .studio-hero-film {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: flex-end;
+    min-height: calc(100vh / var(--page-zoom));
+    min-height: calc(100svh / var(--page-zoom));
+    overflow: clip;
+    background: var(--color-text-dark);
+  }
+  .studio-hero-film video { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+  /* The footage is bright, so the copy sits on a dark rise from the bottom left. */
+  .studio-hero-film::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      linear-gradient(to top, color-mix(in srgb, var(--color-text-dark) 86%, transparent), transparent 62%),
+      linear-gradient(to right, color-mix(in srgb, var(--color-text-dark) 50%, transparent), transparent 60%);
+  }
+  .studio-hero-copy { width: 100%; max-width: var(--studio-width); margin-inline: auto; padding: 0 var(--studio-gutter) clamp(40px, 7svh, 76px); color: var(--color-paper); }
+  .studio-hero-copy h1 { color: inherit; }
+  .studio-hero-copy h1 span { color: #a9d4f5; }
+  .studio-hero-copy p { max-width: 560px; margin-top: clamp(18px, 2vw, 28px); font-size: clamp(17px, 1.3vw, 22px); line-height: 1.5; color: inherit; }
+  .studio-hero-copy a { display: inline-flex; align-items: center; gap: 28px; min-height: 48px; margin-top: 14px; font-size: 17px; font-weight: 500; color: inherit; border-bottom: 1px solid color-mix(in srgb, var(--color-paper) 55%, transparent); }
+  .studio-hero-copy a:hover { color: #a9d4f5; }
+  .studio-hero-copy a>span { font-size: 22px; transition: transform .2s; }
+  .studio-hero-copy a:hover>span { transform: translate(3px,-3px); }
+  .studio-hero-toggle { position: absolute; right: 20px; bottom: 20px; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; color: #fff; background: rgba(0,0,0,.45); cursor: pointer; }
+  .studio-hero-toggle:hover { background: rgba(0,0,0,.65); }
+  .studio-hero-toggle .icon-pause, .studio-hero-toggle.playing .icon-play { display: none; }
+  .studio-hero-toggle.playing .icon-pause { display: inline; }
+  /* Hidden while the film plays: hover shows it on desktop, a tap on the film on touch screens.
+     A paused film always shows it, and pointer-events keeps the hidden button from taking the tap. */
+  .studio-hero-toggle.playing { opacity: 0; pointer-events: none; transition: opacity .2s ease-out; }
+  .studio-hero-film.controls-visible .studio-hero-toggle, .studio-hero-toggle:focus-visible { opacity: 1; pointer-events: auto; }
+  @media (hover: hover) and (pointer: fine) {
+    .studio-hero-film:hover .studio-hero-toggle { opacity: 1; pointer-events: auto; }
+  }
+  @media (max-width: 600px) { .studio-hero-toggle { right: 12px; bottom: 12px; } }
+  @media (prefers-reduced-motion: reduce) { .studio-hero-toggle.playing, .studio-hero-copy a>span { transition: none; } }
+</style>
+
+<script>
+  const hero = document.querySelector<HTMLElement>('.studio-hero-film');
+  const video = hero?.querySelector('video');
+  const toggle = hero?.querySelector<HTMLButtonElement>('.studio-hero-toggle');
+  if (hero && video && toggle) {
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    // Motion only starts by itself when the visitor has not asked for less of it.
+    let wanted = !matchMedia('(prefers-reduced-motion: reduce)').matches && !connection?.saveData;
+    let visible = false;
+    const sync = () => {
+      if (wanted && visible) void video.play().catch(() => {});
+      else video.pause();
+    };
+    const label = () => {
+      toggle.classList.toggle('playing', !video.paused);
+      toggle.setAttribute('aria-label', (video.paused ? toggle.dataset.play : toggle.dataset.pause) ?? '');
+    };
+    video.addEventListener('play', label);
+    video.addEventListener('pause', label);
+    toggle.addEventListener('click', () => { wanted = video.paused; sync(); });
+    // On touch screens a tap on the film shows the button for a few seconds.
+    let hideTimer: ReturnType<typeof setTimeout>;
+    hero.addEventListener('click', () => {
+      hero.classList.add('controls-visible');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => hero.classList.remove('controls-visible'), 3000);
+    });
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }, { threshold: 0.25 }).observe(video);
+  }
+</script>

@@ -5,6 +5,10 @@ interface Props {
 
 const { lang = 'de' } = Astro.props;
 const MAP_URL = "https://maps.app.goo.gl/QGynv1LF7EQwVgry7";
+const PHOTOGRAPHERS = [
+  { name: "Leandra Schurz", url: "https://www.leandraschurz.com/" },
+  { name: "Zsolt Csutak" }
+];
 
 const content = {
   de: {
@@ -55,7 +59,8 @@ const content = {
     capitalLabel: "Stammkapital",
     capitalInfo: "Das eingetragene Stammkapital ergibt sich aus dem Firmenbuch der Klartext AI FlexCo.",
     ecommerceLabel: "Anwendbare berufsrechtliche Vorschriften",
-    ecommerceInfo: "E-Commerce-Gesetz (ECG), Unternehmensgesetzbuch (UGB), Gewerbeordnung (GewO) in der jeweils geltenden Fassung."
+    ecommerceInfo: "E-Commerce-Gesetz (ECG), Unternehmensgesetzbuch (UGB), Gewerbeordnung (GewO) in der jeweils geltenden Fassung.",
+    photoCreditsLabel: "Fotos"
   },
   en: {
     title: "Imprint",
@@ -105,7 +110,8 @@ const content = {
     capitalLabel: "Share Capital",
     capitalInfo: "The registered share capital is as recorded in the commercial register for Klartext AI FlexCo.",
     ecommerceLabel: "Applicable Professional Regulations",
-    ecommerceInfo: "E-Commerce Act (ECG), Austrian Commercial Code (UGB), Trade Regulation Act (GewO), each as amended."
+    ecommerceInfo: "E-Commerce Act (ECG), Austrian Commercial Code (UGB), Trade Regulation Act (GewO), each as amended.",
+    photoCreditsLabel: "Photography"
   }
 } as const;
 
@@ -219,6 +225,19 @@ const text = content[lang];
       <div class="impressum-section">
         <h2>{text.ecommerceLabel}</h2>
         <p>{text.ecommerceInfo}</p>
+      </div>
+
+      <div class="impressum-section">
+        <h2>{text.photoCreditsLabel}</h2>
+        <ul>
+          {PHOTOGRAPHERS.map(({ name, url }) => (
+            <li>
+              {url ? (
+                <a href={url} target="_blank" rel="noopener noreferrer">{name}</a>
+              ) : name}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </div>
