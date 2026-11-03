@@ -3,7 +3,7 @@ interface Props { lang: 'de' | 'en' }
 const { lang } = Astro.props;
 const de = lang === 'de';
 const base = import.meta.env.BASE_URL;
-// scale enlarges logos whose artwork reads small at the shared 58px height.
+// scale evens out visual weight at the shared logo height: >1 for artwork that reads small, <1 for heavy wordmarks.
 type Partner = { name: string; url: string; file: string; scale?: number };
 // Eight per group so each fills its 4 × 2 grid. Wide wordmarks alternate with compact logos so
 // no two wide ones share a row on mobile (2 columns) or sit side by side on desktop (4 columns). Still missing logo: Rahofer (client).
@@ -11,7 +11,7 @@ const clients: Partner[] = [
   { name: 'PwC', url: 'https://www.pwc.at/de.html', file: 'PwC_Company_Logo.svg.png' },
   { name: 'Terre des Hommes Deutschland e. V.', url: de ? 'https://www.tdh.de/' : 'https://www.tdh.de/en', file: 'TerreDesHommes.png' },
   { name: 'Austria Wirtschaftsservice', url: de ? 'https://www.aws.at/' : 'https://www.aws.at/en/', file: 'austria-wirtschaftsservice.webp' },
-  { name: 'KSV1870', url: 'https://www.ksv.at/', file: 'ksv1870.svg', scale: 1.2 },
+  { name: 'KSV1870', url: 'https://www.ksv.at/', file: 'ksv1870.webp', scale: 0.85 },
   { name: 'Investitionsbank Sachsen-Anhalt', url: 'https://www.ib-sachsen-anhalt.de/', file: 'IB_SA.png', scale: 1.25 },
   { name: 'Mad Nice', url: 'https://madnice.at/', file: 'madnice.webp' },
   { name: 'Spielplatz-Service Ing. Kastenhofer GmbH', url: 'https://www.spielplatzservice.at/', file: 'spielplatz-service.webp' },

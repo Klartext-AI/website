@@ -3,119 +3,161 @@ interface Props {
   lang?: 'de' | 'en';
 }
 
-const { lang = 'de' } = Astro.props;
-const MAP_URL = "https://maps.app.goo.gl/QGynv1LF7EQwVgry7";
-const PHOTOGRAPHERS = [
-  { name: "Leandra Schurz", url: "https://www.leandraschurz.com/" },
-  { name: "Zsolt Csutak" }
-];
+// One entry in a row: plain text, or a link. Arrays render as separate lines inside one entry.
+type Entry = { text: string | string[]; href?: string; external?: boolean };
+type Row = { label: string; entries: Entry[] };
+type Group = { heading: string; rows: Row[] };
 
-const content = {
+const { lang = 'de' } = Astro.props;
+
+const MAP_URL = 'https://maps.app.goo.gl/QGynv1LF7EQwVgry7';
+const WKO_URL = 'https://firmen.wko.at/klartext-ai-flexco/wien/?firmaid=e53c4fce-7663-480b-859b-e0c3caddd822&suchbegriff=klartext%20ai';
+const PHONE = '+43 660 81010 67';
+const EMAIL = 'office@klartext-ai.com';
+
+const phone: Entry = { text: PHONE, href: `tel:${PHONE.replace(/\s/g, '')}` };
+const email: Entry = { text: EMAIL, href: `mailto:${EMAIL}` };
+const photographers: Entry[] = [
+  { text: 'Leandra Schurz', href: 'https://www.leandraschurz.com/', external: true },
+  { text: 'Zsolt Csutak', href: 'https://www.instagram.com/zsolt.csutak/', external: true }
+];
+const t = (...texts: string[]): Entry[] => texts.map((text) => ({ text }));
+
+const content: Record<'de' | 'en', { title: string; groups: Group[] }> = {
   de: {
-    title: "Impressum",
-    companyLabel: "Unternehmensname",
-    companyName: "Klartext AI FlexCo",
-    companyFormLabel: "Rechtsform",
-    companyForm: "FlexCo (FlexKapG)",
-    addressLabel: "Geschäftsadresse",
-    address: {
-      street: "Lerchenfelder Straße 74/2/7",
-      city: "1080 Wien",
-      country: "Österreich"
-    },
-    contactLabel: "Kontaktmöglichkeiten",
-    phoneLabel: "Telefonnummer",
-    phone: "+43 660 81010 67",
-    emailLabel: "E-Mail-Adresse",
-    email: "office@klartext-ai.com",
-    businessPurposeLabel: "Unternehmensgegenstand",
-    businessPurpose: [
-      "Dienstleistungen in der automatischen Datenverarbeitung und Informationstechnik.",
-      "Entwicklung und Betrieb von KI-gestützten Softwarelösungen mit Fokus auf Barrierefreiheit und verständliche Aufbereitung komplexer Informationen (z.B. Finanz- und Rechtsdokumente)."
-    ],
-    ownersLabel: "Gewerberechtliche Geschäftsführung",
-    owners: [
-      "Ruben Helmut Hetfleisch, gewerberechtlicher Geschäftsführer",
-      "Daniel Toth, Geschäftsführer",
-      "Bernhard Landrichter",
-      "Christian Kaindl"
-    ],
-    vatLabel: "UID-Nummer",
-    vatNumber: "ATU81693669",
-    registerLabel: "Firmenbuchnummer",
-    registerNumber: "FN 643915 i",
-    registerCourtLabel: "Firmenbuchgericht",
-    registerCourt: "Handelsgericht Wien",
-    gisaLabel: "GISA-Zahl",
-    gisaNumber: "38048296",
-    glnLabel: "GLN (Global Location Number)",
-    glnNumber: "9110037185289",
-    authorityLabel: "Zuständige Aufsichtsbehörde gem. ECG",
-    authority: "Magistratisches Bezirksamt des VIII. Bezirkes, 1080 Wien",
-    chamberLabel: "Mitgliedschaft bei der Wirtschaftskammer",
-    chamber: "Mitglied der Wirtschaftskammer Wien, Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie",
-    chamberLinkLabel: "WKO-Unternehmensprofil",
-    chamberLink: "https://firmen.wko.at/klartext-ai-flexco/wien/?firmaid=e53c4fce-7663-480b-859b-e0c3caddd822&suchbegriff=klartext%20ai",
-    capitalLabel: "Stammkapital",
-    capitalInfo: "Das eingetragene Stammkapital ergibt sich aus dem Firmenbuch der Klartext AI FlexCo.",
-    ecommerceLabel: "Anwendbare berufsrechtliche Vorschriften",
-    ecommerceInfo: "E-Commerce-Gesetz (ECG), Unternehmensgesetzbuch (UGB), Gewerbeordnung (GewO) in der jeweils geltenden Fassung.",
-    photoCreditsLabel: "Fotos"
+    title: 'Impressum',
+    groups: [
+      {
+        heading: 'Unternehmen',
+        rows: [
+          { label: 'Unternehmensname', entries: t('Klartext AI FlexCo') },
+          { label: 'Rechtsform', entries: t('FlexCo (FlexKapG)') },
+          {
+            label: 'Unternehmensgegenstand',
+            entries: t(
+              'Dienstleistungen in der automatischen Datenverarbeitung und Informationstechnik.',
+              'Entwicklung und Betrieb von KI-gestützten Softwarelösungen mit Fokus auf Barrierefreiheit und verständliche Aufbereitung komplexer Informationen (z.B. Finanz- und Rechtsdokumente).'
+            )
+          },
+          {
+            label: 'Geschäftsführung',
+            entries: t(
+              'Ruben Helmut Hetfleisch, Geschäftsführer und gewerberechtlicher Geschäftsführer',
+              'Daniel Toth, Geschäftsführer'
+            )
+          },
+          { label: 'Gesellschafter', entries: t('Ruben Helmut Hetfleisch', 'Daniel Toth', 'Felix Krause') },
+          { label: 'Stammkapital', entries: t('Das eingetragene Stammkapital ergibt sich aus dem Firmenbuch der Klartext AI FlexCo.') }
+        ]
+      },
+      {
+        heading: 'Kontakt',
+        rows: [
+          {
+            label: 'Geschäftsadresse',
+            entries: [{ text: ['Lerchenfelder Straße 74/2/7', '1080 Wien', 'Österreich'], href: MAP_URL, external: true }]
+          },
+          { label: 'Telefonnummer', entries: [phone] },
+          { label: 'E-Mail-Adresse', entries: [email] }
+        ]
+      },
+      {
+        heading: 'Register und Aufsicht',
+        rows: [
+          { label: 'Firmenbuchnummer', entries: t('FN 643915 i') },
+          { label: 'Firmenbuchgericht', entries: t('Handelsgericht Wien') },
+          { label: 'UID-Nummer', entries: t('ATU81693669') },
+          { label: 'GISA-Zahl', entries: t('38048296') },
+          { label: 'GLN (Global Location Number)', entries: t('9110037185289') },
+          { label: 'Zuständige Aufsichtsbehörde gem. ECG', entries: t('Magistratisches Bezirksamt des VIII. Bezirkes, 1080 Wien') },
+          {
+            label: 'Mitgliedschaft bei der Wirtschaftskammer',
+            entries: [
+              { text: 'Mitglied der Wirtschaftskammer Wien, Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie' },
+              { text: 'WKO-Unternehmensprofil', href: WKO_URL, external: true }
+            ]
+          },
+          {
+            label: 'Anwendbare berufsrechtliche Vorschriften',
+            entries: t('E-Commerce-Gesetz (ECG), Unternehmensgesetzbuch (UGB), Gewerbeordnung (GewO) in der jeweils geltenden Fassung.')
+          }
+        ]
+      },
+      {
+        heading: 'Website',
+        rows: [{ label: 'Fotos', entries: photographers }]
+      }
+    ]
   },
   en: {
-    title: "Imprint",
-    companyLabel: "Company Name",
-    companyName: "Klartext AI FlexCo",
-    companyFormLabel: "Legal Form",
-    companyForm: "FlexCo (Austrian flexible corporation, FlexKapG)",
-    addressLabel: "Business Address",
-    address: {
-      street: "Lerchenfelder Straße 74/2/7",
-      city: "1080 Vienna",
-      country: "Austria"
-    },
-    contactLabel: "Contact Details",
-    phoneLabel: "Phone Number",
-    phone: "+43 660 81010 67",
-    emailLabel: "Email Address",
-    email: "office@klartext-ai.com",
-    businessPurposeLabel: "Business Purpose",
-    businessPurpose: [
-      "Services in automatic data processing and information technology.",
-      "Development and operation of AI-powered software solutions with a focus on accessibility and clear communication of complex information (e.g. financial and legal documents)."
-    ],
-    ownersLabel: "Managing Directors / Trade Representative",
-    owners: [
-      "Ruben Helmut Hetfleisch, managing director and trade representative under trade law",
-      "Daniel Toth, managing director",
-      "Bernhard Landrichter",
-      "Christian Kaindl"
-    ],
-    vatLabel: "VAT ID",
-    vatNumber: "ATU81693669",
-    registerLabel: "Commercial Register Number",
-    registerNumber: "FN 643915 i",
-    registerCourtLabel: "Commercial Register Court",
-    registerCourt: "Commercial Court of Vienna (Handelsgericht Wien)",
-    gisaLabel: "GISA Number",
-    gisaNumber: "38048296",
-    glnLabel: "GLN (Global Location Number)",
-    glnNumber: "9110037185289",
-    authorityLabel: "Supervisory Authority pursuant to the E-Commerce Act",
-    authority: "Magistrate District Office of the 8th District, 1080 Vienna",
-    chamberLabel: "Chamber Membership",
-    chamber: "Member of the Vienna Economic Chamber, Professional Association for Management Consultancy, Accounting and Information Technology",
-    chamberLinkLabel: "WKO company profile",
-    chamberLink: "https://firmen.wko.at/klartext-ai-flexco/wien/?firmaid=e53c4fce-7663-480b-859b-e0c3caddd822&suchbegriff=klartext%20ai",
-    capitalLabel: "Share Capital",
-    capitalInfo: "The registered share capital is as recorded in the commercial register for Klartext AI FlexCo.",
-    ecommerceLabel: "Applicable Professional Regulations",
-    ecommerceInfo: "E-Commerce Act (ECG), Austrian Commercial Code (UGB), Trade Regulation Act (GewO), each as amended.",
-    photoCreditsLabel: "Photography"
+    title: 'Imprint',
+    groups: [
+      {
+        heading: 'Company',
+        rows: [
+          { label: 'Company name', entries: t('Klartext AI FlexCo') },
+          { label: 'Legal form', entries: t('FlexCo (Austrian flexible corporation, FlexKapG)') },
+          {
+            label: 'Business purpose',
+            entries: t(
+              'Services in automatic data processing and information technology.',
+              'Development and operation of AI-powered software solutions with a focus on accessibility and clear communication of complex information (e.g. financial and legal documents).'
+            )
+          },
+          {
+            label: 'Managing directors',
+            entries: t(
+              'Ruben Helmut Hetfleisch, managing director and trade representative under trade law',
+              'Daniel Toth, managing director'
+            )
+          },
+          { label: 'Shareholders', entries: t('Ruben Helmut Hetfleisch', 'Daniel Toth', 'Felix Krause') },
+          { label: 'Share capital', entries: t('The registered share capital is as recorded in the commercial register for Klartext AI FlexCo.') }
+        ]
+      },
+      {
+        heading: 'Contact',
+        rows: [
+          {
+            label: 'Business address',
+            entries: [{ text: ['Lerchenfelder Straße 74/2/7', '1080 Vienna', 'Austria'], href: MAP_URL, external: true }]
+          },
+          { label: 'Phone number', entries: [phone] },
+          { label: 'Email address', entries: [email] }
+        ]
+      },
+      {
+        heading: 'Registration and supervision',
+        rows: [
+          { label: 'Commercial register number', entries: t('FN 643915 i') },
+          { label: 'Commercial register court', entries: t('Commercial Court of Vienna (Handelsgericht Wien)') },
+          { label: 'VAT ID', entries: t('ATU81693669') },
+          { label: 'GISA number', entries: t('38048296') },
+          { label: 'GLN (Global Location Number)', entries: t('9110037185289') },
+          { label: 'Supervisory authority pursuant to the E-Commerce Act', entries: t('Magistrate District Office of the 8th District, 1080 Vienna') },
+          {
+            label: 'Chamber membership',
+            entries: [
+              { text: 'Member of the Vienna Economic Chamber, Professional Association for Management Consultancy, Accounting and Information Technology' },
+              { text: 'WKO company profile', href: WKO_URL, external: true }
+            ]
+          },
+          {
+            label: 'Applicable professional regulations',
+            entries: t('E-Commerce Act (ECG), Austrian Commercial Code (UGB), Trade Regulation Act (GewO), each as amended.')
+          }
+        ]
+      },
+      {
+        heading: 'Website',
+        rows: [{ label: 'Photography', entries: photographers }]
+      }
+    ]
   }
-} as const;
+};
 
 const text = content[lang];
+const lines = (value: string | string[]) => (Array.isArray(value) ? value : [value]);
 ---
 
 <section id="impressum" class="impressum section">
@@ -123,122 +165,36 @@ const text = content[lang];
     <div class="impressum-content fade-in">
       <h1 class="impressum-title">{text.title}</h1>
 
-      <div class="impressum-section">
-        <h2>{text.companyLabel}</h2>
-        <p>{text.companyName}</p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.companyFormLabel}</h2>
-        <p>{text.companyForm}</p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.addressLabel}</h2>
-        <a
-          href={MAP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="impressum-address-link"
-        >
-          <p>
-            {text.address.street}<br>
-            {text.address.city}<br>
-            {text.address.country}
-          </p>
-        </a>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.contactLabel}</h2>
-        <p>
-          {text.phoneLabel}:
-          <a href={`tel:${text.phone.replace(/\s/g, '')}`}>{text.phone}</a><br>
-          {text.emailLabel}:
-          <a href={`mailto:${text.email}`}>{text.email}</a>
-        </p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.businessPurposeLabel}</h2>
-        <ul>
-          {text.businessPurpose.map((item) => (
-            <li>{item}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.ownersLabel}</h2>
-        <ul>
-          {text.owners.map((owner) => (
-            <li>{owner}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.registerLabel}</h2>
-        <p>{text.registerNumber}</p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.registerCourtLabel}</h2>
-        <p>{text.registerCourt}</p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.vatLabel}</h2>
-        <p>{text.vatNumber}</p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.gisaLabel}</h2>
-        <p>{text.gisaNumber}</p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.glnLabel}</h2>
-        <p>{text.glnNumber}</p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.authorityLabel}</h2>
-        <p>{text.authority}</p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.chamberLabel}</h2>
-        <p>{text.chamber}</p>
-        <p>
-          <a href={text.chamberLink} target="_blank" rel="noopener noreferrer">
-            {text.chamberLinkLabel}
-          </a>
-        </p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.capitalLabel}</h2>
-        <p>{text.capitalInfo}</p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.ecommerceLabel}</h2>
-        <p>{text.ecommerceInfo}</p>
-      </div>
-
-      <div class="impressum-section">
-        <h2>{text.photoCreditsLabel}</h2>
-        <ul>
-          {PHOTOGRAPHERS.map(({ name, url }) => (
-            <li>
-              {url ? (
-                <a href={url} target="_blank" rel="noopener noreferrer">{name}</a>
-              ) : name}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {text.groups.map((group) => (
+        <section class="impressum-group" aria-labelledby={`impressum-${group.heading.toLowerCase().replace(/\W+/g, '-')}`}>
+          <h2 id={`impressum-${group.heading.toLowerCase().replace(/\W+/g, '-')}`}>{group.heading}</h2>
+          <dl>
+            {group.rows.map((row) => (
+              <div class="impressum-row">
+                <dt>{row.label}</dt>
+                {row.entries.map((entry) => (
+                  <dd>
+                    {entry.href ? (
+                      <a
+                        href={entry.href}
+                        {...(entry.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      >
+                        {lines(entry.text).map((line, i) => (
+                          <Fragment>{i > 0 && <br />}{line}</Fragment>
+                        ))}
+                      </a>
+                    ) : (
+                      lines(entry.text).map((line, i) => (
+                        <Fragment>{i > 0 && <br />}{line}</Fragment>
+                      ))
+                    )}
+                  </dd>
+                ))}
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))}
     </div>
   </div>
 </section>
@@ -246,108 +202,101 @@ const text = content[lang];
 <style>
   .impressum {
     min-height: 80vh;
-    padding: var(--space-2xl) 0;
+    padding: clamp(40px, 5vw, 72px) 0 clamp(56px, 6vw, 90px);
     background: transparent;
   }
 
   .impressum-content {
-    max-width: 800px;
+    max-width: 880px;
     margin: 0 auto;
-    padding: var(--space-xl);
   }
 
   .impressum-title {
-    font-size: var(--font-size-h1);
-    font-weight: 300;
-    margin-bottom: var(--space-xl);
+    font-size: clamp(38px, 4.4vw, 64px);
+    font-weight: 350;
+    line-height: 1.06;
+    letter-spacing: -.055em;
     color: var(--color-text-dark);
-    text-align: center;
-    letter-spacing: -0.02em;
+    margin: 0 0 clamp(32px, 3.5vw, 48px);
+    padding-bottom: clamp(32px, 3.5vw, 48px);
+    border-bottom: 1px solid var(--color-line);
   }
 
-  .impressum-section {
-    margin-bottom: var(--space-lg);
-    padding-bottom: var(--space-md);
-    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+  .impressum-group + .impressum-group {
+    margin-top: clamp(44px, 5vw, 72px);
   }
 
-  .impressum-section:last-child {
-    border-bottom: none;
-  }
-
-  .impressum-section h2 {
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: var(--color-blue);
-    margin-bottom: var(--space-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.9rem;
-  }
-
-  .impressum-section p {
-    font-size: 1.1rem;
-    line-height: 1.8;
+  .impressum-group h2 {
+    font-size: clamp(25px, 2.2vw, 31px);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -.035em;
     color: var(--color-text-dark);
+    margin: 0 0 14px;
+  }
+
+  .impressum-group dl {
     margin: 0;
   }
 
-  .impressum-section ul {
-    list-style: none;
-    padding: 0;
+  .impressum-row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
+    column-gap: clamp(20px, 3vw, 40px);
+    padding: 18px 0;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .impressum-row dt {
+    grid-column: 1;
+    grid-row: 1 / span 10;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    padding-top: 2px;
+  }
+
+  .impressum-row dd {
+    grid-column: 2;
     margin: 0;
-  }
-
-  .impressum-section li {
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: 18px;
+    line-height: 1.6;
     color: var(--color-text-dark);
-    padding: var(--space-xs) 0;
   }
 
-  .impressum-section a {
-    color: var(--color-blue);
-    text-decoration: none;
-    transition: color 0.3s ease;
+  .impressum-row dd + dd {
+    margin-top: 8px;
   }
 
-  .impressum-address-link {
-    display: inline-block;
-    color: var(--color-text-dark);
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
-
-  .impressum-address-link:hover {
-    color: var(--color-blue);
-    transform: translateX(4px);
-  }
-
-  .impressum-section a:hover {
-    color: var(--color-blue-accent);
+  .impressum-row a {
+    color: inherit;
     text-decoration: underline;
+    text-decoration-color: var(--color-line);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition: color .2s ease-out, text-decoration-color .2s ease-out;
   }
 
-  @media (max-width: 768px) {
-    .impressum {
-      padding: var(--space-xl) 0;
+  .impressum-row a:hover {
+    color: var(--color-blue);
+    text-decoration-color: currentColor;
+  }
+
+  @media (max-width: 640px) {
+    .impressum-row {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 16px 0;
     }
 
-    .impressum-content {
-      padding: var(--space-md);
+    .impressum-row dt {
+      grid-row: auto;
+      padding-top: 0;
+      margin-bottom: 4px;
     }
 
-    .impressum-title {
-      font-size: var(--font-size-h2);
-      margin-bottom: var(--space-lg);
-    }
-
-    .impressum-section h2 {
-      font-size: 0.85rem;
-    }
-
-    .impressum-section p,
-    .impressum-section li {
-      font-size: 1rem;
+    .impressum-row dd {
+      grid-column: 1;
+      font-size: 17px;
     }
   }
 </style>
