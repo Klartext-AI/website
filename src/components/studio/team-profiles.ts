@@ -26,7 +26,7 @@ export const teamProfiles = {
     role: "Geschäftsführer",
     image: `${BASE}team/ruben.jpg`,
     hoverImage: `${BASE}team/ruben-fun.jpeg`,
-    linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
+    linkedin: "https://www.linkedin.com/in/rubenhetfleisch/",
     website: "https://rubenhetfleisch.com",
     websiteIcon: "team/rubenhetfleisch-icon.webp",
     summary: [
@@ -225,7 +225,7 @@ export const teamProfiles = {
     role: "CEO",
     image: `${BASE}team/ruben.jpg`,
     hoverImage: `${BASE}team/ruben-fun.jpeg`,
-    linkedin: "https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/",
+    linkedin: "https://www.linkedin.com/in/rubenhetfleisch/",
     website: "https://rubenhetfleisch.com",
     websiteIcon: "team/rubenhetfleisch-icon.webp",
     summary: [

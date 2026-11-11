@@ -34,7 +34,8 @@ const founders = [
     name: 'Ruben Hetfleisch',
     jobTitle: { en: 'CEO', de: 'Geschäftsführer (CEO)' },
     alumniOf: 'TU Darmstadt',
-    memberOf: { name: 'AI Austria', url: 'https://aiaustria.com/' }
+    memberOf: { name: 'AI Austria', url: 'https://aiaustria.com/' },
+    wikidata: 'https://www.wikidata.org/wiki/Q138454511'
   },
   {
     slug: 'daniel-toth',
@@ -62,7 +63,7 @@ export function founderSchema(lang: Lang): Record<string, unknown>[] {
       'name': founder.name,
       'jobTitle': founder.jobTitle[lang],
       ...(website ? { 'url': website } : {}),
-      'sameAs': [profile.linkedin, ...(website ? [website] : [])],
+      'sameAs': [profile.linkedin, ...(website ? [website] : []), ...(founder.wikidata ? [founder.wikidata] : [])],
       ...(founder.alumniOf ? { 'alumniOf': { '@type': 'CollegeOrUniversity', 'name': founder.alumniOf } } : {}),
       ...(founder.memberOf ? { 'memberOf': { '@type': 'Organization', ...founder.memberOf } } : {}),
       'worksFor': maker
