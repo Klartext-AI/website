@@ -6,7 +6,7 @@ Klartext AI FlexCo was founded in Vienna in 2025 by Ruben Hetfleisch (CEO), Dani
 
 ## Founders
 
-- Ruben Hetfleisch, CEO: engineering degree from TU Darmstadt, AI expertise from Fraunhofer Austria. Board member of AI Austria and founder of Austria's GenAI Community. https://www.linkedin.com/in/ruben-hetfleisch-7372091a8/ · https://rubenhetfleisch.com
+- Ruben Hetfleisch, CEO: engineering degree from TU Darmstadt, AI expertise from Fraunhofer Austria. Board member of AI Austria and founder of Austria's GenAI Community. https://www.linkedin.com/in/rubenhetfleisch/ · https://rubenhetfleisch.com
 - Daniel Toth, COO: Diplom-Ingenieur from TU Wien, 8+ years in research, industry and complex project leadership. https://www.linkedin.com/in/daniel-toth-381b0b214/
 - Felix Krause, CTO: economics, data science and software engineering; builds understandable AI systems. Board member of AI Impact Mission (AIM), a European tech network of AI enthusiasts. https://www.linkedin.com/in/f-krause-ai/ · https://www.f-krause.at/
 
