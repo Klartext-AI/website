@@ -1,7 +1,11 @@
 ---
-interface Props { lang: 'de' | 'en' }
-const { lang } = Astro.props;
+// On the start page the film is a section below the opening: it takes an h2 there (the
+// opening holds the page's h1), leads to the team page instead of the careers page, and
+// carries the home facts (passed in as the slot) instead of the founding line, which they repeat.
+interface Props { lang: 'de' | 'en'; home?: boolean }
+const { lang, home = false } = Astro.props;
 const de = lang === 'de';
+const Heading = home ? 'h2' : 'h1';
 const base = import.meta.env.BASE_URL;
 const film = `${base}film/`;
 const root = `${base}${de ? 'de/' : ''}`;
@@ -18,9 +22,17 @@ const playLabel = de ? 'Film abspielen' : 'Play film';
     <source src={`${film}klartext-studio-film-1080p.mp4`} type="video/mp4" />
   </video>
   <div class="studio-hero-copy">
-    <h1 id="studio-hero-title">{de ? 'Aus Wien.' : 'Built in Vienna.'}<br /><span>{de ? 'Für das, was kommt.' : 'For what’s next.'}</span></h1>
-    <p>{de ? '2025 gegründet. Bootstrapped. Ein Team aus Forschung und Engineering, das KI in die Praxis bringt.' : 'Founded in 2025. Bootstrapped. Researchers and engineers building AI that holds up.'}</p>
-    <a href={`${root}karriere/`}>{de ? 'Teil des Teams werden' : 'Join our team'} <span aria-hidden="true">↗</span></a>
+    <Heading id="studio-hero-title">{de ? 'Aus Wien.' : 'Built in Vienna.'}<br /><span>{de ? 'Für das, was kommt.' : 'For what’s next.'}</span></Heading>
+    {home
+      ? <>
+          <p>{de ? 'Ein Team aus Forschung und Engineering, das KI in die Praxis bringt.' : 'Researchers and engineers building AI that holds up.'}</p>
+          <a href={`${root}team/`}>{de ? 'Lern das Team kennen' : 'Meet the team'} <span aria-hidden="true">↗</span></a>
+          <slot />
+        </>
+      : <>
+          <p>{de ? '2025 gegründet. Bootstrapped. Ein Team aus Forschung und Engineering, das KI in die Praxis bringt.' : 'Founded in 2025. Bootstrapped. Researchers and engineers building AI that holds up.'}</p>
+          <a href={`${root}karriere/`}>{de ? 'Teil des Teams werden' : 'Join our team'} <span aria-hidden="true">↗</span></a>
+        </>}
   </div>
   <button class="studio-hero-toggle" type="button" data-pause={pauseLabel} data-play={playLabel} aria-label={playLabel}>
     <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path class="icon-play" d="M3 1.5v11l9-5.5z" fill="currentColor"/><path class="icon-pause" d="M3 1.5h3v11H3zM8 1.5h3v11H8z" fill="currentColor"/></svg>
@@ -53,8 +65,8 @@ const playLabel = de ? 'Film abspielen' : 'Play film';
       linear-gradient(to right, color-mix(in srgb, var(--color-text-dark) 50%, transparent), transparent 60%);
   }
   .studio-hero-copy { width: 100%; max-width: var(--studio-width); margin-inline: auto; padding: 0 var(--studio-gutter) clamp(40px, 7svh, 76px); color: var(--color-paper); }
-  .studio-hero-copy h1 { color: inherit; }
-  .studio-hero-copy h1 span { color: #a9d4f5; }
+  .studio-hero-copy :is(h1, h2) { color: inherit; }
+  .studio-hero-copy :is(h1, h2) span { color: #a9d4f5; }
   .studio-hero-copy p { max-width: 560px; margin-top: clamp(18px, 2vw, 28px); font-size: clamp(17px, 1.3vw, 22px); line-height: 1.5; color: inherit; }
   .studio-hero-copy a { display: inline-flex; align-items: center; gap: 28px; min-height: 48px; margin-top: 14px; font-size: 17px; font-weight: 500; color: inherit; border-bottom: 1px solid color-mix(in srgb, var(--color-paper) 55%, transparent); }
   .studio-hero-copy a:hover { color: #a9d4f5; }

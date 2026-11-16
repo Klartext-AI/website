@@ -33,17 +33,19 @@ const structuredData = page === 'ventures' ? [productSchema('doclarity'), produc
   <main id="main-content" class="studio-site" data-page={page} tabindex="-1">
     {page === 'home' ? <>
       <Opening lang={lang}/>
-      <section class="studio-section home-facts" id="what-we-build" aria-label={de ? 'Klartext in Zahlen' : 'Klartext in numbers'}>
-        <dl class="studio-stats">
-          <div><dt>{de ? 'Gegründet' : 'Founded'}</dt><dd>2025</dd></div>
-          <div><dt>{de ? 'Ohne externes Kapital' : 'No external capital'}</dt><dd class="fact-word">Bootstrapped</dd></div>
-          <div><dt>{de ? 'Expert:innen' : 'Experts'}</dt><dd data-count="10">10+</dd></div>
-          <div><dt>{de ? 'Kunden' : 'Clients'}</dt><dd data-count="20">20+</dd></div>
-          <div><dt>Ventures</dt><dd data-count="3">3+</dd></div>
-        </dl>
-      </section>
+      <StudioHero lang={lang} home>
+        <div class="home-facts" id="what-we-build" role="group" aria-label={de ? 'Klartext in Zahlen' : 'Klartext in numbers'}>
+          <dl class="studio-stats">
+            <div><dt>{de ? 'Gegründet' : 'Founded'}</dt><dd>2025</dd></div>
+            <div><dt>{de ? 'Ohne externes Kapital' : 'No external capital'}</dt><dd class="fact-word">Bootstrapped</dd></div>
+            <div><dt>{de ? 'Expert:innen' : 'Experts'}</dt><dd data-count="10">10+</dd></div>
+            <div><dt>{de ? 'Kunden' : 'Clients'}</dt><dd data-count="20">20+</dd></div>
+            <div><dt>Ventures</dt><dd data-count="3">3+</dd></div>
+          </dl>
+        </div>
+      </StudioHero>
       <section class="studio-section home-relationships conviction">
-        <h2>{de ? 'Gemeinsam bringen wir' : 'Together, we put'}<br /><span class="blue">{de ? 'KI in die Praxis.' : 'AI into practice.'}</span></h2>
+        <h2>{de ? 'Uns vertrauen' : 'Trusted by'}<br /><span class="blue">{de ? 'führende Unternehmen.' : 'leading companies.'}</span></h2>
         <Partners lang={lang}/>
       </section>
       <Assurance lang={lang}/><Pillars lang={lang}/><Ventures lang={lang}/>

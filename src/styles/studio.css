@@ -367,6 +367,23 @@ div.portrait { cursor: default; }
 .studio-stats .fact-count-layer { font: inherit; letter-spacing: inherit; max-width: none; white-space: pre; text-box: inherit; }
 .studio-stats .fact-count-ticker { font-variant-numeric: tabular-nums; }
 .studio-stats { font-variant-numeric: tabular-nums; }
+/* Start page: the facts sit on the studio film, light type on the dark rise at its bottom
+   edge, under a single hairline. They fade and count in like before (see StudioPage). */
+.studio-hero-film .home-facts { margin-top: clamp(30px, 5svh, 56px); }
+.studio-hero-film .home-facts .studio-stats { padding-block: clamp(24px, 3.5svh, 40px) 0; border-bottom: 0; border-top-color: color-mix(in srgb, var(--color-paper) 32%, transparent); }
+.studio-hero-film .home-facts dt { color: color-mix(in srgb, var(--color-paper) 78%, transparent); }
+.studio-hero-film .home-facts dd { color: #a9d4f5; }
+/* With the facts the copy stands taller, so the dark rise reaches further up the film. */
+.studio-hero-film:has(.home-facts)::after {
+  background:
+    linear-gradient(to top, color-mix(in srgb, var(--color-text-dark) 88%, transparent), color-mix(in srgb, var(--color-text-dark) 45%, transparent) 55%, transparent 82%),
+    linear-gradient(to right, color-mix(in srgb, var(--color-text-dark) 50%, transparent), transparent 60%);
+}
+@media (max-width: 600px) {
+  .studio-hero-film .home-facts .studio-stats { gap: 16px; }
+  .studio-hero-film .home-facts dd { font-size: 30px; }
+  .studio-hero-film .home-facts .fact-word { font-size: 22px; }
+}
 .home-relationships .relationship-groups { margin-top: clamp(85px, 8vw, 120px); }
 .relationship-groups { display: grid; gap: 40px; }
 .relationship-groups .partners { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 40px; margin: 0; padding: 0; border: 0; align-items: center; }
