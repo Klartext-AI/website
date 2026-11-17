@@ -4,18 +4,26 @@ interface Props { lang: 'de' | 'en' }
 const { lang } = Astro.props;
 const de = lang === 'de';
 const founders = ['Daniel Toth', 'Ruben Hetfleisch', 'Felix Krause'].map(name => teamProfiles[lang].find(person => person.name === name)!);
+// Facts are HTML so institutions can link out; keep them to one or two lines each, the caption space below the photo is fixed.
+const link = (href: string, text: string) => `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+const fraunhofer = link('https://www.fraunhofer.at/', 'Fraunhofer Austria');
+const tuWien = link('https://www.tuwien.at/', 'TU Wien');
+const tuDarmstadt = link('https://www.tu-darmstadt.de/', 'TU Darmstadt');
+const aiAustria = link('https://aiaustria.com/', 'AI Austria');
+const eaif = link('https://eaiforum.org/', 'European AI Forum');
+const aim = link('https://ai-mission.eu/', 'AI Impact Mission');
 const facts: Record<string, Record<'de' | 'en', string[]>> = {
   'Daniel Toth': {
-    de: ['Ex-TU Wien', '8 Jahre Führungserfahrung am Forschungsinstitut Fraunhofer Austria'],
-    en: ['Ex-TU Wien', '8 years of leadership experience at the research institute Fraunhofer Austria'],
+    de: [`8 Jahre KI-Projektleitung bei ${fraunhofer}`, 'Vom Prototyp bis zum Industrieeinsatz, in internationalen Konsortien', `Studium an der ${tuWien}`],
+    en: [`8 years leading AI projects at ${fraunhofer}`, 'From prototype to industrial rollout, in international consortia', `Studied at ${tuWien}`],
   },
   'Ruben Hetfleisch': {
-    de: ['Ex-TU Darmstadt', 'Hat die GenAI-Forschung bei Fraunhofer Austria aufgebaut', 'Vorstand AI Austria', 'Österreichs Vertreter im European AI Forum'],
-    en: ['Ex-TU Darmstadt', 'Built GenAI research at Fraunhofer Austria', 'Board member, AI Austria', 'Austrian representative, European AI Forum'],
+    de: [`Hat die GenAI-Forschung bei ${fraunhofer} aufgebaut`, `Vorstand bei ${aiAustria}, Gründer der GenAI Community`, `Vertritt Österreich im ${eaif}`, `Ingenieursstudium an der ${tuDarmstadt}`],
+    en: [`Built up GenAI research at ${fraunhofer}`, `Board member of ${aiAustria}, founder of its GenAI Community`, `Represents Austria in the ${eaif}`, `Engineering degree from ${tuDarmstadt}`],
   },
   'Felix Krause': {
-    de: ['Erfahrung beim führenden KI-Beratungsunternehmen TIMETOACT', 'Vorstand AI Impact Mission, europäisches KI-Netzwerk mit 600+ Mitgliedern', 'Hackathons mit 800+ Teilnehmenden aufgebaut'],
-    en: ['Experience at leading AI consultancy TIMETOACT', 'Board member, AI Impact Mission, a 600+ strong European AI network', 'Built hackathons with 800+ participants'],
+    de: [`Data Science an der ${link('https://www.univie.ac.at/', 'Universität Wien')}, Hintergrund in Volkswirtschaft`, `Vorstand bei ${aim}, europäisches KI-Netzwerk mit 600+ Mitgliedern`, 'Mitorganisator der AIM-Hackathons, bisher 800+ Teilnehmende'],
+    en: [`Data science at the ${link('https://www.univie.ac.at/en/', 'University of Vienna')}, background in economics`, `Board member of ${aim}, a European AI network with 600+ members`, 'Co-organises the AIM hackathons, 800+ participants so far'],
   },
 };
 ---
@@ -34,7 +42,7 @@ const facts: Record<string, Record<'de' | 'en', string[]>> = {
         <span class="founder-arrow" aria-hidden="true">↗</span>
       </summary>
       <div class="founder-caption" id={`founder-${lang}-${index}`}>
-        <ul>{facts[person.name][lang].map(fact => <li>{fact}</li>)}</ul>
+        <ul>{facts[person.name][lang].map(fact => <li set:html={fact} />)}</ul>
         <div class="founder-links">
           <a href={person.linkedin!} target="_blank" rel="noopener noreferrer" aria-label={`${person.name} ${de ? 'auf LinkedIn (neuer Tab)' : 'on LinkedIn (new tab)'}`}>LinkedIn <span aria-hidden="true">↗</span></a>
           {person.website && <a href={person.website} target="_blank" rel="noopener noreferrer" aria-label={`${person.name}: ${de ? 'persönliche Website (neuer Tab)' : 'personal website (new tab)'}`}>Website <span aria-hidden="true">↗</span></a>}
@@ -74,10 +82,13 @@ const facts: Record<string, Record<'de' | 'en', string[]>> = {
   .founder-caption li { color: var(--color-text-muted); font-size: 14px; line-height: 1.65; text-wrap: pretty; }
   .founder-caption li + li { margin-top: 3px; }
   .founder-links { display: flex; flex-direction: column; align-items: flex-end; margin-top: -8px; }
-  .founder-caption a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--color-blue); font-size: 14px; white-space: nowrap; }
-  .founder-caption a span { transition: transform 180ms ease-out; }
-  .founder-caption a:hover span { transform: translate(2px, -2px); }
-  .founder-caption a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  /* Institution links stay in the text colour; only a faint underline hints that they go somewhere. */
+  .founder-caption li a { color: inherit; text-decoration: underline; text-decoration-color: var(--color-line); text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color 180ms ease-out, text-decoration-color 180ms ease-out; }
+  .founder-caption li a:hover { color: var(--color-blue); text-decoration-color: currentColor; }
+  .founder-links a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--color-blue); font-size: 14px; white-space: nowrap; }
+  .founder-links a span { transition: transform 180ms ease-out; }
+  .founder-links a:hover span { transform: translate(2px, -2px); }
+  .founder-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
   .founder summary:focus-visible, .founder-caption a:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 4px; border-radius: 2px; }
   @keyframes founder-reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
   @media (max-width: 480px) {
@@ -90,7 +101,7 @@ const facts: Record<string, Record<'de' | 'en', string[]>> = {
   }
   @media (prefers-reduced-motion: reduce) {
     .founder-caption { animation: none; }
-    .founder-track, .founder-arrow, .founder-caption a span, .founder-image-target span { transition: none; }
+    .founder-track, .founder-arrow, .founder-caption a, .founder-links a span, .founder-image-target span { transition: none; }
   }
 </style>
 
@@ -120,7 +131,7 @@ const facts: Record<string, Record<'de' | 'en', string[]>> = {
       const follow = pointerType === 'mouse' || (selected === founder && founder.open);
       selected = founder;
       show(founder);
-      if (follow) founder.querySelector<HTMLAnchorElement>('.founder-caption a')!.click();
+      if (follow) founder.querySelector<HTMLAnchorElement>('.founder-links a')!.click();
     };
     founders.forEach((founder, index) => {
       const summary = founder.querySelector('summary')!;
