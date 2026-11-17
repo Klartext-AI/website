@@ -4,9 +4,9 @@ const { lang = 'de' } = Astro.props;
 const de = lang === 'de';
 const root = `${import.meta.env.BASE_URL}${de ? 'de/' : ''}`;
 const pillars = [
-  { name: 'Research', description: de ? 'Forschung für verlässliche KI.' : 'Research for reliable AI.', href: `${root}research/` },
-  { name: 'Solutions', description: de ? 'Deine Prozesse. Unsere KI-Lösungen.' : 'Your workflows. Our AI solutions.', href: `${root}${de ? 'leistungen' : 'services'}/` },
-  { name: 'Ventures', description: de ? 'Eigene Ideen. Eigene Unternehmen.' : 'Our ideas. Our companies.', href: `${root}ventures/` },
+  { name: 'Research', description: de ? 'Angewandte KI-Forschung.' : 'Applied AI Research.', href: `${root}research/` },
+  { name: 'Solutions', description: de ? 'Maßgeschneiderte KI-Lösungen für dein Unternehmen.' : 'Tailored AI Solutions for your company.', href: `${root}${de ? 'leistungen' : 'services'}/` },
+  { name: 'Ventures', description: de ? 'Unsere eigenen Startups.' : 'Our own startups.', href: `${root}ventures/` },
 ];
 ---
 
