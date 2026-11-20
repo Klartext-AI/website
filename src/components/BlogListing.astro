@@ -244,9 +244,9 @@ const text = content[lang];
           <h2 class="post-title">{post.title}</h2>
           <p class="post-excerpt">{post.excerpt}</p>
 
-          <a href={lang === 'en' ? `${BASE}blog/${post.id}` : `${BASE}de/blog/${post.id}`} class="post-link">
+          <a href={lang === 'en' ? `${BASE}blog/${post.id}` : `${BASE}de/blog/${post.id}`} class="post-link" aria-label={`${text.readMore}: ${post.title}`}>
             {text.readMore}
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M6 12l4-4-4-4"/>
             </svg>
           </a>
@@ -266,7 +266,7 @@ const text = content[lang];
   .blog-header {
     margin-bottom: var(--space-2xl);
     padding-bottom: var(--space-xl);
-    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+    border-bottom: 1px solid var(--color-line-blue);
   }
 
   .blog-page-title {
@@ -300,14 +300,14 @@ const text = content[lang];
     padding: var(--space-md);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     height: 100%;
-    background: rgba(255, 255, 255, 0.55) !important;
+    background: var(--glass-bg-strong) !important;
     backdrop-filter: blur(20px) saturate(160%);
   }
 
   .blog-post-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
-    background: rgba(255, 255, 255, 0.75) !important;
+    box-shadow: var(--shadow-lg);
+    background: var(--glass-bg-solid) !important;
   }
 
   .post-meta {
@@ -325,7 +325,7 @@ const text = content[lang];
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 0.2rem 0.6rem;
-    background: rgba(36, 121, 190, 0.1);
+    background: var(--color-blue-tint);
     border-radius: 4px;
     font-size: 0.75rem;
   }

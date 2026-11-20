@@ -189,10 +189,44 @@ const text = content[lang];
 )}
 
 <style>
+  /* The illustration's palette, named once: every rule below reads from it. It is artwork
+     (aria-hidden), so like a photo it keeps these colours under the contrast schemes. */
   .dl-anim {
     --dl-blue: #2479BE;
+    --dl-blue-light: #4C8AC5;
+    --dl-blue-wash: #EAF3FB;
+    --dl-blue-wash-deep: #DCEBF7;
     --dl-green: #2E9E6B;
+    --dl-green-deep: #1F7A52;
+    --dl-green-wash: #EAF7F0;
+    --dl-paper: #fff;
+    --dl-panel: #F7FAFC;
+    --dl-on-fill: #fff;
+    --dl-ink: #16334A;
+    --dl-muted: #647888;
+    /* Placeholder text lines on the mock page, lightest to darkest */
+    --dl-skeleton-soft: #E9EEF2;
+    --dl-skeleton: #E2E8EE;
+    --dl-skeleton-table: #dde7ef;
+    --dl-skeleton-strong: #D7DEE5;
+    --dl-skeleton-mid: #cdd8e1;
+    --dl-skeleton-ink: #C2CDD7;
+    /* The screen-reader panel */
+    --dl-night: #0E2638;
+    --dl-night-ink: #E8F2FB;
+    --dl-night-ink-soft: #CFE4F4;
+    --dl-night-muted: #6E96B3;
+    --dl-sky: #4FA3E3;
+    --dl-card-shadow: 0 32px 72px rgba(20, 50, 80, 0.24);
     width: 100%;
+  }
+
+  /* Under a contrast scheme the page behind the scenes changes colour while the artwork keeps
+     its own, which would strand its grey captions on navy or yellow. Like the logos, the
+     artwork gets its own white plate. */
+  :global(html[data-contrast]) .dl-anim {
+    border-radius: 16px;
+    background: var(--dl-paper);
   }
 
   /* ===================== TRANSFORM ===================== */
@@ -218,7 +252,7 @@ const text = content[lang];
     width: 340px;
     height: 340px;
     border-radius: 50%;
-    background: radial-gradient(circle, #2479BE, transparent 68%);
+    background: radial-gradient(circle, var(--dl-blue), transparent 68%);
     filter: blur(24px);
     animation: dl-glow-pulse 6s ease-in-out infinite;
     pointer-events: none;
@@ -236,11 +270,11 @@ const text = content[lang];
     position: relative;
     width: 100%;
     aspect-ratio: 340 / 420;
-    background: #fff;
+    background: var(--dl-paper);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 32px 72px rgba(20, 50, 80, 0.24);
-    border: 1px solid rgba(36, 121, 190, 0.1);
+    box-shadow: var(--dl-card-shadow);
+    border: 1px solid color-mix(in srgb, var(--dl-blue) 10%, transparent);
   }
 
   .tr-scan {
@@ -251,8 +285,8 @@ const text = content[lang];
     height: 48px;
     z-index: 6;
     pointer-events: none;
-    background: linear-gradient(180deg, transparent, rgba(36, 121, 190, 0.22) 45%, rgba(36, 121, 190, 0.45) 50%, rgba(36, 121, 190, 0.22) 55%, transparent);
-    box-shadow: 0 0 20px rgba(36, 121, 190, 0.35);
+    background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--dl-blue) 22%, transparent) 45%, color-mix(in srgb, var(--dl-blue) 45%, transparent) 50%, color-mix(in srgb, var(--dl-blue) 22%, transparent) 55%, transparent);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--dl-blue) 35%, transparent);
     animation: dl-scan 9s linear infinite;
   }
 
@@ -269,26 +303,26 @@ const text = content[lang];
   .tr-rh {
     height: 18px;
     width: 62%;
-    background: #D7DEE5;
+    background: var(--dl-skeleton-strong);
     border-radius: 4px;
     flex-shrink: 0;
   }
 
   .tr-rl {
     height: 8px;
-    background: #E2E8EE;
+    background: var(--dl-skeleton);
     border-radius: 3px;
     flex-shrink: 0;
   }
 
   .tr-img-raw {
     height: 80px;
-    background: #E2E8EE;
+    background: var(--dl-skeleton);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #C2CDD7;
+    color: var(--dl-skeleton-ink);
     font-size: 26px;
     flex-shrink: 0;
   }
@@ -302,13 +336,13 @@ const text = content[lang];
 
   .tr-tbl-raw span {
     height: 15px;
-    background: #E2E8EE;
+    background: var(--dl-skeleton);
     border-radius: 3px;
     display: block;
   }
 
   .tr-tbl-raw span.tr-tbl-alt {
-    background: #E9EEF2;
+    background: var(--dl-skeleton-soft);
   }
 
   .tr-struct {
@@ -325,8 +359,8 @@ const text = content[lang];
     display: inline-block;
     font-size: 9px;
     font-weight: 700;
-    color: #2479BE;
-    background: #EAF3FB;
+    color: var(--dl-blue);
+    background: var(--dl-blue-wash);
     padding: 2px 6px;
     border-radius: 4px;
     margin-bottom: 5px;
@@ -344,8 +378,8 @@ const text = content[lang];
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: #2479BE;
-    color: #fff;
+    background: var(--dl-blue);
+    color: var(--dl-on-fill);
     font-size: 12px;
     font-weight: 700;
     display: flex;
@@ -357,7 +391,7 @@ const text = content[lang];
   .tr-h1 {
     font-size: 16px;
     font-weight: 700;
-    color: #16334A;
+    color: var(--dl-ink);
     line-height: 1.2;
   }
 
@@ -369,7 +403,7 @@ const text = content[lang];
 
   .tr-slines span {
     height: 7px;
-    background: #cdd8e1;
+    background: var(--dl-skeleton-mid);
     border-radius: 3px;
     display: block;
   }
@@ -377,13 +411,13 @@ const text = content[lang];
   .tr-simg {
     position: relative;
     height: 72px;
-    background: linear-gradient(135deg, #EAF3FB, #DCEBF7);
+    background: linear-gradient(135deg, var(--dl-blue-wash), var(--dl-blue-wash-deep));
     border-radius: 8px;
-    border: 1px solid rgba(36, 121, 190, 0.18);
+    border: 1px solid color-mix(in srgb, var(--dl-blue) 18%, transparent);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #2479BE;
+    color: var(--dl-blue);
     font-size: 22px;
   }
 
@@ -393,8 +427,8 @@ const text = content[lang];
     left: 6px;
     font-size: 9px;
     font-weight: 700;
-    color: #fff;
-    background: #2E9E6B;
+    color: var(--dl-on-fill);
+    background: var(--dl-green);
     padding: 2px 7px;
     border-radius: 4px;
   }
@@ -412,8 +446,8 @@ const text = content[lang];
     display: block;
   }
 
-  .tr-stbl-h { background: rgba(36, 121, 190, 0.8); }
-  .tr-stbl-d { background: #dde7ef; }
+  .tr-stbl-h { background: color-mix(in srgb, var(--dl-blue) 80%, transparent); }
+  .tr-stbl-d { background: var(--dl-skeleton-table); }
 
   .tr-badge {
     position: absolute;
@@ -423,11 +457,11 @@ const text = content[lang];
     display: flex;
     align-items: center;
     gap: 8px;
-    background: #2E9E6B;
-    color: #fff;
+    background: var(--dl-green);
+    color: var(--dl-on-fill);
     padding: 10px 14px;
     border-radius: 12px;
-    box-shadow: 0 10px 24px rgba(46, 158, 107, 0.4);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--dl-green) 40%, transparent);
     animation: dl-badge-pop 9s infinite;
   }
 
@@ -453,7 +487,7 @@ const text = content[lang];
   .reader-card {
     display: flex;
     gap: 1rem;
-    background: #0E2638;
+    background: var(--dl-night);
     border-radius: 14px;
     padding: 1.25rem;
     align-items: stretch;
@@ -467,8 +501,8 @@ const text = content[lang];
 
   .reader-doc-inner {
     position: relative;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: color-mix(in srgb, var(--dl-on-fill) 5%, transparent);
+    border: 1px solid color-mix(in srgb, var(--dl-on-fill) 9%, transparent);
     border-radius: 10px;
     padding: 16px;
     height: 100%;
@@ -481,7 +515,7 @@ const text = content[lang];
   .reader-doc-title {
     font-size: 1rem;
     font-weight: 700;
-    color: #E8F2FB;
+    color: var(--dl-night-ink);
     line-height: 1.2;
     flex-shrink: 0;
   }
@@ -490,7 +524,7 @@ const text = content[lang];
     display: block;
     width: 100%;
     height: 9px;
-    background: rgba(255, 255, 255, 0.2);
+    background: color-mix(in srgb, var(--dl-on-fill) 20%, transparent);
     border-radius: 5px;
     flex-shrink: 0;
   }
@@ -503,8 +537,8 @@ const text = content[lang];
     display: block;
     flex-shrink: 0;
     height: 48px;
-    background: rgba(79, 163, 227, 0.28);
-    border: 1px solid rgba(79, 163, 227, 0.28);
+    background: color-mix(in srgb, var(--dl-sky) 28%, transparent);
+    border: 1px solid color-mix(in srgb, var(--dl-sky) 28%, transparent);
     border-radius: 8px;
   }
 
@@ -518,7 +552,7 @@ const text = content[lang];
   .reader-table span {
     display: block;
     height: 14px;
-    background: rgba(79, 163, 227, 0.45);
+    background: color-mix(in srgb, var(--dl-sky) 45%, transparent);
     border-radius: 3px;
   }
 
@@ -527,10 +561,10 @@ const text = content[lang];
     left: 10px;
     right: 10px;
     height: 18%;
-    border: 2px solid #4FA3E3;
+    border: 2px solid var(--dl-sky);
     border-radius: 8px;
-    background: rgba(79, 163, 227, 0.12);
-    box-shadow: 0 0 16px rgba(79, 163, 227, 0.4);
+    background: color-mix(in srgb, var(--dl-sky) 12%, transparent);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--dl-sky) 40%, transparent);
     animation: dl-sr-ring 9s ease-in-out infinite;
   }
 
@@ -540,7 +574,7 @@ const text = content[lang];
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    color: #fff;
+    color: var(--dl-on-fill);
     min-width: 0;
   }
 
@@ -554,7 +588,7 @@ const text = content[lang];
   .reader-eq span {
     width: 4px;
     height: 20px;
-    background: #4FA3E3;
+    background: var(--dl-sky);
     border-radius: 2px;
     transform-origin: center;
     animation: dl-eq 0.9s ease-in-out infinite;
@@ -588,7 +622,7 @@ const text = content[lang];
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: #6E96B3;
+    color: var(--dl-night-muted);
     margin-bottom: 0.3rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -600,7 +634,7 @@ const text = content[lang];
     font-size: 0.88rem;
     font-weight: 600;
     line-height: 1.4;
-    color: #CFE4F4;
+    color: var(--dl-night-ink-soft);
     overflow-wrap: break-word;
     word-break: break-word;
   }
@@ -613,7 +647,7 @@ const text = content[lang];
   .pipeline-track {
     position: relative;
     height: 8px;
-    background: #E3E9EF;
+    background: var(--dl-skeleton);
     border-radius: 5px;
     margin: 0 8px 1.5rem;
   }
@@ -624,7 +658,7 @@ const text = content[lang];
     left: 0;
     height: 100%;
     border-radius: inherit;
-    background: linear-gradient(90deg, #4C8AC5, var(--dl-blue));
+    background: linear-gradient(90deg, var(--dl-blue-light), var(--dl-blue));
     transform-origin: left center;
     animation: dl-pipe-fill 9s linear infinite;
   }
@@ -650,7 +684,7 @@ const text = content[lang];
     height: 32px;
     border-radius: 50%;
     background: var(--dl-green);
-    color: #fff;
+    color: var(--dl-on-fill);
     font-size: 1rem;
     opacity: 0;
     transform: scale(0.5);
@@ -660,7 +694,7 @@ const text = content[lang];
   .pipeline-step small {
     font-size: 0.7rem;
     font-weight: 600;
-    color: #647888;
+    color: var(--dl-muted);
     text-align: center;
     line-height: 1.25;
   }
@@ -680,8 +714,8 @@ const text = content[lang];
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: #EAF7F0;
-    color: #1F7A52;
+    background: var(--dl-green-wash);
+    color: var(--dl-green-deep);
     font-size: 0.95rem;
     font-weight: 700;
     padding: 0.6rem 1.1rem;
@@ -710,10 +744,10 @@ const text = content[lang];
     align-items: center;
     gap: 0.9rem;
     background: var(--dl-green);
-    color: #fff;
+    color: var(--dl-on-fill);
     padding: 0.9rem 1.4rem;
     border-radius: 14px;
-    box-shadow: 0 14px 30px rgba(46, 158, 107, 0.3);
+    box-shadow: 0 14px 30px color-mix(in srgb, var(--dl-green) 30%, transparent);
   }
 
   .validation-check {
@@ -735,20 +769,20 @@ const text = content[lang];
   .validation-standards {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #647888;
+    color: var(--dl-muted);
   }
 
   .validation-report {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    background: #F7FAFC;
-    border: 1px solid rgba(36, 121, 190, 0.12);
+    background: var(--dl-panel);
+    border: 1px solid color-mix(in srgb, var(--dl-blue) 12%, transparent);
     border-radius: 10px;
     padding: 0.6rem 1.1rem;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #16334A;
+    color: var(--dl-ink);
   }
 
   /* ===================== KEYFRAMES ===================== */

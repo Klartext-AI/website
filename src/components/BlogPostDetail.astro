@@ -14,13 +14,13 @@ const { title, excerpt, fullExcerpt, fullContent, category, readTime, date, lang
 
 const labels = {
   de: {
-    backToBlog: "← Zurück zum Blog",
+    backToBlog: "Zurück zum Blog",
     category: "Kategorie",
     readTime: "Lesezeit",
     published: "Veröffentlicht"
   },
   en: {
-    backToBlog: "← Back to Blog",
+    backToBlog: "Back to Blog",
     category: "Category",
     readTime: "Read time",
     published: "Published"
@@ -28,6 +28,24 @@ const labels = {
 };
 
 const text = labels[lang];
+
+// The posts' HTML starts its sections at h3 or h4 (written for an older layout), which leaves a
+// gap under the page's h1 for anyone moving by headings. Re-rank them so the top level is h2 and
+// no level is skipped. data-size keeps the size each heading was written with, so the look stays.
+const rankHeadings = (html: string) => {
+  const levels = [...html.matchAll(/<h([1-6])\b/gi)].map((match) => Number(match[1]));
+  if (!levels.length) return html;
+  const shift = Math.min(...levels) - 2;
+  let previous = 1;
+  let open = 2;
+  return html.replace(/<(\/?)h([1-6])\b/gi, (_, closing: string, level: string) => {
+    if (closing) return `</h${open}`;
+    open = Math.max(2, Math.min(Number(level) - shift, previous + 1));
+    previous = open;
+    return `<h${open} data-size="${level}"`;
+  });
+};
+const content = rankHeadings(fullContent);
 const BASE = import.meta.env.BASE_URL;
 const SITE = Astro.site?.toString() ?? 'https://klartext-ai.github.io';
 const canonicalHref = Astro.url?.href ?? new URL(BASE, SITE).toString();
@@ -37,7 +55,7 @@ const canonicalHref = Astro.url?.href ?? new URL(BASE, SITE).toString();
   <div class="container">
     <article class="post-content fade-in">
       <a href={lang === 'en' ? `${BASE}blog` : `${BASE}de/blog`} class="back-link">
-        {text.backToBlog}
+        <span aria-hidden="true">←&nbsp;</span>{text.backToBlog}
       </a>
 
       <header class="post-header">
@@ -55,7 +73,7 @@ const canonicalHref = Astro.url?.href ?? new URL(BASE, SITE).toString();
         <p class="lead-text" set:html={fullExcerpt}></p>
         </div>
 
-        <div class="post-main-content" set:html={fullContent} />
+        <div class="post-main-content" set:html={content} />
       </div>
     </article>
   </div>
@@ -194,15 +212,15 @@ const canonicalHref = Astro.url?.href ?? new URL(BASE, SITE).toString();
     text-wrap: balance;
   }
 
-  .post-main-content :global(h2) {
+  .post-main-content :global([data-size="2"]) {
     font-size: clamp(28px, 2.5vw, 36px);
   }
 
-  .post-main-content :global(h3) {
+  .post-main-content :global([data-size="3"]) {
     font-size: clamp(25px, 2.2vw, 31px);
   }
 
-  .post-main-content :global(h4) {
+  .post-main-content :global([data-size="4"]) {
     font-size: clamp(23px, 1.9vw, 27px);
   }
 
@@ -261,7 +279,7 @@ const canonicalHref = Astro.url?.href ?? new URL(BASE, SITE).toString();
   }
 
   .post-main-content :global(code) {
-    background: rgba(36, 121, 190, 0.1);
+    background: var(--color-blue-tint);
     padding: 0.2em 0.4em;
     border-radius: 3px;
     font-size: 0.9em;

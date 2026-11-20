@@ -26,14 +26,14 @@
 .chat-statement { width: min(800px, 100%); position: relative; padding: 45px 65px 60px; border: 1px solid var(--glass-border); border-radius: 28px; background: var(--glass-bg); box-shadow: var(--glass-shadow); text-align: left; }
 .chat-statement h1 { font-size: clamp(50px, 5.5vw, 92px); }
 .chat-dot { display: block; width: 7px; height: 7px; background: var(--color-blue); border-radius: 50%; margin-bottom: 22px; }
-.chat-send { position: absolute; right: 28px; bottom: 24px; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--color-blue); color: var(--color-paper); font-size: 24px; }
-.chat-send:hover { color: var(--color-paper); transform: translateY(3px); }
+.chat-send { position: absolute; right: 28px; bottom: 24px; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--color-blue); color: var(--color-on-fill); font-size: 24px; }
+.chat-send:hover { color: var(--color-on-fill); transform: translateY(3px); }
 .chat-caption { position: absolute; left: 65px; bottom: 25px; color: var(--color-text-muted); font-size: max(12px, var(--text-floor)); }
 .hero-answer { margin: 28px 0 22px; max-width: 540px; }
 .hero-answer p { font-size: clamp(22px, 1.8vw, 30px); letter-spacing: -.04em; margin-bottom: 8px; }
 .hero-answer>span { font-size: 16px; color: var(--color-text-muted); }
-.studio-button { display: inline-flex; align-items: center; justify-content: center; gap: 32px; border-radius: 999px; padding: 16px 28px; min-height: 54px; font-size: 17px; font-weight: 500; color: var(--color-paper); background: var(--color-blue); transition: transform .2s; }
-.studio-button:hover { color: var(--color-paper); transform: translateY(-2px); }
+.studio-button { display: inline-flex; align-items: center; justify-content: center; gap: 32px; border-radius: 999px; padding: 16px 28px; min-height: 54px; font-size: 17px; font-weight: 500; color: var(--color-on-fill); background: var(--color-blue); transition: transform .2s; }
+.studio-button:hover { color: var(--color-on-fill); transform: translateY(-2px); }
 .hero-bottom { margin-top: auto; padding-top: 45px; padding-bottom: 24px; width: 100%; display: flex; justify-content: space-between; font-size: max(11px, var(--text-floor)); letter-spacing: .015em; color: var(--color-text-muted); border-bottom: 1px solid var(--color-line); }
 .hero-bottom a { color: inherit; min-height: 30px; }
 .line-link { display: inline-flex; align-items: center; gap: 35px; padding-block: 14px; min-height: 48px; font-size: 17px; font-weight: 500; color: var(--color-text-dark); border-bottom: 1px solid var(--color-line); }
@@ -128,7 +128,7 @@ details[open] .detail-plus { transform: rotate(45deg); }
 /* The bottom margin is spacing only (sticky cards release against the stack's content box),
    so a trailing link can sit close. :where keeps it low enough for the mobile reset to win. */
 .venture-stack:where(:has(+ .section-end)) { margin-bottom: 40px; }
-.venture-card { display: grid; grid-template-columns: 1.12fr 1fr; position: sticky; top: 170px; min-height: calc(100svh / var(--page-zoom) - 340px); background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 20px; overflow: hidden; box-shadow: 0 12px 40px -30px var(--color-blue); }
+.venture-card { display: grid; grid-template-columns: 1.12fr 1fr; position: sticky; top: 170px; min-height: calc(100svh / var(--page-zoom) - 340px); background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 20px; overflow: hidden; box-shadow: 0 12px 40px -30px var(--shadow-color); }
 .venture-art { position: relative; padding: 30px; min-height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; overflow: hidden; }
 .venture-art>.kicker { position: absolute; top: 30px; left: 30px; font-size: 13px; }
 .doclarity .venture-art { background: var(--gradient-doclarity); }
@@ -181,7 +181,7 @@ div.portrait { cursor: default; }
    hides their soft edges and removes the pale rim; scaling down keeps the letters clear of the circle. */
 .portrait-website { right: 44px; overflow: hidden; background: #090808; }
 .portrait-website img { width: 100%; height: 100%; object-fit: cover; transform: scale(.78); }
-.portrait-facts { position: absolute; top: calc(100% + 10px); left: 50%; translate: -50% 0; width: max(100%, 210px); padding: 14px; display: flex; flex-direction: column; gap: 9px; text-align: left; border: 1px solid var(--color-line); border-radius: 12px; background: var(--color-paper); color: var(--color-text-dark); font-size: 13px; line-height: 1.5; box-shadow: 0 14px 32px -14px rgb(36 121 190 / .28); opacity: 0; transform: translateY(-4px); transition: opacity .2s ease-out, transform .2s ease-out; pointer-events: none; }
+.portrait-facts { position: absolute; top: calc(100% + 10px); left: 50%; translate: -50% 0; width: max(100%, 210px); padding: 14px; display: flex; flex-direction: column; gap: 9px; text-align: left; border: 1px solid var(--color-line); border-radius: 12px; background: var(--color-paper); color: var(--color-text-dark); font-size: 13px; line-height: 1.5; box-shadow: var(--shadow-lg); opacity: 0; transform: translateY(-4px); transition: opacity .2s ease-out, transform .2s ease-out; pointer-events: none; }
 .portrait-facts span { padding-left: 11px; position: relative; }
 .portrait-facts span::before { content: '•'; position: absolute; left: 0; color: var(--color-blue); }
 .portrait-wrap:has(:focus-visible) .portrait-fun, .portrait-wrap:has(:focus-visible) .portrait-facts { opacity: 1; transform: none; }
@@ -189,7 +189,7 @@ div.portrait { cursor: default; }
   .portrait-wrap:hover .portrait-fun, .portrait-wrap:hover .portrait-facts { opacity: 1; transform: none; }
 }
 .person-dialog { width: min(680px, calc(100% - 32px)); max-height: calc(100dvh / var(--page-zoom) - 48px); margin: auto; padding: clamp(24px, 5vw, 48px); border: 1px solid var(--color-line); border-radius: 16px; background: var(--color-paper); color: var(--color-text-dark); }
-.person-dialog::backdrop { background: rgb(0 0 0 / .45); }
+.person-dialog::backdrop { background: var(--color-scrim); }
 .person-dialog form { display: flex; justify-content: flex-end; margin-bottom: 24px; }
 .person-close { padding: 8px 12px; border: 1px solid var(--color-line); border-radius: 6px; background: var(--color-paper); color: var(--color-text-dark); cursor: pointer; }
 .person .person-dialog p,.people-full .person .person-dialog p { font-size: 18px; line-height: 1.65; margin-top: 20px; }
@@ -372,14 +372,23 @@ div.portrait { cursor: default; }
 .studio-hero-film .home-facts { margin-top: clamp(30px, 5svh, 56px); }
 .studio-hero-film .home-facts .studio-stats { padding-block: clamp(24px, 3.5svh, 40px) 0; border-bottom: 0; border-top-color: color-mix(in srgb, var(--color-paper) 32%, transparent); }
 .studio-hero-film .home-facts dt { color: color-mix(in srgb, var(--color-paper) 78%, transparent); }
-.studio-hero-film .home-facts dd { color: #a9d4f5; }
+.studio-hero-film .home-facts dd { color: var(--color-blue-ice); }
 /* With the facts the copy stands taller, so the dark rise reaches further up the film. */
 .studio-hero-film:has(.home-facts)::after {
   background:
     linear-gradient(to top, color-mix(in srgb, var(--color-text-dark) 88%, transparent), color-mix(in srgb, var(--color-text-dark) 45%, transparent) 55%, transparent 82%),
     linear-gradient(to right, color-mix(in srgb, var(--color-text-dark) 50%, transparent), transparent 60%);
 }
+/* On phones the frame crops to the bright wall at its centre and the copy with the facts fills
+   most of the height, so the heading sat on the wall: the pale blue line fell to 2.8:1 on the
+   poster frame. The rise climbs higher there (.studio-site outranks the phone rule in
+   StudioHero.astro). */
 @media (max-width: 600px) {
+  .studio-site .studio-hero-film:has(.home-facts)::after {
+    background:
+      linear-gradient(to top, color-mix(in srgb, var(--color-text-dark) 88%, transparent), color-mix(in srgb, var(--color-text-dark) 70%, transparent) 62%, transparent 92%),
+      linear-gradient(to right, color-mix(in srgb, var(--color-text-dark) 50%, transparent), transparent 60%);
+  }
   .studio-hero-film .home-facts .studio-stats { gap: 16px; }
   .studio-hero-film .home-facts dd { font-size: 30px; }
   .studio-hero-film .home-facts .fact-word { font-size: 22px; }
@@ -471,7 +480,7 @@ body:has(.studio-site[data-page="ecosystem"]) .studio-brand { visibility: hidden
 /* Ecosystem page: no brand column (logo and tagline) in the footer, and black call-to-action buttons (nav and contact). */
 body:has(.studio-site[data-page="ecosystem"]) .footer-top > div:first-child { visibility: hidden; } /* keeps the column so the footer grid stays aligned */
 body:has(.studio-site[data-page="ecosystem"]) .studio-nav .studio-nav-cta,
-.studio-site[data-page="ecosystem"] .studio-contact .studio-button { background: #111; }
+.studio-site[data-page="ecosystem"] .studio-contact .studio-button { background: var(--color-text-dark); }
 
 /* Ecosystem: Ruben's portrait carries a single website dot, and his name links to the same site. */
 .affiliation-portrait .affiliation-website { position: absolute; inset: auto 8px 8px auto; width: 30px; height: 30px; }

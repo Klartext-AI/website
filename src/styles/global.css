@@ -13,7 +13,9 @@
   /* Typography Colors */
   --color-text-dark: #151b23;
   --color-text-body: #222c38;
-  --color-text-muted: #5b5b5b;
+  /* #555 rather than #5b5b5b: muted text must hold 4.5:1 on the radial background's strongest
+     tint (#b6cfe7, top left) and on the nav glass over the film. */
+  --color-text-muted: #555555;
   --color-paper: #fbfcfe;
   --color-line: rgba(36, 65, 95, 0.18);
   --color-blue-soft: #e0ecf7;
@@ -26,7 +28,30 @@
      shipped CSS gives nothing away. Rename back alongside the card in Ventures.astro. */
   --color-venture3-bg: #e0eee4;
   --color-venture3-ink: #235443;
+  /* Partner brand colours, where we show them outside their logos (the linktree) */
+  --color-doclarity: #1c4fd6;
+  --color-doclarity-soft: #e6ecfb;
+  /* WhatsApp green, deepened from #25D366 so white text keeps 4.5:1 contrast */
+  --color-whatsapp: #15854a;
   --gradient-doclarity: radial-gradient(ellipse at 80% 15%, #d3c7f5, transparent 65%), linear-gradient(130deg, #e9f0fc, #dce3fb);
+
+  /* Surfaces: cards and panels above the paper, ink on a filled or dark ground (blue buttons,
+     the film), the pale blue that accents type on those dark grounds, and the dimming behind
+     dialogs and over footage */
+  --color-surface: #fff;
+  --color-on-fill: #fff;
+  --color-blue-ice: #a9d4f5;
+  --color-scrim: rgb(0 0 0 / 0.45);
+  --color-scrim-strong: rgb(0 0 0 / 0.65);
+
+  /* Brand-blue tints. Wash and tint are grounds (rows, chips, icon plates), lines are edges.
+     They share a hue but stay separate tokens so a theme can treat them apart: the contrast
+     schemes (contrast.css) flatten every ground and draw every edge. */
+  --color-blue-wash: color-mix(in srgb, var(--color-blue) 5%, transparent);
+  --color-blue-tint: color-mix(in srgb, var(--color-blue) 10%, transparent);
+  --color-blue-tint-strong: color-mix(in srgb, var(--color-blue) 15%, transparent);
+  --color-line-blue: color-mix(in srgb, var(--color-blue) 10%, transparent);
+  --color-line-blue-strong: color-mix(in srgb, var(--color-blue) 20%, transparent);
 
   /* Radial Background Gradient */
   --gradient-radial: radial-gradient(
@@ -36,11 +61,19 @@
       rgba(76, 138, 197, 0.29) 100%
   );
 
-  /* Glassmorphism Properties */
-  --glass-bg: rgba(255, 255, 255, 0.35);
-  --glass-border: rgba(255, 255, 255, 0.4);
+  /* Glassmorphism Properties: three opacities of the surface, from airy to near-solid */
+  --glass-bg: color-mix(in srgb, var(--color-surface) 35%, transparent);
+  --glass-bg-strong: color-mix(in srgb, var(--color-surface) 60%, transparent);
+  --glass-bg-solid: color-mix(in srgb, var(--color-surface) 85%, transparent);
+  --glass-border: color-mix(in srgb, var(--color-surface) 40%, transparent);
   --glass-blur: blur(18px) saturate(160%);
-  --glass-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+
+  /* Elevation, tinted with the brand blue: resting, raised (the glass card) and lifted (hover) */
+  --shadow-color: var(--color-blue);
+  --shadow-sm: 0 4px 12px color-mix(in srgb, var(--shadow-color) 8%, transparent);
+  --shadow-md: 0 8px 24px -6px color-mix(in srgb, var(--shadow-color) 18%, transparent);
+  --shadow-lg: 0 14px 36px -10px color-mix(in srgb, var(--shadow-color) 30%, transparent);
+  --glass-shadow: var(--shadow-md);
 
   /* Spacing System */
   --space-xs: 0.5rem;
@@ -171,8 +204,9 @@ a {
   transition: color 0.2s ease;
 }
 
+/* Hover deepens the blue: the lighter accent blue is only 3.56:1 on the paper. */
 a:hover {
-  color: var(--color-blue-accent);
+  color: var(--color-blue-petrol);
 }
 
 /* ============================================
@@ -193,7 +227,7 @@ a:hover {
 
 .glass-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.25);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Container */
@@ -288,10 +322,10 @@ a:hover {
   display: inline-flex;
   align-items: center;
   padding: 1rem 2.5rem;
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
   color: var(--color-blue);
   text-decoration: none;
   font-weight: 500;
@@ -303,29 +337,29 @@ a:hover {
 }
 
 .btn:hover {
-  background: rgba(36, 121, 190, 0.95);
-  color: white;
+  background: var(--color-blue);
+  color: var(--color-on-fill);
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-primary {
   background: var(--color-blue);
-  color: white;
+  color: var(--color-on-fill);
 }
 
 .btn-primary:hover {
-  background: rgba(36, 121, 190, 0.95);
-  color: white;
+  background: var(--color-blue);
+  color: var(--color-on-fill);
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
   color: var(--color-blue);
   border-radius: 1rem;
   display: inline-flex;
@@ -341,10 +375,10 @@ a:hover {
 
 .btn-secondary:hover {
   gap: 0.75rem;
-  background: rgba(36, 121, 190, 0.95);
-  color: white;
+  background: var(--color-blue);
+  color: var(--color-on-fill);
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px -8px rgba(36, 121, 190, 0.35);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Text Utilities */

@@ -30,22 +30,22 @@ const descriptions = de ? {home:'Individuelle KI für geschäftskritische Prozes
 const structuredData = page === 'ventures' ? [productSchema('doclarity'), productSchema('extract')] : [];
 ---
 <BaseLayout title={`${titles[page]} | Klartext AI`} description={descriptions[page]} lang={lang} alwaysShowNav={true} structuredData={structuredData}>
-  <main id="main-content" class="studio-site" data-page={page} tabindex="-1">
+  <div class="studio-site" data-page={page}>
     {page === 'home' ? <>
       <Opening lang={lang}/>
       <StudioHero lang={lang} home>
         <div class="home-facts" id="what-we-build" role="group" aria-label={de ? 'Klartext in Zahlen' : 'Klartext in numbers'}>
           <dl class="studio-stats">
             <div><dt>{de ? 'Gegründet' : 'Founded'}</dt><dd>2025</dd></div>
-            <div><dt>{de ? 'Ohne externes Kapital' : 'No external capital'}</dt><dd class="fact-word">Bootstrapped</dd></div>
+            <div><dt>{de ? 'Ohne externes Kapital' : 'No external capital'}</dt><dd class="fact-word" lang={de ? 'en' : undefined}>Bootstrapped</dd></div>
             <div><dt>{de ? 'Expert:innen' : 'Experts'}</dt><dd data-count="10">10+</dd></div>
             <div><dt>{de ? 'Kunden' : 'Clients'}</dt><dd data-count="20">20+</dd></div>
-            <div><dt>Ventures</dt><dd data-count="3">3+</dd></div>
+            <div><dt lang={de ? 'en' : undefined}>Ventures</dt><dd data-count="3">3+</dd></div>
           </dl>
         </div>
       </StudioHero>
-      <section class="studio-section home-relationships conviction">
-        <h2>{de ? 'Uns vertrauen' : 'Trusted by'}<br /><span class="blue">{de ? 'führende Unternehmen.' : 'leading companies.'}</span></h2>
+      <section class="studio-section home-relationships conviction" aria-labelledby="trusted-title">
+        <h2 id="trusted-title">{de ? 'Uns vertrauen' : 'Trusted by'}<br /><span class="blue">{de ? 'führende Unternehmen.' : 'leading companies.'}</span></h2>
         <Partners lang={lang}/>
       </section>
       <Assurance lang={lang}/><Pillars lang={lang}/><Ventures lang={lang}/>
@@ -61,11 +61,11 @@ const structuredData = page === 'ventures' ? [productSchema('doclarity'), produc
     </>}
     {page === 'home' && <LinkedInFeed lang={lang}/>}
     {page === 'ecosystem'
-      ? <section class="studio-section studio-contact" id="contact"><h2>{de ? 'Eine Initiative, die es' : 'An initiative'}<br /><span class="blue">{de ? 'wert ist, voranzutreiben?' : 'worth pushing?'}</span></h2><a class="studio-button" href="mailto:office@klartext-ai.com">{de ? 'Lass uns Europas Ecosystem stärken' : 'Let’s grow Europe’s ecosystem'} <span aria-hidden="true">↗</span></a></section>
-      : <section class="studio-section studio-contact" id="contact"><h2>{de ? 'Ein Problem, das es' : 'A problem'}<br /><span class="blue">{de ? 'wert ist, zu lösen?' : 'worth solving?'}</span></h2><a class="studio-button" href="mailto:office@klartext-ai.com">{de ? 'Sprechen wir darüber' : 'Let’s talk'} <span aria-hidden="true">↗</span></a></section>}
+      ? <section class="studio-section studio-contact" id="contact" aria-labelledby="contact-title"><h2 id="contact-title">{de ? 'Eine Initiative, die es' : 'An initiative'}<br /><span class="blue">{de ? 'wert ist, voranzutreiben?' : 'worth pushing?'}</span></h2><a class="studio-button" href="mailto:office@klartext-ai.com">{de ? 'Lass uns Europas Ecosystem stärken' : 'Let’s grow Europe’s ecosystem'} <span aria-hidden="true">↗</span></a></section>
+      : <section class="studio-section studio-contact" id="contact" aria-labelledby="contact-title"><h2 id="contact-title">{de ? 'Ein Problem, das es' : 'A problem'}<br /><span class="blue">{de ? 'wert ist, zu lösen?' : 'worth solving?'}</span></h2><a class="studio-button" href="mailto:office@klartext-ai.com">{de ? 'Sprechen wir darüber' : 'Let’s talk'} <span aria-hidden="true">↗</span></a></section>}
     {(page === 'home' || page === 'ventures') && <Faq lang={lang} page={page}/>}
-  </main>
-  <Footer lang={lang}/>
+  </div>
+  <Footer slot="footer" lang={lang}/>
 </BaseLayout>
 
 <script>

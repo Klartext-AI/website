@@ -14,9 +14,9 @@ const BASE = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={title} description={description} lang="en" alwaysShowNav={true} structuredData={[productSchema('doclarity')]}>
-  <main class="product-detail">
+  <div class="product-detail">
     <div class="container">
-      <a href={`${BASE}success-stories`} class="back-link">← Back to Success Stories</a>
+      <a href={`${BASE}success-stories`} class="back-link"><span aria-hidden="true">←&nbsp;</span>Back to Success Stories</a>
 
       <article class="content fade-in">
         <header class="hero">
@@ -94,6 +94,9 @@ const BASE = import.meta.env.BASE_URL;
 
         <!-- FLOW: Steps -->
         <section class="flow">
+          <!-- The demos loop for as long as they are on screen, so they get a pause control (WCAG 2.2.2).
+               Without motion they start paused and the button plays them. -->
+          <button type="button" class="motion-toggle" data-pause="Pause the demos" data-play="Play the demos">Pause the demos</button>
 
           <!-- STEP 01: File Upload -->
           <div class="step-zigzag step-zigzag-left">
@@ -101,7 +104,7 @@ const BASE = import.meta.env.BASE_URL;
               <div class="step-top">
                 <span class="step-number">01</span>
                 <div class="step-text">
-                  <div class="step-title">File Upload</div>
+                  <h2 class="step-title">File Upload</h2>
                   <div class="step-caption">Upload any PDF – scanned or digital. The pipeline handles the pre-structuring, the result is then reviewed by people and adjusted as needed.</div>
                 </div>
               </div>
@@ -113,7 +116,7 @@ const BASE = import.meta.env.BASE_URL;
 
             <div class="step-zigzag-media">
               <div class="media-card media-card-video">
-                <video
+                <video aria-hidden="true"
                   muted
                   playsinline
                   preload="metadata"
@@ -136,7 +139,7 @@ const BASE = import.meta.env.BASE_URL;
               <div class="step-top">
                 <span class="step-number">02</span>
                 <div class="step-text">
-                  <div class="step-title">PDFs are structured with AI assistance</div>
+                  <h2 class="step-title">PDFs are structured with AI assistance</h2>
                   <div class="step-caption">Structure, tags, reading order, and alternative text are proposed with AI assistance – they are then reviewed and adjusted by people as needed.</div>
                 </div>
               </div>
@@ -149,7 +152,7 @@ const BASE = import.meta.env.BASE_URL;
               <div class="step-top">
                 <span class="step-number">03</span>
                 <div class="step-text">
-                  <div class="step-title">Review the accessible document structure</div>
+                  <h2 class="step-title">Review the accessible document structure</h2>
                   <div class="step-caption">Check reading order, headings, and alternative text directly in the browser and refine them as needed.</div>
                 </div>
               </div>
@@ -165,7 +168,7 @@ const BASE = import.meta.env.BASE_URL;
             <div class="step-top">
               <span class="step-number">04</span>
               <div class="step-text">
-                <div class="step-title">Every step is traceable</div>
+                <h2 class="step-title">Every step is traceable</h2>
                 <div class="step-caption">
                   From AI-assisted remediation to validation — every step remains transparent and reviewable.
                 </div>
@@ -201,7 +204,7 @@ const BASE = import.meta.env.BASE_URL;
 
             <div class="closing-cta-buttons">
               <a href="https://doclarity.eu/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-with-logo">
-                 <img src={`${BASE}doclarity_product_files/doclarity-logo.svg`} width="118" height="30" alt="doclarity" class="btn-doclarity-logo" /> ↗
+                 <img src={`${BASE}doclarity_product_files/doclarity-logo.svg`} width="118" height="30" alt="doclarity" class="btn-doclarity-logo" /> <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
@@ -220,19 +223,19 @@ const BASE = import.meta.env.BASE_URL;
               <h2 class="story-block-title">The results</h2>
               <div class="results-list">
                 <div class="result-item-check">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
                   <p>From upload to validated PDF/UA – AI-assisted processing with expert review to follow</p>
                 </div>
                 <div class="result-item-check">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
                   <p>PDF/UA, WCAG &amp; EN 301 549 compliance with full quality report and audit log</p>
                 </div>
                 <div class="result-item-check">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
                   <p>Screen-reader compatibility checked, human-in-the-loop review as a fixed step – control and sign-off stay with domain experts</p>
@@ -260,10 +263,10 @@ const BASE = import.meta.env.BASE_URL;
         </div>
       </article>
     </div>
-  </main>
+  </div>
 
   <FinalCTA lang="en" />
-  <Footer lang="en" />
+  <Footer slot="footer" lang="en" />
 </BaseLayout>
 
 <script is:inline>
@@ -284,18 +287,32 @@ const BASE = import.meta.env.BASE_URL;
       v.addEventListener('loadedmetadata', () => { v.load(); }, { once: true });
     });
 
+    const motionToggle = document.querySelector('.motion-toggle');
+    const onScreen = new Set();
+    let paused = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const setPaused = (value) => {
+      paused = value;
+      document.documentElement.toggleAttribute('data-motion-paused', paused);
+      if (motionToggle) motionToggle.textContent = paused ? motionToggle.dataset.play : motionToggle.dataset.pause;
+      allVideos.forEach((video) => { if (paused) video.pause(); else if (onScreen.has(video)) video.play().catch(() => {}); });
+    };
+    motionToggle?.addEventListener('click', () => setPaused(!paused));
+
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const video = entry.target;
         const startTime = parseFloat(video.dataset.startTime) || 0;
         if (entry.isIntersecting) {
+          onScreen.add(video);
           video.currentTime = startTime;
-          video.play().catch(() => {});
+          if (!paused) video.play().catch(() => {});
         } else {
+          onScreen.delete(video);
           video.pause();
         }
       });
     }, { threshold: 0.3, rootMargin: '0px' });
+    setPaused(paused);
 
     allVideos.forEach((video) => { videoObserver.observe(video); });
   });
@@ -319,28 +336,28 @@ const BASE = import.meta.env.BASE_URL;
 
   .back-link:hover {
     transform: translateX(-4px);
-    color: var(--color-blue-accent);
+    color: var(--color-blue-petrol);
   }
 
   .hero {
     text-align: center;
     margin: var(--space-lg) 0 var(--space-lg);
     padding-bottom: var(--space-lg);
-    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+    border-bottom: 1px solid var(--color-line-blue);
   }
 
   .brand-lockup {
     display: inline-flex;
     align-items: center;
     padding: 0.9rem 2.2rem;
-    background: rgba(36, 121, 190, 0.06);
+    background: var(--color-blue-wash);
     border-radius: 100px;
     margin-bottom: 0.6rem;
     transition: background 0.3s ease, transform 0.3s ease;
   }
 
   .brand-lockup:hover {
-    background: rgba(36, 121, 190, 0.12);
+    background: var(--color-blue-tint);
     transform: translateY(-1px);
   }
 
@@ -383,6 +400,32 @@ const BASE = import.meta.env.BASE_URL;
     margin: var(--space-2xl) 0;
   }
 
+  /* Sits above the first step; the negative margin takes back most of the grid gap. */
+  .motion-toggle {
+    justify-self: end;
+    align-self: start;
+    min-height: 44px;
+    margin-bottom: calc(var(--space-md) - var(--space-2xl));
+    padding: 0 1.25rem;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    background: var(--glass-bg-solid);
+    color: var(--color-text-dark);
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .motion-toggle:hover {
+    border-color: var(--color-blue);
+  }
+
+  :global(html[data-motion-paused] .dl-anim *),
+  :global(html[data-motion-paused] .dl-anim *::before),
+  :global(html[data-motion-paused] .dl-anim *::after) {
+    animation-play-state: paused !important;
+  }
+
   .step-zigzag {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -420,14 +463,19 @@ const BASE = import.meta.env.BASE_URL;
     font-size: 0.8rem;
     font-weight: 800;
     color: var(--color-blue);
-    background: rgba(36, 121, 190, 0.1);
-    border: 1px solid rgba(36, 121, 190, 0.2);
+    background: var(--color-blue-tint);
+    border: 1px solid var(--color-line-blue-strong);
     flex: 0 0 auto;
   }
 
+  /* A heading, so the steps show up in heading navigation; it keeps the look of the caption
+     text around it rather than the global heading style. */
   .step-title {
     font-size: 1.1rem;
     font-weight: 600;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-wrap: inherit;
     color: var(--color-text-dark);
     margin-top: 0;
   }
@@ -473,9 +521,9 @@ const BASE = import.meta.env.BASE_URL;
     border-radius: 1rem;
     max-width: 520px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.15);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     line-height: 0;
     width: 100%;
     margin-top: var(--space-md);
@@ -484,7 +532,7 @@ const BASE = import.meta.env.BASE_URL;
   }
 
   .media-card:hover {
-    box-shadow: 0 12px 32px rgba(36, 121, 190, 0.2);
+    box-shadow: var(--shadow-lg);
   }
 
   .media-card-lg {
@@ -526,16 +574,16 @@ const BASE = import.meta.env.BASE_URL;
     gap: var(--space-sm);
     padding: var(--space-md);
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.12);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     backdrop-filter: blur(8px);
     transition: var(--transition-smooth);
   }
 
   .result-card-doclarity:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(36, 121, 190, 0.18);
+    box-shadow: var(--shadow-lg);
   }
 
   .result-card-doclarity-title {
@@ -581,7 +629,7 @@ const BASE = import.meta.env.BASE_URL;
     gap: var(--space-xl);
     margin-top: var(--space-2xl);
     padding-top: var(--space-xl);
-    border-top: 1px solid rgba(36, 121, 190, 0.1);
+    border-top: 1px solid var(--color-line-blue);
   }
 
   .credit-item {
@@ -632,15 +680,15 @@ const BASE = import.meta.env.BASE_URL;
     align-self: center;
     width: 1px;
     height: 40px;
-    background: rgba(36, 121, 190, 0.15);
+    background: var(--color-line-blue-strong);
   }
 
   .closing-card {
     padding: var(--space-lg);
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.12);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     backdrop-filter: blur(8px);
     text-align: center;
   }
@@ -652,7 +700,7 @@ const BASE = import.meta.env.BASE_URL;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 0.4rem 1rem;
-    background: rgba(36, 121, 190, 0.1);
+    background: var(--color-blue-tint);
     border-radius: 6px;
     font-size: 0.85rem;
     margin-bottom: var(--space-md);
@@ -681,7 +729,7 @@ const BASE = import.meta.env.BASE_URL;
     flex-direction: column;
     gap: var(--space-xl);
     padding-top: var(--space-lg);
-    border-top: 1px solid rgba(36, 121, 190, 0.1);
+    border-top: 1px solid var(--color-line-blue);
   }
 
   .story-highlights-custom {
@@ -690,10 +738,10 @@ const BASE = import.meta.env.BASE_URL;
     gap: var(--space-md);
     padding: var(--space-lg);
     margin-bottom: var(--space-2xl);
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     border-radius: 1rem;
   }
 
@@ -708,7 +756,7 @@ const BASE = import.meta.env.BASE_URL;
     width: 42px;
     height: 42px;
     border-radius: 10px;
-    background: rgba(36, 121, 190, 0.1);
+    background: var(--color-blue-tint);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -738,7 +786,7 @@ const BASE = import.meta.env.BASE_URL;
     margin-bottom: var(--space-2xl);
     padding: var(--space-md);
     border-left: 3px solid var(--color-blue);
-    background: rgba(36, 121, 190, 0.03);
+    background: var(--color-blue-wash);
     border-radius: 0 0.75rem 0.75rem 0;
   }
 
@@ -772,7 +820,6 @@ const BASE = import.meta.env.BASE_URL;
     color: var(--color-blue);
     letter-spacing: 0.08em;
     margin-top: 0.3rem;
-    opacity: 0.6;
   }
 
   .why-point strong {
@@ -822,15 +869,15 @@ const BASE = import.meta.env.BASE_URL;
     gap: var(--space-sm);
     padding: var(--space-md);
     border-radius: 0.75rem;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 12px rgba(36, 121, 190, 0.08);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-sm);
     transition: all 0.3s ease;
   }
 
   .result-item-check:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.15);
+    box-shadow: var(--shadow-md);
   }
 
   .result-item-check svg {

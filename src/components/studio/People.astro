@@ -15,12 +15,12 @@ const people = [
   ['David Janisch','Full-Stack Developer','david','jpg'], ['Otto Winter','Full-Stack Developer','otto','jpg'], ['Bruno','Chief Happiness Officer','bruno','jpg']
 ];
 ---
-<section class={`studio-section people-section ${full ? 'people-full' : ''}`} id="studio">
-  {!full && <div class="people-intro"><h2>{de ? 'Aus Wien.' : 'Built in Vienna.'}<br /><span class="blue">{de ? 'Für das, was kommt.' : 'For what’s next.'}</span></h2>
+<section class={`studio-section people-section ${full ? 'people-full' : ''}`} id="studio" aria-labelledby="people-title">
+  {!full && <div class="people-intro"><h2 id="people-title">{de ? 'Aus Wien.' : 'Built in Vienna.'}<br /><span class="blue">{de ? 'Für das, was kommt.' : 'For what’s next.'}</span></h2>
     <a class="line-link" href={`${root}team/`}>{de ? 'Das Studio kennenlernen' : 'Meet the studio'} <span aria-hidden="true">↗</span></a>
   </div>}
   {full && <div class="studio-stats"><div><strong>10+</strong><span>{de ? 'Menschen aus Forschung und Engineering' : 'Researchers and engineers'}</span></div><div><strong>20+</strong><span>{de ? 'Kunden aus Wirtschaft und öffentlichem Sektor' : 'Clients across industry and the public sector'}</span></div><div><strong>3</strong><span>{de ? 'Ventures aus unserem Studio' : 'Ventures from our studio'}</span></div></div>}
-  {full && <h2 class="builders-heading">{de ? 'Die Menschen dahinter.' : 'The builders.'}</h2>}
+  {full && <h2 class="builders-heading" id="people-title">{de ? 'Die Menschen dahinter.' : 'The builders.'}</h2>}
   {!full && <FounderPhoto lang={lang} />}
   {full && <div class="people-grid">{people.map(([name,role,file]) => {
     const profile = teamProfiles[lang].find(member => member.name === name)!;

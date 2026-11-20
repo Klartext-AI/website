@@ -29,8 +29,8 @@ const projects: { title: string; partners: string; copy: string; href?: string }
   { title: 'MANAGER. An agent for the circular economy.', partners: 'With Fraunhofer IPA, University of Stuttgart and IFM · Eureka, EU-funded', copy: 'An AI agent that helps companies in the electronics sector make their products and processes more circular.' },
 ];
 ---
-<section class="studio-section research" id="research">
-  <Heading>{de ? 'Forschung ist unser' : 'Research is our'}<br /><span class="blue">{de ? 'entscheidender Vorsprung.' : 'unfair advantage.'}</span></Heading>
+<section class="studio-section research" id="research" aria-labelledby="research-title">
+  <Heading id="research-title">{de ? 'Forschung ist unser' : 'Research is our'}<br /><span class="blue">{de ? 'entscheidender Vorsprung.' : 'unfair advantage.'}</span></Heading>
   <div class="research-copy"><p class="lead">{de ? 'Wir nutzen nicht nur, was die Forschung möglich macht. Wir arbeiten daran.' : 'We don’t just use what’s happening at the frontier. We work on it.'}</p><p>{de ? 'Zuverlässigkeit ist eine Forschungsfrage. Deshalb erforschen wir überprüfbare Autonomie, Evaluation und Kalibrierung. Daraus wird Technologie. Dann Produkte. Dann Unternehmen.' : 'Reliability is a research problem. That’s why we study verifiable autonomy, evaluation, and calibration. The work becomes technology. Then products. Then companies.'}</p></div>
   <ol class="research-flow" data-research-flow>{stages.map((stage, i) => <li style={`--stage-delay: ${i * 450}ms; --stage-start: ${i * 28}%; --stage-end: ${i * 28 + 16}%; --link-end: ${(i + 1) * 28}%;`}>
     {i === 0 && <svg class="flow-symbol" aria-hidden="true" viewBox="0 0 88 88" focusable="false"><circle class="symbol-fill research-field" cx="44" cy="44" r="30.5"/><circle cx="44" cy="44" r="43.5"/><circle cx="44" cy="44" r="30.5"/><circle cx="44" cy="44" r="17.5"/><circle class="symbol-fill research-core" cx="44" cy="44" r="5"/></svg>}

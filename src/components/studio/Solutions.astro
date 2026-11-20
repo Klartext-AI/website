@@ -6,7 +6,7 @@ const base = import.meta.env.BASE_URL;
 const root = `${base}${de ? 'de/' : ''}`;
 const steps = de ? [['Entdecken','Wir finden den Prozess, in dem Fehler teuer sind. Und entscheiden, wo KI einen Unterschied macht.','KI-Strategie · Use Cases · Architektur'],['Entwickeln','Agentische Systeme mit festen Regeln. Versioniert, geprüft und reproduzierbar.','Agentic AI · Machine Learning · Knowledge Graphs'],['Integrieren','In Deine Daten, Deine Systeme und Deine Abläufe. Mit klaren Übergaben an Menschen.','APIs · Audit Trails · Evaluation · Monitoring']] : [['Discover','We find the process where being wrong is expensive. And decide where AI can make a difference.','AI strategy · Use cases · Architecture'],['Build','Agentic systems with deterministic edges. Versioned, tested, and reproducible.','Agentic AI · Machine learning · Knowledge graphs'],['Integrate','Into your data, your systems, and your workflows. With clear handoffs to people.','APIs · Audit trails · Evaluation · Monitoring']];
 ---
-<section class="studio-section" id="solutions">
+<section class="studio-section" id="solutions" aria-labelledby={full ? undefined : 'solutions-title'}>
   {full ? <>
     <div class="process-grid">{steps.map(([title,copy,tags], i) => <article><p class="kicker step-index">0{i+1}</p><h2>{title}</h2><p>{copy}</p><p class="process-tags">{tags}</p></article>)}</div>
     <div class="project-list"><h2>{de ? 'Aus der Praxis.' : 'Reference projects.'}</h2>{(de ? [
@@ -19,7 +19,7 @@ const steps = de ? [['Entdecken','Wir finden den Prozess, in dem Fehler teuer si
       ['quote-automation','From requests to quotes.','Industry · Automation','Over 1,000 requests per week automatically classified.']
     ]).map(([slug,title,category,copy]) => <a class="project-row" href={`${root}success-stories/${slug}/`}><span class="kicker">{category}</span><h3>{title}</h3><p>{copy}</p><span class="project-arrow" aria-hidden="true">↗</span></a>)}<article class="project-row"><span class="kicker">{de ? 'Öffentliche Förderung · Evaluation' : 'Public funding · Evaluation'}</span><h3>{de ? 'Anträge werden nachvollziehbar vorgeprüft.' : 'Applications assessed with evidence.'}</h3><p>{de ? 'Kriterienbasierte Vorprüfung von Förderanträgen. Mit einer Begründung zu jeder Empfehlung.' : 'Criteria-based pre-assessment of funding applications. With reasoning attached to every recommendation.'}</p></article></div>
   </> : <>
-    <h2>{de ? 'Zwei Wege,' : 'Two ways'}<br /><span class="blue">{de ? 'mit KI zu bauen.' : 'to build with AI.'}</span></h2>
+    <h2 id="solutions-title">{de ? 'Zwei Wege,' : 'Two ways'}<br /><span class="blue">{de ? 'mit KI zu bauen.' : 'to build with AI.'}</span></h2>
     <div class="two-paths build-paths">
       <article>
         <div class="path-identity">

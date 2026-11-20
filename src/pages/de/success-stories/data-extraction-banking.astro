@@ -13,9 +13,9 @@ const BASE = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={title} description={description} lang="de" alwaysShowNav={true} structuredData={[productSchema('extract')]}>
-  <main class="product-detail">
+  <div class="product-detail">
     <div class="container">
-      <a href={`${BASE}de/success-stories`} class="back-link">← Zurück zu Erfolgsgeschichten</a>
+      <a href={`${BASE}de/success-stories`} class="back-link"><span aria-hidden="true">←&nbsp;</span>Zurück zu Erfolgsgeschichten</a>
 
       <article class="content fade-in">
         <header class="hero">
@@ -84,13 +84,16 @@ const BASE = import.meta.env.BASE_URL;
 
         <!-- FLOW: Steps -->
         <section class="flow">
+          <!-- The demos loop for as long as they are on screen, so they get a pause control (WCAG 2.2.2).
+               Without motion they start paused and the button plays them. -->
+          <button type="button" class="motion-toggle" data-pause="Demos anhalten" data-play="Demos abspielen">Demos anhalten</button>
           <!-- STEP 01 – Text links, Video rechts -->
           <div class="step-zigzag step-zigzag-left">
             <div class="step-zigzag-content">
               <div class="step-top">
                 <span class="step-number">01</span>
                 <div class="step-text">
-                  <div class="step-title">Bis zu 10 Reports mit hunderten Seiten hochladen</div>
+                  <h2 class="step-title">Bis zu 10 Reports mit hunderten Seiten hochladen</h2>
                   <div class="step-caption">Drag & drop, alle Reports in einem Rutsch.</div>
                 </div>
               </div>
@@ -98,7 +101,7 @@ const BASE = import.meta.env.BASE_URL;
 
             <div class="step-zigzag-media">
               <div class="media-card media-card-lg">
-                <video
+                <video aria-hidden="true"
                   muted
                   playsinline
                   preload="metadata"
@@ -114,7 +117,7 @@ const BASE = import.meta.env.BASE_URL;
           <div class="step-zigzag step-zigzag-right">
             <div class="step-zigzag-media">
               <div class="media-card media-card-lg">
-                <video muted playsinline preload="metadata" class="media-video hover-play pause-at-end" data-start-time="1">
+                <video aria-hidden="true" muted playsinline preload="metadata" class="media-video hover-play pause-at-end" data-start-time="1">
                   <source src="/kpi_extraction_product_files/start_processing.mp4" type="video/mp4" />
                 </video>
               </div>
@@ -124,7 +127,7 @@ const BASE = import.meta.env.BASE_URL;
               <div class="step-top">
                 <span class="step-number">02</span>
                 <div class="step-text">
-                  <div class="step-title">Start drücken und loslegen</div>
+                  <h2 class="step-title">Start drücken und loslegen</h2>
                   <div class="step-caption">Extraktion von KPIs innerhalb von Minuten mit Referenz zur Stelle in der PDF.</div>
                 </div>
               </div>
@@ -136,7 +139,7 @@ const BASE = import.meta.env.BASE_URL;
             <div class="step-top">
               <span class="step-number">03</span>
               <div class="step-text">
-                <div class="step-title">Ergebnisse prüfen</div>
+                <h2 class="step-title">Ergebnisse prüfen</h2>
                 <div class="step-caption">
                   Auf einen Blick: was gefunden wurde – und was nicht. Damit Du sofort nacharbeiten kannst.
                 </div>
@@ -150,7 +153,7 @@ const BASE = import.meta.env.BASE_URL;
                 </div>
 
                 <div class="result-body">
-                  <div class="result-title">KPIs found</div>
+                  <div class="result-title" lang="en">KPIs found</div>
                   <div class="result-text">
                     Extrahierte Werte sind strukturiert verfügbar und sofort als Ecxcel exportierbar.
                   </div>
@@ -168,7 +171,7 @@ const BASE = import.meta.env.BASE_URL;
                 </div>
 
                 <div class="result-body">
-                  <div class="result-title">KPIs not found</div>
+                  <div class="result-title" lang="en">KPIs not found</div>
                   <div class="result-text">
                     Fehlende KPIs werden transparent markiert.
                   </div>
@@ -187,13 +190,13 @@ const BASE = import.meta.env.BASE_URL;
             <div class="step-top">
               <span class="step-number">04</span>
               <div class="step-text">
-                <div class="step-title">KPIs filtern und sortieren</div>
+                <h2 class="step-title">KPIs filtern und sortieren</h2>
                 <div class="step-caption">Filter nach diversen Kriterien, beispielsweise um Werte mit niedriger Extraktionsgenauigkeit zu überprüfen.</div>
               </div>
             </div>
 
             <div class="media-card">
-              <video muted playsinline preload="metadata" class="media-video hover-play pause-at-end">
+              <video aria-hidden="true" muted playsinline preload="metadata" class="media-video hover-play pause-at-end">
                 <source src="/kpi_extraction_product_files/filter_sort.mp4" type="video/mp4" />
               </video>
             </div>
@@ -206,7 +209,7 @@ const BASE = import.meta.env.BASE_URL;
               <div class="step-top">
                 <span class="step-number">05</span>
                 <div class="step-text">
-                  <div class="step-title">Nach gewünschten KPIs suchen</div>
+                  <h2 class="step-title">Nach gewünschten KPIs suchen</h2>
                   <div class="step-caption">
                     Direkt prüfen, ob ein KPI vorhanden ist.
                   </div>
@@ -214,7 +217,7 @@ const BASE = import.meta.env.BASE_URL;
               </div>
 
               <div class="media-card search-media sync-ignore">
-                <video muted playsinline preload="metadata" class="media-video hover-play pause-at-end">
+                <video aria-hidden="true" muted playsinline preload="metadata" class="media-video hover-play pause-at-end">
                   <source src="/kpi_extraction_product_files/Search_1.mp4" type="video/mp4" />
                 </video>
               </div>
@@ -225,7 +228,7 @@ const BASE = import.meta.env.BASE_URL;
               <div class="step-top">
                 <span class="step-number">06</span>
                 <div class="step-text">
-                  <div class="step-title">KI-Erklärung zur Herkunft der Werte</div>
+                  <h2 class="step-title">KI-Erklärung zur Herkunft der Werte</h2>
                   <div class="step-caption">
                     Zu jedem KPI ist nachvollziehbar erklärt, woher der Wert stammt –  
                     und bei Bedarf auch, wie er berechnet wurde.
@@ -234,7 +237,7 @@ const BASE = import.meta.env.BASE_URL;
               </div>
 
               <div class="media-card sync-ignore">
-                <video muted playsinline preload="metadata" class="media-video hover-play pause-at-end">
+                <video aria-hidden="true" muted playsinline preload="metadata" class="media-video hover-play pause-at-end">
                   <source src="/kpi_extraction_product_files/Search_2.mp4" type="video/mp4" />
                 </video>
               </div>
@@ -286,31 +289,31 @@ const BASE = import.meta.env.BASE_URL;
               <h2 class="story-block-title">Die Ergebnisse</h2>
               <div class="results-list">
                 <div class="result-item-check">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
                   <p>Statt 4 Tagen manuelle Extraktion – jetzt in 15 Minuten erledigt, für Human-in-the-Loop optimiert</p>
                 </div>
                 <div class="result-item-check">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
                   <p>Vollständige Nachvollziehbarkeit: jede Extraktion mit direkter Referenz zur Stelle im Dokument</p>
                 </div>
                 <div class="result-item-check">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
                   <p>Höhere Qualität durch Konsistenz – keine übersehenen Details mehr</p>
                 </div>
                 <div class="result-item-check">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
                   <p>Skalierbarkeit ohne Mehraufwand – Volumen kann problemlos steigen</p>
                 </div>
                 <div class="result-item-check">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
                   <p>Vollständige Nachvollziehbarkeit – jede Extraktion mit Quellenangabe</p>
@@ -336,10 +339,10 @@ const BASE = import.meta.env.BASE_URL;
         </section>
       </article>
     </div>
-  </main>
+  </div>
 
   <FinalCTA lang="de" />
-  <Footer lang="de" />
+  <Footer slot="footer" lang="de" />
 </BaseLayout>
 
 <script is:inline>
@@ -368,19 +371,32 @@ const BASE = import.meta.env.BASE_URL;
     });
 
     // Create IntersectionObserver for scroll-based autoplay
+    // The loops get a pause control; without motion they start paused.
+    const motionToggle = document.querySelector('.motion-toggle');
+    const onScreen = new Set();
+    let paused = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const setPaused = (value) => {
+      paused = value;
+      if (motionToggle) motionToggle.textContent = paused ? motionToggle.dataset.play : motionToggle.dataset.pause;
+      allVideos.forEach((video) => { if (paused) video.pause(); else if (onScreen.has(video)) video.play().catch(() => {}); });
+    };
+    motionToggle?.addEventListener('click', () => setPaused(!paused));
+
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const video = entry.target;
         const startTime = parseFloat(video.dataset.startTime) || 0;
 
         if (entry.isIntersecting) {
-          // Video is visible - play it
+          // Video is visible - play it, unless the visitor paused the demos
+          onScreen.add(video);
           video.currentTime = startTime;
-          video.play().catch(() => {
+          if (!paused) video.play().catch(() => {
             // Autoplay blocked - that's okay
           });
         } else {
           // Video is not visible - pause it
+          onScreen.delete(video);
           video.pause();
         }
       });
@@ -393,6 +409,7 @@ const BASE = import.meta.env.BASE_URL;
     allVideos.forEach((video) => {
       videoObserver.observe(video);
     });
+    setPaused(paused);
 
     // Handle synced video pairs
     document.querySelectorAll('.sync-pair').forEach((pair) => {
@@ -404,6 +421,7 @@ const BASE = import.meta.env.BASE_URL;
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             // Play all videos in the pair together
+            if (paused) return;
             videos.forEach((v) => {
               v.currentTime = 0;
               v.play().catch(() => {});
@@ -446,7 +464,7 @@ const BASE = import.meta.env.BASE_URL;
 
   .back-link:hover {
     transform: translateX(-4px);
-    color: var(--color-blue-accent);
+    color: var(--color-blue-petrol);
   }
 
   /* HERO / HEADER */
@@ -454,7 +472,7 @@ const BASE = import.meta.env.BASE_URL;
     text-align: center;
     margin: var(--space-lg) 0 var(--space-lg);
     padding-bottom: var(--space-lg);
-    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+    border-bottom: 1px solid var(--color-line-blue);
   }
 
   .brand-wordmark {
@@ -479,6 +497,26 @@ const BASE = import.meta.env.BASE_URL;
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
     margin: var(--space-2xl) 0;
+  }
+
+  /* Sits above the first step; the negative margin takes back most of the grid gap. */
+  .motion-toggle {
+    justify-self: end;
+    align-self: start;
+    min-height: 44px;
+    margin-bottom: calc(var(--space-md) - var(--space-2xl));
+    padding: 0 1.25rem;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    background: var(--glass-bg-solid);
+    color: var(--color-text-dark);
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .motion-toggle:hover {
+    border-color: var(--color-blue);
   }
 
   /* ZIGZAG LAYOUT FOR STEPS 01 & 02 */
@@ -548,14 +586,19 @@ const BASE = import.meta.env.BASE_URL;
     font-size: 0.8rem;
     font-weight: 800;
     color: var(--color-blue);
-    background: rgba(36, 121, 190, 0.1);
-    border: 1px solid rgba(36, 121, 190, 0.2);
+    background: var(--color-blue-tint);
+    border: 1px solid var(--color-line-blue-strong);
     flex: 0 0 auto;
   }
 
+  /* A heading, so the steps show up in heading navigation; it keeps the look of the caption
+     text around it rather than the global heading style. */
   .step-title {
     font-size: 1.1rem;
     font-weight: 600;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-wrap: inherit;
     color: var(--color-text-dark);
     margin-top: 0;
   }
@@ -575,9 +618,9 @@ const BASE = import.meta.env.BASE_URL;
     border-radius: 1rem;
     max-width: 520px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.15);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     line-height: 0;
     width: 100%;
     margin-top: var(--space-md);
@@ -586,7 +629,7 @@ const BASE = import.meta.env.BASE_URL;
   }
 
   .media-card:hover {
-    box-shadow: 0 12px 32px rgba(36, 121, 190, 0.2);
+    box-shadow: var(--shadow-lg);
   }
 
   .media-card-lg {
@@ -645,16 +688,16 @@ const BASE = import.meta.env.BASE_URL;
     gap: var(--space-md);
     padding: 3.5rem var(--space-md) var(--space-md);
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.12);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     transition: var(--transition-smooth);
     backdrop-filter: blur(8px);
   }
 
   .result-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(36, 121, 190, 0.18);
+    box-shadow: var(--shadow-lg);
   }
 
   .result-icon-float {
@@ -667,9 +710,9 @@ const BASE = import.meta.env.BASE_URL;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 10px 28px rgba(36, 121, 190, 0.15);
+    background: var(--glass-bg-solid);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     backdrop-filter: blur(8px);
   }
 
@@ -721,9 +764,9 @@ const BASE = import.meta.env.BASE_URL;
   .closing-card {
     padding: var(--space-lg);
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.12);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     backdrop-filter: blur(8px);
     text-align: center;
   }
@@ -735,7 +778,7 @@ const BASE = import.meta.env.BASE_URL;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 0.4rem 1rem;
-    background: rgba(36, 121, 190, 0.1);
+    background: var(--color-blue-tint);
     border-radius: 6px;
     font-size: 0.85rem;
     margin-bottom: var(--space-md);
@@ -771,7 +814,7 @@ const BASE = import.meta.env.BASE_URL;
     flex-direction: column;
     gap: var(--space-xl);
     padding-top: var(--space-lg);
-    border-top: 1px solid rgba(36, 121, 190, 0.1);
+    border-top: 1px solid var(--color-line-blue);
   }
 
   .story-highlights-custom {
@@ -780,10 +823,10 @@ const BASE = import.meta.env.BASE_URL;
     gap: var(--space-md);
     padding: var(--space-lg);
     margin-bottom: var(--space-2xl);
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     border-radius: 1rem;
   }
 
@@ -798,7 +841,7 @@ const BASE = import.meta.env.BASE_URL;
     width: 42px;
     height: 42px;
     border-radius: 10px;
-    background: rgba(36, 121, 190, 0.1);
+    background: var(--color-blue-tint);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -828,7 +871,7 @@ const BASE = import.meta.env.BASE_URL;
     margin-bottom: var(--space-2xl);
     padding: var(--space-md);
     border-left: 3px solid var(--color-blue);
-    background: rgba(36, 121, 190, 0.03);
+    background: var(--color-blue-wash);
     border-radius: 0 0.75rem 0.75rem 0;
   }
 
@@ -862,7 +905,6 @@ const BASE = import.meta.env.BASE_URL;
     color: var(--color-blue);
     letter-spacing: 0.08em;
     margin-top: 0.3rem;
-    opacity: 0.6;
   }
 
   .why-point strong {
@@ -876,9 +918,9 @@ const BASE = import.meta.env.BASE_URL;
     gap: var(--space-lg);
     padding: var(--space-xl);
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.12);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     backdrop-filter: blur(8px);
   }
 
@@ -991,15 +1033,15 @@ const BASE = import.meta.env.BASE_URL;
     gap: var(--space-sm);
     padding: var(--space-md);
     border-radius: 0.75rem;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 12px rgba(36, 121, 190, 0.08);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-sm);
     transition: all 0.3s ease;
   }
 
   .result-item-check:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(36, 121, 190, 0.15);
+    box-shadow: var(--shadow-md);
   }
 
   .result-item-check svg {

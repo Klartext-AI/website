@@ -50,14 +50,14 @@ const brunoImg = `${BASE}bruno/bruno-magnifier.png`;
 ---
 
 <BaseLayout title={t.title} description={t.description} lang={lang} alwaysShowNav={true} robots="noindex, nofollow">
-  <main class="bruno-404">
+  <div class="bruno-404">
     <div class="container">
       <div class="hero">
         <p class="kicker">{t.kicker}</p>
         <h1 class="headline">{t.headline}</h1>
 
         <div class="bruno-wrap">
-          <img class="bruno-img" src={brunoImg} width="1040" height="584" alt="Bruno with a magnifying glass" loading="eager" />
+          <img class="bruno-img" src={brunoImg} width="1040" height="584" alt="Bruno with a magnifying glass" lang="en" loading="eager" />
         </div>
 
         <p class="body">{t.body}</p>
@@ -75,9 +75,9 @@ const brunoImg = `${BASE}bruno/bruno-magnifier.png`;
         </div>
       </div>
     </div>
-  </main>
+  </div>
 
-  <Footer lang={lang} />
+  <Footer slot="footer" lang={lang} />
 
   <script>
     const btn = document.getElementById('biscuit-btn');
@@ -141,7 +141,7 @@ const brunoImg = `${BASE}bruno/bruno-magnifier.png`;
   .bruno-img {
     width: min(520px, 92vw);
     height: auto;
-    filter: drop-shadow(0 18px 28px rgba(36, 121, 190, 0.18));
+    filter: drop-shadow(0 18px 28px color-mix(in srgb, var(--shadow-color) 18%, transparent));
   }
 
   .body {
@@ -166,21 +166,21 @@ const brunoImg = `${BASE}bruno/bruno-magnifier.png`;
     justify-content: center;
     padding: 0.75rem 1.05rem;
     border-radius: 12px;
-    border: 1px solid rgba(36, 121, 190, 0.25);
+    border: 1px solid var(--color-line-blue-strong);
     color: var(--color-blue);
-    background: rgba(255, 255, 255, 0.65);
+    background: var(--glass-bg-strong);
     font-weight: 700;
     transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   }
 
   .btn:hover {
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 14px 32px -18px rgba(36, 121, 190, 0.45);
+    background: var(--glass-bg-solid);
+    box-shadow: var(--shadow-lg);
   }
 
   .btn.primary {
-    color: white;
+    color: var(--color-on-fill);
     background: var(--color-blue);
     border-color: var(--color-blue);
   }
@@ -204,8 +204,8 @@ const brunoImg = `${BASE}bruno/bruno-magnifier.png`;
 
   .biscuit {
     border: 0;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(36, 121, 190, 0.25);
+    background: var(--glass-bg-solid);
+    border: 1px solid var(--color-line-blue-strong);
     color: var(--color-text-dark);
     font-weight: 800;
     border-radius: 999px;
@@ -216,7 +216,7 @@ const brunoImg = `${BASE}bruno/bruno-magnifier.png`;
 
   .biscuit:hover {
     transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--color-surface);
   }
 
   .biscuit-msg {

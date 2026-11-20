@@ -1,0 +1,59 @@
+---
+// The full contrast bar for the footer: one swatch per scheme, open at every width, so the
+// setting is never behind a click. Each swatch shows a letter in its own pair, the specimen
+// convention of the public-sector bars, and names its pair and ratio for assistive tech.
+import { CONTRAST_COPY, CONTRAST_SCHEMES, schemeName } from '../utils/contrast-schemes';
+interface Props { lang: 'de' | 'en' }
+const { lang } = Astro.props;
+---
+<fieldset class="contrast-palette">
+  <legend>{CONTRAST_COPY[lang].group}</legend>
+  <div class="contrast-swatches" style={`--contrast-count: ${CONTRAST_SCHEMES.length}`}>
+    {CONTRAST_SCHEMES.map((scheme) => (
+      <button
+        type="button"
+        class="contrast-swatch"
+        data-contrast-choice={scheme.id}
+        aria-pressed={scheme.id === 'default' ? 'true' : 'false'}
+        aria-label={schemeName(scheme, lang)}
+        style={`--swatch-fg: ${scheme.fg}; --swatch-bg: ${scheme.bg}`}
+      ><span aria-hidden="true">a</span></button>
+    ))}
+  </div>
+</fieldset>
+
+<style>
+  /* A floated legend leaves the fieldset's special legend rendering and lays out as an ordinary
+     flex item, so label and swatches share one row. */
+  .contrast-palette { display: flex; align-items: center; gap: 12px; min-inline-size: 0; margin: 0; padding: 0; border: 0; }
+  legend { float: left; padding: 0; color: var(--color-text-muted); font-size: 13px; }
+  .contrast-swatches { display: flex; gap: 8px; }
+  .contrast-swatch { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 2px solid var(--swatch-fg); border-radius: 9px; background: var(--swatch-bg); color: var(--swatch-fg); font: inherit; font-size: 17px; font-weight: 600; line-height: 1; cursor: pointer; }
+  /* A lowercase letter has no ascender, so centring its line box leaves it sitting low. Trimming
+     the box to x-height and baseline centres the glyph itself; the padding approximates that
+     where text-box is unsupported. */
+  .contrast-swatch span { text-box: trim-both ex alphabetic; }
+  @supports not (text-box: trim-both ex alphabetic) { .contrast-swatch span { padding-bottom: .18em; } }
+  /* The chosen scheme is marked by a ring in the text colour, never by a tint. */
+  .contrast-swatch[aria-pressed="true"] { outline: 2px solid var(--color-text-dark); outline-offset: 2px; }
+  .contrast-swatch:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 4px; }
+  /* Phones: the label takes its own line and the swatches share the width in equal columns,
+     one per scheme, so the row never wraps and grows with the screen. */
+  @media (max-width: 600px) {
+    .contrast-palette { display: block; }
+    legend { float: none; margin-bottom: 10px; }
+    .contrast-swatches { display: grid; grid-template-columns: repeat(var(--contrast-count), minmax(0, 1fr)); gap: 8px; max-width: 420px; }
+    .contrast-swatch { width: 100%; height: auto; aspect-ratio: 1; }
+  }
+</style>
+
+<script>
+  import { onSchemeChange, setScheme } from '../scripts/contrast';
+  import type { ContrastScheme } from '../utils/contrast-schemes';
+
+  document.querySelectorAll<HTMLElement>('.contrast-palette').forEach((palette) => {
+    const swatches = Array.from(palette.querySelectorAll<HTMLButtonElement>('[data-contrast-choice]'));
+    swatches.forEach((swatch) => swatch.addEventListener('click', () => setScheme(swatch.dataset.contrastChoice as ContrastScheme)));
+    onSchemeChange((scheme) => swatches.forEach((swatch) => swatch.setAttribute('aria-pressed', String(swatch.dataset.contrastChoice === scheme))));
+  });
+</script>

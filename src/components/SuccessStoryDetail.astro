@@ -31,7 +31,7 @@ const labels = {
     results: "Die Ergebnisse",
     client: "Kunde",
     category: "Kategorie",
-    backToStories: "← Zurück zu Erfolgsgeschichten"
+    backToStories: "Zurück zu Erfolgsgeschichten"
   },
   en: {
     challenge: "The Challenge",
@@ -39,7 +39,7 @@ const labels = {
     results: "The Results",
     client: "Client",
     category: "Category",
-    backToStories: "← Back to Success Stories"
+    backToStories: "Back to Success Stories"
   }
 };
 
@@ -50,7 +50,7 @@ const BASE = import.meta.env.BASE_URL;
 <section class="success-story-detail section">
   <div class="container">
     <a href={lang === 'en' ? `${BASE}success-stories` : `${BASE}de/success-stories`} class="back-link">
-      {text.backToStories}
+      <span aria-hidden="true">←&nbsp;</span>{text.backToStories}
     </a>
 
     <article class="story-content fade-in">
@@ -90,7 +90,7 @@ const BASE = import.meta.env.BASE_URL;
           <div class="results-grid">
             {results.map((result) => (
               <div class="result-item glass-card">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M20 6L9 17l-5-5"/>
                 </svg>
                 <p>{result}</p>
@@ -126,7 +126,7 @@ const BASE = import.meta.env.BASE_URL;
 
   .back-link:hover {
     transform: translateX(-4px);
-    color: var(--color-blue-accent);
+    color: var(--color-blue-petrol);
   }
 
   .story-content {
@@ -138,7 +138,7 @@ const BASE = import.meta.env.BASE_URL;
     text-align: center;
     margin-bottom: var(--space-2xl);
     padding-bottom: var(--space-xl);
-    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+    border-bottom: 1px solid var(--color-line-blue);
   }
 
   .story-category-badge {
@@ -148,7 +148,7 @@ const BASE = import.meta.env.BASE_URL;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 0.4rem 1rem;
-    background: rgba(36, 121, 190, 0.1);
+    background: var(--color-blue-tint);
     border-radius: 6px;
     font-size: 0.85rem;
     margin-bottom: var(--space-md);
@@ -175,7 +175,7 @@ const BASE = import.meta.env.BASE_URL;
     gap: var(--space-md);
     padding: var(--space-xl);
     margin-bottom: var(--space-2xl);
-    background: rgba(255, 255, 255, 0.6) !important;
+    background: var(--glass-bg-strong) !important;
   }
 
   .highlight-item {
@@ -190,7 +190,7 @@ const BASE = import.meta.env.BASE_URL;
     width: 42px;
     height: 42px;
     border-radius: 10px;
-    background: rgba(36, 121, 190, 0.1);
+    background: var(--color-blue-tint);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -282,13 +282,13 @@ const BASE = import.meta.env.BASE_URL;
     align-items: flex-start;
     gap: var(--space-sm);
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.5) !important;
+    background: var(--glass-bg-strong) !important;
     transition: all 0.3s ease;
   }
 
   .result-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.25);
+    box-shadow: var(--shadow-md);
   }
 
   .result-item svg {
@@ -307,7 +307,7 @@ const BASE = import.meta.env.BASE_URL;
   .full-content {
     margin-top: var(--space-xl);
     padding-top: var(--space-xl);
-    border-top: 1px solid rgba(36, 121, 190, 0.1);
+    border-top: 1px solid var(--color-line-blue);
   }
 
   @media (max-width: 768px) {

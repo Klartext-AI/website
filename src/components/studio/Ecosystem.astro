@@ -6,8 +6,8 @@ const de = lang === 'de';
 const base = import.meta.env.BASE_URL;
 const root = `${base}${de ? 'de/' : ''}`;
 ---
-<section class="studio-section ecosystem-section" id="ecosystem">
-  <Heading>{de ? 'Wir haben nicht einfach einen Job.' : 'We don’t just have a job.'}<br /><span class="blue">{de ? 'Wir haben eine Mission.' : 'We have a mission.'}</span></Heading>
+<section class="studio-section ecosystem-section" id="ecosystem" aria-labelledby="ecosystem-title">
+  <Heading id="ecosystem-title">{de ? 'Wir haben nicht einfach einen Job.' : 'We don’t just have a job.'}<br /><span class="blue">{de ? 'Wir haben eine Mission.' : 'We have a mission.'}</span></Heading>
   {full
     ? <p class="lead">{de ? 'Menschen, die mit Klartext AI affiliiert sind, wollen Innovation aus & für Europa treiben. Unterstützte Tätigkeiten dieser Personen umfassen:' : 'People affiliated with Klartext AI want to drive innovation from & for Europe. Activities these people support include:'}</p>
     : <p class="lead">{de ? 'Fortschritt entsteht gemeinsam. Wir verbinden Menschen aus Forschung, Wirtschaft und Gesellschaft, um KI in Österreich und Europa voranzubringen.' : 'Progress takes more than one company. We connect researchers, founders, engineers, and institutions to move AI forward in Austria and Europe.'}</p>}

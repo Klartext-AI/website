@@ -78,11 +78,18 @@ const computedSecondaryLink = secondaryLink || (lang === 'en' ? `${BASE}success-
   .final-cta {
     background: linear-gradient(
       135deg,
-      rgba(36, 121, 190, 0.05) 0%,
-      rgba(76, 138, 197, 0.15) 100%
+      var(--color-blue-wash) 0%,
+      color-mix(in srgb, var(--color-blue-accent) 15%, transparent) 100%
     );
     padding: var(--space-2xl) 0;
     margin-top: var(--space-2xl);
+  }
+
+  /* Contrast schemes: the wash would tint the page in the text colour, so the band is marked
+     by its edges instead. */
+  :global(html[data-contrast]) .final-cta {
+    background: none;
+    border-block: 1px solid var(--hc-fg);
   }
 
   .cta-content {
@@ -99,7 +106,7 @@ const computedSecondaryLink = secondaryLink || (lang === 'en' ? `${BASE}success-
     max-width: 120px;
     height: auto;
     opacity: 0.9;
-    filter: drop-shadow(0 2px 8px rgba(36, 121, 190, 0.15));
+    filter: drop-shadow(0 2px 8px color-mix(in srgb, var(--shadow-color) 15%, transparent));
     transition: all 0.3s ease;
   }
 

@@ -30,6 +30,7 @@ const {
 
 import '@fontsource/inter/latin.css';
 import '../styles/global.css';
+import '../styles/contrast.css';
 // The hero headline renders at weight 350, which CSS font matching resolves to the
 // 300 face; 400 carries nav and body copy. Without a preload both are only discovered
 // after the stylesheet parses, which delays the largest contentful paint.
@@ -38,6 +39,7 @@ import interLatin400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?
 import Navigation from '../components/Navigation.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import { getLanguagePaths } from '../utils/i18n';
+import { CONTRAST_SCHEMES, CONTRAST_STORAGE_KEY, contrastSchemeCss } from '../utils/contrast-schemes';
 import { DOCLARITY_ID, EXTRACT_ID, ORGANIZATION_ID, founderSchema } from '../utils/structured-data';
 const BASE = import.meta.env.BASE_URL;
 const SITE = Astro.site?.toString() ?? 'https://klartext-ai.github.io';
@@ -65,6 +67,10 @@ const locale = lang === 'en' ? 'en_US' : 'de_DE';
 // transcribing it is English regardless of `lang`.
 const OG_IMAGE_ALT = 'Klartext AI — We build what’s next. Cutting-edge AI solutions for companies. New AI ventures for the world. Industry · Research · Ventures.';
 const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString();
+
+// Page colour per contrast scheme, for the pre-paint script below. Only known schemes are
+// applied, whatever storage holds.
+const contrastGrounds = Object.fromEntries(CONTRAST_SCHEMES.filter((s) => s.id !== 'default').map((s) => [s.id, s.bg]));
 ---
 
 <!DOCTYPE html>
@@ -90,6 +96,10 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
   <meta name="generator" content={Astro.generator}>
   <meta name="robots" content={robots}>
   <meta name="theme-color" content="#2479BE">
+  <!-- Replays the stored contrast scheme before first paint, so someone who needs it never
+       sees a flash of the brand colours on navigation (see src/scripts/contrast.ts). -->
+  <style is:inline set:html={contrastSchemeCss()} />
+  <script is:inline set:html={`try{var s=localStorage.getItem(${JSON.stringify(CONTRAST_STORAGE_KEY)}),g=${JSON.stringify(contrastGrounds)}[s];if(typeof g==='string'){document.documentElement.setAttribute('data-contrast',s);var m=document.querySelector('meta[name="theme-color"]');if(m){m.dataset.brand=m.content;m.content=g}}}catch(e){}`} />
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content={ogType}>
@@ -126,33 +136,33 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
       font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
       z-index: 9999;
       /* Theme tokens inspired by cookieconsent light-funky, tuned to our brand blues */
-      --cc-bg: rgba(255, 255, 255, 0.9);
+      --cc-bg: var(--glass-bg-solid);
       --cc-primary-color: var(--color-blue);
       --cc-secondary-color: var(--color-blue);
       --cc-btn-primary-bg: var(--color-blue);
-      --cc-btn-primary-color: #fff;
-      --cc-btn-primary-hover-bg: rgba(36, 121, 190, 0.9);
-      --cc-btn-primary-hover-color: #fff;
+      --cc-btn-primary-color: var(--color-on-fill);
+      --cc-btn-primary-hover-bg: color-mix(in srgb, var(--color-blue) 90%, var(--color-surface));
+      --cc-btn-primary-hover-color: var(--color-on-fill);
       --cc-btn-primary-border-color: transparent;
       --cc-btn-primary-hover-border-color: transparent;
-      --cc-btn-secondary-bg: rgba(36, 121, 190, 0.08);
+      --cc-btn-secondary-bg: var(--color-blue-tint);
       --cc-btn-secondary-color: var(--color-blue);
-      --cc-btn-secondary-hover-bg: rgba(36, 121, 190, 0.12);
+      --cc-btn-secondary-hover-bg: var(--color-blue-tint-strong);
       --cc-btn-secondary-hover-color: var(--color-blue);
       --cc-btn-secondary-border-color: transparent;
       --cc-btn-secondary-hover-border-color: transparent;
-      --cc-cookie-category-block-bg: rgba(255, 255, 255, 0.95);
-      --cc-cookie-category-block-border: rgba(36, 121, 190, 0.15);
-      --cc-cookie-category-block-hover-bg: rgba(255, 255, 255, 1);
-      --cc-cookie-category-block-hover-border: rgba(36, 121, 190, 0.2);
+      --cc-cookie-category-block-bg: var(--glass-bg-solid);
+      --cc-cookie-category-block-border: var(--color-line-blue-strong);
+      --cc-cookie-category-block-hover-bg: var(--color-surface);
+      --cc-cookie-category-block-hover-border: var(--color-line-blue-strong);
       --cc-footer-bg: transparent;
-      --cc-footer-border-color: rgba(36, 121, 190, 0.0);
+      --cc-footer-border-color: transparent;
       --cc-btn-border-radius: 12px;
       --cc-modal-border-radius: 16px;
     }
 
     #cc-main .cm {
-      background: rgba(255, 255, 255, 0.5) !important;
+      background: var(--glass-bg-strong) !important;
       backdrop-filter: blur(24px) saturate(180%) !important;
       -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
       border: 1px solid var(--glass-border);
@@ -162,7 +172,7 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
     }
 
     #cc-main .pm {
-      background: rgba(255, 255, 255, 1) !important;
+      background: var(--color-surface) !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
       border: 1px solid var(--glass-border);
@@ -202,14 +212,14 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
     #cc-main .cc-btn.cc-btn-primary,
     #cc-main .cm__btns .cc-btn.cc-btn-primary {
       background: var(--color-blue);
-      color: #fff !important;
+      color: var(--color-on-fill) !important;
       border: none !important;
       outline: none !important;
-      box-shadow: 0 10px 22px -10px rgba(36, 121, 190, 0.35);
+      box-shadow: var(--shadow-md);
     }
 
     #cc-main .cc-btn.cc-btn-primary:hover {
-      background: rgba(36, 121, 190, 0.92);
+      background: var(--color-blue);
       transform: translateY(-1px);
       border: none !important;
     }
@@ -218,7 +228,7 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
     #cc-main .cc-btn.cc-btn-outline,
     #cc-main .cm__btns .cc-btn.cc-btn-secondary,
     #cc-main .cm__btns .cc-btn.cc-btn-outline {
-      background: rgba(36, 121, 190, 0.08);
+      background: var(--color-blue-tint);
       color: var(--color-blue) !important;
       border: none !important;
       outline: none !important;
@@ -227,19 +237,19 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
 
     #cc-main .cc-btn.cc-btn-secondary:hover,
     #cc-main .cc-btn.cc-btn-outline:hover {
-      background: rgba(36, 121, 190, 0.12);
+      background: var(--color-blue-tint);
       border: none !important;
       color: var(--color-blue);
     }
 
     #cc-main .pm__badge {
-      background: rgba(36, 121, 190, 0.1);
+      background: var(--color-blue-tint);
       color: var(--color-blue);
     }
 
     #cc-main .cm__btns,
     #cc-main .pm__btns {
-      border-top: 1px solid rgba(36, 121, 190, 0.15) !important;
+      border-top: 1px solid var(--color-line-blue-strong) !important;
       padding-top: 1rem !important;
     }
 
@@ -261,14 +271,14 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
 
     /* Preferences modal section styling - clean white backgrounds */
     #cc-main .pm__section {
-      background: rgba(255, 255, 255, 0.98) !important;
-      border: 1px solid rgba(36, 121, 190, 0.12) !important;
+      background: var(--glass-bg-solid) !important;
+      border: 1px solid var(--color-line-blue) !important;
       padding: 1.25rem !important;
       border-radius: 12px !important;
     }
 
     #cc-main .pm__section:hover {
-      background: rgba(255, 255, 255, 1) !important;
+      background: var(--color-surface) !important;
     }
 
     #cc-main .pm__section-title {
@@ -277,6 +287,39 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
 
     #cc-main .pm__section-desc {
       margin-bottom: 0 !important;
+    }
+
+    /* Contrast schemes: the banner's buttons are borderless tints, which would flatten into
+       plain text on the page colour, so each one draws its edge. The toggles keep the library's
+       light-theme colours unless remapped (a white knob on a white track in white-on-black):
+       on is a text-coloured track with a page-coloured knob, off the reverse, each outlined.
+       The always-on toggle for necessary cookies reads as on. */
+    html[data-contrast] #cc-main :is(.cm__btn, .pm__btn),
+    html[data-contrast] #cc-main .pm__section {
+      border: 1px solid var(--hc-fg) !important;
+    }
+
+    html[data-contrast] #cc-main {
+      --cc-toggle-on-bg: var(--hc-fg);
+      --cc-toggle-on-knob-bg: var(--hc-bg);
+      --cc-toggle-enabled-icon-color: var(--hc-fg);
+      --cc-toggle-off-bg: var(--hc-bg);
+      --cc-toggle-off-knob-bg: var(--hc-fg);
+      --cc-toggle-disabled-icon-color: var(--hc-bg);
+      --cc-toggle-readonly-bg: var(--hc-fg);
+      --cc-toggle-readonly-knob-bg: var(--hc-bg);
+      --cc-toggle-readonly-knob-icon-color: var(--hc-fg);
+    }
+
+    html[data-contrast] #cc-main .toggle__icon {
+      box-shadow: 0 0 0 1px var(--hc-fg);
+    }
+
+    /* The section expand arrow borrows the always-on toggle's track colour for its circle,
+       which would put its text-coloured stroke on a text-coloured disc. */
+    html[data-contrast] #cc-main .pm__section-arrow {
+      background: var(--hc-bg);
+      box-shadow: 0 0 0 1px var(--hc-fg);
     }
 
     /* Mobile responsive adjustments */
@@ -384,7 +427,10 @@ const ogImageUrl = new URL(`${BASE}${ogImage ?? 'og-image.png'}`, SITE).toString
   <div class="site-background" aria-hidden="true"></div>
   <Navigation lang={lang} alwaysVisible={alwaysShowNav} />
   {isProd && GA4_ID && <CookieConsent lang={lang} gaId={GA4_ID} />}
-  <div id="page-content" tabindex="-1"><slot /></div>
+  <!-- The one <main> of every page; pages never bring their own. The footer goes in its own
+       slot so it stays outside <main> and keeps the contentinfo landmark. -->
+  <main id="page-content" tabindex="-1"><slot /></main>
+  <slot name="footer" />
 
   <!-- Scroll Animation Script -->
   <script>

@@ -18,17 +18,17 @@ const ventures = [
   {name:de ? 'Drittes Venture' : 'Third venture', theme:'venture3', stealth:true, status:'Stealth', title:de ? 'Finanzsektor. Mit Forschung im Rücken.' : 'Finance sector. Backed by research.', copy:de ? 'Unser drittes Venture entsteht gemeinsam mit einer der größten Wirtschaftsuniversitäten Europas. Mehr, sobald wir mehr sagen dürfen.' : 'Our third venture is taking shape with one of Europe’s largest business universities. More as soon as we can talk about it.', href:'mailto:office@klartext-ai.com?subject=Stealth%20Venture', link:de ? 'Mit uns sprechen' : 'Talk to us'}
 ];
 ---
-<section class="studio-section venture-section" id="ventures">
-  <div class="split-heading"><Heading>Built by<br /><span class="blue">Klartext AI.</span></Heading>{full && <p>{de ? 'Unsere Überzeugung. In Produkte übersetzt.' : 'Our ventures are our thesis, shipped.'}</p>}</div>
+<section class="studio-section venture-section" id="ventures" aria-labelledby="ventures-title">
+  <div class="split-heading"><Heading id="ventures-title" lang={de ? 'en' : undefined}>Built by<br /><span class="blue">Klartext AI.</span></Heading>{full && <p>{de ? 'Unsere Überzeugung. In Produkte übersetzt.' : 'Our ventures are our thesis, shipped.'}</p>}</div>
   <div class="venture-stack" style={`--venture-count:${ventures.length}`}>{ventures.map((v,i) => <article class={`venture-card ${v.theme}`} style={`--card-index:${i}`}>
-    <div class="venture-art"><span class="kicker"><span class="kicker-scope">Built by Klartext AI ·</span> 0{i+1}</span>
+    <div class="venture-art"><span class="kicker"><span class="kicker-scope" lang={de ? 'en' : undefined}>Built by Klartext AI ·</span> 0{i+1}</span>
       {v.logo ? <img class="venture-logo" src={`${base}${v.logo}`} alt={v.name} width="330" height="130" loading="lazy" /> : v.stealth ? <span class="venture-stealth" aria-hidden="true"><span class="stealth-mark" /><span class="stealth-word">{[34,22,41,18,29,45].map(w => <i style={`--w:${w}px`} />)}</span></span> : <span class="extract-wordmark">Klartext <strong>Extract</strong></span>}
       <svg class="venture-lines" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
         {v.theme === 'doclarity' && [0,1,2,3,4,5].map(n => <path d={`M-30 ${50+n*25} C100 ${-30+n*25} 200 ${180+n*18} 360 ${100+n*20} S520 ${30+n*22} 640 ${100+n*22}`} />)}
         {v.theme === 'extract' && [0,1,2,3,4].map(n => <path d={`M-20 ${35+n*30} H${130+n*25} V${15+n*24} H${345+n*25} V${75+n*24} H640`} />)}
         {v.theme === 'venture3' && [0,1,2,3,4,5].map(n => <path d={`M-40 ${70+n*27} L200 ${-15+n*27} L420 ${70+n*27} L650 ${-15+n*27}`} />)}
       </svg>
-      <span class="venture-status">{v.status}</span>
+      <span class="venture-status" lang={de && v.stealth ? 'en' : undefined}>{v.status}</span>
     </div>
     <div class="venture-copy"><CardHeading>{v.title}</CardHeading><p>{v.copy}</p><a class="line-link" href={v.href}>{v.link} <span aria-hidden="true">↗</span></a></div>
   </article>)}</div>

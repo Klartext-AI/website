@@ -22,8 +22,8 @@ const plateTones = [
   { face: ['--color-blue-muted', '--color-blue-petrol', '--color-blue-night'], edge: '--color-blue-muted' }
 ];
 ---
-<section class="studio-section assurance" id="assurance">
-  <h2>{de ? 'Agentische Systeme für Prozesse,' : 'Agentic systems for processes'}<br />{de ? 'in denen Fehler' : 'where being wrong'}<br /><span class="blue">{de ? 'keine Option sind.' : 'is not an option.'}</span></h2>
+<section class="studio-section assurance" id="assurance" aria-labelledby="assurance-title">
+  <h2 id="assurance-title">{de ? 'Agentische Systeme für Prozesse,' : 'Agentic systems for processes'}<br />{de ? 'in denen Fehler' : 'where being wrong'}<br /><span class="blue">{de ? 'keine Option sind.' : 'is not an option.'}</span></h2>
   <div class="assurance-grid">
     <svg class="assurance-connection" aria-hidden="true"><path /></svg>
     <svg class="assurance-sculpture" viewBox="0 0 640 590" aria-hidden="true">
@@ -197,9 +197,13 @@ const plateTones = [
 
         item.querySelector('summary')?.addEventListener('click', (event) => {
           const tapped = !hoverQuery.matches || (event instanceof PointerEvent && event.pointerType === 'touch');
+          // Enter or Space (a click without a pointer, detail 0) must still close an open row,
+          // or the summary would announce "expanded" and ignore the key.
+          const keyboard = event.detail === 0;
           // Opening is driven here in both cases, so the height animation stays in charge.
           event.preventDefault();
           if (tapped) toggleByTap(item);
+          else if (keyboard && item.dataset.expanded === 'true') collapseAll();
           else activate(item);
         });
         item.addEventListener('toggle', () => {

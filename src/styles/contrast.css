@@ -1,0 +1,131 @@
+/* High-contrast colour schemes (WCAG 2.2 § 1.4.8, AAA).
+ *
+ * The pairs come from the table in src/utils/contrast-schemes.ts, which BaseLayout.astro
+ * inlines as `--hc-fg`/`--hc-bg` per scheme. A scheme sets `data-contrast` on <html> (the
+ * pre-paint script in BaseLayout.astro replays the stored choice before first paint), and
+ * "default" removes the attribute again.
+ *
+ * Windows High Contrast is the model: one text colour, one page colour, no tints, no shadows,
+ * separation by border rather than by fill. Every token in global.css is remapped onto the
+ * pair below, so a new component that sticks to the tokens needs nothing here. Status must
+ * never be signalled by colour alone (WCAG 1.4.1), because in this mode every ink is one colour.
+ *
+ * Rules for scoped component styles sit in their components, behind
+ * `:global(html[data-contrast])`: Astro's attribute scoping raises their specificity above
+ * anything written here.
+ */
+
+/* ---- The token mapping, once, for every scheme ---- */
+
+html[data-contrast] {
+  /* Hover feedback, the only shade this mode allows itself: mostly page colour, so text on it
+     keeps nearly the full ratio, but visibly not the page. */
+  --hc-hover: color-mix(in srgb, var(--hc-fg) 20%, var(--hc-bg));
+
+  /* Every ink is the text colour. No muted tier: de-emphasising text by lowering its contrast
+     is exactly what this mode exists to stop, so secondary text keeps full strength. */
+  --color-blue: var(--hc-fg);
+  --color-blue-accent: var(--hc-fg);
+  --color-blue-ice: var(--hc-fg);
+  --color-text-dark: var(--hc-fg);
+  --color-text-body: var(--hc-fg);
+  --color-text-muted: var(--hc-fg);
+  --color-venture3-ink: var(--hc-fg);
+  --color-doclarity: var(--hc-fg);
+
+  /* Every ground is the page; depth comes from the edges below, not from fills. Filled
+     controls (blue buttons, the WhatsApp pill) invert: text colour as the fill, page colour
+     as the label. */
+  --color-paper: var(--hc-bg);
+  --color-surface: var(--hc-bg);
+  --color-bg-light: var(--hc-bg);
+  --color-bg-white-warm: var(--hc-bg);
+  --color-blue-soft: var(--hc-bg);
+  --color-blue-wash: var(--hc-bg);
+  --color-blue-tint: var(--hc-bg);
+  --color-blue-tint-strong: var(--hc-hover);
+  --color-venture3-bg: var(--hc-bg);
+  --color-doclarity-soft: var(--hc-bg);
+  --color-whatsapp: var(--hc-fg);
+  --color-on-fill: var(--hc-bg);
+  --glass-bg: var(--hc-bg);
+  --glass-bg-strong: var(--hc-bg);
+  --glass-bg-solid: var(--hc-bg);
+  --glass-blur: none;
+  --color-scrim: color-mix(in srgb, var(--hc-bg) 85%, transparent);
+  --color-scrim-strong: var(--hc-bg);
+  --gradient-radial: none;
+  --gradient-doclarity: none;
+
+  /* Every edge is the text colour, and every edge is drawn: with one flat ground, a border is
+     the only thing separating a card from the page. */
+  --color-line: var(--hc-fg);
+  --color-line-blue: var(--hc-fg);
+  --color-line-blue-strong: var(--hc-fg);
+  --glass-border: var(--hc-fg);
+
+  /* The plate sculpture (Assurance.astro). Its pale steps, which also draw the plates' edges,
+     go to the page colour and its deep steps to the text colour, so every plate reads as a
+     text-coloured layer outlined in the page colour instead of merging with the one below. */
+  --color-blue-sky: var(--hc-bg);
+  --color-blue-muted: var(--hc-bg);
+  --color-blue-petrol: var(--hc-fg);
+  --color-blue-night: var(--hc-fg);
+
+  /* A shadow carries no contrast ratio, and this mode exists for people who cannot resolve one. */
+  --shadow-color: transparent;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --glass-shadow: none;
+
+  color: var(--hc-fg);
+  background-color: var(--hc-bg);
+}
+
+html[data-contrast] body {
+  color: var(--hc-fg);
+  background: var(--hc-bg);
+}
+
+html[data-contrast] .site-background { display: none; }
+
+html[data-contrast] ::selection {
+  color: var(--hc-bg);
+  background: var(--hc-fg);
+}
+
+/* Links inside running text stop being told apart by colour once every ink is one colour,
+   so they carry an underline (WCAG 1.4.1). Navigation and buttons read as links by place. */
+html[data-contrast] :is(p, li, dd, address, td, blockquote) a:not([class*="button"], [class*="btn"]) {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---- Logos and blend modes ----
+ *
+ * `multiply` turns anything on a black page black, so the logo grids drop it. Logos are their
+ * owners' artwork in fixed colours, mostly dark ink, which a dark scheme would put on black;
+ * they are not ours to recolour, so on dark schemes they keep their colours on a white plate.
+ * Photos are left alone in every scheme. */
+html[data-contrast] img { mix-blend-mode: normal !important; }
+
+html:is(
+    [data-contrast="white-black"],
+    [data-contrast="yellow-black"],
+    [data-contrast="yellow-blue"],
+    [data-contrast="green-black"]
+  ) img:is([src$=".svg"], [src*="logo" i], [src*="/references/"], [src*="/ventures/"]) {
+  background: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 0 0 5px #ffffff;
+}
+
+/* ---- Shared studio sections (studio.css) ---- */
+
+/* The film's facts sit on the copy panel in this mode (see StudioHero.astro). */
+html[data-contrast] .studio-hero-film .home-facts .studio-stats { border-top-color: var(--hc-fg); }
+html[data-contrast] .studio-hero-film .home-facts dt { color: var(--hc-fg); }
+
+/* The forced-colors handover (Windows High Contrast) is generated with the pairs; see
+   contrastSchemeCss() in src/utils/contrast-schemes.ts. */

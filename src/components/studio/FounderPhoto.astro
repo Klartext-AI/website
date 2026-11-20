@@ -30,8 +30,10 @@ const facts: Record<string, Record<'de' | 'en', string[]>> = {
 <figure class="founder-photo">
   <div class="founder-frame">
     <img src={`${import.meta.env.BASE_URL}team/founder-team.webp`} width="1000" height="1000" loading="lazy" alt={de ? 'Die drei Klartext-AI-Gründer mit Bürohund Bruno auf dem Sofa. Von links: Daniel Toth, Ruben Hetfleisch, Felix Krause.' : 'The three Klartext AI founders with office dog Bruno on the sofa. From left: Daniel Toth, Ruben Hetfleisch, Felix Krause.'} />
-    <div class="founder-image-targets" hidden>
-      {founders.map((person, index) => <button type="button" class="founder-image-target" aria-controls={`founder-${lang}-${index}`} aria-expanded="false" aria-label={`${de ? 'Details zu' : 'About'} ${person.name}`}><span aria-hidden="true">↗</span></button>)}
+    {/* Pointer shortcuts on the photo. The names below are the same controls for keyboard and
+        screen readers, so these stay out of the tab order and the accessibility tree. */}
+    <div class="founder-image-targets" aria-hidden="true" hidden>
+      {founders.map((person, index) => <button type="button" class="founder-image-target" tabindex="-1" aria-controls={`founder-${lang}-${index}`} aria-expanded="false" aria-label={`${de ? 'Details zu' : 'About'} ${person.name}`}><span aria-hidden="true">↗</span></button>)}
     </div>
   </div>
   <figcaption class="founder-index">

@@ -40,7 +40,7 @@ const schemaJson = JSON.stringify(schema).replace(/</g, '\\u003c');
         <summary><span>{item.q}</span><span class="detail-plus" aria-hidden="true">+</span></summary>
         <div class="faq-answer">
           <p>{parts(item.a).map(part => part.href ? <a href={part.href}>{part.text}</a> : part.text)}</p>
-          {item.link && <a class="faq-link" href={href(item.link.href)}>{item.link.label} <span aria-hidden="true">↗</span></a>}
+          {item.link && <a class="faq-link" href={href(item.link.href)} lang={item.link.lang}>{item.link.label} <span aria-hidden="true">↗</span></a>}
         </div>
       </details>)}
     </div>

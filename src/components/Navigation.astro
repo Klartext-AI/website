@@ -1,12 +1,15 @@
 ---
 import { getLanguagePaths } from '../utils/i18n';
+import ContrastMenu from './ContrastMenu.astro';
 interface Props { lang?: 'de' | 'en'; alwaysVisible?: boolean }
 const { lang = 'de' } = Astro.props;
 const de = lang === 'de';
 const base = import.meta.env.BASE_URL;
 const root = `${base}${de ? 'de/' : ''}`;
 const paths = getLanguagePaths(Astro.url.pathname, base);
-// The nav labels stay English in both languages, like Research, Ventures and Ecosystem.
+// The nav labels stay English in both languages, like Research, Ventures and Ecosystem, so on
+// German pages they carry lang="en" for screen readers to pronounce them in English.
+const labelLang = de ? 'en' : undefined;
 const links = [['The Studio','team'],['Research','research'],['Solutions', de ? 'leistungen' : 'services'],['Ventures','ventures'],['Ecosystem','ecosystem']];
 ---
 <header class="studio-nav">
@@ -16,9 +19,10 @@ const links = [['The Studio','team'],['Research','research'],['Solutions', de ? 
       <img src={`${base}ventures/klartext.svg`} alt="Klartext AI" width="120" height="38" />
     </a>
     <nav class="studio-desktop-nav" aria-label={de ? 'Hauptnavigation' : 'Main navigation'}>
-      {links.map(([label,slug]) => <a href={`${root}${slug}/`} aria-current={Astro.url.pathname.replace(/\/$/, '') === `${root}${slug}` ? 'page' : undefined}>{label}</a>)}
+      {links.map(([label,slug]) => <a href={`${root}${slug}/`} lang={labelLang} aria-current={Astro.url.pathname.replace(/\/$/, '') === `${root}${slug}` ? 'page' : undefined}>{label}</a>)}
     </nav>
     <div class="studio-nav-actions">
+      <ContrastMenu lang={lang} />
       <div class="studio-language" role="group" aria-label={de ? 'Sprache' : 'Language'}>
         <a data-language-choice="en" href={paths.en} hreflang="en" lang="en" aria-current={de ? undefined : 'true'} aria-label="English">EN</a>
         <a data-language-choice="de" href={paths.de} hreflang="de" lang="de" aria-current={de ? 'true' : undefined} aria-label="Deutsch">DE</a>
@@ -29,7 +33,7 @@ const links = [['The Studio','team'],['Research','research'],['Solutions', de ? 
   </div>
   <nav class="studio-mobile-nav" id="studio-mobile-nav" aria-label={de ? 'Mobile Navigation' : 'Mobile navigation'} hidden>
     <div class="studio-mobile-nav-inner">
-      {links.map(([label,slug]) => <a href={`${root}${slug}/`}>{label} <span aria-hidden="true">↗</span></a>)}
+      {links.map(([label,slug]) => <a href={`${root}${slug}/`} lang={labelLang}>{label} <span aria-hidden="true">↗</span></a>)}
       <a href="mailto:office@klartext-ai.com">{de ? 'Kontakt' : 'Contact'} <span aria-hidden="true">↗</span></a>
     </div>
   </nav>
@@ -50,7 +54,7 @@ const links = [['The Studio','team'],['Research','research'],['Solutions', de ? 
       background: color-mix(in srgb, var(--color-paper) 72%, transparent);
       -webkit-backdrop-filter: var(--glass-blur);
       backdrop-filter: var(--glass-blur);
-      box-shadow: inset 0 -1px var(--glass-border), 0 8px 28px -24px var(--color-blue);
+      box-shadow: inset 0 -1px var(--glass-border), 0 8px 28px -24px var(--shadow-color);
     }
   }
   .studio-nav-inner { max-width: 1440px; margin: auto; min-height: 64px; padding: 8px clamp(20px,4vw,65px); position: relative; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
@@ -71,9 +75,10 @@ const links = [['The Studio','team'],['Research','research'],['Solutions', de ? 
   .studio-nav-actions { --nav-control-h: 36px; gap: 10px; margin-left: auto; }
   .studio-language { display: flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--color-line); border-radius: 30px; }
   .studio-nav .studio-language a { display: grid; place-items: center; min-width: 36px; min-height: calc(var(--nav-control-h) - 8px); border-radius: 30px; font-size: 13px; font-weight: 500; color: var(--color-text-muted); }
-  .studio-nav .studio-language a[aria-current] { background: var(--color-blue-soft); color: var(--color-blue); }
-  .studio-nav .studio-nav-cta { padding: 0 14px; min-height: var(--nav-control-h); border-radius: 30px; background: var(--color-blue); color: var(--color-paper); display: flex; gap: 8px; align-items: center; font-size: 15px; }
-  .studio-nav .studio-nav-cta:hover { color: var(--color-paper); }
+  /* Petrol, not the brand blue: blue on the soft tint is only 3.85:1. */
+  .studio-nav .studio-language a[aria-current] { background: var(--color-blue-soft); color: var(--color-blue-petrol); }
+  .studio-nav .studio-nav-cta { padding: 0 14px; min-height: var(--nav-control-h); border-radius: 30px; background: var(--color-blue); color: var(--color-on-fill); display: flex; gap: 8px; align-items: center; font-size: 15px; }
+  .studio-nav .studio-nav-cta:hover { color: var(--color-on-fill); }
   .studio-menu-toggle { display: none; }
   /* Two bars crossed into a plus; a 135° turn lands it on a close cross. */
   .menu-icon { position: relative; width: 15px; height: 15px; flex: none; transition: transform .34s cubic-bezier(.22,1,.36,1); }
@@ -107,8 +112,12 @@ const links = [['The Studio','team'],['Research','research'],['Solutions', de ? 
      The background is opaque here, so the blur behind it is invisible — and dropping it
      matters: the panel unrolls by animating grid rows, so every frame of that relayout
      would otherwise re-capture and re-blur a backdrop of changing size. */
-  .studio-nav:has(.studio-mobile-nav:not([hidden])) { background: var(--color-paper); box-shadow: 0 22px 40px -30px rgba(36,121,190,.55); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .studio-nav:has(.studio-mobile-nav:not([hidden])) { background: var(--color-paper); box-shadow: 0 22px 40px -30px color-mix(in srgb, var(--shadow-color) 55%, transparent); -webkit-backdrop-filter: none; backdrop-filter: none; }
   @media (prefers-reduced-transparency: reduce) { .studio-nav { background: var(--color-paper); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+  /* Contrast schemes: an opaque bar with a drawn edge instead of glass, and the current
+     language marked by inversion, since its tint flattens onto the page colour. */
+  :global(html[data-contrast]) .studio-nav { background: var(--hc-bg); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; border-bottom-color: var(--hc-fg); }
+  :global(html[data-contrast]) .studio-nav .studio-language a[aria-current] { background: var(--hc-fg); color: var(--hc-bg); }
   @media(prefers-reduced-motion:reduce) { .menu-icon,.studio-mobile-nav,.studio-mobile-nav-inner,.studio-desktop-nav a,.studio-desktop-nav a::after { transition: none; } }
 </style>
 <script>

@@ -1,19 +1,23 @@
 ---
+import ContrastPalette from './ContrastPalette.astro';
 interface Props { lang?: 'de' | 'en' }
 const { lang = 'de' } = Astro.props;
 const de = lang === 'de';
 const root = `${import.meta.env.BASE_URL}${de ? 'de/' : ''}`;
+// English words on the German footer carry lang="en"; the German tagline in the logo's alt
+// text carries lang="de" on the English one.
+const en = de ? 'en' : undefined;
 ---
 <footer class="studio-footer">
   <div class="footer-top">
-    <div><a class="footer-brand" href={root}><img src={`${import.meta.env.BASE_URL}ventures/klartext-full.svg`} alt="Klartext AI – Klar mit KI." width="190" height="68" loading="lazy" /></a><p>{de ? '2025 gegründet. Bootstrapped.' : 'Founded 2025. Bootstrapped.'}<br />{de ? 'Wir bauen, was als Nächstes kommt.' : 'Building what’s next.'}</p></div>
-    <nav aria-label={de ? 'Leistungen und Ventures' : 'Solutions and ventures'}><span>{de ? 'Mit uns bauen' : 'Build with us'}</span><a href={`${root}${de ? 'leistungen' : 'services'}/`}>{de ? 'Lösungen' : 'Solutions'}</a><a href={`${root}ventures/`}>Ventures</a><a href={`${root}research/`}>{de ? 'Forschung' : 'Research'}</a><a href="https://showroom.klartext-ai.com">Showroom ↗</a></nav>
+    <div><a class="footer-brand" href={root}><img src={`${import.meta.env.BASE_URL}ventures/klartext-full.svg`} alt="Klartext AI – Klar mit KI." lang={de ? undefined : 'de'} width="190" height="68" loading="lazy" /></a><p>{de ? <>2025 gegründet. <span lang="en">Bootstrapped.</span></> : 'Founded 2025. Bootstrapped.'}<br />{de ? 'Wir bauen, was als Nächstes kommt.' : 'Building what’s next.'}</p></div>
+    <nav aria-label={de ? 'Leistungen und Ventures' : 'Solutions and ventures'}><span>{de ? 'Mit uns bauen' : 'Build with us'}</span><a href={`${root}${de ? 'leistungen' : 'services'}/`}>{de ? 'Lösungen' : 'Solutions'}</a><a href={`${root}ventures/`} lang={en}>Ventures</a><a href={`${root}research/`}>{de ? 'Forschung' : 'Research'}</a><a href="https://showroom.klartext-ai.com">Showroom<span aria-hidden="true">&nbsp;↗</span></a></nav>
     {/* Blog, Werte and Success Stories are no longer in the main nav. They stay linked
         here so old URLs keep their internal links and search engines can still reach them. */}
-    <nav aria-label={de ? 'Unternehmen' : 'Company'}><span>{de ? 'Kennenlernen' : 'Get to know us'}</span><a href={`${root}team/`}>{de ? 'Das Studio' : 'The Studio'}</a><a href={`${root}ecosystem/`}>Ecosystem</a><a href={`${root}karriere/`}>{de ? 'Karriere' : 'Careers'}</a><a href={`${root}blog/`}>Blog</a><a href={`${root}values/`}>{de ? 'Werte' : 'Values'}</a><a href={`${root}success-stories/`}>{de ? 'Success Stories' : 'Success Stories'}</a></nav>
-    <div class="footer-contact"><span>{de ? 'Hier sind wir' : 'Find us'}</span><address>Lerchenfelder Straße 74/2/7<br />1080 {de ? 'Wien, Österreich' : 'Vienna, Austria'}</address><a href="mailto:office@klartext-ai.com">office@klartext-ai.com</a><a href="https://www.linkedin.com/company/klartext-ai/">LinkedIn ↗</a></div>
+    <nav aria-label={de ? 'Unternehmen' : 'Company'}><span>{de ? 'Kennenlernen' : 'Get to know us'}</span><a href={`${root}team/`}>{de ? 'Das Studio' : 'The Studio'}</a><a href={`${root}ecosystem/`} lang={en}>Ecosystem</a><a href={`${root}karriere/`}>{de ? 'Karriere' : 'Careers'}</a><a href={`${root}blog/`}>Blog</a><a href={`${root}values/`}>{de ? 'Werte' : 'Values'}</a><a href={`${root}success-stories/`} lang={en}>Success Stories</a></nav>
+    <div class="footer-contact"><span>{de ? 'Hier sind wir' : 'Find us'}</span><address>Lerchenfelder Straße 74/2/7<br />1080 {de ? 'Wien, Österreich' : 'Vienna, Austria'}</address><a href="mailto:office@klartext-ai.com">office@klartext-ai.com</a><a href="https://www.linkedin.com/company/klartext-ai/">LinkedIn<span aria-hidden="true">&nbsp;↗</span></a><a href={`${root}linktree/`}>{de ? 'Alle Kanäle' : 'All channels'}</a></div>
   </div>
-  <div class="footer-bottom"><span>© {new Date().getFullYear()} Klartext AI</span><nav aria-label={de ? 'Rechtliches' : 'Legal'}><a href={`${root}impressum/`}>{de ? 'Impressum' : 'Legal notice'}</a><a href={`${root}agb/`}>{de ? 'AGB' : 'Terms'}</a><a href={`${root}datenschutz/`}>{de ? 'Datenschutz' : 'Privacy'}</a>{import.meta.env.PROD && import.meta.env.PUBLIC_GA4_ID && <button type="button" data-cc="show-preferencesModal">{de ? 'Cookie-Einstellungen' : 'Cookie settings'}</button>}</nav></div>
+  <div class="footer-bottom"><span>© {new Date().getFullYear()} Klartext AI</span><ContrastPalette lang={lang} /><nav aria-label={de ? 'Rechtliches' : 'Legal'}><a href={`${root}impressum/`}>{de ? 'Impressum' : 'Legal notice'}</a><a href={`${root}agb/`}>{de ? 'AGB' : 'Terms'}</a><a href={`${root}datenschutz/`}>{de ? 'Datenschutz' : 'Privacy'}</a>{import.meta.env.PROD && import.meta.env.PUBLIC_GA4_ID && <button type="button" data-cc="show-preferencesModal">{de ? 'Cookie-Einstellungen' : 'Cookie settings'}</button>}</nav></div>
 </footer>
 <style>
   .studio-footer { border-top: 1px solid var(--color-line); padding: 55px clamp(22px,5vw,80px) 25px; max-width: 1440px; margin: auto; font-size: 15px; }
@@ -26,12 +30,15 @@ const root = `${import.meta.env.BASE_URL}${de ? 'de/' : ''}`;
   .footer-brand img { width: 190px; height: auto; }
   .footer-top p { color: var(--color-text-muted); font-size: 15px; }
   address { font-style: normal; line-height: 1.8; margin-bottom: 10px; }
-  .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 25px; padding-top: 20px; border-top: 1px solid var(--color-line); font-size: 13px; }
+  .footer-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 25px; padding-top: 20px; border-top: 1px solid var(--color-line); font-size: 13px; }
+  /* The contrast bar sits between copyright and legal links while the row has room for all
+     three, and takes a row of its own above them once it does not. */
+  @media(max-width:1100px) { .footer-bottom > :global(.contrast-palette) { order: -1; flex-basis: 100%; padding-bottom: 6px; } }
   .footer-bottom nav { display: flex; gap: 24px; flex-wrap: wrap; }
   .footer-bottom button { background: none; border: 0; font: inherit; color: inherit; cursor: pointer; min-height: 30px; }
   @media(max-width:800px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 35px 25px; } }
   /* Two columns squeeze the brand line and the address into ragged wraps, so below
      this width both run full width and only the two link lists stay side by side. */
   @media(max-width:640px) { .studio-footer { padding-top: 45px; } .footer-top { gap: 32px 25px; padding-bottom: 35px; } .footer-top>div:first-child,.footer-contact { grid-column: 1/-1; } .footer-top .footer-brand { margin-bottom: 18px; } .footer-brand img { width: 165px; } }
-  @media(max-width:450px) { .footer-bottom { align-items: start; flex-direction: column; gap: 14px; } .footer-bottom nav { gap: 20px; } }
+  @media(max-width:450px) { .footer-bottom { align-items: start; flex-direction: column; flex-wrap: nowrap; gap: 14px; } .footer-bottom > :global(.contrast-palette) { flex-basis: auto; align-self: stretch; } .footer-bottom nav { gap: 20px; } }
 </style>

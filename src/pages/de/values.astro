@@ -259,7 +259,7 @@ const designPrinciples = content.valuePosts.filter((post) =>
               </div>
 
 
-                <h3 class="core-card-title">{card.title}</h3>
+                <h2 class="core-card-title">{card.title}</h2>
                 <p class="core-card-short">{card.short}</p>
               </div>
               <ul class="core-card-bullets">
@@ -270,6 +270,7 @@ const designPrinciples = content.valuePosts.filter((post) =>
               <div class="core-card-cta">
                 <span>{content.readMore}</span>
                 <svg
+                  aria-hidden="true"
                   width="16"
                   height="16"
                   viewBox="0 0 16 16"
@@ -297,7 +298,7 @@ const designPrinciples = content.valuePosts.filter((post) =>
       {/* Design Principles Section */}
       <section class="design-principles-section">
         <div class="section-header text-center fade-in">
-          <h2 class="design-principles-title">{content.designPrinciplesTitle}</h2>
+          <h2 class="design-principles-title" lang="en">{content.designPrinciplesTitle}</h2>
           <p class="design-principles-subtitle">
             {content.designPrinciplesSubtitle}
           </p>
@@ -318,12 +319,13 @@ const designPrinciples = content.valuePosts.filter((post) =>
                 <span class="post-read-time">{post.readTime}</span>
               </div>
 
-              <h2 class="post-title">{post.title}</h2>
+              <h3 class="post-title">{post.title}</h3>
               <p class="post-excerpt">{post.excerpt}</p>
 
-              <a href={`${BASE}de/blog/${post.id}`} class="post-link">
+              <a href={`${BASE}de/blog/${post.id}`} class="post-link" aria-label={`${content.readMore}: ${post.title}`}>
                 {content.readMore}
                 <svg
+                  aria-hidden="true"
                   width="16"
                   height="16"
                   viewBox="0 0 16 16"
@@ -371,9 +373,11 @@ const designPrinciples = content.valuePosts.filter((post) =>
                       <a
                         href={`${BASE}de/blog/${post.id}`}
                         class="values-blog-link"
+                        aria-label={`${content.readMore}: ${post.title}`}
                       >
                         {content.readMore}
                         <svg
+                          aria-hidden="true"
                           width="16"
                           height="16"
                           viewBox="0 0 16 16"
@@ -388,9 +392,10 @@ const designPrinciples = content.valuePosts.filter((post) =>
                   </article>
                 ))}
 
-                {/* Duplicate set for seamless loop */}
+                {/* Duplicate set for the seamless loop. Screen readers and the tab order already
+                    have the first set, so this copy is kept out of both. */}
                 {content.blogPosts.map((post) => (
-                  <article class="values-blog-item">
+                  <article class="values-blog-item" aria-hidden="true" inert>
                     <div class="values-blog-card">
                       <div class="values-blog-meta">
                         <span class="values-blog-category">
@@ -407,9 +412,12 @@ const designPrinciples = content.valuePosts.filter((post) =>
                       <a
                         href={`${BASE}de/blog/${post.id}`}
                         class="values-blog-link"
+                        tabindex="-1"
+                        aria-label={`${content.readMore}: ${post.title}`}
                       >
                         {content.readMore}
                         <svg
+                          aria-hidden="true"
                           width="16"
                           height="16"
                           viewBox="0 0 16 16"
@@ -426,7 +434,7 @@ const designPrinciples = content.valuePosts.filter((post) =>
               </div>
             </div>
           </div>
-          
+          <button type="button" class="values-blog-toggle" data-pause="Laufband anhalten" data-play="Laufband abspielen">Laufband anhalten</button>
         </div>
       </section>
     </div>
@@ -440,7 +448,7 @@ const designPrinciples = content.valuePosts.filter((post) =>
     primaryLink={`${BASE}de/blog`}
     showSecondary={false}
   />
-  <Footer lang="de" />
+  <Footer slot="footer" lang="de" />
 </BaseLayout>
 
 <style>
@@ -453,7 +461,7 @@ const designPrinciples = content.valuePosts.filter((post) =>
   .values-header {
     margin-bottom: var(--space-xl);
     padding-bottom: var(--space-lg);
-    border-bottom: 1px solid rgba(36, 121, 190, 0.1);
+    border-bottom: 1px solid var(--color-line-blue);
   }
 
   .values-page-title {
@@ -489,8 +497,8 @@ const designPrinciples = content.valuePosts.filter((post) =>
 
   .core-value-card {
     padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.65) !important;
-    backdrop-filter: blur(18px) saturate(160%);
+    background: var(--glass-bg-strong) !important;
+    backdrop-filter: var(--glass-blur);
     border-radius: 18px;
     text-decoration: none;
     color: inherit;
@@ -502,8 +510,8 @@ const designPrinciples = content.valuePosts.filter((post) =>
 
   .core-value-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 14px 32px -10px rgba(36, 121, 190, 0.3);
-    background: rgba(255, 255, 255, 0.85) !important;
+    box-shadow: var(--shadow-lg);
+    background: var(--glass-bg-solid) !important;
   }
 
   .core-card-header {
@@ -617,15 +625,15 @@ const designPrinciples = content.valuePosts.filter((post) =>
     padding: var(--space-md);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     height: 100%;
-    background: rgba(255, 255, 255, 0.55) !important;
+    background: var(--glass-bg-strong) !important;
     backdrop-filter: blur(20px) saturate(160%);
     position: relative;
   }
 
   .value-post-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 16px 40px -10px rgba(36, 121, 190, 0.3);
-    background: rgba(255, 255, 255, 0.75) !important;
+    box-shadow: var(--shadow-lg);
+    background: var(--glass-bg-solid) !important;
   }
 
   .post-icon {
@@ -652,7 +660,7 @@ const designPrinciples = content.valuePosts.filter((post) =>
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 0.2rem 0.6rem;
-    background: rgba(36, 121, 190, 0.1);
+    background: var(--color-blue-tint);
     border-radius: 4px;
     font-size: 0.75rem;
   }
@@ -731,10 +739,10 @@ const designPrinciples = content.valuePosts.filter((post) =>
   .values-blog-glass-container {
     max-width: 1480px;
     margin: var(--space-xl) auto 0;
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     border-radius: 24px;
     position: relative;
     overflow: hidden;
@@ -755,8 +763,45 @@ const designPrinciples = content.valuePosts.filter((post) =>
     animation: blogScroll 45s linear infinite;
   }
 
-  .values-blog-banner:hover {
+  /* The ticker runs longer than five seconds, so it stops on hover, while a link in it has
+     focus, and for good with the button below it. */
+  .values-blog-banner:hover,
+  .values-blog-banner:focus-within,
+  .values-blog-impact.is-paused .values-blog-banner {
     animation-play-state: paused;
+  }
+
+  .values-blog-toggle {
+    display: block;
+    min-height: 44px;
+    margin: var(--space-sm) auto 0;
+    padding: 0 1.25rem;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    background: var(--glass-bg-solid);
+    color: var(--color-text-dark);
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .values-blog-toggle:hover {
+    border-color: var(--color-blue);
+  }
+
+  /* Without motion the cards stand still and the row scrolls sideways instead. */
+  @media (prefers-reduced-motion: reduce) {
+    .values-blog-banner {
+      animation: none;
+    }
+
+    .values-blog-banner-wrapper {
+      overflow-x: auto;
+    }
+
+    .values-blog-toggle {
+      display: none;
+    }
   }
 
   .values-blog-item {
@@ -767,10 +812,10 @@ const designPrinciples = content.valuePosts.filter((post) =>
   }
 
   .values-blog-card {
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--glass-bg-solid);
     border-radius: 16px;
     padding: var(--space-md);
-    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    box-shadow: var(--shadow-md);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -790,7 +835,7 @@ const designPrinciples = content.valuePosts.filter((post) =>
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 0.2rem 0.6rem;
-    background: rgba(36, 121, 190, 0.08);
+    background: var(--color-blue-tint);
     border-radius: 999px;
     font-size: 0.75rem;
   }
@@ -950,5 +995,14 @@ const designPrinciples = content.valuePosts.filter((post) =>
     );
 
     fadeElements.forEach((el) => observer.observe(el));
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('.values-blog-toggle').forEach((button) => {
+    const section = button.closest('.values-blog-impact');
+    button.addEventListener('click', () => {
+      const paused = !section?.classList.contains('is-paused');
+      section?.classList.toggle('is-paused', paused);
+      button.textContent = (paused ? button.dataset.play : button.dataset.pause) ?? '';
+    });
   });
 </script>

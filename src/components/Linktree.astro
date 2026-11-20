@@ -56,7 +56,7 @@ const paths: Record<string, string[]> = {
 ---
 
 <BaseLayout title={title} description={description} lang={lang} alwaysShowNav={true}>
-  <main class="linktree-page">
+  <div class="linktree-page">
     <div class="linktree-container">
       <header class="linktree-header fade-in">
         <h1>{de ? 'Schön, dass Du da bist!' : 'Great to have you here!'}</h1>
@@ -141,7 +141,7 @@ const paths: Record<string, string[]> = {
               <a href={link.href} class="link-pill" target="_blank" rel="noopener noreferrer">
                 <span class="link-icon" aria-hidden="true">
                   {link.icon === 'doclarity' ? (
-                    <svg viewBox="0 0 100 100">
+                    <svg class="doclarity-mark" viewBox="0 0 100 100">
                       <path d="M67.8 19.3 A35.5 35.5 0 1 0 67.8 80.7" fill="none" stroke="#131922" stroke-width="22" stroke-linecap="round"></path>
                       <circle cx="85.5" cy="50" r="13" fill="#1c4fd6"></circle>
                     </svg>
@@ -162,7 +162,7 @@ const paths: Record<string, string[]> = {
         </ul>
       </section>
     </div>
-  </main>
+  </div>
 </BaseLayout>
 
 <script>
@@ -249,7 +249,7 @@ const paths: Record<string, string[]> = {
     border-radius: 999px;
     font-size: 18px;
     font-weight: 500;
-    color: var(--color-paper);
+    color: var(--color-on-fill);
     background: var(--color-blue);
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
@@ -257,13 +257,12 @@ const paths: Record<string, string[]> = {
   }
 
   .pill-button:hover {
-    color: var(--color-paper);
+    color: var(--color-on-fill);
     transform: translateY(-2px);
   }
 
-  /* WhatsApp green, deepened from #25D366 so white text keeps 4.5:1 contrast */
   .pill-button-whatsapp {
-    background: #15854a;
+    background: var(--color-whatsapp);
   }
 
   .pill-button svg {
@@ -347,9 +346,14 @@ const paths: Record<string, string[]> = {
   }
 
   .doclarity-list .link-icon {
-    background: #e6ecfb;
-    color: #1c4fd6;
+    background: var(--color-doclarity-soft);
+    color: var(--color-doclarity);
   }
+
+  /* Contrast schemes: the doclarity mark's ink would vanish on a dark page, so it is drawn
+     in the text colour like the icons beside it. */
+  :global(html[data-contrast]) .doclarity-mark path { stroke: currentColor; }
+  :global(html[data-contrast]) .doclarity-mark circle { fill: currentColor; }
 
   .link-text {
     flex: 1;

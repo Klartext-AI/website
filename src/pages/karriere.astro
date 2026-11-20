@@ -65,7 +65,7 @@ const description = 'Join Klartext AI and help shape the future of AI with us.';
       </section>
     </div>
   </div>
-  <Footer lang="en" />
+  <Footer slot="footer" lang="en" />
 </BaseLayout>
 
 <style>
@@ -163,13 +163,13 @@ const description = 'Join Klartext AI and help shape the future of AI with us.';
     font-weight: 500;
     color: var(--color-blue);
     padding: var(--space-sm) var(--space-lg);
-    background: rgba(36, 121, 190, 0.08);
+    background: var(--color-blue-tint);
     border-radius: 8px;
     transition: all 0.3s ease;
   }
 
   .role-item:hover {
-    background: rgba(36, 121, 190, 0.15);
+    background: var(--color-blue-tint-strong);
     transform: translateY(-2px);
   }
 
@@ -199,7 +199,7 @@ const description = 'Join Klartext AI and help shape the future of AI with us.';
 
   .job-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 16px 48px -12px rgba(36, 121, 190, 0.3);
+    box-shadow: var(--shadow-lg);
   }
 
   .job-header {
@@ -211,14 +211,14 @@ const description = 'Join Klartext AI and help shape the future of AI with us.';
     padding: var(--space-md);
     background: transparent;
     border: none;
-    border-bottom: 2px solid rgba(36, 121, 190, 0.15);
+    border-bottom: 2px solid var(--color-line-blue-strong);
     cursor: pointer;
     text-align: left;
     transition: background 0.3s ease;
   }
 
   .job-header:hover {
-    background: rgba(36, 121, 190, 0.05);
+    background: var(--color-blue-wash);
   }
 
   .job-header-content {
@@ -255,7 +255,7 @@ const description = 'Join Klartext AI and help shape the future of AI with us.';
     font-weight: 500;
     color: var(--color-blue);
     padding: 0.375rem 0.875rem;
-    background: rgba(36, 121, 190, 0.1);
+    background: var(--color-blue-tint);
     border-radius: 6px;
   }
 
@@ -312,6 +312,8 @@ const description = 'Join Klartext AI and help shape the future of AI with us.';
 
   .job-section li::before {
     content: '→';
+    /* Decoration only: the empty alt text keeps screen readers from announcing the arrow. */
+    content: '→' / '';
     position: absolute;
     left: 0;
     color: var(--color-blue);
@@ -324,7 +326,7 @@ const description = 'Join Klartext AI and help shape the future of AI with us.';
     color: var(--color-blue);
     margin-top: var(--space-lg);
     padding-top: var(--space-lg);
-    border-top: 1px solid rgba(36, 121, 190, 0.15);
+    border-top: 1px solid var(--color-line-blue-strong);
   }
 
   .tech-stack-section {
@@ -355,17 +357,17 @@ const description = 'Join Klartext AI and help shape the future of AI with us.';
   .tech-tag {
     font-size: 0.9375rem;
     font-weight: 500;
-    color: white;
+    color: var(--color-on-fill);
     background: var(--color-blue);
     padding: 0.5rem 1rem;
     border-radius: 6px;
     transition: all 0.3s ease;
   }
 
+  /* The tag keeps its blue on hover: white on the lighter accent blue is only 3.65:1. */
   .tech-tag:hover {
-    background: var(--color-blue-accent);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(36, 121, 190, 0.3);
+    box-shadow: var(--shadow-sm);
   }
 
   .tech-stack-card h4 {
@@ -436,15 +438,15 @@ const description = 'Join Klartext AI and help shape the future of AI with us.';
   }
 
   .email-link:hover {
-    color: var(--color-blue-accent);
-    border-bottom-color: var(--color-blue-accent);
+    color: var(--color-blue-petrol);
+    border-bottom-color: var(--color-blue-petrol);
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px -6px rgba(36, 121, 190, 0.18);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
   }
 
   @keyframes fadeIn {

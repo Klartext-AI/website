@@ -7,7 +7,8 @@
 export interface FaqItem {
   q: string;
   a: string;
-  link?: { href: string; label: string };
+  // lang marks an English label on the German page.
+  link?: { href: string; label: string; lang?: 'en' };
 }
 
 type Lang = 'de' | 'en';
@@ -65,7 +66,7 @@ const content: Record<Page, Record<Lang, FaqItem[]>> = {
       {
         q: 'Welche Probleme löst Ihr mit KI?',
         a: 'Prozesse, in denen Fehler teuer sind. Konkret: KPI-Extraktion aus Geschäftsberichten mit über 100 Seiten für Banken und Ratingagenturen, barrierefreie PDFs nach PDF/UA und WCAG, die automatische Klassifizierung von über 1.000 Angebotsanfragen pro Woche für einen Industriebetrieb, Compliance-Assistenten, die aus über 50 internen Richtlinien mit Quellenangabe antworten, KI-Tutoren für das Onboarding und die kriterienbasierte Vorprüfung von Förderanträgen.',
-        link: { href: 'success-stories/', label: 'Success Stories' }
+        link: { href: 'success-stories/', label: 'Success Stories', lang: 'en' }
       },
       {
         q: 'Was ist der Unterschied zu einem Chatbot?',
@@ -87,7 +88,7 @@ const content: Record<Page, Record<Lang, FaqItem[]>> = {
       {
         q: 'Welche KI-Produkte hat Klartext AI entwickelt?',
         a: '[doclarity](https://doclarity.eu/de) macht PDFs mit KI barrierefrei und prüft sie gegen PDF/UA und WCAG. [Klartext Extract](https://extract.klartext-ai.com/) macht aus Geschäftsberichten, Verträgen und anderen langen PDFs strukturierte Daten, mit Quelle für jeden Wert. Ein drittes Venture im Finanzsektor entsteht im Stealth-Modus gemeinsam mit einer der größten Wirtschaftsuniversitäten Europas.',
-        link: { href: 'ventures/', label: 'Ventures' }
+        link: { href: 'ventures/', label: 'Ventures', lang: 'en' }
       },
       {
         q: 'Wer steht hinter Klartext AI?',
@@ -162,7 +163,7 @@ const content: Record<Page, Record<Lang, FaqItem[]>> = {
       {
         q: 'Wer nutzt Klartext Extract?',
         a: 'Klartext Extract ist bei einer europäischen Ratingagentur im Einsatz. Deren Analyst:innen haben Financial Spreading früher händisch erledigt, über Berichte mit Hunderten Seiten für jede Risikobewertung. Heute dauert eine Analyse rund 15 Minuten statt vier Tage, inklusive Prüfung, mit Quelle für jeden KPI.',
-        link: { href: 'success-stories/data-extraction-banking/', label: 'Success Story Banking' }
+        link: { href: 'success-stories/data-extraction-banking/', label: 'Success Story Banking', lang: 'en' }
       },
       {
         q: 'Wo verarbeiten doclarity und Klartext Extract Daten?',
